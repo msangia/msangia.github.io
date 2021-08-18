@@ -5,8 +5,8 @@
 
 ## R
 
-[Introducción a R](https://msangia.github.io/R/01Intro.html)
+[Introducción](https://msangia.github.io/R/01Intro.html)
 
-[Bases de datos en R](https://msangia.github.io/R/02BaseDatos.html)
+[Bases de datos](https://msangia.github.io/R/02BaseDatos.html)
 
-[Análisis de datos en R](https://msangia.github.io/R/03AnalisisDatos.html)
+[Análisis de datos](https://msangia.github.io/R/03AnalisisDatos.html)
