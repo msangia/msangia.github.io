@@ -1,3 +1,6 @@
 theme: jekyll-theme-minimal
-title: Máximo Sangiácomo
+title: ["Máximo Sangiácomo"]
 description: Página personal
+# Social Sharing
+twitter:
+  username: @msangia
