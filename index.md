@@ -9,4 +9,4 @@
 
 [2. Bases de datos](https://msangia.github.io/R/basedatos.html "Manipulacion de base de datos.")
 
-[3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de dato.s")
+[3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de datos.")
