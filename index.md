@@ -1,7 +1,7 @@
 
 ## Stata
 
-[Introducción a Stata (UNLP)](https://msangia.github.io/stata.html)        
+[Conceptos básicos (UNLP)](https://msangia.github.io/stata.html)        
 
 ## R
 
