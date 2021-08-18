@@ -5,8 +5,8 @@
 
 ## R
 
-[Introducción](https://msangia.github.io/R/01Intro.html)
+[1. Introducción](https://msangia.github.io/R/01Intro.html)
 
-[Bases de datos](https://msangia.github.io/R/02BaseDatos.html)
+[2. Bases de datos](https://msangia.github.io/R/02BaseDatos.html)
 
-[Análisis de datos](https://msangia.github.io/R/03AnalisisDatos.html)
+[3. Análisis de datos](https://msangia.github.io/R/03AnalisisDatos.html)
