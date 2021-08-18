@@ -1,3 +1,6 @@
+
+title: "Maximo Sangiacomo"
+
 ## Stata
 
 [Introducción a Stata](https://msangia.github.io/stata.html)        
