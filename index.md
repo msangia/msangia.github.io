@@ -1,5 +1,3 @@
-# Máximo Sangiácomo
-
 ## Stata
 
 [Introducción a Stata](https://msangia.github.io/stata.html)        
