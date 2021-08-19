@@ -1,8 +1,8 @@
-<img src=stata-logo-blue.svg width="75" />
+![](stata-logo-blue.svg)
 
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
-<img src=rstudio-icon.png width="75" />
+[## R](https://cran.r-project.org/)
 
 [1. Introducción](https://msangia.github.io/R/intro.html "Conceptos basicos. Objetos.")
 
