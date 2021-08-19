@@ -1,9 +1,9 @@
 
-![Stata](stata-logo.jpg)
+# [Stata](https://www.stata.com/)
 
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
-![R](rstudio-icon.png)
+# [R](https://cran.r-project.org/)
 
 [1. Introducción](https://msangia.github.io/R/intro.html "Conceptos basicos. Objetos.")
 
