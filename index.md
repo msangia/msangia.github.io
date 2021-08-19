@@ -1,4 +1,4 @@
-![](stata-logo-blue.svg)
+![](scr = stata-logo-blue.svg)
 
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
