@@ -1,5 +1,5 @@
 
-![Stata](stata-logo.png)
+![Stata](stata-logo.jpg)
 
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
