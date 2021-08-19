@@ -1,4 +1,4 @@
-![](stata-logo-blue.svg){width=80}
+![](stata-logo-blue.svg){width=80%}
 
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
