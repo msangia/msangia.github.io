@@ -1,6 +1,8 @@
-<img src=stata-logo-blue.svg width="20" />
+<img src=stata-logo-blue.svg width="50" />
+
 [Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
 
+<img src=rstudio-icon.png width="90" />
 
 [1. Introducción](https://msangia.github.io/R/intro.html "Conceptos basicos. Objetos.")
 
