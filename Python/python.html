@@ -212,8 +212,7 @@ base.drop([&#39;gdp_pc2010&#39;,&#39;gdp_2010&#39;,&#39;poblacion&#39;,&#39;expo
 
 # info
 base.info()
-
-# filter</code></pre>
+</code></pre>
 <pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 ## Int64Index: 60 entries, 0 to 59
 ## Data columns (total 8 columns):
@@ -229,7 +228,10 @@ base.info()
 ##  7   open        60 non-null     float64
 ## dtypes: float64(4), int64(1), object(3)
 ## memory usage: 4.2+ KB</code></pre>
-<pre class="python"><code>base2 = base[base.year &gt; 2017]
+       
+<pre class="python"><code>
+# filter
+base2 = base[base.year &gt; 2017]
 
 # group
 base3 = base2.groupby([&#39;region&#39;,&#39;year&#39;]).mean()
