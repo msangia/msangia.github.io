@@ -10,3 +10,8 @@
 [2. Bases de datos](https://msangia.github.io/R/basedatos.html "Manipulacion de base de datos.")
 
 [3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de datos.")
+
+
+# [Python](https://www.anaconda.com/)
+
+[Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
