@@ -260,7 +260,16 @@ base3.pivot_table(index=&#39;region&#39;, columns= &#39;year&#39;, values=&#39;g
 ## 1     Latin America &amp; Caribbean  20818.854904  20598.452094  19025.010305</code></pre>
 
 
-
+plt.plot(AR.year, AR.gdp_pc2017, linestyle='--', label='GDPpc')
+# axis labels
+plt.xlabel('Year')
+plt.ylabel('GDPpc ARG')
+# show the legend
+plt.legend()
+# show the plot
+# plt.show()       
+       
+<p><img src="gdp.png" ></p>
 
 </div>
 
@@ -303,6 +312,7 @@ $(document).ready(function () {
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
-<p><img src="gdp.png" ></p>
+       
+
 </body>
 </html>
