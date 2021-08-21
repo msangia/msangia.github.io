@@ -2,8 +2,9 @@ theme: jekyll-theme-minimal
 title: "Máximo Sangiácomo"
 description: Página personal 
 url: https://github.com/msangia/msangia.github.io/raw/main/MSangia_CVeng.pdf
+logo: 
 social-network-links:
   email: "msangia@hotmail.com"
-  twitter: msangia
+  twitter: @msangia
 share-links-active:
   twitter: true
