@@ -1,9 +1,11 @@
 
 # [Stata](https://www.stata.com/)
 
-[Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.") **(UNLP)**       
+[0. Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.") **(UNLP)**       
 
-# [R](https://cran.r-project.org/) **(BCRA)**   
+# [R](https://cran.r-project.org/) 
+
+**Curso BCRA**   
 
 [1. Introducción](https://msangia.github.io/R/intro.html "Conceptos basicos. Objetos.")
 
@@ -14,4 +16,4 @@
 
 # [Python](https://www.anaconda.com/)
 
-[Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
+[0. Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
