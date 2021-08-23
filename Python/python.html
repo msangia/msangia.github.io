@@ -185,81 +185,73 @@ tup </code></pre>
 <pre><code>## (1, 2, 3)</code></pre>
 <pre class="python"><code>seq = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
 for a, b, c in seq:
-   print(&#39;a={0}, b={1}, c={2}&#39;.format(a, b, c))
-
-# list (lists are variable-length and their contents can be modified in-place)</code></pre>
+   print(&#39;a={0}, b={1}, c={2}&#39;.format(a, b, c))</code></pre>
 <pre><code>## a=1, b=2, c=3
 ## a=4, b=5, c=6
 ## a=7, b=8, c=9</code></pre>
-<pre class="python"><code>list = [4, 5, 6]
-list
-# list slice</code></pre>
+<pre class="python"><code># list (lists are variable-length and their contents can be modified in-place)
+list = [4, 5, 6]
+list</code></pre>
 <pre><code>## [4, 5, 6]</code></pre>
-<pre class="python"><code>list[0:1]
-
-# dict (collection of key-value pairs, where key and value are Python objects)</code></pre>
+<pre class="python"><code># list slice
+list[0:1]</code></pre>
 <pre><code>## [4]</code></pre>
-<pre class="python"><code>dc = {&#39;a&#39; : &#39;hello&#39;, &#39;b&#39; : [1, 2, 3]}
-dc
-
-# add element</code></pre>
+<pre class="python"><code># dict (collection of key-value pairs, where key and value are Python objects)
+dc = {&#39;a&#39; : &#39;hello&#39;, &#39;b&#39; : [1, 2, 3]}
+dc</code></pre>
 <pre><code>## {&#39;a&#39;: &#39;hello&#39;, &#39;b&#39;: [1, 2, 3]}</code></pre>
-<pre class="python"><code>dc[4] = &#39;good bye&#39;
-dc
-
-# access elements</code></pre>
+<pre class="python"><code># add element
+dc[4] = &#39;good bye&#39;
+dc</code></pre>
 <pre><code>## {&#39;a&#39;: &#39;hello&#39;, &#39;b&#39;: [1, 2, 3], 4: &#39;good bye&#39;}</code></pre>
-<pre class="python"><code>dc[&#39;b&#39;]
-
-# set (unordered collection of unique elements)
-# 1</code></pre>
+<pre class="python"><code># access elements
+dc[&#39;b&#39;]</code></pre>
 <pre><code>## [1, 2, 3]</code></pre>
-<pre class="python"><code>{2, 2, 2, 1, 3, 3}
-
-# 2</code></pre>
+<pre class="python"><code># set (unordered collection of unique elements)
+# 1 
+{2, 2, 2, 1, 3, 3}</code></pre>
 <pre><code>## {1, 2, 3}</code></pre>
-<pre class="python"><code>set([2, 2, 2, 1, 3, 3])
-
-# List comprehensions (form a new list by filtering the elements of a collection, transforming the elements passing the filter)
-# [expr for val in collection if condition]</code></pre>
+<pre class="python"><code># 2
+set([2, 2, 2, 1, 3, 3])</code></pre>
 <pre><code>## {1, 2, 3}</code></pre>
-<pre class="python"><code>strings = [&#39;a&#39;, &#39;as&#39;, &#39;bat&#39;, &#39;car&#39;, &#39;dove&#39;, &#39;python&#39;]
-[x.upper() for x in strings if len(x) &gt; 2]
-
-# functions</code></pre>
+       
+<pre class="python"><code># List comprehensions (form a new list by filtering the elements of a collection, transforming the elements passing the filter)
+[_expr_ for val in collection if _condition_]
+strings = [&#39;a&#39;, &#39;as&#39;, &#39;bat&#39;, &#39;car&#39;, &#39;dove&#39;, &#39;python&#39;]
+[x.upper() for x in strings if len(x) &gt; 2]</code></pre>
 <pre><code>## [&#39;BAT&#39;, &#39;CAR&#39;, &#39;DOVE&#39;, &#39;PYTHON&#39;]</code></pre>
-<pre class="python"><code>def suma(x, y):
+<pre class="python"><code># functions
+def suma(x, y):
    return x + y
 
-suma(2,5)
-
-# multiple outputs</code></pre>
+suma(2,5)</code></pre>
 <pre><code>## 7</code></pre>
-<pre class="python"><code>def suma2(x, y):
+<pre class="python"><code># multiple outputs
+def suma2(x, y):
    s = x + y
    m = x * y
    return s, m 
    
-a, b = suma2(2,5)
-a</code></pre>
+a, b = suma2(2,5)</code></pre>
+<pre class="python"><code>a</code></pre>
 <pre><code>## 7</code></pre>
 <pre class="python"><code>b</code></pre>
 <pre><code>## 10</code></pre>
+       
 </div>
 <div id="loops" class="section level1">
 <h1>Loops</h1>
 <pre class="python"><code># for
 a =[0, 1, 2, 3, 4]
 for x in a:
-    print(x)
-
-# if </code></pre>
+    print(x)</code></pre>
 <pre><code>## 0
 ## 1
 ## 2
 ## 3
 ## 4</code></pre>
-<pre class="python"><code>for x in a:
+<pre class="python"><code># if 
+for x in a:
     if x % 2 == 0:
         print(&#39;{0} is even&#39;.format(x))
     else:
@@ -277,13 +269,14 @@ for x in a:
     else:
         print(&#39;{0} is odd&#39;.format(x))
 
-# while</code></pre>
+</code></pre>
 <pre><code>## 0 is zero
 ## 1 is odd
 ## 2 is even
 ## 3 is odd
 ## 4 is even</code></pre>
-<pre class="python"><code>x = 4
+<pre class="python"><code># while
+x = 4
 i = 0
 while (x &gt;= 0):
     i = i + 1
