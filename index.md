@@ -1,9 +1,9 @@
 
 # [Stata](https://www.stata.com/)
 
-[Conceptos básicos (UNLP)](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")        
+[Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.") **(UNLP)**       
 
-# [R](https://cran.r-project.org/)
+# [R](https://cran.r-project.org/) **(BCRA)**   
 
 [1. Introducción](https://msangia.github.io/R/intro.html "Conceptos basicos. Objetos.")
 
