@@ -4,4 +4,7 @@ description: Página personal
 url: https://github.com/msangia/msangia.github.io/raw/main/MSangia_CVeng.pdf
 twitter: msangia
 logo: /assets/img/kykcolor210.png
-google_analytics:   
+colors:
+  theme:        "#ff00b4"
+  background:   "#fff"
+ 
