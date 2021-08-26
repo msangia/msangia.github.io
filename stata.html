@@ -171,7 +171,7 @@ xij variables:
 <li>Si no los incluimos: <strong>sesgo</strong> por variable omitida.</li>
 </ul>
 <h2><a href="#estimador-de-efectos-fijos" id="estimador-de-efectos-fijos">Estimador de efectos fijos</a></h2>
-<p>\begin{equation} y_{it} = x^{&rsquo;}_{it} \beta + \mu_i + \epsilon_{it} \end{equation}</p>
+<p>\begin{equation} y_{it} = x&rsquo;_{it} \beta + \mu_i + \epsilon_{it} \end{equation}</p>
 <ul>
 <li>Incorpora <em>(N - 1)</em> variables binarias por individuo (distinto intercepto por individuo).</li>
 </ul>
@@ -181,7 +181,7 @@ xij variables:
 <li><em>Transfomacion within</em>: controlar por efectos fijos es identico a restar a cada observacion la media individual (varaibles originales transformadas).</li>
 </ul>
 <pre><code></code></pre>
-<p><img src="Graph.svg" ></p>
+<p><img src="Graph1.svg" ></p>
 <h1><a href="#definición-de-unidad-de-información" id="definición-de-unidad-de-información">Definición de unidad de información</a></h1>
 <pre><code>. use wb_data.dta, clear
 
@@ -266,7 +266,7 @@ corr(u_i, Xb)  = -0.9779                        Prob &gt; F          =     0.010
      sigma_e |    2.76808
          rho |  .89953649   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est1 stored)
+(est5 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -295,7 +295,7 @@ corr(u_i, Xb)  = -0.9274                        Prob &gt; F          =     0.021
      sigma_e |  2.7243547
          rho |  .76705105   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est2 stored)
+(est6 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
