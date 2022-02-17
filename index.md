@@ -2,7 +2,7 @@
 
 **Curso BCRA**   
 
-[Guia del curso](https://msangia.github.io/CienciaDatos/index.html "Contenido completo.")
+Guia del curso
 
 # [R](https://cran.r-project.org/) 
 
