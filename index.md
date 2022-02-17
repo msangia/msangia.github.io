@@ -1,9 +1,8 @@
+# [Ciencia de datos]
 
-# [Stata](https://www.stata.com/)
+**Curso BCRA**   
 
-**Curso UNLP** 
-
-[Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")    
+[Guia del curso](https://msangia.github.io/CienciaDatos/index.html "Contenidos.")
 
 # [R](https://cran.r-project.org/) 
 
@@ -15,6 +14,12 @@
 
 [3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de datos.")
 
+
+# [Stata](https://www.stata.com/)
+
+**Curso UNLP** 
+
+[Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")    
 
 # [Python](https://www.anaconda.com/)
 
