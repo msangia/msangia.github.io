@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 3 Conceptos generales | Curso Ciencia de Datos</title>
+<meta name="author" content="Máximo Sangiácomo">
+<meta name="description" content="El objetivo de la Ciencia de Datos es aprender algo de los datos. Si se dispone de una variable output2 y otras input3 el aprendizaje se denomina supervisado, si sólo hay inputs el aprendizaje es...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Capítulo 3 Conceptos generales | Curso Ciencia de Datos">
+<meta property="og:type" content="book">
+<meta property="og:description" content="El objetivo de la Ciencia de Datos es aprender algo de los datos. Si se dispone de una variable output2 y otras input3 el aprendizaje se denomina supervisado, si sólo hay inputs el aprendizaje es...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 3 Conceptos generales | Curso Ciencia de Datos">
+<meta name="twitter:site" content="@msangia">
+<meta name="twitter:description" content="El objetivo de la Ciencia de Datos es aprender algo de los datos. Si se dispone de una variable output2 y otras input3 el aprendizaje se denomina supervisado, si sólo hay inputs el aprendizaje es...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Curso Ciencia de Datos</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Descripcion del curso</a></li>
+<li><a class="" href="introduccion-a-r.html"><span class="header-section-number">1</span> Introduccion a R</a></li>
+<li><a class="" href="base-de-datos.html"><span class="header-section-number">2</span> Base de datos</a></li>
+<li><a class="active" href="conceptos-generales.html"><span class="header-section-number">3</span> Conceptos generales</a></li>
+<li><a class="" href="regresion-lineal.html"><span class="header-section-number">4</span> Regresion lineal</a></li>
+<li><a class="" href="lasso.html"><span class="header-section-number">5</span> Lasso</a></li>
+<li><a class="" href="logit.html"><span class="header-section-number">6</span> Logit</a></li>
+<li><a class="" href="arboles-de-decision.html"><span class="header-section-number">7</span> Arboles de decision</a></li>
+<li><a class="" href="analisis-de-clusters.html"><span class="header-section-number">8</span> Analisis de clusters</a></li>
+<li><a class="" href="bibliografia.html">Bibliografia</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="conceptos-generales" class="section level1" number="3">
+<h1>
+<span class="header-section-number">Capítulo 3</span> Conceptos generales<a class="anchor" aria-label="anchor" href="#conceptos-generales"><i class="fas fa-link"></i></a>
+</h1>
+<p>El <strong>objetivo</strong> de la Ciencia de Datos es <strong>aprender</strong> algo de los <strong>datos</strong>. Si se dispone de una variable <em>output</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;También variable dependiente o variable explicada&lt;/p&gt;"><sup>2</sup></a> y otras <em>input</em><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;También variables independientes o variables explicativas&lt;/p&gt;"><sup>3</sup></a> el aprendizaje se denomina <strong>supervisado</strong>, si sólo hay <em>inputs</em> el aprendizaje es <strong>no supervisado</strong>.</p>
+<p>Dentro aprendizaje supervisado podemos distinguir la <strong>predicción</strong>, cuando la variable <em>output</em> es cuantitativa, de la <strong>clasificación</strong> donde la la variable <em>output</em> es discreta/categórica (ej. <span class="math inline">\(0/1\)</span>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;En general el interés no esta puesto en realizar inferencia/análisis condicional.&lt;/p&gt;"><sup>4</sup></a> Por su parte, el análisis no supervisado busca relaciones y estructura dentro de los datos (ej. distinguir <em>clusters</em>/grupos de clientes para promociones publicitarias).</p>
+<div id="estimacion" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Estimacion<a class="anchor" aria-label="anchor" href="#estimacion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Supongamos que se quiere estudiar la relación entre el gasto en publicidad a través de diversos canales como televisión, radio, diarios (<em>inputs</em>) y las ventas en distintos mercados (<em>output</em>).</p>
+<p><span class="math display" id="eq:estima">\[\begin{equation}
+\tag{3.1}
+  Y = f(X) + \epsilon
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(f\)</span> es una función desconocida de <span class="math inline">\((X_1, X_2, X_3)\)</span> y <span class="math inline">\(\epsilon\)</span> es un término de error aleatorio independiente de <span class="math inline">\(X\)</span> con media <span class="math inline">\(0\)</span>.</p>
+<p>En esencia, el aprendizaje estadístico se refiere a un conjunto de enfoques para estimar <span class="math inline">\(f\)</span>.</p>
+</div>
+<div id="prediccion" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Prediccion<a class="anchor" aria-label="anchor" href="#prediccion"><i class="fas fa-link"></i></a>
+</h2>
+<p>Supongamos que se dispone de datos de variables independientes por no de la dependiente, en ese caso, dado que el error en promedio es <span class="math inline">\(0\)</span> podríamos predecir <span class="math inline">\(Y\)</span> utilizando:</p>
+<p><span class="math display" id="eq:pred">\[\begin{equation}
+\tag{3.2}
+  \hat{Y} = \hat{f}(X)
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\hat{f}\)</span> representa nuestra estimación de <span class="math inline">\(f\)</span> y <span class="math inline">\(\hat{Y}\)</span> representa la predicción de <span class="math inline">\(Y\)</span>. En este contexto, <span class="math inline">\(\hat{f}\)</span> a menudo se trata como una <strong>caja negra</strong>, en el sentido que no importa la forma exacta de <span class="math inline">\(\hat{f}\)</span>, siempre que produzca predicciones precisas de <span class="math inline">\(Y\)</span>.</p>
+<p>La precisión con la que <span class="math inline">\(\hat{Y}\)</span> se acerca a <span class="math inline">\(Y\)</span> depende de dos cantidades, el error <em>reducible</em> y el <em>irreducible</em>. En general, <span class="math inline">\(\hat{f}\)</span> no será una estimación perfecta de <span class="math inline">\(f\)</span>, y esta inexactitud introducirá
+un error que es reducible porque potencialmente podemos mejorar la
+precisión de <span class="math inline">\(\hat{f}\)</span> usando la técnica de aprendizaje estadístico más apropiada para estimar <span class="math inline">\(f\)</span>. Sin embargo, si fuera posible estimar <span class="math inline">\(f\)</span> de manera perfecta de manera que la respuesta estimada <span class="math inline">\(\hat{Y} = f(X)\)</span>, nuestra predicción todavía tendría algún error dado que <span class="math inline">\(Y\)</span> también es función de <span class="math inline">\(\epsilon\)</span>, que por definición, no se puede predecir usando <span class="math inline">\(X\)</span>. Por lo tanto, la variabilidad asociada con <span class="math inline">\(\epsilon\)</span> también afecta la precisión de nuestras predicciones. Esto se conoce como el error irreducible, porque no importa qué tan bien estimemos <span class="math inline">\(f\)</span>, no puede reducir el error introducido por <span class="math inline">\(\epsilon\)</span>.</p>
+<p>El término de error <span class="math inline">\(\epsilon\)</span> puede contener variables no observables que son útiles para predecir <span class="math inline">\(Y\)</span> y, por lo tanto, <span class="math inline">\(f\)</span> no puede usarlos para su predicción.</p>
+<p><span class="math display">\[\begin{align*}
+  E(Y - \hat{Y})^2 &amp; = E[f(X) + \epsilon - \hat{f}(X)]^2 \\
+                   &amp; = \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{Reducible}} + \underbrace{Var(\epsilon)}_{\text{Irreducible}}
+\end{align*}\]</span></p>
+<p>donde de <span class="math inline">\(E(Y − \hat{Y})^2\)</span> representa el promedio, o valor esperado, de la diferencia entre el valor predicho y real de <span class="math inline">\(Y\)</span> al cuadrado, y <span class="math inline">\(Var(\epsilon)\)</span> representa la varianza asociada al término de error <span class="math inline">\(\epsilon\)</span>.</p>
+<p>El foco de este curso está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que la error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción para <span class="math inline">\(Y\)</span> que en la práctica casi siempre es desconocido.</p>
+</div>
+<div id="inferencia" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Inferencia<a class="anchor" aria-label="anchor" href="#inferencia"><i class="fas fa-link"></i></a>
+</h2>
+<p>En este caso el interés está en comprender la asociación entre <span class="math inline">\(Y\)</span> y <span class="math inline">\(X_1,..., X_p\)</span>. Se busca estimar <span class="math inline">\(f\)</span>, pero el objetivo no es necesariamente hacer predicciones sobre <span class="math inline">\(Y\)</span>. Ahora <span class="math inline">\(\hat{f}\)</span> <strong>no</strong> puede ser tratada como una <strong>caja negra</strong>, porque se necesita conocer su forma exacta. Así se busca determinar:</p>
+<ul>
+<li>Qué variables se deben incluir en el modelo</li>
+<li>Cómo es la relación entre el la variable explicada y cada predictor</li>
+<li>Si la relación se puede aproximar con un modelo lineal o uno más complejo</li>
+</ul>
+</div>
+<div id="metodos-parametricos" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Metodos parametricos<a class="anchor" aria-label="anchor" href="#metodos-parametricos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Se realiza en dos etapas:</p>
+<ul>
+<li>Asumir una forma funcional (<strong>modelo</strong>, por ejemplo lineal)</li>
+</ul>
+<p><span class="math display" id="eq:ml">\[\begin{equation}
+\tag{3.3}
+  Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p
+\end{equation}\]</span></p>
+<ul>
+<li>Estimar los parámetros (<strong>método</strong>, por ejemplo MCO)</li>
+</ul>
+<p>Si bien el problema se reduce a estimar <span class="math inline">\(p + 1\)</span> parámetros, la desventaja es que la forma funcional elegida puede diferir de la verdadera <span class="math inline">\(f\)</span>.</p>
+</div>
+<div id="metodos-no-parametricos" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Metodos no parametricos<a class="anchor" aria-label="anchor" href="#metodos-no-parametricos"><i class="fas fa-link"></i></a>
+</h2>
+<p>No realizan supuestos sobre la forma funcional de <span class="math inline">\(f\)</span> sino que tratan de buscar una estimación que se acerque lo más posible a los datos sin ser ni demasiado tosco ni demasiado ondulado. El costo es que se necesitan más datos para estimar.</p>
+</div>
+<div id="evaluacion-de-la-precision-del-modelo" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> Evaluacion de la precision del modelo<a class="anchor" aria-label="anchor" href="#evaluacion-de-la-precision-del-modelo"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ningún método domina al resto sobre todas las bases de datos posibles. En un conjunto de datos en particular, un método específico puede funcionar mejor, pero algún otro método lo puede superar con otra base de datos. Por lo tanto, en cada caso se debe decidir qué método produce los mejores resultados.</p>
+<div id="calidad-del-ajuste" class="section level3" number="3.6.1">
+<h3>
+<span class="header-section-number">3.6.1</span> Calidad del ajuste<a class="anchor" aria-label="anchor" href="#calidad-del-ajuste"><i class="fas fa-link"></i></a>
+</h3>
+<p>Para evaluar el desempeño de un método de aprendizaje estadístico en
+un conjunto de datos dado, se necesita alguna forma de medir qué tan bien sus predicciones coinciden con los datos observados. Es decir, se necesita cuantificar el grado en el cual el valor pronosticado para una observación dada está cerca de el verdadero valor de respuesta para esa observación. En el escenario de regresión, la medida más utilizada es el error cuadrático medio (<span class="math inline">\(MSE\)</span>):</p>
+<p><span class="math display" id="eq:mse">\[\begin{equation}
+\tag{3.4}
+  MSE = \frac{1}{n} \sum_{i=1}^{n}(y_i - \hat{f}(x_i))^2
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\hat{f}(x_i)\)</span> es la predicción que <span class="math inline">\(\hat{f}\)</span> hace sobre la observación <span class="math inline">\(i\)</span>. El <span class="math inline">\(MSE\)</span> será pequeño si las respuestas predichas están muy cerca de las respuestas verdaderas y será grande si para algunas observaciones difieren demasiado.</p>
+<p>El <span class="math inline">\(MSE\)</span> en <a href="conceptos-generales.html#eq:mse">(3.4)</a> se calcula usando los datos de entrenamiento (<em>training</em>) que se usaron para estimar el modelo, por lo que debería denominarse con mayor precisión <span class="math inline">\(MSE\)</span> de entrenamiento. Pero en general, no nos interesa realmente qué tan bien funciona el método
+sobre los datos de entrenamiento. Más bien, estamos interesados en la precisión de las predicciones que obtenemos cuando aplicamos nuestro método <strong>datos de <em>test</em></strong> que no fueron visto antes (datos no utilizados para entrenar el modelo). Es decir, se busca elegir el método que produzca el menor <span class="math inline">\(MSE\)</span> de <em>test</em>.</p>
+<p><span class="math display" id="eq:msetest">\[\begin{equation}
+\tag{3.5}
+  Prom(y_0 - \hat{f}(x_0))^2
+\end{equation}\]</span></p>
+<p>el error de predicción cuadrático promedio para estas observaciones de <em>test</em> <span class="math inline">\((y_0, x_0)\)</span>.</p>
+<p>¿Qué sucede si se elige en base al MSE de <em>training</em> <a href="conceptos-generales.html#eq:mse">(3.4)</a> ? no hay garantía de que el método con el MSE de entrenamiento más bajo también tenga el MSE de test más bajo.</p>
+<p>El panel de la izquierda de la Figura <a href="conceptos-generales.html#fig:f29">3.1</a> muestra la verdadera <span class="math inline">\(f\)</span> dada por la curva negra. Las curvas naranja, azul y verde ilustran
+tres posibles estimaciones de <span class="math inline">\(f\)</span> obtenidas utilizando métodos con
+niveles de flexibilidad. La línea naranja es el ajuste de regresión lineal, que es relativamente inflexible. Las curvas azul y verde se produjeron usando <em>splines</em> con diferentes niveles de suavidad. Es claro que a medida que aumenta el nivel de flexibilidad, las curvas se ajustan mejor a los datos observados. La curva verde es la más flexible y coincide con la datos muy bien; sin embargo, se observa que se ajusta mal a la verdadera <span class="math inline">\(f\)</span> (en negro) porque es demasiado ondulada. Cambiando el nivel de flexibilidad del <em>spline</em> se pueden producir ajustes diferentes para estos datos.</p>
+<p>En el panel de la derecha de la Figura <a href="conceptos-generales.html#fig:f29">3.1</a> la curva gris
+muestra el <span class="math inline">\(MSE\)</span> de entrenamiento promedio en función de la flexibilidad, o más formalmente los grados de libertad (resume la flexibilidad de una curva), para una serie de <em>splines</em>. Los cuadrados naranja, azul y verde
+indican los <span class="math inline">\(MSE\)</span> asociados con las curvas correspondientes en el panel izquierdo. El <span class="math inline">\(MSE\)</span> de entrenamiento MSE disminuye monótonamente a medida que aumenta la flexibilidad. En este ejemplo el verdadera <span class="math inline">\(f\)</span> es no lineal, por lo que el ajuste lineal naranja no es lo suficientemente flexible para estimar bien <span class="math inline">\(f\)</span>. La curva verde tiene el <span class="math inline">\(MSE\)</span> de entrenamiento más bajo de los tres métodos, ya que corresponde a la más flexible de las tres curvas.</p>
+<p>En este ejemplo, se conoce la verdadera función <span class="math inline">\(f\)</span>, por lo que también se puede calcular el <span class="math inline">\(MSE\)</span> de <em>test</em> (en general <span class="math inline">\(f\)</span> es desconocida, por lo que esto no es posible). El <span class="math inline">\(MSE\)</span> de <em>test</em> se muestra usando la curva roja en el panel derecho de la Figura <a href="conceptos-generales.html#fig:f29">3.1</a>. Como con el MSE de entrenamiento, el MSE de <em>test</em> disminuye inicialmente a medida que el nivel de flexibilidad aumenta. Sin embargo, en algún momento el MSE de <em>test</em> se nivela y luego empieza a aumentar. En consecuencia, las curvas naranja y verde tienen un <span class="math inline">\(MSE\)</span> de <em>test</em> alto. La curva azul minimiza el <span class="math inline">\(MSE\)</span> de <em>test</em>, dado que visualmente parece estimar <span class="math inline">\(f\)</span> lo mejor en el panel izquierdo. La línea discontinua horizontal indica <span class="math inline">\(Var(\epsilon)\)</span>, el error irreducible en la ecuación de <span class="math inline">\(E(Y - \hat{Y})^2\)</span>, que corresponde al menor alcanzable por el MSE de <em>test</em> entre todos los métodos posibles. Por lo tanto, la <em>spline</em> de suavizado representada por la curva azul está cerca del óptimo.</p>
+<p>En el panel de la derecha de la Figura <a href="conceptos-generales.html#fig:f29">3.1</a>, como la flexibilidad del método de aprendizaje aumente, se observa una disminución monótona en el <span class="math inline">\(MSE\)</span> de entrenamiento y una forma de U en el <span class="math inline">\(MSE\)</span> de <em>test</em>. Esta es una propiedad fundamental de aprendizaje estadístico que se mantiene independientemente del conjunto de datos particular en cuestión e independientemente del método estadístico que se utilice.</p>
+<p>Cuando un método dado produce un <span class="math inline">\(MSE\)</span> de entrenamiento pequeño pero un <span class="math inline">\(MSE\)</span> de <em>test</em> grande, se dice que está haciendo <em>overfitting</em>/sobreajustando los datos. Esto sucede porque nuestro aprendizaje estadístico está trabajando demasiado para encontrar patrones en los datos de entrenamiento, y puede estar detectando algunos patrones que son causados por casualidad en lugar de por las verdaderas propiedades de la función desconocida <span class="math inline">\(f\)</span>. <em>Overfitting</em> se refiere específicamente al caso en el que un modelo menos flexible podría haber producido un menor error de predicción en <em>test</em>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:f29"></span>
+<img src="2.9MSE_TestTrain.png" alt="Datos en curva y MSE" width="80%"><p class="caption">
+Figura 3.1: Datos en curva y MSE
+</p>
+</div>
+<p>La Figura <a href="conceptos-generales.html#fig:f210">3.2</a> proporciona otro ejemplo en el que la verdadera <span class="math inline">\(f\)</span> es aproximadamente lineal por lo que este tipo de modelos obtienen el menor <span class="math inline">\(MSE\)</span> en <em>test</em>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:f210"></span>
+<img src="2.10MSE_TestTrain.png" alt="Datos lineales y MSE" width="80%"><p class="caption">
+Figura 3.2: Datos lineales y MSE
+</p>
+</div>
+</div>
+<div id="trade-off-sesgo-varianza" class="section level3" number="3.6.2">
+<h3>
+<span class="header-section-number">3.6.2</span> Trade-off Sesgo-Varianza<a class="anchor" aria-label="anchor" href="#trade-off-sesgo-varianza"><i class="fas fa-link"></i></a>
+</h3>
+<p>La Figura <a href="conceptos-generales.html#fig:fsv">3.3</a> muestra el <em>trade-off</em> <strong>Sesgo - Varianza</strong> intuitivamente.</p>
+<div class="figure">
+<span style="display:block;" id="fig:fsv"></span>
+<img src="SesgoVar.png" alt="Estimacion y MSE" width="70%"><p class="caption">
+Figura 3.3: Estimacion y MSE
+</p>
+</div>
+<p>La forma de U observada en las curvas <span class="math inline">\(MSE\)</span> de <em>test</em> es el resultado de dos propiedades que compiten en los métodos de aprendizaje estadístico. El <span class="math inline">\(MSE\)</span> de <em>test</em> esperado, para un valor dado <span class="math inline">\(x_0\)</span>, puede descomponerse en la suma de tres cantidades fundamentales: la
+varianza de <span class="math inline">\(\hat{f}(x_0)\)</span>, el sesgo al cuadrado de <span class="math inline">\(\hat{f}(x_0)\)</span> y la varianza del error <span class="math inline">\(\epsilon\)</span>.</p>
+<p><span class="math display" id="eq:sv">\[\begin{equation}
+\tag{3.6}
+  E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + [Sesgo(\hat{f}(x_0))]^2 + Var(\epsilon)
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(E(y_0 - \hat{f}(x_0))^2\)</span> el valor esperado de <span class="math inline">\(MSE\)</span> de <em>test</em> en <span class="math inline">\(x_0\)</span>. Para minimizar el error de <em>test</em> esperado, se necesita seleccionar un método de aprendizaje estadístico que logre simultáneamente <strong>baja varianza</strong> y <strong>bajo sesgo</strong>.</p>
+<p>La <strong>varianza</strong> se refiere al valor en que <span class="math inline">\(f\)</span> cambiaría si
+se estimara utilizando una base de datos de entrenamiento diferente. <strong>Sesgo</strong> se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por mucho modelo más simple. Como regla general, a medida que se utilizan métodos más flexibles, la varianza aumenta y el sesgo disminuye. La tasa relativa de cambio de estos dos cantidades determina si el <span class="math inline">\(MSE\)</span> de <em>test</em> aumenta o disminuye.</p>
+<p>Los dos paneles de la Figura <a href="conceptos-generales.html#fig:f212">3.4</a> ilustran la Ecuación <a href="conceptos-generales.html#eq:sv">(3.6)</a> para los ejemplos en Figuras <a href="conceptos-generales.html#fig:f29">3.1</a> y <a href="conceptos-generales.html#fig:f210">3.2</a>. En cada caso, la curva sólida azul representa el cuadrado del sesgo, para diferentes niveles de flexibilidad, mientras que la curva naranja corresponde a la varianza. La línea discontinua horizontal representa <span class="math inline">\(Var(\epsilon)\)</span>, el error irreducible. Finalmente, la curva roja, corresponde al MSE de <em>test</em>, es la suma de estas tres cantidades.</p>
+<div class="figure">
+<span style="display:block;" id="fig:f212"></span>
+<img src="2.12MSE_SesgoVar.png" alt="Estimacion y MSE" width="80%"><p class="caption">
+Figura 3.4: Estimacion y MSE
+</p>
+</div>
+</div>
+<div id="clasificacion" class="section level3" number="3.6.3">
+<h3>
+<span class="header-section-number">3.6.3</span> Clasificacion<a class="anchor" aria-label="anchor" href="#clasificacion"><i class="fas fa-link"></i></a>
+</h3>
+<p>Muchos de los conceptos del contexto de regresion, como
+el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificación donde ahora <span class="math inline">\(y_i\)</span> es cualitativa. El el enfoque más común para cuantificar la precisión de la estimación <span class="math inline">\(\hat{f}\)</span> es la <strong>tasa de error</strong> de entrenamiento, la proporción de errores que se cometen si aplicamos nuestra estimación <span class="math inline">\(\hat{f}\)</span> a las observaciones de entrenamiento</p>
+<p><span class="math display" id="eq:terror">\[\begin{equation}
+\tag{3.7}
+  \frac{1}{n} \sum_{i=1}^{n}I(y_i \neq \hat{y_i})
+\end{equation}\]</span></p>
+<p>Aquí <span class="math inline">\(\hat{y_i}\)</span> es la etiqueta de clase predicha para la i-ésima observación usando <span class="math inline">\(\hat{f}\)</span>. Y <span class="math inline">\(I(y_i \neq \hat{y_i})\)</span> es una variable indicadora que es igual a 1 si <span class="math inline">\(y_i \neq \hat{y_i}\)</span> y cero si <span class="math inline">\(y_i = \hat{y_i}\)</span>. indicador Si <span class="math inline">\(I(y_i \neq \hat{y_i}) = 0\)</span> entonces la i-ésima observación fue clasificada correctamente por el método de clasificación; de lo contrario, fue mal clasificado.</p>
+<p>La tasa de error de <em>test</em> asociada con un conjunto de observaciones de <em>test</em> de la forma <span class="math inline">\((x_0, y_0)\)</span> está dada por:</p>
+<p><span class="math display" id="eq:terror2">\[\begin{equation}
+\tag{3.8}
+  Prom(I(y_0 \neq \hat{y_0}))
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\hat{y_0}\)</span> es la etiqueta de clase predicha que resulta de aplicar el clasificador a la observación de prueba con predictor <span class="math inline">\(x_0\)</span>. Un buen clasificador es aquel para el cual el error de prueba <a href="conceptos-generales.html#eq:terror2">(3.8)</a> es el más pequeño.</p>
+<div id="clasificador-de-bayes" class="section level4" number="3.6.3.1">
+<h4>
+<span class="header-section-number">3.6.3.1</span> Clasificador de Bayes<a class="anchor" aria-label="anchor" href="#clasificador-de-bayes"><i class="fas fa-link"></i></a>
+</h4>
+<p>Es posible mostrar bajo penalidad simétrica<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;¿Útil para probabilidad de &lt;em&gt;default&lt;/em&gt;?&lt;/p&gt;"><sup>5</sup></a> la tasa de error de <em>test</em> postulada en <a href="conceptos-generales.html#eq:terror2">(3.8)</a> se minimiza, en promedio, por un clasificador muy simple que asigna cada observación a la clase más probable, dados sus valores predictores. En otras palabras, se debería asignar una observación de test con vector predictor <span class="math inline">\(x_0\)</span> a la clase <span class="math inline">\(j\)</span> para la cual <a href="conceptos-generales.html#eq:bayes">(3.9)</a> es mayor.</p>
+<p><span class="math display" id="eq:bayes">\[\begin{equation}
+\tag{3.9}
+  Pr(Y = j \mid X = x_0)
+\end{equation}\]</span></p>
+<p>Es decir, en un problema donde sólo hay dos categorías el clasificador de Bayes predice la clase <span class="math inline">\(1\)</span> si <span class="math inline">\(Pr(Y = 1 \mid X = x_0)&gt;0.5\)</span> y la clase <span class="math inline">\(2\)</span> en caso contrario.</p>
+</div>
+</div>
+<div id="matriz-de-confusion" class="section level3" number="3.6.4">
+<h3>
+<span class="header-section-number">3.6.4</span> Matriz de confusion<a class="anchor" aria-label="anchor" href="#matriz-de-confusion"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">Observado</th>
+<th align="center"></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(0\)</span></td>
+<td align="center"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Predicción</strong></td>
+<td align="center"><span class="math inline">\(0\)</span></td>
+<td align="center"><span class="math inline">\(VN\)</span></td>
+<td align="center"><span class="math inline">\(FN\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">(decision)</td>
+<td align="center"><span class="math inline">\(1\)</span></td>
+<td align="center"><span class="math inline">\(FP\)</span></td>
+<td align="center"><span class="math inline">\(VP\)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p><br></p>
+<p><span class="math inline">\(VN\)</span>: Verdadero Negativo; <span class="math inline">\(FN\)</span>: Falso Negativo; <span class="math inline">\(FP\)</span>: Falso Positivo; <span class="math inline">\(VP\)</span>: Verdadero Positivo</p>
+<p>Métricas para comparar modelos. La <strong>precisión</strong> es la cantidad de predicciones correctas, la <strong>sensibilidad</strong> es la cantidad de <span class="math inline">\(VP\)</span> identificados sobre el total de positivos y la <strong>especificidad</strong> es la cantidad de <span class="math inline">\(VN\)</span> identificados sobre el total de negativos.</p>
+<p><span class="math display">\[\begin{align*}
+Precision &amp; = \frac{VP + VN}{VP + VN + FP + FN} \\ 
+Sensiblilidad &amp; = \frac{VP}{VP + FN} \\ 
+Especificidad &amp; = \frac{VN}{VN + FP} 
+\end{align*}\]</span></p>
+</div>
+<div id="curva-roc" class="section level3" number="3.6.5">
+<h3>
+<span class="header-section-number">3.6.5</span> Curva ROC<a class="anchor" aria-label="anchor" href="#curva-roc"><i class="fas fa-link"></i></a>
+</h3>
+<p>El nombre viene de <em>receiver operating characteristics</em> (comunicación). Si se modifica el umbral <span class="math inline">\(p_i &gt; c\)</span>, cambian los resultados de la matriz de confusión. Por ejemplo, al estimar la probabilidad de <em>default</em>, para un banco podría resultar relativamente más costoso clasificar a un mal deudor como no <em>default</em> que a uno bueno como <em>default</em>. Entonces podría bajar el umbral <span class="math inline">\(p_i &gt; 0,3\)</span> (asimétrico) para clasificar casos positivos afectando las tasas de errores.</p>
+<p>Si se define:
+<span class="math display">\[\begin{align*}
+TPR = &amp; VP / P \\ 
+FPR = &amp; FP / N
+\end{align*}\]</span></p>
+<p>La curva <span class="math inline">\(ROC\)</span> representa la relación entre <span class="math inline">\(TPR\)</span> y <span class="math inline">\(FPR\)</span> (notar que la <span class="math inline">\(FPR = 1 - Especificidad\)</span>) para todos los valores posibles de <span class="math inline">\(c \in [0, 1]\)</span>. La curva <span class="math inline">\(ROC\)</span> permite medir capacidad predictiva y comparar modelos.</p>
+<div class="figure">
+<span style="display:block;" id="fig:roc"></span>
+<img src="4.8ROC.png" alt="Curva ROC" width="75%"><p class="caption">
+Figura 3.5: Curva ROC
+</p>
+</div>
+<p>Casos extremos</p>
+<ul>
+<li>
+<span class="math inline">\(c = 1\)</span> todos clasificados como negativos ; <span class="math inline">\(tpr = 0\)</span>, <span class="math inline">\(fpr = 0\)</span>
+</li>
+<li>
+<span class="math inline">\(c = 0\)</span> todos clasificados como positivos ; <span class="math inline">\(tpr = 1\)</span>, <span class="math inline">\(fpr = 1\)</span>
+</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:roc2"></span>
+<img src="rocideal.png" alt="Curva ROC puntos importantes" width="65%"><p class="caption">
+Figura 3.6: Curva ROC puntos importantes
+</p>
+</div>
+<p><span class="math inline">\(AUC\)</span> (o <span class="math inline">\(AUROC\)</span>): área bajo la curva <span class="math inline">\(ROC\)</span>. Cuán parecida es la curva <span class="math inline">\(ROC\)</span> a la ideal, es decir cuanto <span class="math inline">\(AUC\)</span> está más cerca de <span class="math inline">\(1\)</span> mejor es el clasificador. Por su parte, un clasificador aleatorio debe tener un <span class="math inline">\(AUC = 0,5\)</span> (línea de <span class="math inline">\(45^\circ\)</span>).</p>
+</div>
+</div>
+<div id="cross-validation" class="section level2" number="3.7">
+<h2>
+<span class="header-section-number">3.7</span> Cross Validation<a class="anchor" aria-label="anchor" href="#cross-validation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Recordar la diferencia entre la tasa de error de <em>test</em> y la
+tasa de error de entrenamiento. El error de <em>test</em> es el error promedio que resulta de usar un método de aprendizaje estadístico para predecir la respuesta en una nueva observación, es decir, que no fue utilizada en el entrenamiento del método.</p>
+<p>Modelos complejos predicen bien dentro de la muestra pero mal fuera de la misma (<em>overfit</em>) y nuestro interés está puesto en esta última.</p>
+<p><strong>Objetivo:</strong> buscar el nivel de complejidad óptimo para predecir fuera de la muestra.</p>
+<p>Pérdida</p>
+<ul>
+<li>Regresión = <span class="math inline">\((Y - \hat{Y})^2\)</span>
+</li>
+<li>Clasificación = <span class="math inline">\(1(Y \neq \hat{Y})\)</span>
+</li>
+</ul>
+<p><strong><em>k-Fold cross-validation</em></strong></p>
+<ol style="list-style-type: decimal">
+<li>Dividir la muestra en <span class="math inline">\(K\)</span> partes al azar.</li>
+<li>Tomar <span class="math inline">\(K - 1\)</span> partes y estimar en modelo.</li>
+<li>Calcular el error de predicción para los datos no utilizados.</li>
+<li>Repetir para <span class="math inline">\(k = 1,...,K\)</span>
+</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:cv"></span>
+<img src="5.5CrossVal.png" alt="K-Fold cross-validation" width="65%"><p class="caption">
+Figura 3.7: K-Fold cross-validation
+</p>
+</div>
+<p>La estimación por <em>cross-validation</em> del error de predicción es:</p>
+<p><span class="math display" id="eq:cv">\[\begin{equation}
+\tag{3.10}
+  CV(\hat{f}) = \frac{1}{N}L(Y_i - \hat{Y}_{-k}(x_i))
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(\hat{Y}_{-k}(x_i)\)</span> es la predicción hecha cuando la observación no fue usada para estimar. Cada observación se utiliza en dos roles: Entrenamiento y <em>test</em>. De esta forma se estima el modelo <span class="math inline">\(K\)</span> veces para construir el error de pronóstico.</p>
+<p><em>Cross-validation</em> para eleccion de modelos
+Si <span class="math inline">\(\alpha\)</span> representa la complejidad de un modelo (por ejemplo el grado de un polinomio)</p>
+<p><span class="math display" id="eq:cv2">\[\begin{equation}
+\tag{3.11}
+  CV(\hat{f}, \alpha) = \frac{1}{N}L(Y_i - \hat{Y}_{-k}(x_i, \alpha))
+\end{equation}\]</span></p>
+<p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Luego de seleccionar el modelo se estima con la muestra completa.&lt;/p&gt;"><sup>6</sup></a></p>
+</div>
+<div id="bootstrap" class="section level2" number="3.8">
+<h2>
+<span class="header-section-number">3.8</span> Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+</h2>
+<p><em>Bootstrap</em> es una herramienta estadística que se puede utilizar para cuantificar la incertidumbre asociada con un estimador o un método de aprendizaje estadístico.</p>
+<p>Dado <span class="math inline">\(Y_1, Y_2,...,Y_n\)</span> iid <span class="math inline">\(Y \sim (\mu, \sigma^2)\)</span></p>
+<p>Se quiere estimar la varianza de la media muestral <span class="math inline">\(V(\overline{Y}) = \frac{\sigma^2}{n}\)</span></p>
+<p>Formula: <span class="math inline">\(\frac{\hat{\sigma}^2}{n}\)</span></p>
+<p><span class="math display" id="eq:sigma2">\[\begin{equation}
+\tag{3.12}
+  \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n}(Y_i-\overline{Y})^2 
+\end{equation}\]</span></p>
+<p><strong>Método sin fórmula</strong></p>
+<p>De los <span class="math inline">\(N\)</span> datos originales <span class="math inline">\(y_1, y_2,...,y_N\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Tomar una muestra <strong>con remplazo</strong> de tamaño <span class="math inline">\(n\)</span> (una observación puede entrar más de una vez y otra puede no entrar nunca).</li>
+<li>Computar la media muestral de esta muestra.</li>
+<li>Repetir <span class="math inline">\(B\)</span> veces. Al terminar tendremos <span class="math inline">\(B\)</span> estimaciones de la media.</li>
+<li>Calcular la varianza de las <span class="math inline">\(B\)</span> medias.</li>
+</ol>
+<p><strong>En términos generales</strong></p>
+<p>Dado <span class="math inline">\(Y_i\)</span> con <span class="math inline">\(i = 1,...,n\)</span> y <span class="math inline">\(\theta\)</span> es una magnitud de interés</p>
+<ol style="list-style-type: decimal">
+<li>Tomar una muestra <strong>con remplazo</strong> de tamaño <span class="math inline">\(n\)</span> (muestra <em>bootstrap</em>).</li>
+<li>Computar <span class="math inline">\(\hat{\theta}_j\)</span>, con <span class="math inline">\(j = 1,...,B\)</span>.</li>
+<li>Repetir <span class="math inline">\(B\)</span> veces.</li>
+<li>Calcular:</li>
+</ol>
+<p><span class="math display" id="eq:theta">\[\begin{equation}
+\tag{3.13}
+  \hat{V}(\hat{\theta})_B = \frac{1}{B} \sum_{j=1}^{B}(\hat{\theta}_j - \overline{\hat{\theta}})^2 
+\end{equation}\]</span></p>
+<p><strong>Ejemplo:</strong></p>
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
+<span class="va">poblacion</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>
+
+<span class="co"># Bootstrap con 10000 repeticiones:</span>
+<span class="va">muestra_boot</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">muestra</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">poblacion</span>, <span class="fl">300</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">muestra_boot</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">muestra_boot</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">muestra</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span>  
+
+<span class="co"># Media calculada con MUESTRA BOOTSTRAP</span>
+<span class="va">simulated_mean</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">muestra_boot</span><span class="op">)</span>
+
+<span class="co"># Varianza de la MUESTRA BOOTSTRAP</span>
+<span class="va">simulated_var</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">muestra_boot</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
+
+<span class="co"># Comparemos medias:</span>
+<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">poblacion</span><span class="op">)</span>; <span class="va">simulated_mean</span></code></pre></div>
+<pre><code>## [1] -0.0265972</code></pre>
+<pre><code>## [1] -0.02612666</code></pre>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Comparemos varianza:</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">poblacion</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fl">300</span>; <span class="va">simulated_var</span></code></pre></div>
+<pre><code>## [1] 0.003315608</code></pre>
+<pre><code>## [1] 0.003312673</code></pre>
+
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="base-de-datos.html"><span class="header-section-number">2</span> Base de datos</a></div>
+<div class="next"><a href="regresion-lineal.html"><span class="header-section-number">4</span> Regresion lineal</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#conceptos-generales"><span class="header-section-number">3</span> Conceptos generales</a></li>
+<li><a class="nav-link" href="#estimacion"><span class="header-section-number">3.1</span> Estimacion</a></li>
+<li><a class="nav-link" href="#prediccion"><span class="header-section-number">3.2</span> Prediccion</a></li>
+<li><a class="nav-link" href="#inferencia"><span class="header-section-number">3.3</span> Inferencia</a></li>
+<li><a class="nav-link" href="#metodos-parametricos"><span class="header-section-number">3.4</span> Metodos parametricos</a></li>
+<li><a class="nav-link" href="#metodos-no-parametricos"><span class="header-section-number">3.5</span> Metodos no parametricos</a></li>
+<li>
+<a class="nav-link" href="#evaluacion-de-la-precision-del-modelo"><span class="header-section-number">3.6</span> Evaluacion de la precision del modelo</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#calidad-del-ajuste"><span class="header-section-number">3.6.1</span> Calidad del ajuste</a></li>
+<li><a class="nav-link" href="#trade-off-sesgo-varianza"><span class="header-section-number">3.6.2</span> Trade-off Sesgo-Varianza</a></li>
+<li><a class="nav-link" href="#clasificacion"><span class="header-section-number">3.6.3</span> Clasificacion</a></li>
+<li><a class="nav-link" href="#matriz-de-confusion"><span class="header-section-number">3.6.4</span> Matriz de confusion</a></li>
+<li><a class="nav-link" href="#curva-roc"><span class="header-section-number">3.6.5</span> Curva ROC</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#cross-validation"><span class="header-section-number">3.7</span> Cross Validation</a></li>
+<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">3.8</span> Bootstrap</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Curso Ciencia de Datos</strong>" was written by Máximo Sangiácomo. It was last built on 2022-01-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

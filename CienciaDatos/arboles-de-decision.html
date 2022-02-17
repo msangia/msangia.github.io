@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 7 Arboles de decision | Curso Ciencia de Datos</title>
+<meta name="author" content="Máximo Sangiácomo">
+<meta name="description" content="7.1 CART Classification and Regression Tree \(Y\) es la respuesta y los inputs son \(X_1\) y \(X_2\). Partimos el espacio \((X_1, X_2)\) en dos regiones, en base a una sola variable (partición...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Capítulo 7 Arboles de decision | Curso Ciencia de Datos">
+<meta property="og:type" content="book">
+<meta property="og:description" content="7.1 CART Classification and Regression Tree \(Y\) es la respuesta y los inputs son \(X_1\) y \(X_2\). Partimos el espacio \((X_1, X_2)\) en dos regiones, en base a una sola variable (partición...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 7 Arboles de decision | Curso Ciencia de Datos">
+<meta name="twitter:site" content="@msangia">
+<meta name="twitter:description" content="7.1 CART Classification and Regression Tree \(Y\) es la respuesta y los inputs son \(X_1\) y \(X_2\). Partimos el espacio \((X_1, X_2)\) en dos regiones, en base a una sola variable (partición...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Curso Ciencia de Datos</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Descripcion del curso</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Introduccion a R</a></li>
+<li><a class="" href="bd.html"><span class="header-section-number">2</span> Base de datos</a></li>
+<li><a class="" href="conceptos.html"><span class="header-section-number">3</span> Conceptos generales</a></li>
+<li><a class="" href="mco.html"><span class="header-section-number">4</span> Regresion lineal</a></li>
+<li><a class="" href="lasso.html"><span class="header-section-number">5</span> Lasso</a></li>
+<li><a class="" href="logit.html"><span class="header-section-number">6</span> Logit</a></li>
+<li><a class="active" href="arboles-de-decision.html"><span class="header-section-number">7</span> Arboles de decision</a></li>
+<li><a class="" href="cluster.html"><span class="header-section-number">8</span> Analisis de clusters</a></li>
+<li><a class="" href="bibliografia.html">Bibliografia</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="arboles-de-decision" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Capítulo 7</span> Arboles de decision<a class="anchor" aria-label="anchor" href="#arboles-de-decision"><i class="fas fa-link"></i></a>
+</h1>
+<div id="cart" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> CART<a class="anchor" aria-label="anchor" href="#cart"><i class="fas fa-link"></i></a>
+</h2>
+<p><em>Classification and Regression Tree</em></p>
+<p><span class="math inline">\(Y\)</span> es la respuesta y los <em>inputs</em> son <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span>.
+Partimos el espacio <span class="math inline">\((X_1, X_2)\)</span> en dos regiones, en base a una sola variable (partición horizontal o vertical). Dentro de cada región proponemos como predicción la media muestral de <span class="math inline">\(Y\)</span> en cada región.
+<strong>Importante:</strong> elegir la variable y el punto de partición de manera optima (mejor ajuste global). Continuar partiendo las regiones, con el mismo criterio. Esto implica una partición recursiva binaria del espacio de atributos.</p>
+<div class="figure">
+<span style="display:block;" id="fig:tree"></span>
+<img src="8Tree.png" alt="Arbol de regresión" width="80%"><p class="caption">
+Figura 7.1: Arbol de regresión
+</p>
+</div>
+<p>Notar:</p>
+<ul>
+<li><p>Cada región tiene su propio modelo.</p></li>
+<li><p>Ciertas variables importan en determinadas regiones y no en otras (Hits).</p></li>
+</ul>
+<p><span class="math inline">\(Y\)</span> y <span class="math inline">\(X\)</span>, un vector de <span class="math inline">\(p\)</span> variables de <span class="math inline">\(n\)</span> observaciones.
+Algoritmo: ¿Cuál variable usar para la partición y que punto de esa variable usar para la partición?
+<span class="math inline">\(j\)</span> es la variable de partición y el punto de partición es <span class="math inline">\(s\)</span>.
+Si se definen los siguientes semiplanos:</p>
+<p><span class="math display">\[\begin{align*}
+  R_1(j,s) = &amp; {X \mid X_j \le s} \\
+  R_2(j,s) = &amp; {X \mid X_j &gt; s}
+\end{align*}\]</span></p>
+<p>Problema: buscar la variable de partición <span class="math inline">\(X_j\)</span> y el punto de partición <span class="math inline">\(s\)</span> que resuelvan (minimizar el <span class="math inline">\(MSE\)</span> en cada región)</p>
+<p><span class="math display" id="eq:region">\[\begin{equation}
+\tag{7.1}
+  min_{j,s} [min_{c_1} \sum_{x_i \in R_1(j,s)} (y_i - c_1)^2 +  min_{c_2} \sum_{x_i \in R_2(j,s)} (y_i - c_2)^2] 
+\end{equation}\]</span></p>
+<p>Para cada variable de partición y punto de partición, la minimización interna se corresponde con la <strong>media</strong> dentro de cada región.</p>
+<p>¿Cuándo parar?</p>
+<p>Un árbol demasiado extenso sobreajusta (<em>overfit</em>) los datos (es como poner una <em>dummy</em> para cada observación). Pero dado que el proceso es secuencial y cada corte no mira lo que puede suceder despues, si detengo el proceso demasiado pronto puedo perder un “gran” corte. <em>Prunning</em>: ajustar un árbol grande y luego podarlo (<em>prune</em>) usando un criterio de cost-complexity.</p>
+<p><strong><em>Weakest link pruning</em></strong></p>
+<p>Un subarbol <span class="math inline">\(T \in T_0\)</span> es un árbol que se obtiene colapsando los nodos terminales de otro árbol (cortando ramas).</p>
+<p><em>Cost-complexity</em> del árbol <span class="math inline">\(T\)</span>:</p>
+<p><span class="math display" id="eq:cc">\[\begin{equation}
+\tag{7.2}
+   C_{\alpha}(T) = \sum_{m=1}^{[T]} n_mQ_m(T) + \alpha[T]
+\end{equation}\]</span></p>
+<p>con <span class="math inline">\(Q_m(T) = \frac{1}{n_m} \sum_{x_i \in R_m} (y_i - \hat{c}_m)^2\)</span> (impureza) y <span class="math inline">\(n_m\)</span> cantidad de observaciones en cada partición.</p>
+<p>Intuición: el primer termino mide el (mal) ajuste y el segundo la complejidad<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Idea similar a &lt;em&gt;Lasso&lt;/em&gt;.&lt;/p&gt;"><sup>8</sup></a></p>
+<p><strong>Objetivo:</strong> para un <span class="math inline">\(\alpha\)</span> dado, encontrar la poda óptima que minimiza <span class="math inline">\(C_{\alpha}(T)\)</span>.</p>
+<p>Mecanismo de búsqueda de <span class="math inline">\(T_{\alpha}\)</span> (poda óptima dado <span class="math inline">\(\alpha\)</span>).
+Resultado: para cada <span class="math inline">\(\alpha\)</span> hay un único subarbol <span class="math inline">\(T_{\alpha}\)</span> que minimiza <span class="math inline">\(C_{\alpha}(T)\)</span>.
+<em>Weakest link</em>: eliminar sucesivamente las ramas que producen el mínimo
+incremento en <span class="math inline">\(\sum_{m=1}^{[T]} n_mQ_m(T)\)</span> (impureza)
+Idea: sacar ramas es colapsar, esto aumenta la varianza, ergo, colapsamos la partición menos necesaria.
+Esto eventualmente colapsa en el nodo inicial, pero pasa por una sucesión de arboles, desde el mas grande, hasta el mas chico, por el proceso de <em>weakest link pruning</em>. El árbol óptimo <span class="math inline">\(T_{\alpha}\)</span> pertenece a esta sucesión.</p>
+<p><strong><em>Classification tree</em></strong></p>
+<p>Clase más común en el nodo. Se basa en el error de clasificación o índice de Gini (pureza). Análogo a RSS.</p>
+</div>
+<div id="bagging" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Bagging<a class="anchor" aria-label="anchor" href="#bagging"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="math inline">\(CART\)</span></p>
+<ul>
+<li><p>Forma inteligente de representar no linealidades.</p></li>
+<li><p>Arriba quedan las variables más relevantes entonces es fácil de comunicar. Reproduce proceso decisorio humano.</p></li>
+<li><p>Si la estructura es lineal, CART no anda bien.</p></li>
+<li><p>Poco robusto, variaciones en los datos modifican el resultado.</p></li>
+</ul>
+<p><em>Bootstrap aggregation</em></p>
+<p><em>Boostrap training sets</em>: tomar como predicción el promedio de las
+predicciones <em>boostrap</em>.</p>
+<p><span class="math display" id="eq:bag">\[\begin{equation}
+\tag{7.3}
+   \hat{f}_{bag} = \frac{1}{B} \sum_{b=1}^{B} \hat{f}^{b}(x)
+\end{equation}\]</span></p>
+<p><strong>Idea</strong>: la varianza del promedio es menor que la de una predicción sola. Bajo independencia si <span class="math inline">\(V(x) = \sigma^2\)</span> entonces <span class="math inline">\(V(\overline{x}) = \frac{\sigma^2}{n}\)</span>.</p>
+<p><strong>Problema</strong>: si hay un predictor fuerte, distintos árboles son muy similares entre sí. Alta correlación.</p>
+</div>
+<div id="random-forest" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Random Forest<a class="anchor" aria-label="anchor" href="#random-forest"><i class="fas fa-link"></i></a>
+</h2>
+<p>Busca bajar la correlación entre los árboles en el <em>boostrap</em>. Si hay <span class="math inline">\(p\)</span> predictores, en cada partición usar sólo <span class="math inline">\(m &lt; p\)</span> predictores, elegidos al
+azar y después procede como <em>bagging</em>.</p>
+</div>
+<div id="boosting" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Boosting<a class="anchor" aria-label="anchor" href="#boosting"><i class="fas fa-link"></i></a>
+</h2>
+<p><em>Weak classifier</em>: clasificador marginalmente mejor que tirar una moneda. Tasa de error apenas mejor que <span class="math inline">\(0,5\)</span>.
+Ejemplo: <span class="math inline">\(CART\)</span> con pocas ramas (<em>stump</em>, clasificador con dos ramas).</p>
+<p><em>Boosting</em>: promedio ponderado de una sucesión de clasificadores débiles. Notable mejora.</p>
+<p><strong>Definiciones</strong></p>
+<p><span class="math inline">\(y \in -1,1\)</span></p>
+<p>Clasificador = <span class="math inline">\(\hat{y} = G(X)\)</span></p>
+<p>Error de predicción = <span class="math inline">\(\frac{1}{N} \sum_{i=1}^{N}I(y_i \neq G(x_i))\)</span></p>
+<div id="ada-boost" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Ada Boost<a class="anchor" aria-label="anchor" href="#ada-boost"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><p>Comienza con con pesos <span class="math inline">\(w_i = \frac{1}{N}\)</span></p></li>
+<li><p>Para <span class="math inline">\(m = 1,...,M\)</span>:</p></li>
+</ol>
+<ul>
+<li><p>Calcula una predicción</p></li>
+<li><p>Calcula el error de predicción agregado</p></li>
+<li><p>Calcula <span class="math inline">\(\alpha_m = ln[\frac{1 - err_m}{err_m}]\)</span></p></li>
+<li><p>Actualiza los ponderadores <span class="math inline">\(w_i\)</span> <span class="math inline">\(\leftarrow\)</span> <span class="math inline">\(w_ic_i\)</span></p></li>
+</ul>
+<p>con <span class="math inline">\(c_i =\)</span> exp <span class="math inline">\([\alpha_m \underbrace{I(y_i \neq G(x_i))}_{{0/1}}]\)</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>
+<em>Output</em>: <span class="math inline">\(G(x) =\)</span> sgn <span class="math inline">\([\sum_{m=1}^{M} \alpha_m G_m(x)]\)</span> (signo del promedio).</li>
+</ol>
+<p>Si <span class="math inline">\(i\)</span> estuvo correctamente predicha, <span class="math inline">\(c_i = 1\)</span>, entonces no hay ajuste.
+Caso contrario, <span class="math inline">\(c_i =\)</span> exp<span class="math inline">\((\alpha_m) = \frac{1 - err_m}{err_m} &gt; 1\)</span>. Notar que si siempre predigo la clase mayoritaria la tasa de error nunca puede ser mayor al <span class="math inline">\(50\%\)</span> y por eso la expresión anterior es mayor a <span class="math inline">\(1\)</span>.
+En cada paso el método da más importancia relativa a las observaciones mal predichas. <strong>Paso final</strong>: promedio ponderado de predicciones en cada paso.</p>
+<div class="figure">
+<span style="display:block;" id="fig:boost"></span>
+<img src="Boosting.png" alt="Ada boost" width="80%"><p class="caption">
+Figura 7.2: Ada boost
+</p>
+</div>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="logit.html"><span class="header-section-number">6</span> Logit</a></div>
+<div class="next"><a href="cluster.html"><span class="header-section-number">8</span> Analisis de clusters</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#arboles-de-decision"><span class="header-section-number">7</span> Arboles de decision</a></li>
+<li><a class="nav-link" href="#cart"><span class="header-section-number">7.1</span> CART</a></li>
+<li><a class="nav-link" href="#bagging"><span class="header-section-number">7.2</span> Bagging</a></li>
+<li><a class="nav-link" href="#random-forest"><span class="header-section-number">7.3</span> Random Forest</a></li>
+<li>
+<a class="nav-link" href="#boosting"><span class="header-section-number">7.4</span> Boosting</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ada-boost"><span class="header-section-number">7.4.1</span> Ada Boost</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Curso Ciencia de Datos</strong>" was written by Máximo Sangiácomo. It was last built on 2022-01-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

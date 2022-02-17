@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Base de datos | Ciencia de Datos</title>
+  <meta name="description" content="BCRA" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Base de datos | Ciencia de Datos" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="BCRA" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Base de datos | Ciencia de Datos" />
+  <meta name="twitter:site" content="@msangia" />
+  <meta name="twitter:description" content="BCRA" />
+  
+
+<meta name="author" content="Máximo Sangiácomo" />
+
+
+<meta name="date" content="2022-02-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="conceptos.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="r4ds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Descripcion del curso</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a><ul>
+<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="bd.html"><a href="bd.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.1</b> Directorio de trabajo</a></li>
+<li class="chapter" data-level="2.2" data-path="bd.html"><a href="bd.html#cargar-datos"><i class="fa fa-check"></i><b>2.2</b> Cargar datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.5</b> Variables</a></li>
+<li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#merge"><i class="fa fa-check"></i><b>2.6</b> Merge</a></li>
+<li class="chapter" data-level="2.7" data-path="bd.html"><a href="bd.html#group_by-mutate"><i class="fa fa-check"></i><b>2.7</b> group_by, mutate</a></li>
+<li class="chapter" data-level="2.8" data-path="bd.html"><a href="bd.html#guardar-datos"><i class="fa fa-check"></i><b>2.8</b> Guardar datos</a></li>
+<li class="chapter" data-level="2.9" data-path="bd.html"><a href="bd.html#valores-missing"><i class="fa fa-check"></i><b>2.9</b> Valores missing</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.9.1</b> Eliminar valores missing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.10</b> Loop</a></li>
+<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#pivot"><i class="fa fa-check"></i><b>2.11</b> Pivot</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#append"><i class="fa fa-check"></i><b>2.12</b> Append</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.13</b> Strings</a></li>
+<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.14</b> Fechas</a><ul>
+<li class="chapter" data-level="2.14.1" data-path="bd.html"><a href="bd.html#year"><i class="fa fa-check"></i><b>2.14.1</b> Year</a></li>
+<li class="chapter" data-level="2.14.2" data-path="bd.html"><a href="bd.html#month"><i class="fa fa-check"></i><b>2.14.2</b> Month</a></li>
+<li class="chapter" data-level="2.14.3" data-path="bd.html"><a href="bd.html#day"><i class="fa fa-check"></i><b>2.14.3</b> Day</a></li>
+<li class="chapter" data-level="2.14.4" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.14.4</b> Manipulación de fechas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.15</b> Análisis de datos</a><ul>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.15.1</b> Tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.16</b> group_by, summarise</a></li>
+<li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.17</b> Vector de resultados</a></li>
+<li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.18</b> Gráficos</a></li>
+<li class="chapter" data-level="2.19" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.19</b> GGPlot</a></li>
+<li class="chapter" data-level="2.20" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.20</b> Guardar un gráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a><ul>
+<li class="chapter" data-level="3.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>3.1</b> Estimacion</a></li>
+<li class="chapter" data-level="3.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>3.2</b> Prediccion</a></li>
+<li class="chapter" data-level="3.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>3.3</b> Inferencia</a></li>
+<li class="chapter" data-level="3.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>3.4</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="3.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>3.5</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="3.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>3.6</b> Evaluacion de la precision del modelo</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="conceptos.html"><a href="conceptos.html#calidad-del-ajuste"><i class="fa fa-check"></i><b>3.6.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="3.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>3.6.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="3.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>3.6.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#matriz-de-confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#curva-roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#cross-validation"><i class="fa fa-check"></i><b>3.7</b> Cross Validation</a></li>
+<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.8</b> Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a><ul>
+<li class="chapter" data-level="4.1" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>4.1</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lasso.html"><a href="lasso.html"><i class="fa fa-check"></i><b>5</b> Lasso</a><ul>
+<li class="chapter" data-level="5.1" data-path="lasso.html"><a href="lasso.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>5.1</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>6</b> Logit</a><ul>
+<li class="chapter" data-level="6.1" data-path="logit.html"><a href="logit.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>6.1</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>7</b> Arboles de decision</a><ul>
+<li class="chapter" data-level="7.1" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>7.1</b> Bagging</a></li>
+<li class="chapter" data-level="7.2" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>7.2</b> Random Forest</a></li>
+<li class="chapter" data-level="7.3" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>7.3</b> Boosting</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>7.3.1</b> Ada Boost</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>7.4</b> Aplicacion practica</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>7.4.1</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="7.4.2" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>7.4.2</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="7.4.3" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>7.4.3</b> Boosting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>8</b> Analisis de clusters</a><ul>
+<li class="chapter" data-level="8.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>8.1</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="8.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-4"><i class="fa fa-check"></i><b>8.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciencia de Datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bd" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> Base de datos</h1>
+<p>En esta clase nos vamos a centrar en el uso de <code>tidyverse</code>. Además vamos a utilizar funciones de <code>lubridate</code> y <code>zoo</code> que tienen algunas funciones especiales para trabajar con fechas.</p>
+<p>En <strong>R</strong> existen dos tipos de bases de datos <code>data.frame()</code> y <code>tibble()</code> que son las bases de datos de <code>tidyverse</code> el mejor paquete para manipulación y transformación de datos (ver <span class="citation">Wickham and Grolemund (<a href="#ref-R4DS" role="doc-biblioref">2017</a>)</span>). Un <code>data.frame</code> (objeto df) se convierte fácilmente a tibble (y viceversa).</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" title="1"><span class="co"># Un data.frame (objeto df) se convierte fácilmente a tibble</span></a>
+<a class="sourceLine" id="cb253-2" title="2">tib =<span class="st"> </span><span class="kw">as_tibble</span>(df)</a></code></pre></div>
+<p>Las tibbles tienen algunas funciones especiales como poder usar nombres de variables con espacio (se deben utilizar <em>back ticks</em>).</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb254-2" title="2">tb &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb254-3" title="3">  <span class="st">`</span><span class="dt">Plazo Fijo</span><span class="st">`</span> =<span class="st"> &quot;espacio&quot;</span>, </a>
+<a class="sourceLine" id="cb254-4" title="4">  <span class="st">`</span><span class="dt">2000</span><span class="st">`</span> =<span class="st"> &quot;numero&quot;</span></a>
+<a class="sourceLine" id="cb254-5" title="5">)</a>
+<a class="sourceLine" id="cb254-6" title="6">tb</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   `Plazo Fijo` `2000`
+##   &lt;chr&gt;        &lt;chr&gt; 
+## 1 espacio      numero</code></pre>
+<div id="directorio-de-trabajo" class="section level2">
+<h2><span class="header-section-number">2.1</span> Directorio de trabajo</h2>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">getwd</span>() <span class="co"># Para ver en que directorio estamos trabajando</span></a>
+<a class="sourceLine" id="cb256-2" title="2"><span class="kw">setwd</span>(<span class="st">&#39;C:/Documentos/CianciaDatos&#39;</span>) <span class="co"># Definir directorio. Notar barras invertidas en la ruta</span></a></code></pre></div>
+</div>
+<div id="cargar-datos" class="section level2">
+<h2><span class="header-section-number">2.2</span> Cargar datos</h2>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1"><span class="co"># CSV</span></a>
+<a class="sourceLine" id="cb257-2" title="2">bd =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;b_datos.csv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb257-3" title="3"></a>
+<a class="sourceLine" id="cb257-4" title="4"><span class="co"># TXT / Esta es la más eficiente porque permite paralelizar con multithread</span></a>
+<a class="sourceLine" id="cb257-5" title="5">bd =<span class="st"> </span>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&#39;b_datos.txt&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">stringsAsFactors=</span>F, <span class="dt">sep=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>, <span class="dt">nThread=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb257-6" title="6"></a>
+<a class="sourceLine" id="cb257-7" title="7">bd =<span class="st"> </span><span class="kw">read.delim</span>(<span class="st">&#39;datos/b_datos.txt&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">stringsAsFactors=</span>F, <span class="dt">sep=</span><span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1"><span class="co"># Excel</span></a>
+<a class="sourceLine" id="cb258-2" title="2">bd =<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&#39;datos_wb.xlsx&#39;</span>, <span class="dt">sheet=</span><span class="st">&#39;1&#39;</span>) <span class="co"># En datos_pd esta la ruta de acceso completa </span></a></code></pre></div>
+<table>
+<caption><span id="tab:tab">Tabla 2.1: </span>Vista de la base de datos (World Bank)</caption>
+<colgroup>
+<col width="5%" />
+<col width="12%" />
+<col width="5%" />
+<col width="10%" />
+<col width="10%" />
+<col width="15%" />
+<col width="9%" />
+<col width="5%" />
+<col width="7%" />
+<col width="7%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">year</th>
+<th align="left">cname</th>
+<th align="left">ccode</th>
+<th align="center">gdp_pc2010</th>
+<th align="center">gdp_pc2017</th>
+<th align="center">gdp_2010</th>
+<th align="center">credit_ps</th>
+<th align="center">inv</th>
+<th align="center">exports</th>
+<th align="center">imports</th>
+<th align="center">popu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Argentina</td>
+<td align="left">ARG</td>
+<td align="center">10,883</td>
+<td align="center">24,648</td>
+<td align="center">449,061,807,872</td>
+<td align="center">14.0</td>
+<td align="center">17.2</td>
+<td align="center">18.4</td>
+<td align="center">16.8</td>
+<td align="center">41,261,490</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">Brazil</td>
+<td align="left">BRA</td>
+<td align="center">11,628</td>
+<td align="center">15,323</td>
+<td align="center">2,296,661,602,092</td>
+<td align="center">58.1</td>
+<td align="center">20.6</td>
+<td align="center">11.6</td>
+<td align="center">12.4</td>
+<td align="center">197,514,541</td>
+</tr>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Chile</td>
+<td align="left">CHL</td>
+<td align="center">13,456</td>
+<td align="center">22,338</td>
+<td align="center">231,892,203,586</td>
+<td align="center">101.3</td>
+<td align="center">23.1</td>
+<td align="center">37.8</td>
+<td align="center">34.4</td>
+<td align="center">17,233,584</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">France</td>
+<td align="left">FRA</td>
+<td align="center">41,369</td>
+<td align="center">42,864</td>
+<td align="center">2,703,188,933,543</td>
+<td align="center">96.8</td>
+<td align="center">22.4</td>
+<td align="center">28.4</td>
+<td align="center">30.4</td>
+<td align="center">65,342,789</td>
+</tr>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Italy</td>
+<td align="left">ITA</td>
+<td align="center">36,228</td>
+<td align="center">42,892</td>
+<td align="center">2,151,209,302,546</td>
+<td align="center">94.1</td>
+<td align="center">19.7</td>
+<td align="center">26.9</td>
+<td align="center">28.3</td>
+<td align="center">59,379,449</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">United Kingdom</td>
+<td align="left">GBR</td>
+<td align="center">39,729</td>
+<td align="center">42,294</td>
+<td align="center">2,513,237,223,478</td>
+<td align="center">170.6</td>
+<td align="center">15.6</td>
+<td align="center">30.7</td>
+<td align="center">31.7</td>
+<td align="center">63,258,810</td>
+</tr>
+</tbody>
+</table>
+<div id="ingrasar-datos-con-tidyverse" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Ingrasar datos con <code>tidyverse</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Comando</th>
+<th align="center">Separador</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>read_csv()</code></td>
+<td align="center">coma</td>
+</tr>
+<tr class="even">
+<td align="center"><code>read_csv2()</code></td>
+<td align="center">punto y coma</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>read_tsv()</code></td>
+<td align="center">tab</td>
+</tr>
+<tr class="even">
+<td align="center"><code>read_delim()</code></td>
+<td align="center">otros</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="bases-de-stata" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Bases de Stata</h3>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1"><span class="kw">library</span>(heaven)</a>
+<a class="sourceLine" id="cb259-2" title="2"><span class="kw">read_dta</span>()</a>
+<a class="sourceLine" id="cb259-3" title="3"><span class="kw">write_dta</span>()</a></code></pre></div>
+</div>
+</div>
+<div id="problemas-de-imputación" class="section level2">
+<h2><span class="header-section-number">2.3</span> Problemas de imputación</h2>
+<p>Ver más especificaciones <a href="https://r4ds.had.co.nz/data-import.html#parsing-a-vector">aquí</a></p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" title="1"><span class="co"># Parsear vectores</span></a>
+<a class="sourceLine" id="cb260-2" title="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb260-3" title="3"><span class="kw">str</span>(<span class="kw">parse_logical</span>(<span class="kw">c</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;NA&quot;</span>)))</a></code></pre></div>
+<pre><code>##  logi [1:3] TRUE FALSE NA</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="kw">str</span>(<span class="kw">parse_integer</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3&quot;</span>)))</a></code></pre></div>
+<pre><code>##  int [1:3] 1 2 3</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">str</span>(<span class="kw">parse_date</span>(<span class="kw">c</span>(<span class="st">&quot;2010-01-01&quot;</span>, <span class="st">&quot;1979-10-14&quot;</span>)))</a></code></pre></div>
+<pre><code>##  Date[1:2], format: &quot;2010-01-01&quot; &quot;1979-10-14&quot;</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1"><span class="kw">parse_integer</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;231&quot;</span>, <span class="st">&quot;.&quot;</span>, <span class="st">&quot;456&quot;</span>), <span class="dt">na =</span> <span class="st">&quot;.&quot;</span>)</a></code></pre></div>
+<pre><code>## [1]   1 231  NA 456</code></pre>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">parse_double</span>(<span class="st">&quot;1,23&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">decimal_mark =</span> <span class="st">&quot;,&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] 1.23</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1"><span class="co"># Base de datos</span></a>
+<a class="sourceLine" id="cb270-2" title="2">challenge &lt;-<span class="st"> </span><span class="kw">read_csv</span>(</a>
+<a class="sourceLine" id="cb270-3" title="3">  <span class="kw">readr_example</span>(<span class="st">&quot;challenge.csv&quot;</span>), </a>
+<a class="sourceLine" id="cb270-4" title="4">  <span class="dt">col_types =</span> <span class="kw">cols</span>(</a>
+<a class="sourceLine" id="cb270-5" title="5">    <span class="dt">x =</span> <span class="kw">col_double</span>(),</a>
+<a class="sourceLine" id="cb270-6" title="6">    <span class="dt">y =</span> <span class="kw">col_date</span>()</a>
+<a class="sourceLine" id="cb270-7" title="7">  )</a>
+<a class="sourceLine" id="cb270-8" title="8">)</a>
+<a class="sourceLine" id="cb270-9" title="9"><span class="kw">tail</span>(challenge)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##       x y         
+##   &lt;dbl&gt; &lt;date&gt;    
+## 1 0.805 2019-11-21
+## 2 0.164 2018-03-29
+## 3 0.472 2014-08-04
+## 4 0.718 2015-08-16
+## 5 0.270 2020-02-04
+## 6 0.608 2019-01-06</code></pre>
+</div>
+<div id="exportar-datos" class="section level2">
+<h2><span class="header-section-number">2.4</span> Exportar datos</h2>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1"><span class="co"># CSV</span></a>
+<a class="sourceLine" id="cb272-2" title="2"><span class="kw">write.csv</span>(bd,<span class="st">&quot;b_datos.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb272-3" title="3"><span class="kw">write_csv</span>()</a>
+<a class="sourceLine" id="cb272-4" title="4"><span class="kw">write_excel_csv</span>()</a>
+<a class="sourceLine" id="cb272-5" title="5"><span class="co"># TXT </span></a>
+<a class="sourceLine" id="cb272-6" title="6"><span class="kw">write_delim</span>()</a>
+<a class="sourceLine" id="cb272-7" title="7"><span class="kw">write_tsv</span>()</a>
+<a class="sourceLine" id="cb272-8" title="8"></a>
+<a class="sourceLine" id="cb272-9" title="9"><span class="co"># Excel</span></a>
+<a class="sourceLine" id="cb272-10" title="10"><span class="kw">library</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb272-11" title="11"><span class="co"># Primera base de datos</span></a>
+<a class="sourceLine" id="cb272-12" title="12"><span class="kw">write.xlsx</span>(USArrests, <span class="dt">file =</span> <span class="st">&quot;b_datos.xlsx&quot;</span>, <span class="dt">sheetName =</span> <span class="st">&quot;IRIS&quot;</span>, <span class="dt">append =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb272-13" title="13"><span class="co"># Segunda base de datos</span></a>
+<a class="sourceLine" id="cb272-14" title="14"><span class="kw">write.xlsx</span>(mtcars, <span class="dt">file =</span> <span class="st">&quot;b_datos.xlsx&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;MTCARS&quot;</span>, <span class="dt">append=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="variables" class="section level2">
+<h2><span class="header-section-number">2.5</span> Variables</h2>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb273-2" title="2">bd1 =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb273-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gdp_pc2010bis =</span> gdp_<span class="dv">2010</span> <span class="op">/</span><span class="st"> </span>popu,   <span class="co"># crear</span></a>
+<a class="sourceLine" id="cb273-4" title="4">         <span class="dt">open =</span> exports <span class="op">+</span><span class="st"> </span>imports,</a>
+<a class="sourceLine" id="cb273-5" title="5">         <span class="dt">inv_demean =</span> inv <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(inv)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb273-6" title="6"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">poblacion =</span> popu) <span class="op">%&gt;%</span><span class="st">              </span><span class="co"># rename (newname = oldname)</span></a>
+<a class="sourceLine" id="cb273-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gdp_2010 =</span> <span class="ot">NULL</span>)                   <span class="co"># drop (también con select())</span></a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">year</th>
+<th align="left">cname</th>
+<th align="center">gdp_pc2010</th>
+<th align="center">gdp_pc2010bis</th>
+<th align="center">open</th>
+<th align="left">inv_demean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Argentina</td>
+<td align="center">10,883</td>
+<td align="center">10,883</td>
+<td align="center">35.2</td>
+<td align="left">-2</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">Brazil</td>
+<td align="center">11,628</td>
+<td align="center">11,628</td>
+<td align="center">23.9</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Chile</td>
+<td align="center">13,456</td>
+<td align="center">13,456</td>
+<td align="center">72.2</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">France</td>
+<td align="center">41,369</td>
+<td align="center">41,369</td>
+<td align="center">58.8</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="center">2,011</td>
+<td align="left">Italy</td>
+<td align="center">36,228</td>
+<td align="center">36,228</td>
+<td align="center">55.1</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="center">2,011</td>
+<td align="left">United Kingdom</td>
+<td align="center">39,729</td>
+<td align="center">39,729</td>
+<td align="center">62.4</td>
+<td align="left">-3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="merge" class="section level2">
+<h2><span class="header-section-number">2.6</span> Merge</h2>
+<p><img src="join-venn.png" style="width:40.0%" /></p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1">meta =<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&#39;datos_wb.xlsx&#39;</span>, <span class="dt">sheet=</span><span class="st">&#39;2&#39;</span>)</a>
+<a class="sourceLine" id="cb274-2" title="2">bd =<span class="st"> </span><span class="kw">left_join</span>(bd, meta, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&#39;ccode&#39;</span>))</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="left">cname</th>
+<th align="left">region</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="left">Argentina</td>
+<td align="left">Latin America &amp; Caribbean</td>
+</tr>
+<tr class="even">
+<td align="right">2011</td>
+<td align="left">Brazil</td>
+<td align="left">Latin America &amp; Caribbean</td>
+</tr>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="left">Chile</td>
+<td align="left">Latin America &amp; Caribbean</td>
+</tr>
+<tr class="even">
+<td align="right">2011</td>
+<td align="left">France</td>
+<td align="left">Europe &amp; Central Asia</td>
+</tr>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="left">Italy</td>
+<td align="left">Europe &amp; Central Asia</td>
+</tr>
+<tr class="even">
+<td align="right">2011</td>
+<td align="left">United Kingdom</td>
+<td align="left">Europe &amp; Central Asia</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="group_by-mutate" class="section level2">
+<h2><span class="header-section-number">2.7</span> group_by, mutate</h2>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">bd<span class="op">$</span>id =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(bd<span class="op">$</span>ccode))</a>
+<a class="sourceLine" id="cb275-2" title="2"><span class="co"># Si quiero usar una función propia</span></a>
+<a class="sourceLine" id="cb275-3" title="3">demean =<span class="st"> </span><span class="cf">function</span>(x) {x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)}</a>
+<a class="sourceLine" id="cb275-4" title="4">bd =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb275-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">open =</span> exports <span class="op">+</span><span class="st"> </span>imports) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb275-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(ccode, year, region, gdp_pc2017, credit_ps, inv, id, open) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb275-7" title="7"><span class="st">    </span><span class="kw">arrange</span>(ccode, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb275-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(ccode) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb275-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">obs =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(ccode)),     <span class="co"># igual con row_number()</span></a>
+<a class="sourceLine" id="cb275-10" title="10">         <span class="dt">gdp_gr =</span> <span class="dv">100</span> <span class="op">*</span><span class="st"> </span>(gdp_pc2017 <span class="op">/</span><span class="st"> </span><span class="kw">lag</span>(gdp_pc2017,<span class="dv">1</span>) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb275-11" title="11">         <span class="dt">credit_ps_mean =</span> <span class="kw">mean</span>(credit_ps, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb275-12" title="12">         <span class="dt">dev =</span> <span class="kw">if_else</span>(region<span class="op">==</span><span class="st">&#39;Latin America &amp; Caribbean&#39;</span>, <span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb275-13" title="13">         <span class="dt">gdp_dem =</span> <span class="kw">demean</span>(gdp_pc2017)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb275-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb275-15" title="15"><span class="kw">head</span>(bd[<span class="kw">c</span>(<span class="st">&#39;ccode&#39;</span>, <span class="st">&#39;dev&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;gdp_pc2017&#39;</span>, <span class="st">&#39;gdp_gr&#39;</span>, <span class="st">&#39;gdp_dem&#39;</span>)],<span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 6
+##    ccode   dev  year gdp_pc2017 gdp_gr  gdp_dem
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+##  1 ARG       0  2011     24648.  NA     1451.  
+##  2 ARG       0  2012     24119.  -2.15   922.  
+##  3 ARG       0  2013     24424.   1.27  1227.  
+##  4 ARG       0  2014     23550.  -3.58   353.  
+##  5 ARG       0  2015     23934.   1.63   737.  
+##  6 ARG       0  2016     23190.  -3.11    -7.58
+##  7 ARG       0  2017     23597.   1.76   400.  
+##  8 ARG       0  2018     22759.  -3.55  -438.  
+##  9 ARG       0  2019     22064.  -3.06 -1133.  
+## 10 ARG       0  2020     19687. -10.8  -3511.</code></pre>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1"><span class="co"># case_when() permite evaluar más de 2 alternativas</span></a>
+<a class="sourceLine" id="cb277-2" title="2"></a>
+<a class="sourceLine" id="cb277-3" title="3">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb277-4" title="4">  <span class="dt">a =</span> <span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb277-5" title="5">)</a>
+<a class="sourceLine" id="cb277-6" title="6">df =<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">b =</span> <span class="kw">case_when</span>(a <span class="op">&lt;=</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb277-7" title="7">                                 a <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span> <span class="op">&amp;</span><span class="st"> </span>a <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb277-8" title="8">                                 <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.double</span>(a)))</a>
+<a class="sourceLine" id="cb277-9" title="9">df</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##       a     b
+##   &lt;int&gt; &lt;dbl&gt;
+## 1     1     1
+## 2     2     1
+## 3     3     2
+## 4     4     2
+## 5     5     5</code></pre>
+</div>
+<div id="guardar-datos" class="section level2">
+<h2><span class="header-section-number">2.8</span> Guardar datos</h2>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1">bd =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(ccode, year, region, gdp_gr, credit_ps, inv, open)</a>
+<a class="sourceLine" id="cb279-2" title="2"><span class="kw">save</span>(bd, <span class="dt">file=</span><span class="st">&quot;datos_wb.rda&quot;</span>)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">ccode</th>
+<th align="right">year</th>
+<th align="left">region</th>
+<th align="right">gdp_gr</th>
+<th align="right">credit_ps</th>
+<th align="right">inv</th>
+<th align="right">open</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="right">2018</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">-3.6</td>
+<td align="right">NA</td>
+<td align="right">14.7</td>
+<td align="right">31.2</td>
+</tr>
+<tr class="even">
+<td align="left">ARG</td>
+<td align="right">2019</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">-3.1</td>
+<td align="right">NA</td>
+<td align="right">13.5</td>
+<td align="right">32.6</td>
+</tr>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="right">2020</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">-10.8</td>
+<td align="right">NA</td>
+<td align="right">13.4</td>
+<td align="right">30.5</td>
+</tr>
+<tr class="even">
+<td align="left">BRA</td>
+<td align="right">2018</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">1.0</td>
+<td align="right">60.2</td>
+<td align="right">15.1</td>
+<td align="right">28.9</td>
+</tr>
+<tr class="odd">
+<td align="left">BRA</td>
+<td align="right">2019</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">0.7</td>
+<td align="right">62.6</td>
+<td align="right">15.3</td>
+<td align="right">28.5</td>
+</tr>
+<tr class="even">
+<td align="left">BRA</td>
+<td align="right">2020</td>
+<td align="left">Latin America &amp; Caribbean</td>
+<td align="right">-4.7</td>
+<td align="right">70.2</td>
+<td align="right">16.4</td>
+<td align="right">32.4</td>
+</tr>
+<tr class="odd">
+<td align="left">GBR</td>
+<td align="right">2018</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">0.6</td>
+<td align="right">134.6</td>
+<td align="right">17.8</td>
+<td align="right">63.0</td>
+</tr>
+<tr class="even">
+<td align="left">GBR</td>
+<td align="right">2019</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">0.8</td>
+<td align="right">133.5</td>
+<td align="right">18.0</td>
+<td align="right">63.4</td>
+</tr>
+<tr class="odd">
+<td align="left">GBR</td>
+<td align="right">2020</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">-10.3</td>
+<td align="right">146.4</td>
+<td align="right">17.6</td>
+<td align="right">55.1</td>
+</tr>
+<tr class="even">
+<td align="left">ITA</td>
+<td align="right">2018</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">1.1</td>
+<td align="right">76.7</td>
+<td align="right">17.8</td>
+<td align="right">60.3</td>
+</tr>
+<tr class="odd">
+<td align="left">ITA</td>
+<td align="right">2019</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">1.5</td>
+<td align="right">74.3</td>
+<td align="right">18.0</td>
+<td align="right">60.1</td>
+</tr>
+<tr class="even">
+<td align="left">ITA</td>
+<td align="right">2020</td>
+<td align="left">Europe &amp; Central Asia</td>
+<td align="right">-8.6</td>
+<td align="right">83.6</td>
+<td align="right">17.8</td>
+<td align="right">55.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="valores-missing" class="section level2">
+<h2><span class="header-section-number">2.9</span> Valores missing</h2>
+<p>Son tratados como los valores más grandes de todos pero el replace los respeta.</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" title="1">df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb280-2" title="2">  <span class="dt">a =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dt">replace =</span> F),</a>
+<a class="sourceLine" id="cb280-3" title="3">  <span class="dt">b =</span> <span class="kw">seq</span>(<span class="dv">5</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb280-4" title="4">)</a>
+<a class="sourceLine" id="cb280-5" title="5">df2</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##       a     b
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     5
+## 2     3     4
+## 3     2     3
+## 4     5     2
+## 5     4     1</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1">df2 =<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">b =</span> <span class="kw">ifelse</span>(b <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>, b)) </a>
+<a class="sourceLine" id="cb282-2" title="2">df2 =<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">c =</span> <span class="kw">ifelse</span>(b <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">0</span>, b))</a>
+<a class="sourceLine" id="cb282-3" title="3">df2 =<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(b)</a>
+<a class="sourceLine" id="cb282-4" title="4">df2</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##       a     b     c
+##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1     4     1     1
+## 2     2     3     3
+## 3     3     4     0
+## 4     1     5     0
+## 5     5    NA    NA</code></pre>
+<div id="eliminar-valores-missing" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Eliminar valores missing</h3>
+<p>Se debe tener presente que se elimina la fila completa.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="co">#  Volvemos a la base de WB. Recordamos la estructura</span></a>
+<a class="sourceLine" id="cb284-2" title="2"><span class="kw">str</span>(bd)</a></code></pre></div>
+<pre><code>## tibble [60 x 7] (S3: tbl_df/tbl/data.frame)
+##  $ ccode    : chr [1:60] &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; ...
+##  $ year     : num [1:60] 2011 2012 2013 2014 2015 ...
+##  $ region   : chr [1:60] &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; ...
+##  $ gdp_gr   : num [1:60] NA -2.15 1.27 -3.58 1.63 ...
+##  $ credit_ps: num [1:60] 14 15.2 15.7 13.8 14.4 ...
+##  $ inv      : num [1:60] 17.2 15.9 16.3 16 15.6 ...
+##  $ open     : num [1:60] 35.2 30.5 29.3 28.4 22.5 ...</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb286-1" title="1"><span class="kw">summary</span>(bd[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a></code></pre></div>
+<pre><code>##     ccode                year         region              gdp_gr        
+##  Length:60          Min.   :2011   Length:60          Min.   :-10.7750  
+##  Class :character   1st Qu.:2013   Class :character   1st Qu.: -2.7656  
+##  Mode  :character   Median :2016   Mode  :character   Median :  0.7100  
+##                     Mean   :2016                      Mean   : -0.6777  
+##                     3rd Qu.:2018                      3rd Qu.:  1.4095  
+##                     Max.   :2020                      Max.   :  4.3092  
+##                                                       NA&#39;s   :6</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1">bd1 =<span class="st"> </span><span class="kw">na.omit</span>(bd)</a>
+<a class="sourceLine" id="cb288-2" title="2"><span class="kw">nrow</span>(bd1)</a></code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" title="1"><span class="kw">sum</span>(<span class="kw">ifelse</span>(<span class="kw">is.na</span>(bd<span class="op">$</span>credit_ps),<span class="dv">1</span>,<span class="dv">0</span>)) <span class="co"># cuenta valores missing de CreditoSPriv</span></a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="kw">rm</span>(<span class="st">&#39;bd1&#39;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="loop" class="section level2">
+<h2><span class="header-section-number">2.10</span> Loop</h2>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb293-2" title="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb293-3" title="3">  <span class="dt">a =</span> <span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb293-4" title="4">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb293-5" title="5">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean=</span><span class="dv">5</span>, <span class="dt">sd=</span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb293-6" title="6">)</a>
+<a class="sourceLine" id="cb293-7" title="7"><span class="kw">head</span>(df,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       a      b     c
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1  11.4 -1.81   3.87
+## 2  62.2 -0.582  5.29
+## 3  60.9 -1.11   9.92</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="co"># Reemplazar variables existentes</span></a>
+<a class="sourceLine" id="cb295-2" title="2">vars =<span class="st"> </span><span class="kw">names</span>(df)</a>
+<a class="sourceLine" id="cb295-3" title="3"><span class="cf">for</span> (v <span class="cf">in</span> vars) {</a>
+<a class="sourceLine" id="cb295-4" title="4">  df[v] =<span class="st"> </span>df[v] <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb295-5" title="5">}</a>
+<a class="sourceLine" id="cb295-6" title="6"></a>
+<a class="sourceLine" id="cb295-7" title="7"><span class="kw">head</span>(df,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##       a      b     c
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 1137. -181.   387.
+## 2 6223.  -58.2  529.
+## 3 6093. -111.   992.</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1"><span class="co"># Generar varaibles nuevas</span></a>
+<a class="sourceLine" id="cb297-2" title="2"><span class="co"># Dividir las dos ultimas (b y c) por la primera (a)</span></a>
+<a class="sourceLine" id="cb297-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb297-4" title="4">df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb297-5" title="5">  <span class="dt">a =</span> <span class="kw">rep</span>(<span class="dv">2</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb297-6" title="6">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb297-7" title="7">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb297-8" title="8">)</a>
+<a class="sourceLine" id="cb297-9" title="9">vars =<span class="st"> </span><span class="kw">names</span>(df1[<span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(df1)])</a>
+<a class="sourceLine" id="cb297-10" title="10"><span class="cf">for</span> (v <span class="cf">in</span> vars) {</a>
+<a class="sourceLine" id="cb297-11" title="11">  df1[<span class="kw">paste0</span>(v,<span class="st">&#39;_a&#39;</span>)] =<span class="st"> </span>df1[v] <span class="op">/</span><span class="st"> </span>df1[[<span class="st">&#39;a&#39;</span>]]</a>
+<a class="sourceLine" id="cb297-12" title="12">}</a>
+<a class="sourceLine" id="cb297-13" title="13"><span class="kw">head</span>(df1,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##       a      b     c    b_a   c_a
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1     2 -1.21   6.24 -0.604  3.12
+## 2     2  0.277  3.58  0.139  1.79
+## 3     2  1.08   5.20  0.542  2.60</code></pre>
+</div>
+<div id="pivot" class="section level2">
+<h2><span class="header-section-number">2.11</span> Pivot</h2>
+<p><img src="reshape.png" style="width:50.0%" /></p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="co"># Long</span></a>
+<a class="sourceLine" id="cb299-2" title="2">bdAR =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb299-3" title="3"><span class="st">         </span><span class="kw">filter</span>(ccode<span class="op">==</span><span class="st">&#39;ARG&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb299-4" title="4"><span class="st">         </span><span class="kw">select</span>(year, credit_ps, inv) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb299-5" title="5"><span class="st">         </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>year, <span class="dt">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="dt">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb299-6" title="6"><span class="st">         </span><span class="kw">arrange</span>(year, <span class="kw">desc</span>(Var))    <span class="co"># Sort</span></a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="left">Var</th>
+<th align="right">Val</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2011</td>
+<td align="left">inv</td>
+<td align="right">17.2</td>
+</tr>
+<tr class="even">
+<td align="right">2011</td>
+<td align="left">credit_ps</td>
+<td align="right">14.0</td>
+</tr>
+<tr class="odd">
+<td align="right">2012</td>
+<td align="left">inv</td>
+<td align="right">15.9</td>
+</tr>
+<tr class="even">
+<td align="right">2012</td>
+<td align="left">credit_ps</td>
+<td align="right">15.2</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">inv</td>
+<td align="right">16.3</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">credit_ps</td>
+<td align="right">15.7</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="co"># Wide</span></a>
+<a class="sourceLine" id="cb300-2" title="2">bdAR2 =<span class="st"> </span>bdAR <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb300-3" title="3"><span class="st">         </span><span class="kw">filter</span>(Var<span class="op">==</span><span class="st">&#39;credit_ps&#39;</span>, year <span class="op">&lt;=</span><span class="dv">2015</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-4" title="4"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">ccode =</span> <span class="st">&#39;ARG&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-5" title="5"><span class="st">         </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols=</span>ccode, <span class="dt">names_from=</span>year, <span class="dt">values_from=</span>Val) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-6" title="6"><span class="st">         </span><span class="kw">rename_with</span>(<span class="op">~</span><span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;CREDIT&quot;</span>, <span class="dv">2011</span><span class="op">:</span><span class="dv">2015</span>), <span class="kw">where</span>(is.numeric))</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">ccode</th>
+<th align="right">CREDIT2011</th>
+<th align="right">CREDIT2012</th>
+<th align="right">CREDIT2013</th>
+<th align="right">CREDIT2014</th>
+<th align="right">CREDIT2015</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="right">14</td>
+<td align="right">15.2</td>
+<td align="right">15.7</td>
+<td align="right">13.8</td>
+<td align="right">14.4</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1"><span class="co"># Otra forma de llevar a long starts_with()</span></a>
+<a class="sourceLine" id="cb301-2" title="2">bdAR3 =<span class="st"> </span>bdAR2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb301-3" title="3"><span class="st">       </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;CREDIT&quot;</span>), <span class="dt">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="dt">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb301-4" title="4"><span class="st">       </span><span class="kw">separate</span>(Var, <span class="kw">c</span>(<span class="st">&quot;V&quot;</span>,<span class="st">&quot;year&quot;</span>), <span class="dt">sep =</span> <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb301-5" title="5"><span class="co">#unite() para concatenar variables</span></a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">ccode</th>
+<th align="left">V</th>
+<th align="left">year</th>
+<th align="right">Val</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="left">CREDIT</td>
+<td align="left">2011</td>
+<td align="right">14.0</td>
+</tr>
+<tr class="even">
+<td align="left">ARG</td>
+<td align="left">CREDIT</td>
+<td align="left">2012</td>
+<td align="right">15.2</td>
+</tr>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="left">CREDIT</td>
+<td align="left">2013</td>
+<td align="right">15.7</td>
+</tr>
+<tr class="even">
+<td align="left">ARG</td>
+<td align="left">CREDIT</td>
+<td align="left">2014</td>
+<td align="right">13.8</td>
+</tr>
+<tr class="odd">
+<td align="left">ARG</td>
+<td align="left">CREDIT</td>
+<td align="left">2015</td>
+<td align="right">14.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="append" class="section level2">
+<h2><span class="header-section-number">2.12</span> Append</h2>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1">bdAR =<span class="st"> </span>bd <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb302-2" title="2"><span class="st">  </span><span class="kw">filter</span>(ccode<span class="op">==</span><span class="st">&quot;ARG&quot;</span>,</a>
+<a class="sourceLine" id="cb302-3" title="3">         year<span class="op">&gt;=</span><span class="dv">2018</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb302-4" title="4"><span class="st">  </span><span class="kw">select</span>(year, ccode, gdp_gr)</a>
+<a class="sourceLine" id="cb302-5" title="5">bdBR =<span class="st"> </span>bd <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb302-6" title="6"><span class="st">  </span><span class="kw">filter</span>(ccode<span class="op">==</span><span class="st">&quot;BRA&quot;</span>,</a>
+<a class="sourceLine" id="cb302-7" title="7">         year<span class="op">&gt;=</span><span class="dv">2018</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb302-8" title="8"><span class="st">  </span><span class="kw">select</span>(year, ccode, gdp_gr)</a>
+<a class="sourceLine" id="cb302-9" title="9">bdARBR =<span class="st"> </span><span class="kw">rbind</span>(bdAR, bdBR)</a>
+<a class="sourceLine" id="cb302-10" title="10"><span class="co"># Ver bind_rows() de tidyverse</span></a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="left">ccode</th>
+<th align="right">gdp_gr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">ARG</td>
+<td align="right">-3.6</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="left">ARG</td>
+<td align="right">-3.1</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">ARG</td>
+<td align="right">-10.8</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">BRA</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="left">BRA</td>
+<td align="right">0.7</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">BRA</td>
+<td align="right">-4.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="strings" class="section level2">
+<h2><span class="header-section-number">2.13</span> Strings</h2>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1">words =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;uno&#39;</span>,<span class="st">&#39;dos&#39;</span>, <span class="st">&#39;tres&#39;</span>)</a>
+<a class="sourceLine" id="cb303-2" title="2"><span class="kw">length</span>(words)   <span class="co"># cuenta los elementos del vector</span></a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1"><span class="kw">str_length</span>(words)</a></code></pre></div>
+<pre><code>## [1] 3 3 4</code></pre>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1">words =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;tres&#39;</span>,<span class="st">&#39;cinco&#39;</span>,words)</a>
+<a class="sourceLine" id="cb307-2" title="2">words</a></code></pre></div>
+<pre><code>## [1] &quot;uno&quot;   &quot;dos&quot;   &quot;cinco&quot;</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1">words =<span class="st"> </span><span class="kw">str_replace</span>(words, <span class="st">&quot;uno&quot;</span>, <span class="st">&quot;diez&quot;</span>)</a>
+<a class="sourceLine" id="cb309-2" title="2">words</a></code></pre></div>
+<pre><code>## [1] &quot;diez&quot;  &quot;dos&quot;   &quot;cinco&quot;</code></pre>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1">hi =<span class="st"> &#39;hola&#39;</span></a>
+<a class="sourceLine" id="cb311-2" title="2"><span class="kw">nchar</span>(hi)</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="fechas" class="section level2">
+<h2><span class="header-section-number">2.14</span> Fechas</h2>
+<div id="year" class="section level3">
+<h3><span class="header-section-number">2.14.1</span> Year</h3>
+<p>%Y (4 digitos).</p>
+<p>%y (2 digitos); 00-69 -&gt; 2000-2069, 70-99 -&gt; 1970-1999.</p>
+</div>
+<div id="month" class="section level3">
+<h3><span class="header-section-number">2.14.2</span> Month</h3>
+<p>%m (2 digitos).</p>
+<p>%b (nombre abreviado, “Jan”).</p>
+<p>%B (nombre completo, “January”).</p>
+</div>
+<div id="day" class="section level3">
+<h3><span class="header-section-number">2.14.3</span> Day</h3>
+<p>%d (2 digitos).</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="kw">library</span>(zoo)</a>
+<a class="sourceLine" id="cb313-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb313-3" title="3">datos =<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&#39;datos_ts.xlsx&#39;</span>, <span class="dt">sheet=</span><span class="st">&#39;datos&#39;</span>)</a>
+<a class="sourceLine" id="cb313-4" title="4">datos<span class="op">$</span>fecha =<span class="st"> </span><span class="kw">as.Date</span>(datos<span class="op">$</span>fecha, <span class="dt">format =</span> <span class="st">&#39;%Y-%m-%d&#39;</span>)</a>
+<a class="sourceLine" id="cb313-5" title="5">datos<span class="op">$</span>fecha2 =<span class="st"> </span>datos<span class="op">$</span>fecha <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb313-6" title="6">datos<span class="op">$</span>fecha3 =<span class="st"> </span><span class="kw">floor_date</span>(datos<span class="op">$</span>fecha2, <span class="st">&#39;month&#39;</span>)</a>
+<a class="sourceLine" id="cb313-7" title="7">datos<span class="op">$</span>mes =<span class="st"> </span><span class="kw">month</span>(datos<span class="op">$</span>fecha)</a>
+<a class="sourceLine" id="cb313-8" title="8">datos<span class="op">$</span>year =<span class="st"> </span><span class="kw">year</span>(datos<span class="op">$</span>fecha)</a>
+<a class="sourceLine" id="cb313-9" title="9">datos =<span class="st"> </span>datos[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># reordena la base de datos</span></a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">fecha</th>
+<th align="left">…5</th>
+<th align="left">fecha2</th>
+<th align="left">fecha3</th>
+<th align="right">mes</th>
+<th align="right">ipc</th>
+<th align="right">tcn</th>
+<th align="right">emae_sa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2015-01-01</td>
+<td align="left">2015q1</td>
+<td align="left">2015-01-16</td>
+<td align="left">2015-01-01</td>
+<td align="right">1</td>
+<td align="right">57.6</td>
+<td align="right">8.6</td>
+<td align="right">144.2</td>
+</tr>
+<tr class="even">
+<td align="left">2015-02-01</td>
+<td align="left">2015q1</td>
+<td align="left">2015-02-16</td>
+<td align="left">2015-02-01</td>
+<td align="right">2</td>
+<td align="right">58.5</td>
+<td align="right">8.7</td>
+<td align="right">148.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-03-01</td>
+<td align="left">2015q1</td>
+<td align="left">2015-03-16</td>
+<td align="left">2015-03-01</td>
+<td align="right">3</td>
+<td align="right">59.5</td>
+<td align="right">8.8</td>
+<td align="right">147.7</td>
+</tr>
+<tr class="even">
+<td align="left">2015-04-01</td>
+<td align="left">2015q2</td>
+<td align="left">2015-04-16</td>
+<td align="left">2015-04-01</td>
+<td align="right">4</td>
+<td align="right">60.9</td>
+<td align="right">8.9</td>
+<td align="right">149.8</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-05-01</td>
+<td align="left">2015q2</td>
+<td align="left">2015-05-16</td>
+<td align="left">2015-05-01</td>
+<td align="right">5</td>
+<td align="right">62.2</td>
+<td align="right">9.0</td>
+<td align="right">149.7</td>
+</tr>
+<tr class="even">
+<td align="left">2015-06-01</td>
+<td align="left">2015q2</td>
+<td align="left">2015-06-16</td>
+<td align="left">2015-06-01</td>
+<td align="right">6</td>
+<td align="right">63.0</td>
+<td align="right">9.1</td>
+<td align="right">150.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="manipulación-de-fechas" class="section level3">
+<h3><span class="header-section-number">2.14.4</span> Manipulación de fechas</h3>
+<p>Utilizamos el paquete <code>zoo</code></p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1">datosq &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(<span class="st">&#39;datos_ts.xlsx&#39;</span>, <span class="dt">sheet=</span><span class="st">&#39;trim&#39;</span>)  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb314-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fecha=</span><span class="kw">as.Date</span>(<span class="kw">as.yearqtr</span>(<span class="kw">paste</span>(year, trim), <span class="dt">format=</span><span class="st">&quot;%Y %q&quot;</span>)))</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">trim</th>
+<th align="right">ipc</th>
+<th align="right">tcn</th>
+<th align="right">emae_sa</th>
+<th align="left">fecha</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="right">57.6</td>
+<td align="right">8.6</td>
+<td align="right">144.2</td>
+<td align="left">2015-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">2</td>
+<td align="right">60.9</td>
+<td align="right">8.9</td>
+<td align="right">149.8</td>
+<td align="left">2015-04-01</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">3</td>
+<td align="right">64.3</td>
+<td align="right">9.2</td>
+<td align="right">150.8</td>
+<td align="left">2015-07-01</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">4</td>
+<td align="right">67.7</td>
+<td align="right">9.5</td>
+<td align="right">149.4</td>
+<td align="left">2015-10-01</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">1</td>
+<td align="right">74.7</td>
+<td align="right">13.9</td>
+<td align="right">147.8</td>
+<td align="left">2016-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">2</td>
+<td align="right">85.5</td>
+<td align="right">14.3</td>
+<td align="right">145.0</td>
+<td align="left">2016-04-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="análisis-de-datos" class="section level2">
+<h2><span class="header-section-number">2.15</span> Análisis de datos</h2>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="kw">str</span>(bd)</a></code></pre></div>
+<pre><code>## tibble [60 x 7] (S3: tbl_df/tbl/data.frame)
+##  $ ccode    : chr [1:60] &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; ...
+##  $ year     : num [1:60] 2011 2012 2013 2014 2015 ...
+##  $ region   : chr [1:60] &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; ...
+##  $ gdp_gr   : num [1:60] NA -2.15 1.27 -3.58 1.63 ...
+##  $ credit_ps: num [1:60] 14 15.2 15.7 13.8 14.4 ...
+##  $ inv      : num [1:60] 17.2 15.9 16.3 16 15.6 ...
+##  $ open     : num [1:60] 35.2 30.5 29.3 28.4 22.5 ...</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="kw">dim</span>(bd)</a></code></pre></div>
+<pre><code>## [1] 60  7</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">names</span>(bd)</a></code></pre></div>
+<pre><code>## [1] &quot;ccode&quot;     &quot;year&quot;      &quot;region&quot;    &quot;gdp_gr&quot;    &quot;credit_ps&quot; &quot;inv&quot;      
+## [7] &quot;open&quot;</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="kw">glimpse</span>(bd)</a></code></pre></div>
+<pre><code>## Rows: 60
+## Columns: 7
+## $ ccode     &lt;chr&gt; &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG~
+## $ year      &lt;dbl&gt; 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, ~
+## $ region    &lt;chr&gt; &quot;Latin America &amp; Caribbean&quot;, &quot;Latin America &amp; Caribbean&quot;, &quot;L~
+## $ gdp_gr    &lt;dbl&gt; NA, -2.1452844, 1.2656852, -3.5785805, 1.6296643, -3.1100639~
+## $ credit_ps &lt;dbl&gt; 14.00872, 15.21282, 15.72909, 13.82377, 14.41423, 13.66763, ~
+## $ inv       &lt;dbl&gt; 17.24828, 15.85753, 16.28951, 15.97995, 15.56475, 14.27236, ~
+## $ open      &lt;dbl&gt; 35.20615, 30.52654, 29.33393, 28.40679, 22.48623, 26.09389, ~</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="kw">head</span>(bd)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##   ccode  year region                    gdp_gr credit_ps   inv  open
+##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 ARG    2011 Latin America &amp; Caribbean  NA         14.0  17.2  35.2
+## 2 ARG    2012 Latin America &amp; Caribbean  -2.15      15.2  15.9  30.5
+## 3 ARG    2013 Latin America &amp; Caribbean   1.27      15.7  16.3  29.3
+## 4 ARG    2014 Latin America &amp; Caribbean  -3.58      13.8  16.0  28.4
+## 5 ARG    2015 Latin America &amp; Caribbean   1.63      14.4  15.6  22.5
+## 6 ARG    2016 Latin America &amp; Caribbean  -3.11      13.7  14.3  26.1</code></pre>
+<div id="tablas" class="section level3">
+<h3><span class="header-section-number">2.15.1</span> Tablas</h3>
+<p>Los valores NA afectan a todas las estadísticas. Opción na.rm = F/T</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1">bd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb325-2" title="2">  <span class="dt">credit_ps_media =</span> <span class="kw">mean</span>(credit_ps),</a>
+<a class="sourceLine" id="cb325-3" title="3">  <span class="dt">inv_max =</span> <span class="kw">max</span>(inv),</a>
+<a class="sourceLine" id="cb325-4" title="4">  <span class="dt">open_min =</span> <span class="kw">min</span>(open)</a>
+<a class="sourceLine" id="cb325-5" title="5">)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   credit_ps_media inv_max open_min
+##             &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+## 1              NA    24.9     22.5</code></pre>
+</div>
+</div>
+<div id="group_by-summarise" class="section level2">
+<h2><span class="header-section-number">2.16</span> group_by, summarise</h2>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1">tab =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb327-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(credit_ps, inv, open) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb327-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st">     </span><span class="co"># esta variable es solo para usar pivot, despues la dropeo</span></a>
+<a class="sourceLine" id="cb327-4" title="4"><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="op">-</span>id, <span class="dt">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="dt">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb327-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="ot">NULL</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb327-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(Variable) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb327-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb327-8" title="8">    <span class="dt">Obs =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb327-9" title="9">    <span class="dt">Media =</span> <span class="kw">mean</span>(Value, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb327-10" title="10">    <span class="dt">Mediana =</span> <span class="kw">median</span>(Value, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb327-11" title="11">    <span class="dt">SD =</span> <span class="kw">sd</span>(Value, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb327-12" title="12">    <span class="dt">Min =</span> <span class="kw">min</span>(Value, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb327-13" title="13">    <span class="dt">Max =</span> <span class="kw">max</span>(Value, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb327-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb327-15" title="15">tab</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 7
+##   Variable    Obs Media Mediana    SD   Min   Max
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 credit_ps    60  89.7    94.6 38.9   13.7 171. 
+## 2 inv          60  18.8    17.8  3.19  13.4  24.9
+## 3 open         60  49.1    56.2 15.7   22.5  72.2</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1">tab =<span class="st"> </span>bd <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-2" title="2"><span class="st">  </span><span class="kw">filter</span>(year<span class="op">&gt;=</span><span class="dv">2015</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(year, region) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb329-5" title="5">    <span class="dt">inv_sum =</span> <span class="kw">sum</span>(inv, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb329-6" title="6">    <span class="dt">inv_sd =</span> <span class="kw">sd</span>(inv, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb329-7" title="7">    <span class="dt">credit_ps_p50 =</span> <span class="kw">median</span>(credit_ps, <span class="dt">na.rm =</span> T),</a>
+<a class="sourceLine" id="cb329-8" title="8">    <span class="dt">obs =</span> <span class="kw">n</span>()</a>
+<a class="sourceLine" id="cb329-9" title="9">    ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-10" title="10"><span class="st">  </span><span class="kw">arrange</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-11" title="11"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb329-12" title="12">tab</a></code></pre></div>
+<pre><code>## # A tibble: 12 x 6
+##     year region                    inv_sum inv_sd credit_ps_p50   obs
+##    &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
+##  1  2015 Europe &amp; Central Asia        55.7   2.55          95.1     3
+##  2  2015 Latin America &amp; Caribbean    57.2   4.24          66.8     3
+##  3  2016 Europe &amp; Central Asia        56.7   2.54          97.4     3
+##  4  2016 Latin America &amp; Caribbean    52.5   4.57          62.2     3
+##  5  2017 Europe &amp; Central Asia        58.0   2.76         101.      3
+##  6  2017 Latin America &amp; Caribbean    50.7   3.57          59.5     3
+##  7  2018 Europe &amp; Central Asia        58.6   2.93         104.      3
+##  8  2018 Latin America &amp; Caribbean    51.2   3.81          88.6     3
+##  9  2019 Europe &amp; Central Asia        59.6   3.26         108.      3
+## 10  2019 Latin America &amp; Caribbean    51.8   4.98          93.2     3
+## 11  2020 Europe &amp; Central Asia        58.2   3.02         124.      3
+## 12  2020 Latin America &amp; Caribbean    50.7   3.78          70.2     3</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1">tab =<span class="st"> </span>tab <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">region =</span> <span class="kw">str_replace</span>(region, <span class="kw">c</span>(<span class="st">&#39;Europe &amp; Central Asia&#39;</span>, <span class="st">&#39;Latin America &amp; Caribbean&#39;</span>), <span class="kw">c</span>(<span class="st">&#39;EU&#39;</span>, <span class="st">&#39;LA&#39;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb331-2" title="2"><span class="st"> </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span><span class="kw">c</span>(year, region), <span class="dt">names_to=</span><span class="st">&#39;Var&#39;</span>, <span class="dt">values_to=</span><span class="st">&#39;Val&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb331-3" title="3"><span class="st"> </span><span class="kw">unite</span>(id,region, Var) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb331-4" title="4"><span class="st"> </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols=</span>year, <span class="dt">names_from=</span>id, <span class="dt">values_from=</span>Val)</a>
+<a class="sourceLine" id="cb331-5" title="5">tab</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 9
+##    year EU_inv_sum EU_inv_sd EU_credit_ps_p50 EU_obs LA_inv_sum LA_inv_sd
+##   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1  2015       55.7      2.55             95.1      3       57.2      4.24
+## 2  2016       56.7      2.54             97.4      3       52.5      4.57
+## 3  2017       58.0      2.76            101.       3       50.7      3.57
+## 4  2018       58.6      2.93            104.       3       51.2      3.81
+## 5  2019       59.6      3.26            108.       3       51.8      4.98
+## 6  2020       58.2      3.02            124.       3       50.7      3.78
+## # ... with 2 more variables: LA_credit_ps_p50 &lt;dbl&gt;, LA_obs &lt;dbl&gt;</code></pre>
+</div>
+<div id="vector-de-resultados" class="section level2">
+<h2><span class="header-section-number">2.17</span> Vector de resultados</h2>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb333-2" title="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb333-3" title="3">  <span class="dt">a =</span> <span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb333-4" title="4">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb333-5" title="5">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean=</span><span class="dv">5</span>, <span class="dt">sd=</span><span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb333-6" title="6">)</a>
+<a class="sourceLine" id="cb333-7" title="7"></a>
+<a class="sourceLine" id="cb333-8" title="8">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="kw">ncol</span>(df))  <span class="co"># 1. verctor de resultados (vacio)</span></a>
+<a class="sourceLine" id="cb333-9" title="9"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {            <span class="co"># 2. secuencia</span></a>
+<a class="sourceLine" id="cb333-10" title="10">  output[[i]] &lt;-<span class="st"> </span><span class="kw">mean</span>(df[[i]])        <span class="co"># 3. cuerpo</span></a>
+<a class="sourceLine" id="cb333-11" title="11">}</a>
+<a class="sourceLine" id="cb333-12" title="12">output</a></code></pre></div>
+<pre><code>## [1] 43.74972619  0.07975381  5.40972645</code></pre>
+</div>
+<div id="gráficos" class="section level2">
+<h2><span class="header-section-number">2.18</span> Gráficos</h2>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="kw">plot</span>(datos<span class="op">$</span>fecha, datos<span class="op">$</span>ipc )</a></code></pre></div>
+<p><img src="Libro_files/figure-html/plot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1"><span class="kw">plot</span>(datos<span class="op">$</span>fecha, <span class="kw">log</span>(datos<span class="op">$</span>ipc), <span class="dt">type=</span> <span class="st">&#39;l&#39;</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">xlab =</span><span class="st">&#39;Mes&#39;</span>, <span class="dt">ylab =</span><span class="st">&#39;Log(IPC)&#39;</span>)</a></code></pre></div>
+<p><img src="Libro_files/figure-html/plot2-1.png" width="672" /></p>
+</div>
+<div id="ggplot" class="section level2">
+<h2><span class="header-section-number">2.19</span> GGPlot</h2>
+<p>Grammar of Graphics.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1"><span class="co">#SINTAXIS</span></a>
+<a class="sourceLine" id="cb337-2" title="2"><span class="co"># ggplot(data = &lt;DATA&gt;) + </span></a>
+<a class="sourceLine" id="cb337-3" title="3"><span class="co">#   &lt;GEOM_FUNCTION&gt;(mapping = aes(&lt;MAPPINGS&gt;)) # se agregan layers (piont, line, etc.)</span></a>
+<a class="sourceLine" id="cb337-4" title="4"><span class="co"># aes() &quot;aesthetic&quot; define la estética del gráfico</span></a>
+<a class="sourceLine" id="cb337-5" title="5"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb337-6" title="6">datos1 =<span class="st"> </span>datos <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb337-7" title="7"><span class="st">     </span><span class="kw">select</span>(fecha, ipc) </a>
+<a class="sourceLine" id="cb337-8" title="8"></a>
+<a class="sourceLine" id="cb337-9" title="9"><span class="kw">ggplot</span>(datos1, <span class="kw">aes</span>(<span class="dt">x=</span>fecha, <span class="dt">y=</span>ipc)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb337-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&#39;steelblue2&#39;</span>, <span class="dt">size =</span> <span class="fl">1.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb337-11" title="11"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb337-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Indice de precios al consumidor&quot;</span>, <span class="dt">x=</span><span class="st">&quot;Mes&quot;</span>, <span class="dt">y=</span><span class="st">&quot;IPC&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb337-13" title="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb337-14" title="14"><span class="st">  </span><span class="ot">NULL</span></a></code></pre></div>
+<p><img src="Libro_files/figure-html/ggplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1"><span class="co"># Selecciona el mejor de cada clase de acuerdo al consumo en highway</span></a>
+<a class="sourceLine" id="cb338-2" title="2">best_in_class &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb338-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(class) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb338-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">row_number</span>(<span class="kw">desc</span>(hwy)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb338-5" title="5"></a>
+<a class="sourceLine" id="cb338-6" title="6">g =<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb338-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb338-8" title="8"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb338-9" title="9"><span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> model), <span class="dt">data =</span> best_in_class, <span class="dt">nudge_y =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb338-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Fuel efficiency generally decreases with engine size&quot;</span>,</a>
+<a class="sourceLine" id="cb338-11" title="11">       <span class="dt">subtitle =</span> <span class="st">&quot;Two seaters (sports cars) are an exception because of their light weight&quot;</span>,</a>
+<a class="sourceLine" id="cb338-12" title="12">       <span class="dt">x =</span> <span class="st">&quot;Engine displacement (L)&quot;</span>,</a>
+<a class="sourceLine" id="cb338-13" title="13">       <span class="dt">y =</span> <span class="st">&quot;Highway fuel economy (mpg)&quot;</span>,</a>
+<a class="sourceLine" id="cb338-14" title="14">       <span class="dt">colour =</span> <span class="st">&quot;Car type&quot;</span>,</a>
+<a class="sourceLine" id="cb338-15" title="15">       <span class="dt">caption =</span> <span class="st">&quot;Data from fueleconomy.gov&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb338-16" title="16"><span class="st">  </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb338-17" title="17">g</a></code></pre></div>
+<p><img src="Libro_files/figure-html/ggplot2-1.png" width="672" /></p>
+</div>
+<div id="guardar-un-gráfico" class="section level2">
+<h2><span class="header-section-number">2.20</span> Guardar un gráfico</h2>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">work =<span class="st"> &quot;C:/Users/msang/&quot;</span></a>
+<a class="sourceLine" id="cb339-2" title="2">filesave =<span class="st"> </span><span class="kw">paste0</span>(work,<span class="st">&#39;ts.png&#39;</span>)</a>
+<a class="sourceLine" id="cb339-3" title="3"><span class="kw">ggsave</span>(filesave, g, <span class="dt">width=</span><span class="dv">10</span>, <span class="dt">height=</span><span class="dv">8</span>) </a></code></pre></div>
+
+</div>
+</div>
+<h3>Bibliografia</h3>
+<div id="refs" class="references">
+<div id="ref-R4DS">
+<p>Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science</em>. O’REILLY. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conceptos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-BaseDatos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Libro.pdf", "Libro.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
