@@ -1,4 +1,4 @@
-# [Ciencia de datos]
+# Ciencia de datos
 
 **Curso BCRA**   
 
