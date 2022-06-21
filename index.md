@@ -4,13 +4,13 @@
 
 [Guia del curso](https://msangia.github.io/CienciaDatos/index.html "Guia completa.")
 
-# [R](https://cran.r-project.org/) 
-
 # Politica Economica II
 
 **Trabajo Practico 2022** 
 
 [Guia del curso](https://msangia.github.io/NotasTP/index.html "Guia completa.")    
+
+# [R](https://cran.r-project.org/) 
 
 **Curso BCRA**   
 
