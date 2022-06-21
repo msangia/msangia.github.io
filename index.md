@@ -15,11 +15,11 @@
 [3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de datos.")
 
 
-# [Stata](https://www.stata.com/) 
+# [Politica Economica II]
 
-**Curso UNLP** 
+**Trabajo Practico 2022** 
 
-[Conceptos básicos](https://msangia.github.io/stata.html "Desarrollo de un proyecto.")    
+[Guia del curso](https://msangia.github.io/NotasTP/index.html "Guia completa.")    
 
 # [Python](https://www.anaconda.com/)
 
