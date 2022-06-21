@@ -15,7 +15,7 @@
 [3. Análisis de datos](https://msangia.github.io/R/analisis.html "Analisis basico de datos.")
 
 
-# [Politica Economica II]
+# Politica Economica II
 
 **Trabajo Practico 2022** 
 
