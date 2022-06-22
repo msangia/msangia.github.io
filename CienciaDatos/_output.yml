@@ -1,0 +1,27 @@
+bookdown::gitbook:
+  css: [css/style.css, css/r4ds.css]
+  includes:
+    in_header: header.html
+    before_body: assets/hero-image.html
+  config:
+    toc:
+      before: |
+        <li><a href="./">Ciencia de Datos - BCRA</a></li>
+      after: |
+        <li><a href="./" target="blank">Maximo Sangiacomo - GMyP</a></li>
+bookdown::pdf_book:
+  includes:
+    in_header: [latex/preamble.tex]
+    # before_body: [latex/before.tex]
+  keep_tex: yes
+  fig_crop: false
+  latex_engine: xelatex
+  citation_package: natbib
+  template: null
+  pandoc_args: [--top-level-division=chapter, --wrap=none]
+  toc_depth: 3
+  toc_unnumbered: no
+  toc_appendix: yes
+  highlight_bw: yes
+  quote_footer: ["\\VA{", "}{}"]
+# bookdown::epub_book: default
