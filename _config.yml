@@ -1,5 +1,5 @@
 includes:
-  in_header: header.html
+  in_header: /includes/head.html
 theme: jekyll-theme-minimal
 title: "Máximo Sangiácomo"
 description: Página personal 
