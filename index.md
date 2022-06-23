@@ -1,6 +1,6 @@
-
-<link rel="shortcut icon" type="image/x-icon" href="assets/img/mountain.png" />
-
+<head>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/mountain.png" />
+<head/>
 
 # Ciencia de datos  
 
