@@ -1,4 +1,4 @@
-<link rel="shortcut icon" type="image/x-icon" href="assets/img/mountain.png">
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/mountain.png"/>
 
 
 # Ciencia de datos  
