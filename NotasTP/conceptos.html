@@ -419,7 +419,7 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 <td align="center"><span class="math inline">\(FN\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center">(decision)</td>
+<td align="center">(decisión)</td>
 <td align="center"><span class="math inline">\(1\)</span></td>
 <td align="center"><span class="math inline">\(FP\)</span></td>
 <td align="center"><span class="math inline">\(VP\)</span></td>
@@ -428,10 +428,13 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 </table>
 <p><br> </br></p>
 <p><span class="math inline">\(VN\)</span>: Verdadero Negativo; <span class="math inline">\(FN\)</span>: Falso Negativo; <span class="math inline">\(FP\)</span>: Falso Positivo; <span class="math inline">\(VP\)</span>: Verdadero Positivo</p>
-<p>Métricas para comparar modelos. La <strong>precisión</strong> (<em>accuracy</em>) es la cantidad de predicciones correctas.</p>
-<p><span class="math display">\[\begin{equation}
-\text{Precision} = \frac{VP + VN}{VP + VN + FP + FN}  
-\end{equation}\]</span></p>
+<p>Métricas para comparar modelos. La <strong>precisión</strong> (<em>accuracy</em>) es la cantidad de predicciones correctas, la <strong>sensibilidad</strong> (<em>sensitivity</em>) es la proporción de verdaderos positivos y la <strong>especificidad</strong> (<em>specificity</em>) es la cantidad de <span class="math inline">\(VN\)</span> identificados sobre el total de negativos.</p>
+<p><span class="math display">\[\begin{align*}
+\text{Precisión} &amp; = \frac{VP + VN}{VP + VN + FP + FN} \\
+\text{Sensibilidad} &amp; = \frac{VP}{VP + FN} \\
+\text{Especificidad} &amp; = \frac{VN}{VN + FP}
+\end{align*}\]</span></p>
+<p>Otra alternativa es la <strong>Curva ROC</strong> cuyo nombre viene de <em>receiver operating characteristics</em> (comunicación) pero no vamos a ver en este curso.</p>
 
 </div>
 </div>
