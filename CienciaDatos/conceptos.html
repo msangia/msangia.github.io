@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Conceptos generales | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Conceptos generales | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -497,7 +497,7 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 <td align="center"><span class="math inline">\(FN\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center">(decision)</td>
+<td align="center">(decisión)</td>
 <td align="center"><span class="math inline">\(1\)</span></td>
 <td align="center"><span class="math inline">\(FP\)</span></td>
 <td align="center"><span class="math inline">\(VP\)</span></td>
@@ -506,11 +506,11 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 </table>
 <p><br> </br></p>
 <p><span class="math inline">\(VN\)</span>: Verdadero Negativo; <span class="math inline">\(FN\)</span>: Falso Negativo; <span class="math inline">\(FP\)</span>: Falso Positivo; <span class="math inline">\(VP\)</span>: Verdadero Positivo</p>
-<p>Métricas para comparar modelos. La <strong>precisión</strong> (<em>accuracy</em>) es la cantidad de predicciones correctas, la <strong>sensibilidad</strong> (<em>sensitivity</em>) es la cantidad de <span class="math inline">\(VP\)</span> identificados sobre el total de positivos y la <strong>especificidad</strong> (<em>specificity</em>) es la cantidad de <span class="math inline">\(VN\)</span> identificados sobre el total de negativos.</p>
+<p>Métricas para comparar modelos. La <strong>precisión</strong> (<em>accuracy</em>) es la cantidad de predicciones correctas, la <strong>sensibilidad</strong> (<em>sensitivity</em>) es la proporción de verdaderos positivos y la <strong>especificidad</strong> (<em>specificity</em>) es la cantidad de <span class="math inline">\(VN\)</span> identificados sobre el total de negativos.</p>
 <p><span class="math display">\[\begin{align*}
-Precision &amp; = \frac{VP + VN}{VP + VN + FP + FN} \\
-Sensiblilidad &amp; = \frac{VP}{VP + FN} \\
-Especificidad &amp; = \frac{VN}{VN + FP}
+\text{Precisión} &amp; = \frac{VP + VN}{VP + VN + FP + FN} \\
+\text{Sensibilidad} &amp; = \frac{VP}{VP + FN} \\
+\text{Especificidad} &amp; = \frac{VN}{VN + FP}
 \end{align*}\]</span></p>
 </div>
 <div id="roc" class="section level3 hasAnchor" number="3.6.5">
@@ -521,7 +521,7 @@ Especificidad &amp; = \frac{VN}{VN + FP}
 TPR = &amp; VP / P \\
 FPR = &amp; FP / N
 \end{align*}\]</span></p>
-<p>La curva <span class="math inline">\(ROC\)</span> representa la relación entre <em>true positive rate</em> (<span class="math inline">\(TPR\)</span>) y <em>false positive rate</em> (<span class="math inline">\(FPR\)</span>)<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> para todos los valores posibles de <span class="math inline">\(c \in [0, 1]\)</span>. La curva <span class="math inline">\(ROC\)</span> permite medir capacidad predictiva y comparar modelos.</p>
+<p>La curva <span class="math inline">\(ROC\)</span> representa la relación entre <em>true positive rate</em> (<span class="math inline">\(TPR\)</span>) y <em>false positive rate</em> (<span class="math inline">\(FPR\)</span>) o, expresado de otra manera, <span class="math inline">\((1 - \text{Especificidad)}\)</span> para todos los valores posibles de <span class="math inline">\(c \in [0, 1]\)</span>. La curva <span class="math inline">\(ROC\)</span> compara la proporción de verdaderos positivos con (el complemento de) la proporción de verdaderos negativos, es decir, mide la pureza alcanzada en cada categoría. De esta forma, permite medir capacidad predictiva y comparar modelos.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:roc"></span>
 <img src="figures/4.8ROC.png" alt="Curva ROC" width="75%" height="40%" />
 <p class="caption">
@@ -544,8 +544,7 @@ Figura 3.6: Curva ROC puntos importantes
 </div>
 <div id="cv" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Cross Validation<a href="conceptos.html#cv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Recordar la diferencia entre la tasa de error de <em>test</em> y la
-tasa de error de entrenamiento. El error de <em>test</em> es el error promedio que resulta de usar un método de aprendizaje estadístico para predecir la respuesta en una nueva observación, es decir, que no fue utilizada en el entrenamiento del método.</p>
+<p>Recordar la diferencia entre la tasa de error de <em>test</em> y la tasa de error de entrenamiento. El error de <em>test</em> es el error promedio que resulta de usar un método de aprendizaje estadístico para predecir la respuesta en una nueva observación, es decir, que no fue utilizada en el entrenamiento del método.</p>
 <p>Modelos complejos predicen bien dentro de la muestra pero mal fuera de la misma (<em>overfit</em>) y nuestro interés está puesto en esta última.</p>
 <p><strong>Objetivo:</strong> buscar el nivel de complejidad óptimo para predecir fuera de la muestra.</p>
 <p>Definición de pérdida:</p>
@@ -577,7 +576,7 @@ Figura 3.7: K-Fold cross-validation
 \tag{3.12}
   CV(\hat{f}, \alpha) = \frac{1}{N}L(Y_i - \hat{Y}_{-k}(x_i, \alpha))
 \end{equation}\]</span></p>
-<p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 </div>
 <div id="bootstrap" class="section level2 hasAnchor" number="3.8">
 <h2><span class="header-section-number">3.8</span> Bootstrap<a href="conceptos.html#bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -645,8 +644,7 @@ Figura 3.7: K-Fold cross-validation
 <li id="fn8"><p>En general el interés no esta puesto en realizar inferencia/análisis condicional.<a href="conceptos.html#fnref8" class="footnote-back">↩︎</a></p></li>
 <li id="fn9"><p>Volveremos sobre este tema en el Capítulo <a href="mco.html#mco">4</a>.<a href="conceptos.html#fnref9" class="footnote-back">↩︎</a></p></li>
 <li id="fn10"><p>¿Útil para probabilidad de <em>default</em>?<a href="conceptos.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>Notar que la <span class="math inline">\(FPR = 1 - Especificidad\)</span>.<a href="conceptos.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>Luego de seleccionar el modelo se estima con la muestra completa.<a href="conceptos.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>Luego de seleccionar el modelo se estima con la muestra completa.<a href="conceptos.html#fnref11" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
