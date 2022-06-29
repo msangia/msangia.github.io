@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 LASSO | Ciencia de Datos</title>
+  <meta name="description" content="BCRA" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 LASSO | Ciencia de Datos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="BCRA" />
+  <meta name="github-repo" content="msangia/msangia.github" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 LASSO | Ciencia de Datos" />
+  <meta name="twitter:site" content="@msangia" />
+  <meta name="twitter:description" content="BCRA" />
+  
+
+<meta name="author" content="Máximo Sangiácomo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mco.html"/>
+<link rel="next" href="logit.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<html>
+  <head>
+	<link rel="shortcut icon" href="images/favicon.png" />
+  </head>
+  <body>
+  </body>
+</html>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/r4ds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Ciencia de Datos - BCRA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Descripcion del curso</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a>
+<ul>
+<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="bd.html"><a href="bd.html#directorio-de-trabajo"><i class="fa fa-check"></i><b>2.1</b> Directorio de trabajo</a></li>
+<li class="chapter" data-level="2.2" data-path="bd.html"><a href="bd.html#cargar-datos"><i class="fa fa-check"></i><b>2.2</b> Cargar datos</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
+<li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.5</b> Variables</a></li>
+<li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#merge"><i class="fa fa-check"></i><b>2.6</b> Merge</a></li>
+<li class="chapter" data-level="2.7" data-path="bd.html"><a href="bd.html#variables-group_by-mutate"><i class="fa fa-check"></i><b>2.7</b> Variables: group_by, mutate</a></li>
+<li class="chapter" data-level="2.8" data-path="bd.html"><a href="bd.html#guardar-datos"><i class="fa fa-check"></i><b>2.8</b> Guardar datos</a></li>
+<li class="chapter" data-level="2.9" data-path="bd.html"><a href="bd.html#valores-missing"><i class="fa fa-check"></i><b>2.9</b> Valores missing</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.9.1</b> Eliminar valores missing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.10</b> Loop</a></li>
+<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#pivot"><i class="fa fa-check"></i><b>2.11</b> Pivot</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#append"><i class="fa fa-check"></i><b>2.12</b> Append</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.13</b> Strings</a></li>
+<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.14</b> Fechas</a>
+<ul>
+<li class="chapter" data-level="2.14.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.14.1</b> Manipulación de fechas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.15</b> Análisis de datos</a>
+<ul>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.15.1</b> Tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.16</b> group_by, summarise</a></li>
+<li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.17</b> Vector de resultados</a></li>
+<li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.18</b> Gráficos</a></li>
+<li class="chapter" data-level="2.19" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.19</b> GGPlot</a></li>
+<li class="chapter" data-level="2.20" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.20</b> Guardar un gráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>3.1</b> Estimacion</a></li>
+<li class="chapter" data-level="3.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>3.2</b> Prediccion</a></li>
+<li class="chapter" data-level="3.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>3.3</b> Inferencia</a></li>
+<li class="chapter" data-level="3.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>3.4</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="3.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>3.5</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="3.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>3.6</b> Evaluacion de la precision del modelo</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>3.6.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="3.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>3.6.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="3.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>3.6.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7</b> Cross Validation</a></li>
+<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.8</b> Bootstrap</a></li>
+<li class="chapter" data-level="3.9" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.9</b> Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>4.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
+<li class="chapter" data-level="4.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>4.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lasso.html"><a href="lasso.html"><i class="fa fa-check"></i><b>5</b> LASSO</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lasso.html"><a href="lasso.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>5.1</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>6</b> Logit</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>6.1</b> Modelo <em>logit</em></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>6.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>6.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>7</b> Arboles de decision</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>7.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
+<li class="chapter" data-level="7.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>7.2</b> Bagging</a></li>
+<li class="chapter" data-level="7.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>7.3</b> Random Forest</a></li>
+<li class="chapter" data-level="7.4" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>7.4</b> Boosting</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>7.4.1</b> Ada Boost</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>7.5</b> Aplicacion practica</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>7.5.1</b> Arboles de clasificacion</a></li>
+<li class="chapter" data-level="7.5.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>7.5.2</b> Comparacion de modelos para clasificacion</a></li>
+<li class="chapter" data-level="7.5.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>7.5.3</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="7.5.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>7.5.4</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="7.5.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>7.5.5</b> Boosting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>8</b> Neural Networks</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="nnet.html"><a href="nnet.html#single-layer-neural-networks"><i class="fa fa-check"></i><b>8.1</b> Single Layer Neural Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>9</b> Analisis de clusters</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>9.1</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="9.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-4"><i class="fa fa-check"></i><b>9.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="./" target="blank">Maximo Sangiacomo - GMyP</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ciencia de Datos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="css/style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="images/background.png">
+</div>
+<div id="lasso" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> LASSO<a href="lasso.html#lasso" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>Least Absolute Shrinkage and Selection Operator</em>. Cuando el objetivo es encontrar el mejor modelo, es decir, aquel con menor error de predicción en la muestra de <em>test</em> existen distintas alternativas de selección de modelos. La idea de <em>shrinkage</em> es ajustar un modelo que contenga todos los <span class="math inline">\(p\)</span> predictores usando una técnica que restringe o regulariza las estimaciones de coeficientes hacia cero.</p>
+<p>Dado:</p>
+<p><span class="math inline">\(Y = \beta_0 + \beta_1 X_1 +...+ \beta_p X_p + u\)</span></p>
+<p>Suponer que <span class="math inline">\(M_k\)</span> con <span class="math inline">\(k = 1,...,K\)</span> es una serie modelos.</p>
+<p><strong>Elección de modelos:</strong> buscar en <span class="math inline">\(M_k\)</span> el mejor modelo para predecir fuera de la muestra. La primera alternativa podría ser realizar una búsqueda exhaustiva. En la ocasiones, puede ser impracticable dado que con <span class="math inline">\(p\)</span> predictores, se pueden construir <span class="math inline">\(2^p\)</span> modelos (con <span class="math inline">\(p = 15\)</span> hay <span class="math inline">\(32.768\)</span> modelos).</p>
+<p><em>Lasso</em>: una manera formal y algorítmica de realizar esa tarea. Para <span class="math inline">\(\lambda \ge 0\)</span> dado, se considera la siguiente función objetivo (a minimizar):</p>
+<p><span class="math display" id="eq:lasso">\[\begin{equation}
+\tag{5.1}
+R_l(\beta) = \sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2 + \lambda \sum_{s=2}^{p}|\beta_s|
+\end{equation}\]</span></p>
+<p>donde <span class="math inline">\(x_i\)</span> contiene un intercepto.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\lambda = 0\)</span> es el estimador de <span class="math inline">\(MCO\)</span></p></li>
+<li><p><span class="math inline">\(\lambda = \infty\)</span> el segundo término <span class="math inline">\(\to \infty\)</span> entonces <span class="math inline">\(\beta_2,...\beta_p = 0\)</span></p></li>
+<li><p>Si <span class="math inline">\(0 &lt; \lambda &lt; \infty\)</span> <em>Lasso</em> hace algo intermedio entre <span class="math inline">\(MCO\)</span> y <span class="math inline">\(0\)</span></p></li>
+</ol>
+<p>Intuitivamente:</p>
+<ul>
+<li><p><span class="math inline">\(\sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2\)</span> penaliza la falta de ajuste</p></li>
+<li><p><span class="math inline">\(\sum_{s=2}^{p}|\beta_s|\)</span> penaliza complejidad</p></li>
+</ul>
+<div class="infobox note">
+<p>La ventaja de utilizar <em>lasso</em> es que elige automáticamente que variables entran en el modelo <span class="math inline">\((\beta_s \neq 0)\)</span> y cuales no <span class="math inline">\((\beta_s = 0)\)</span>.</p>
+</div>
+<p>La Figura <a href="lasso.html#fig:lasso">5.1</a> muestra el valor de los coeficientes estandarizados en función de distintos valores del parámetro <span class="math inline">\(\lambda\)</span> que se obtienen de aplicar <em>lasso</em> a la base de datos de <code>Credit</code>.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Cuando <span class="math inline">\(\lambda = 0\)</span>, el resultado coincide con el de mínimos cuadrados, cuando <span class="math inline">\(\lambda\)</span> es lo suficientemente grande, todos los coeficientes son iguales cero. Entre los dos casos extremos, moviéndose de derecha a izquierda se observa que al principio <em>lasso</em> resulta en un modelo que contiene solo el predictor de <code>rating</code>. Luego, ingresan al modelo <code>student</code> y <code>limit</code> casi simultáneamente, seguidas de cerca por <code>income</code>. Finalmente lo hacen el resto de las variables.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lasso"></span>
+<img src="figures/6.6Lasso.png" alt="Lasso" width="80%" height="40%" />
+<p class="caption">
+Figura 5.1: Lasso
+</p>
+</div>
+<p>Como señalamos arriba, si <span class="math inline">\(\hat{\beta_l} = 0\)</span>, al moverse de <span class="math inline">\(0\)</span> (es decir, incluir la variable) podría pensarse que la función de penalidad de <em>lasso</em> genera costos y beneficios. Por un lado, costo por incluir la variable sube en el valor de (<span class="math inline">\(\lambda\)</span>), por el otro, la penalidad de ajuste baja (más variables, mejor ajuste). Si el primero sube más rápido que lo que el segundo baja conviene quedarse en <span class="math inline">\(0\)</span>. En caso contrario conviene moverse afuera de <span class="math inline">\(0\)</span>. Por lo tanto, conviene moverse de <span class="math inline">\(0\)</span> si la relación es lo suficientemente fuerte (mejora el ajuste), sino conviene evitar la penalización.</p>
+<div id="aplicacion-practica-1" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Aplicacion practica<a href="lasso.html#aplicacion-practica-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se utiliza el paquete <code>glmnet</code> para realizar la regresión de <em>lasso</em><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> con una sintaxis ligeramente diferente de otras funciones de estimación de modelos. En particular, se debe usar una matriz <code>x</code> y un vector <code>y</code> y no utiliza la sintaxis <code>(y ~ x)</code>. Se busca predecir <code>Salary</code> en la base de datos <code>Hitters</code>. Antes de comenzar deben eliminarse lo valores <em>missing</em>.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="lasso.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb373-2"><a href="lasso.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb373-3"><a href="lasso.html#cb373-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Hitters)</span></code></pre></div>
+<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;       &quot;Walks&quot;    
+##  [7] &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;    &quot;CRuns&quot;     &quot;CRBI&quot;     
+## [13] &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot;  &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;   
+## [19] &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="lasso.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters)</span></code></pre></div>
+<pre><code>## [1] 322  20</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="lasso.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters<span class="sc">$</span>Salary))</span></code></pre></div>
+<pre><code>## [1] 59</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="lasso.html#cb379-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Hitters)</span>
+<span id="cb379-2"><a href="lasso.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters)</span></code></pre></div>
+<pre><code>## [1] 263  20</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="lasso.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>La función <code>model.matrix()</code> es útil para crear <code>x</code>; no sólo produce una matriz correspondiente a los <span class="math inline">\(19\)</span> predictores, sino también transforma automáticamente cualquier variable cualitativa en variables <em>dummies</em>. La última propiedad es importante porque <code>glmnet()</code> sólo puede tomar variables numéricas y cuantitativas.</p>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="lasso.html#cb383-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., Hitters)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb383-2"><a href="lasso.html#cb383-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> Hitters<span class="sc">$</span>Salary</span></code></pre></div>
+<p>Por primera vez dividimos las muestras en una base de entrenamiento y otra de <em>test</em> para estimar el error de <em>test</em> de la regresión <em>lasso</em>. Hay varias formas de dividir aleatoriamente una base de datos. Nuestro enfoque elige aleatoriamente un subconjunto de números entre <span class="math inline">\(1\)</span> y <span class="math inline">\(n\)</span>; estos se pueden usar como índices para las observaciones de entrenamiento.</p>
+<div class="infobox tip">
+<p>La función <code>createDataPartition()</code> de la librería <code>caret</code> es útil para crear particiones de <em>train</em> y <em>test</em>.</p>
+</div>
+<p>Primero establecemos una semilla aleatoria para que los resultados obtenidos sean reproducibles.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="lasso.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb384-2"><a href="lasso.html#cb384-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x), <span class="fu">nrow</span>(x) <span class="sc">/</span> <span class="dv">2</span>) <span class="co"># selecciona la mitad de las observaciones</span></span>
+<span id="cb384-3"><a href="lasso.html#cb384-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> (<span class="sc">-</span>train)</span>
+<span id="cb384-4"><a href="lasso.html#cb384-4" aria-hidden="true" tabindex="-1"></a>y.test <span class="ot">&lt;-</span> y[test]</span></code></pre></div>
+<p>Para estimar un modelo <em>lasso</em> usamos la función <code>glmnet()</code> con el argumento <code>alpha = 1</code> que indica la metodología que queremos usar.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p>También definimos una grilla<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> de <span class="math inline">\(100\)</span> valores <span class="math inline">\(\lambda\)</span> que van desde <span class="math inline">\(\lambda=10^{10}\)</span> a <span class="math inline">\(\lambda=10^{-2}\)</span>, cubriendo esencialmente la gama completa de escenarios desde el modelo nulo que contiene solo la constante, hasta el modelo de mínimos cuadrados.</p>
+<p>Podemos ver en el gráfico de coeficientes que dependiendo de la elección del parámetro de ajuste, algunos de los coeficientes serán exactamente iguales a cero (<strong>L1 norm</strong> es la penalidad de LASSO).</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="lasso.html#cb385-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb385-2"><a href="lasso.html#cb385-2" aria-hidden="true" tabindex="-1"></a>lasso.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
+<span id="cb385-3"><a href="lasso.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso.mod)</span></code></pre></div>
+<p><img src="CienciaDatosMS_files/figure-html/lasso5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<p>Ahora realizamos un ejercicio de <em>cross validation</em> (subsección <a href="conceptos.html#cv">3.7</a>) y calculamos el error de <em>test</em> asociado. Por default el argumento <code>nfolds = 10</code>. Los números en la parte superior de la Figura indican el número de variables en el modelo. La primera y segunda línea discontinua vertical representan el valor de <span class="math inline">\(\lambda\)</span> con el EMC mínimo y el mayor valor de <span class="math inline">\(\lambda\)</span> dentro de un error estándar.</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="lasso.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb386-2"><a href="lasso.html#cb386-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb386-3"><a href="lasso.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out)</span></code></pre></div>
+<p><img src="CienciaDatosMS_files/figure-html/lasso6-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="lasso.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cv.out)</span></code></pre></div>
+<pre><code>##  [1] &quot;lambda&quot;     &quot;cvm&quot;        &quot;cvsd&quot;       &quot;cvup&quot;       &quot;cvlo&quot;      
+##  [6] &quot;nzero&quot;      &quot;call&quot;       &quot;name&quot;       &quot;glmnet.fit&quot; &quot;lambda.min&quot;
+## [11] &quot;lambda.1se&quot; &quot;index&quot;</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="lasso.html#cb389-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
+<span id="cb389-2"><a href="lasso.html#cb389-2" aria-hidden="true" tabindex="-1"></a>lasso.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso.mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x[test, ])</span>
+<span id="cb389-3"><a href="lasso.html#cb389-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># EMC</span></span></code></pre></div>
+<pre><code>## [1] 143673.6</code></pre>
+<p>Finalmente, el resultado indica que <span class="math inline">\(8\)</span> (el primer comando de abajo no dice esto pero los otros resultados si) de los <span class="math inline">\(19\)</span> coeficientes estimados son exactamente cero. Por lo tanto, el modelo de <em>lasso</em> con <span class="math inline">\(\lambda\)</span> elegido por <em>cross validation</em> contiene solo <span class="math inline">\(11\)</span> variables.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="lasso.html#cb391-1" aria-hidden="true" tabindex="-1"></a>cv.out<span class="sc">$</span>nzero[cv.out<span class="sc">$</span>index[[<span class="dv">1</span>]]]</span></code></pre></div>
+<pre><code>## s36 
+##  10</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="lasso.html#cb393-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
+<span id="cb393-2"><a href="lasso.html#cb393-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span>
+<span id="cb393-3"><a href="lasso.html#cb393-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code></pre></div>
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##    1.27479059   -0.05497143    2.18034583    0.00000000    0.00000000 
+##           RBI         Walks         Years        CAtBat         CHits 
+##    0.00000000    2.29192406   -0.33806109    0.00000000    0.00000000 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##    0.02825013    0.21628385    0.41712537    0.00000000   20.28615023 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -116.16755870    0.23752385    0.00000000   -0.85629148    0.00000000</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="lasso.html#cb395-1" aria-hidden="true" tabindex="-1"></a>lasso.coef[lasso.coef <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
+<pre><code>##   (Intercept)         AtBat          Hits         Walks         Years 
+##    1.27479059   -0.05497143    2.18034583    2.29192406   -0.33806109 
+##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 
+##    0.02825013    0.21628385    0.41712537   20.28615023 -116.16755870 
+##       PutOuts        Errors 
+##    0.23752385   -0.85629148</code></pre>
+
+</div>
+</div>
+<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-glmnet" class="csl-entry">
+Simon, Noah, Jerome Friedman, Trevor Hastie, y Rob Tibshirani. 2011. <span>«Regularization Paths for Cox’s Proportional Hazards Model via Coordinate Descent»</span>. <em>Journal of Statistical Software</em> 39 (5): 1-13. <a href="https://www.jstatsoft.org/v39/i05/">https://www.jstatsoft.org/v39/i05/</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="16">
+<li id="fn16"><p>Datos simulados que contiene información sobre 10.000 clientes donde el objetivo es predecir quienes no pagarán su deuda de tarjeta de crédito.<a href="lasso.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>La función principal de este paquete es <code>glmnet()</code>.<a href="lasso.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>Para más detalles véase <span class="citation">(<a href="#ref-glmnet" role="doc-biblioref">Simon et al. 2011</a>)</span>.<a href="lasso.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p><code>alpha = 0</code> estima con la metodología <em>ridge</em>.<a href="lasso.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>También se pueden usar valores específicos.<a href="lasso.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Para más detalles de <code>cv.glmnet</code> ver <a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">aquí</a>.<a href="lasso.html#fnref21" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mco.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
