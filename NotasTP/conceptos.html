@@ -185,19 +185,20 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.3</b> Exportar datos</a></li>
-<li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.4</b> Variables</a></li>
-<li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#merge"><i class="fa fa-check"></i><b>2.5</b> Merge</a></li>
-<li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#variables-group_by-mutate"><i class="fa fa-check"></i><b>2.6</b> Variables: group_by, mutate</a></li>
-<li class="chapter" data-level="2.7" data-path="bd.html"><a href="bd.html#guardar-datos"><i class="fa fa-check"></i><b>2.7</b> Guardar datos</a></li>
-<li class="chapter" data-level="2.8" data-path="bd.html"><a href="bd.html#valores-missing"><i class="fa fa-check"></i><b>2.8</b> Valores missing</a></li>
-<li class="chapter" data-level="2.9" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.9</b> Análisis de datos</a>
+<li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#pipe"><i class="fa fa-check"></i><b>2.4</b> Pipe</a></li>
+<li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.5</b> Variables</a></li>
+<li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#merge"><i class="fa fa-check"></i><b>2.6</b> Merge</a></li>
+<li class="chapter" data-level="2.7" data-path="bd.html"><a href="bd.html#variables-group_by-mutate"><i class="fa fa-check"></i><b>2.7</b> Variables: group_by, mutate</a></li>
+<li class="chapter" data-level="2.8" data-path="bd.html"><a href="bd.html#guardar-datos"><i class="fa fa-check"></i><b>2.8</b> Guardar datos</a></li>
+<li class="chapter" data-level="2.9" data-path="bd.html"><a href="bd.html#valores-missing"><i class="fa fa-check"></i><b>2.9</b> Valores missing</a></li>
+<li class="chapter" data-level="2.10" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.10</b> Análisis de datos</a>
 <ul>
-<li class="chapter" data-level="2.9.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.9.1</b> Tablas</a></li>
+<li class="chapter" data-level="2.10.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.10.1</b> Tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.10</b> group_by, summarise</a></li>
-<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.11</b> Gráficos</a></li>
-<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.12</b> GGPlot</a></li>
-<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.13</b> Guardar un gráfico</a></li>
+<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.11</b> group_by, summarise</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.12</b> Gráficos</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.13</b> GGPlot</a></li>
+<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.14</b> Guardar un gráfico</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a>
 <ul>
@@ -361,7 +362,7 @@ varianza de <span class="math inline">\(\hat{f}(x_0)\)</span>, el sesgo al cuadr
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(E(y_0 - \hat{f}(x_0))^2\)</span> el valor esperado de <span class="math inline">\(EMC\)</span> de <em>test</em> en <span class="math inline">\(x_0\)</span>. Para minimizar el error de <em>test</em> esperado, se necesita seleccionar un método de aprendizaje estadístico que logre simultáneamente <strong>baja varianza</strong> y <strong>bajo sesgo</strong>.</p>
 <p>La <strong>varianza</strong> se refiere al valor en que <span class="math inline">\(f\)</span> cambiaría si
-se estimara utilizando una base de datos de entrenamiento diferente. <strong>Sesgo</strong> se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por mucho modelo más simple. Como regla general, a medida que se utilizan métodos más flexibles, la varianza aumenta y el sesgo disminuye. La tasa relativa de cambio de estas dos cantidades determina si el <span class="math inline">\(EMC\)</span> de <em>test</em> aumenta o disminuye.</p>
+se estimara utilizando una base de datos de entrenamiento diferente. <strong>Sesgo</strong> se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por un modelo mucho más simple. Como regla general, a medida que se utilizan métodos más flexibles, la varianza aumenta y el sesgo disminuye. La tasa relativa de cambio de estas dos cantidades determina si el <span class="math inline">\(EMC\)</span> de <em>test</em> aumenta o disminuye.</p>
 <p>Los dos paneles de la Figura <a href="conceptos.html#fig:f212">3.4</a> ilustran la Ecuación <a href="conceptos.html#eq:sv">(3.7)</a> para los ejemplos en Figuras <a href="conceptos.html#fig:f29">3.1</a> y <a href="conceptos.html#fig:f210">3.2</a>. En cada caso, la curva sólida azul representa el cuadrado del sesgo, para diferentes niveles de flexibilidad, mientras que la curva naranja corresponde a la varianza. La línea discontinua horizontal representa <span class="math inline">\(Var(\epsilon)\)</span>, el error irreducible. Finalmente, la curva roja, corresponde al <span class="math inline">\(EMC\)</span> de <em>test</em>, es la suma de estas tres cantidades.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:f212"></span>
 <img src="figures/2.12MSE_SesgoVar.png" alt="Estimacion y EMC" width="80%" height="40%" />
