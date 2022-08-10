@@ -297,7 +297,7 @@ Figura 4.1: Modelo lineal y MCO
 </p>
 </div>
 <p><strong>Teorema de Gauss/Markov (TGM)</strong>: Bajo los supuestos clásicos el estimador de <span class="math inline">\(MCO\)</span> es el mejor dentro de los lineales e insesgados (MELI).</p>
-<p>El <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
+<p><strong>Definición</strong>: el <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
 <p><span class="math display" id="eq:r2">\[\begin{equation}
 \tag{4.5}
 R^2 = 1 - \frac{SCR}{SCT}
@@ -322,7 +322,7 @@ Y_i = X_i^{&#39;} \beta + u_i
 <li><p><span class="math inline">\(V(\hat{Y_i}) = X_i^{&#39;} V(\hat{\beta})X_i = \sigma^2X_i^{&#39;}(X&#39;X)^{-1}X_i\)</span></p></li>
 </ul>
 <p>donde <span class="math inline">\(V(\hat{\beta}) = \sigma^2(X&#39;X)^{-1}\)</span></p>
-<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, entonces <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
+<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
 <p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
 <p><span class="math display" id="eq:ecm">\[\begin{equation}
 \tag{4.8}
@@ -339,7 +339,7 @@ EMC(\hat{\beta}) = E(\hat{\beta} - \beta)^2
 \tag{4.9}
 EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
 \end{equation}\]</span></p>
-<p>Es decir, cuán mal estima <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuan disperso es en relación a su propio centro (varianza).</p>
+<p>Es decir, cuán mal estima <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
 <p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
 <p><span class="math display" id="eq:err">\[\begin{equation}
 \tag{4.10}
@@ -374,7 +374,7 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <div id="aplicacion-practica" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="infobox tip">
-<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> o en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
+<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> y en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
 </div>
 <p>La biblioteca <code>ISLR2</code> contiene la base de datos de <code>Boston</code>, que registra <code>medv</code> (mediana del valor de las casas en miles de USD) para <span class="math inline">\(506\)</span> distritos censales en Boston. Buscaremos predecir <code>medv</code> usando <span class="math inline">\(12\)</span> predictores como <code>rm</code> (número promedio de habitaciones por casa), <code>age</code> (edad promedio de las casas) y <code>lstat</code> (porcentaje de hogares con bajo <em>status</em> socioeconómico).</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="mco.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
@@ -420,7 +420,7 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <ul>
 <li><strong>Residuals vs. fitted values:</strong> residuos vs. valores ajustados se utiliza para detectar patrones de variables omitidas, heterocedasticidad, etc.</li>
 <li><strong>Scale Location:</strong> residuos estandarizados vs. valores ajustados. Similar al anterior y se utiliza para detectar patrones en los residuos.</li>
-<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
+<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la distribución normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
 <li><strong>Residuals vs. Leverage:</strong> el <em>leverage</em> es una medida de cuán influyente es una observación en el valor de los coeficientes. Este gráfico se utiliza para detectar las (posibles) observaciones influyentes y los valores atípicos al mismo tiempo.</li>
 </ul>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="mco.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
