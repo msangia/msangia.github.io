@@ -213,8 +213,8 @@ div.csl-indent {
 <li class="chapter" data-level="2.10.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.10.1</b> Eliminar valores missing</a></li>
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.11</b> Loop</a></li>
-<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot"><i class="fa fa-check"></i><b>2.12</b> Pivot</a></li>
-<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#append"><i class="fa fa-check"></i><b>2.13</b> Append</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.12</b> Pivot (Reshape)</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.13</b> Row bind (Append)</a></li>
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
@@ -350,7 +350,7 @@ Figura 4.1: Modelo lineal y MCO
 </p>
 </div>
 <p><strong>Teorema de Gauss/Markov (TGM)</strong>: Bajo los supuestos clásicos el estimador de <span class="math inline">\(MCO\)</span> es el mejor dentro de los lineales e insesgados (MELI).</p>
-<p>El <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
+<p><strong>Definición</strong>: el <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
 <p><span class="math display" id="eq:r2">\[\begin{equation}
 \tag{4.5}
 R^2 = 1 - \frac{SCR}{SCT}
@@ -375,7 +375,7 @@ Y_i = X_i^{&#39;} \beta + u_i
 <li><p><span class="math inline">\(V(\hat{Y_i}) = X_i^{&#39;} V(\hat{\beta})X_i = \sigma^2X_i^{&#39;}(X&#39;X)^{-1}X_i\)</span></p></li>
 </ul>
 <p>donde <span class="math inline">\(V(\hat{\beta}) = \sigma^2(X&#39;X)^{-1}\)</span></p>
-<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, entonces <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
+<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
 <p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
 <p><span class="math display" id="eq:ecm">\[\begin{equation}
 \tag{4.8}
@@ -392,7 +392,7 @@ EMC(\hat{\beta}) = E(\hat{\beta} - \beta)^2
 \tag{4.9}
 EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
 \end{equation}\]</span></p>
-<p>Es decir, cuán mal estima <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuan disperso es en relación a su propio centro (varianza).</p>
+<p>Es decir, cuán mal estima <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
 <p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
 <p><span class="math display" id="eq:err">\[\begin{equation}
 \tag{4.10}
@@ -427,12 +427,12 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <div id="aplicacion-practica" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="infobox tip">
-<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> o en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
+<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> y en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
 </div>
 <p>La biblioteca <code>ISLR2</code> contiene la base de datos de <code>Boston</code>, que registra <code>medv</code> (mediana del valor de las casas en miles de USD) para <span class="math inline">\(506\)</span> distritos censales en Boston. Buscaremos predecir <code>medv</code> usando <span class="math inline">\(12\)</span> predictores como <code>rm</code> (número promedio de habitaciones por casa), <code>age</code> (edad promedio de las casas) y <code>lstat</code> (porcentaje de hogares con bajo <em>status</em> socioeconómico).</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="mco.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb359-2"><a href="mco.html#cb359-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb359-3"><a href="mco.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="mco.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb361-2"><a href="mco.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb361-3"><a href="mco.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Boston)</span></code></pre></div>
 <pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio lstat medv
 ## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3  4.98 24.0
 ## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8  9.14 21.6
@@ -441,8 +441,8 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7  5.33 36.2
 ## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7  5.21 28.7</code></pre>
 <p>Comenzaremos usando la función <code>lm()</code> para ajustar un modelo de regresión lineal simple, con <code>medv</code> como respuesta y <code>lstat</code> como predictor.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="mco.html#cb361-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
-<span id="cb361-2"><a href="mco.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="mco.html#cb363-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
+<span id="cb363-2"><a href="mco.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ lstat, data = Boston)
@@ -461,32 +461,32 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Residual standard error: 6.216 on 504 degrees of freedom
 ## Multiple R-squared:  0.5441, Adjusted R-squared:  0.5432 
 ## F-statistic: 601.6 on 1 and 504 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="mco.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="mco.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit)</span></code></pre></div>
 <pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
 ##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
 ##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="mco.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Boston)</span>
-<span id="cb365-2"><a href="mco.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lstat, medv, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb365-3"><a href="mco.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="mco.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Boston)</span>
+<span id="cb367-2"><a href="mco.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lstat, medv, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
+<span id="cb367-3"><a href="mco.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/ml3-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>A continuación se examinan algunos gráficos de diagnóstico con la función <code>plot()</code>. En general, este comando producirá un gráfico a la vez (presionando <em>Enter</em> se generará el siguiente gráfico). Sin embargo, se pueden ver los cuatro gráficos juntos con las funciones <code>par()</code> y <code>mfrow()</code>, que le dicen a <code>R</code> que divida la pantalla de visualización en paneles separados. Por ejemplo, <code>par(mfrow = c(2, 2))</code> divide la región del gráfico en una cuadrícula de paneles de <span class="math inline">\(2 \times 2\)</span>.</p>
 <ul>
 <li><strong>Residuals vs. fitted values:</strong> residuos vs. valores ajustados se utiliza para detectar patrones de variables omitidas, heterocedasticidad, etc.</li>
 <li><strong>Scale Location:</strong> residuos estandarizados vs. valores ajustados. Similar al anterior y se utiliza para detectar patrones en los residuos.</li>
-<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
+<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la distribución normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
 <li><strong>Residuals vs. Leverage:</strong> el <em>leverage</em> es una medida de cuán influyente es una observación en el valor de los coeficientes. Este gráfico se utiliza para detectar las (posibles) observaciones influyentes y los valores atípicos al mismo tiempo.</li>
 </ul>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="mco.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb366-2"><a href="mco.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="mco.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb368-2"><a href="mco.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/ml5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Para obtener la predicción y el EMC:</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="mco.html#cb367-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit, <span class="at">data =</span> Boston)</span>
-<span id="cb367-2"><a href="mco.html#cb367-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb367-3"><a href="mco.html#cb367-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="mco.html#cb369-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit, <span class="at">data =</span> Boston)</span>
+<span id="cb369-2"><a href="mco.html#cb369-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb369-3"><a href="mco.html#cb369-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
 <pre><code>## [1] 38.48297</code></pre>
 <p>Regresión lineal múltiple:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="mco.html#cb369-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb369-2"><a href="mco.html#cb369-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="mco.html#cb371-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
+<span id="cb371-2"><a href="mco.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ lstat + age, data = Boston)
@@ -507,8 +507,8 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Multiple R-squared:  0.5513, Adjusted R-squared:  0.5495 
 ## F-statistic:   309 on 2 and 503 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Utilizando todas las variables de la base de datos:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="mco.html#cb371-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
-<span id="cb371-2"><a href="mco.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="mco.html#cb373-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
+<span id="cb373-2"><a href="mco.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ ., data = Boston)
@@ -539,8 +539,8 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Multiple R-squared:  0.7343, Adjusted R-squared:  0.7278 
 ## F-statistic: 113.5 on 12 and 493 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Utilizando todas las variables de la base de datos menos <code>age</code>:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="mco.html#cb373-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb373-2"><a href="mco.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="mco.html#cb375-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
+<span id="cb375-2"><a href="mco.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ . - age, data = Boston)
