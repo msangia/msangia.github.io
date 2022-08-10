@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Conceptos generales | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Conceptos generales | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -286,14 +286,14 @@ div.csl-indent {
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(\hat{f}\)</span> representa nuestra estimación de <span class="math inline">\(f\)</span> y <span class="math inline">\(\hat{Y}\)</span> representa la predicción de <span class="math inline">\(Y\)</span>. En este contexto, <span class="math inline">\(\hat{f}\)</span> a menudo se trata como una <strong>caja negra</strong>, en el sentido que no importa la forma exacta de <span class="math inline">\(\hat{f}\)</span>, siempre que produzca predicciones precisas de <span class="math inline">\(Y\)</span>.</p>
 <p>La precisión con la que <span class="math inline">\(\hat{Y}\)</span> se acerca a <span class="math inline">\(Y\)</span> depende de dos cantidades, el error <em>reducible</em> y el <em>irreducible</em>. En general, <span class="math inline">\(\hat{f}\)</span> no será una estimación perfecta de <span class="math inline">\(f\)</span>, y esta inexactitud introducirá un error que es reducible porque potencialmente podemos mejorar la precisión de <span class="math inline">\(\hat{f}\)</span> usando la técnica de aprendizaje estadístico más apropiada para estimar <span class="math inline">\(f\)</span>. Sin embargo, si fuera posible estimar <span class="math inline">\(f\)</span> exactamente de manera que la respuesta estimada <span class="math inline">\(\hat{Y} = f(X)\)</span>, nuestra predicción todavía tendría algún error dado que <span class="math inline">\(Y\)</span> también es función de <span class="math inline">\(\epsilon\)</span>, que por definición, no se puede predecir usando <span class="math inline">\(X\)</span>. Por lo tanto, la variabilidad asociada con <span class="math inline">\(\epsilon\)</span> también afecta la precisión de nuestras predicciones. Esto se conoce como el error irreducible, porque no importa qué tan bien estimemos <span class="math inline">\(f\)</span>, no puede reducir el error introducido por <span class="math inline">\(\epsilon\)</span>.</p>
-<p>El término de error <span class="math inline">\(\epsilon\)</span> puede contener variables no observables que son útiles para predecir <span class="math inline">\(Y\)</span> y, por lo tanto, <span class="math inline">\(f\)</span> no puede usarlos para su predicción.</p>
+<p>El término de error <span class="math inline">\(\epsilon\)</span> puede contener variables no observables que son útiles para predecir <span class="math inline">\(Y\)</span> y, por lo tanto, <span class="math inline">\(f\)</span> no puede usarlos para su predicción. A partir de las ecuaciones <a href="conceptos.html#eq:estima">(3.1)</a> y <a href="conceptos.html#eq:pred">(3.2)</a> puede expresarse:</p>
 <p><span class="math display" id="eq:ri">\[\begin{align}
 \tag{3.3}
   E(Y - \hat{Y})^2 &amp; = E[f(X) + \epsilon - \hat{f}(X)]^2 \\
                    &amp; = \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{Reducible}} + \underbrace{Var(\epsilon)}_{\text{Irreducible}}
 \end{align}\]</span></p>
 <p>donde de <span class="math inline">\(E(Y − \hat{Y})^2\)</span> representa el promedio, o valor esperado, de la diferencia entre el valor predicho y el valor real de <span class="math inline">\(Y\)</span> elevado al cuadrado (diferencia por exceso y defecto ponderan igual), y <span class="math inline">\(Var(\epsilon)\)</span> representa la varianza asociada al término de error <span class="math inline">\(\epsilon\)</span>.</p>
-<p>El <strong>foco</strong> está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que la error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción para <span class="math inline">\(Y\)</span> que en la práctica casi siempre es desconocido.</p>
+<p>El <strong>foco</strong> está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que la error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción de <span class="math inline">\(Y\)</span> que en la práctica casi siempre es desconocido.</p>
 </div>
 <div id="metodos-parametricos" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Metodos parametricos<a href="conceptos.html#metodos-parametricos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -313,7 +313,7 @@ div.csl-indent {
 <div id="metodos-no-parametricos" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Metodos no parametricos<a href="conceptos.html#metodos-no-parametricos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>No realizan supuestos sobre la forma funcional de <span class="math inline">\(f\)</span> sino que tratan de buscar una estimación que se acerque lo más posible a los datos sin ser ni demasiado tosco ni demasiado ondulado.</p>
-<p>Este enfoque puede tener una gran ventaja sobre los métodos paramétricos: al evitar el supuesto de una forma funcional particular para <em>f</em>, tiene el potencial para adaptarse con precisión a una gama más amplia de posibles formas para <em>f</em>. Cualquier enfoque paramétrico tiene la posibilidad de que la forma funcional utilizada para estimar <em>f</em> sea muy diferente de la verdadera <em>f</em>, en cuyo caso el resultado modelo no se ajustará bien a los datos. El costo es que se necesitan más datos para estimar.</p>
+<p>Este enfoque puede tener una gran ventaja sobre los métodos paramétricos: al evitar el supuesto de una forma funcional particular para <span class="math inline">\(f\)</span>, tiene el potencial para adaptarse con precisión a una gama más amplia de posibles formas para <span class="math inline">\(f\)</span>. Cualquier enfoque paramétrico tiene la posibilidad de que la forma funcional utilizada para estimar <span class="math inline">\(f\)</span> sea muy diferente de la verdadera <span class="math inline">\(f\)</span>, en cuyo caso el resultado modelo no se ajustará bien a los datos. El costo es que se necesitan más datos para estimar.</p>
 </div>
 <div id="evaluacion-de-la-precision-del-modelo" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Evaluacion de la precision del modelo<a href="conceptos.html#evaluacion-de-la-precision-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -327,7 +327,7 @@ div.csl-indent {
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(\hat{f}(x_i)\)</span> es la predicción que hace <span class="math inline">\(\hat{f}\)</span> sobre la observación <span class="math inline">\(i\)</span>. El <span class="math inline">\(EMC\)</span> será pequeño si las respuestas predichas están muy cerca de las respuestas verdaderas y será grande si para algunas observaciones difieren demasiado.</p>
 <p>El <span class="math inline">\(EMC\)</span> en <a href="conceptos.html#eq:mse">(3.5)</a> se calcula usando los <strong>datos de entrenamiento</strong> (<em>training</em>) que se usaron para estimar el modelo, por lo que debería denominarse con mayor precisión <span class="math inline">\(EMC\)</span> de entrenamiento. Pero en general, no nos interesa realmente qué tan bien funciona el método
-sobre los datos de entrenamiento. Más bien, estamos interesados en la precisión de las predicciones que obtenemos cuando aplicamos nuestro método <strong>datos de <em>test</em></strong> que no fueron visto antes (datos no utilizados para entrenar el modelo). Es decir, se busca elegir el método que produzca el menor <span class="math inline">\(EMC\)</span> de <em>test</em>.</p>
+sobre los datos de entrenamiento. Más bien, estamos interesados en la precisión de las predicciones que obtenemos cuando aplicamos nuestro método en los <strong>datos de <em>test</em></strong> que no fueron visto antes (datos no utilizados para entrenar el modelo). Es decir, se busca elegir el método que produzca el menor <span class="math inline">\(EMC\)</span> en la muestra de <em>test</em>.</p>
 <p><span class="math display" id="eq:msetest">\[\begin{equation}
 \tag{3.6}
   Prom(y_0 - \hat{f}(x_0))^2
