@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Regresion lineal | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Regresion lineal | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -373,6 +373,9 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 </div>
 <div id="aplicacion-practica" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="infobox tip">
+<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> o en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
+</div>
 <p>La biblioteca <code>ISLR2</code> contiene la base de datos de <code>Boston</code>, que registra <code>medv</code> (mediana del valor de las casas en miles de USD) para <span class="math inline">\(506\)</span> distritos censales en Boston. Buscaremos predecir <code>medv</code> usando <span class="math inline">\(12\)</span> predictores como <code>rm</code> (número promedio de habitaciones por casa), <code>age</code> (edad promedio de las casas) y <code>lstat</code> (porcentaje de hogares con bajo <em>status</em> socioeconómico).</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="mco.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb94-2"><a href="mco.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
