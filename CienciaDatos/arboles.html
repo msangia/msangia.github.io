@@ -389,7 +389,7 @@ Figura 7.1: Arbol de regresión
 <h2><span class="header-section-number">7.4</span> Boosting<a href="arboles.html#boosting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Tanto <em>bagging</em> como <em>random forest</em> son técnicas paralelas. Es decir, cada clasificador individual se construye independientemente de los otros. La ventaja es que se pueden crear muchos clasificadores simultáneamente, pero la desventaja de que los clasificadores no aprenden unos de otros.</p>
 <p>En <em>boosting</em> los árboles van crecido secuencialmente, es decir, cada árbol crece usando información de árboles elaborados previamente. <em>Boosting</em> no implica un muestreo <em>bootstrap</em>; en cambio cada árbol se ajusta a una versión modificada de la base de datos original.</p>
-<p><em>Boosting</em> se basa en el concepto de <strong><em>weak classifier</em></strong>: un clasificador marginalmente mejor que tirar una moneda, donde la tasa de error apenas mejor que <span class="math inline">\(0,5\)</span>. Por ejemplo, un árbol como vimos en <span class="math inline">\(CART\)</span> con pocas ramas (<em>stump</em>: clasificador con dos ramas). El promedio ponderado de una sucesión de clasificadores débiles genera una notable mejora.</p>
+<p><em>Boosting</em> se basa en el concepto de <strong><em>weak classifier</em></strong>: un clasificador marginalmente mejor que tirar una moneda, donde la tasa de error es apenas mejor que <span class="math inline">\(0,5\)</span>. Por ejemplo, un árbol como vimos en <span class="math inline">\(CART\)</span> con pocas ramas (<em>stump</em>: clasificador con dos ramas). El promedio ponderado de una sucesión de clasificadores débiles genera una notable mejora.</p>
 <div id="ada-boost" class="section level3 hasAnchor" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Ada Boost<a href="arboles.html#ada-boost" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><em>Adaptive boosting</em>. Dadas las siguientes definiciones:</p>
@@ -724,7 +724,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb476-37"><a href="arboles.html#cb476-37" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb476-38"><a href="arboles.html#cb476-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.003343 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.005532 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>
