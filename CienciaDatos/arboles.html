@@ -535,7 +535,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="arboles.html#cb450-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">104</span> <span class="sc">+</span> <span class="dv">50</span>) <span class="sc">/</span> <span class="dv">200</span></span></code></pre></div>
 <pre><code>## [1] 0.77</code></pre>
 <p>A continuación, consideramos si podar el árbol podría llevar a mejores resultados. La función <code>cv.tree()</code> realiza una <em>cross-validation</em> para determinar el nivel óptimo de complejidad del árbol; se utiliza <em>cost complexity pruning</em> para seleccionar una secuencia de árboles.</p>
-<p>Usamos el argumento <code>FUN = prune.misclass</code> para indicar que queremos que la tasa de error de clasificación guíe el proceso de <em>cross-validation</em> y poda, en lugar del valor predeterminado para la función <code>cv.tree()</code> que es el desvío. La función <code>cv.tree()</code> reporta el número de nodos terminales de cada árbol considerado (<code>size</code>), así como la tasa de error correspondiente y el valor del parámetro <em>cost complexity</em> utilizado (<code>k</code>, que corresponde a <span class="math inline">\(\alpha\)</span> en la ecuación <a href="arboles.html#eq:cc">(7.2)</a>).</p>
+<p>Usamos el argumento <code>FUN = prune.misclass</code> para indicar que queremos que la tasa de error de clasificación guíe el proceso de <em>cross-validation</em> y poda, en lugar del valor predeterminado para la función <code>cv.tree()</code> que es el desvío. La función <code>cv.tree()</code> reporta el número de nodos terminales de cada árbol considerado (<code>size</code>), así como la tasa de error correspondiente (<code>dev</code>) y el valor del parámetro <em>cost complexity</em> utilizado (<code>k</code>, que corresponde a <span class="math inline">\(\alpha\)</span> en la ecuación <a href="arboles.html#eq:cc">(7.2)</a>).</p>
 <div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="arboles.html#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7</span>)</span>
 <span id="cb452-2"><a href="arboles.html#cb452-2" aria-hidden="true" tabindex="-1"></a>cv.carseats <span class="ot">&lt;-</span> <span class="fu">cv.tree</span>(tree.carseats, <span class="at">FUN =</span> prune.misclass)</span>
 <span id="cb452-3"><a href="arboles.html#cb452-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cv.carseats)</span></code></pre></div>
@@ -724,7 +724,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb476-37"><a href="arboles.html#cb476-37" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb476-38"><a href="arboles.html#cb476-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.005532 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.002194 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>
