@@ -403,31 +403,44 @@ Figura 5.1: Lasso
 <span id="cb390-4"><a href="lasso.html#cb390-4" aria-hidden="true" tabindex="-1"></a>y.test <span class="ot">&lt;-</span> y[test]</span></code></pre></div>
 <p>Para estimar un modelo <em>lasso</em> usamos la función <code>glmnet()</code> con el argumento <code>alpha = 1</code> que indica la metodología que queremos usar.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <p>También definimos una grilla<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> de <span class="math inline">\(100\)</span> valores <span class="math inline">\(\lambda\)</span> que van desde <span class="math inline">\(\lambda=10^{10}\)</span> a <span class="math inline">\(\lambda=10^{-2}\)</span>, cubriendo esencialmente la gama completa de escenarios desde el modelo nulo que contiene solo la constante, hasta el modelo de mínimos cuadrados.</p>
-<p>Podemos ver en el gráfico de coeficientes que dependiendo de la elección del parámetro de ajuste, algunos de los coeficientes serán exactamente iguales a cero (<strong>L1 norm</strong> es la penalidad de LASSO).</p>
+<p>Podemos ver en el gráfico de abajo que cada curva corresponde a una variable. Muestra la trayectoria de su coeficiente frente a <strong>L1 norm</strong> (la penalidad de LASSO) del vector de coeficientes completo a medida que varía <span class="math inline">\(\lambda\)</span>. El eje de arriba indica el número de coeficientes distintos de cero para LASSO.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="lasso.html#cb391-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
 <span id="cb391-2"><a href="lasso.html#cb391-2" aria-hidden="true" tabindex="-1"></a>lasso.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
 <span id="cb391-3"><a href="lasso.html#cb391-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso.mod, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/lasso5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<p>Se muestra un resumen de la ruta de <code>glmnet</code> en cada paso:</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="lasso.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lasso.mod)</span></code></pre></div>
+<pre><code>## 
+## Call:  glmnet(x = x[train, ], y = y[train], alpha = 1, lambda = grid) 
+## 
+##     Df  %Dev    Lambda
+## 1    0  0.00 1.000e+10
+## 2    0  0.00 7.565e+09
+## 3    0  0.00 5.722e+09
+## 4    0  0.00 4.329e+09
+## 5    0  0.00 3.275e+09
+## 6    0  0.00 2.477e+09
+....</code></pre>
 <p>Ahora realizamos un ejercicio de <em>cross validation</em> (subsección <a href="conceptos.html#cv">3.7</a>) y calculamos el error de <em>test</em> asociado. Por defecto el argumento <code>nfolds = 10</code>. Los números en la parte superior de la Figura indican el número de variables en el modelo. La primera y segunda línea discontinua vertical representan el valor de <span class="math inline">\(\lambda\)</span> con el EMC mínimo y el mayor valor de <span class="math inline">\(\lambda\)</span> dentro de un error estándar.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="lasso.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb392-2"><a href="lasso.html#cb392-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb392-3"><a href="lasso.html#cb392-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out)</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="lasso.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb394-2"><a href="lasso.html#cb394-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb394-3"><a href="lasso.html#cb394-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/lasso6-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="lasso.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cv.out)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="lasso.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cv.out)</span></code></pre></div>
 <pre><code>##  [1] &quot;lambda&quot;     &quot;cvm&quot;        &quot;cvsd&quot;       &quot;cvup&quot;       &quot;cvlo&quot;      
 ##  [6] &quot;nzero&quot;      &quot;call&quot;       &quot;name&quot;       &quot;glmnet.fit&quot; &quot;lambda.min&quot;
 ## [11] &quot;lambda.1se&quot; &quot;index&quot;</code></pre>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="lasso.html#cb395-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
-<span id="cb395-2"><a href="lasso.html#cb395-2" aria-hidden="true" tabindex="-1"></a>lasso.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso.mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x[test, ])</span>
-<span id="cb395-3"><a href="lasso.html#cb395-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># EMC</span></span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="lasso.html#cb397-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
+<span id="cb397-2"><a href="lasso.html#cb397-2" aria-hidden="true" tabindex="-1"></a>lasso.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso.mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x[test, ])</span>
+<span id="cb397-3"><a href="lasso.html#cb397-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># EMC</span></span></code></pre></div>
 <pre><code>## [1] 143673.6</code></pre>
 <p>Finalmente, el resultado indica que <span class="math inline">\(10\)</span> de los <span class="math inline">\(19\)</span> coeficientes estimados son distintos de <span class="math inline">\(0\)</span> (notar que hay una contradicción con las últimas dos tablas). Por lo tanto, el modelo de <em>lasso</em> con <span class="math inline">\(\lambda\)</span> elegido por <em>cross validation</em> contiene solo <span class="math inline">\(11\)</span> variables (más la constante).<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="lasso.html#cb397-1" aria-hidden="true" tabindex="-1"></a>cv.out<span class="sc">$</span>nzero[cv.out<span class="sc">$</span>index[[<span class="dv">1</span>]]]</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="lasso.html#cb399-1" aria-hidden="true" tabindex="-1"></a>cv.out<span class="sc">$</span>nzero[cv.out<span class="sc">$</span>index[[<span class="dv">1</span>]]]</span></code></pre></div>
 <pre><code>## s36 
 ##  10</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="lasso.html#cb399-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
-<span id="cb399-2"><a href="lasso.html#cb399-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span>
-<span id="cb399-3"><a href="lasso.html#cb399-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="lasso.html#cb401-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
+<span id="cb401-2"><a href="lasso.html#cb401-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span>
+<span id="cb401-3"><a href="lasso.html#cb401-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
 ##    1.27479059   -0.05497143    2.18034583    0.00000000    0.00000000 
 ##           RBI         Walks         Years        CAtBat         CHits 
@@ -436,7 +449,7 @@ Figura 5.1: Lasso
 ##    0.02825013    0.21628385    0.41712537    0.00000000   20.28615023 
 ##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
 ## -116.16755870    0.23752385    0.00000000   -0.85629148    0.00000000</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="lasso.html#cb401-1" aria-hidden="true" tabindex="-1"></a>lasso.coef[lasso.coef <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="lasso.html#cb403-1" aria-hidden="true" tabindex="-1"></a>lasso.coef[lasso.coef <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
 <pre><code>##   (Intercept)         AtBat          Hits         Walks         Years 
 ##    1.27479059   -0.05497143    2.18034583    2.29192406   -0.33806109 
 ##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 
