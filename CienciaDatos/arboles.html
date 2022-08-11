@@ -622,7 +622,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 </div>
 <p>En esta subsección se presenta la aplicación de 3 modelos diferentes <code>rpart</code> (CART), <code>ranger</code> (<em>Random Forest</em>) y <code>lightgbm</code> (<em>Boosting</em>) y se compara la <em>performace</em> a través de la curva ROC. Por lo tanto, en todos los casos se predicen probabilidades.</p>
 <p>Notar que, por un lado, se puede optimizar (<em>tuning</em>) hiperparámetros y, por el otro, se puede predecir la clase para luego construir la matriz de confusión. Tareas para el TPF…</p>
-<p>Comenzamos. Primero se cargan las librerías a utilizar y se generan los datos a utilizar.</p>
+<p>Comenzamos. Primero se cargan las librerías y se generan los datos a utilizar.</p>
 <div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="arboles.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
 <span id="cb470-2"><a href="arboles.html#cb470-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ranger)</span>
 <span id="cb470-3"><a href="arboles.html#cb470-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lightgbm)</span>
@@ -724,7 +724,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb476-37"><a href="arboles.html#cb476-37" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb476-38"><a href="arboles.html#cb476-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.002194 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000466 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>

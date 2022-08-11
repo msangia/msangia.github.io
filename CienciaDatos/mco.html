@@ -479,7 +479,7 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="mco.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb368-2"><a href="mco.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/ml5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>Para obtener la predicción y el EMC:</p>
+<p>Para obtener la predicción y el <span class="math inline">\(EMC\)</span>:</p>
 <div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="mco.html#cb369-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit, <span class="at">data =</span> Boston)</span>
 <span id="cb369-2"><a href="mco.html#cb369-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb369-3"><a href="mco.html#cb369-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
