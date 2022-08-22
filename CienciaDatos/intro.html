@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 1 Introduccion a R | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 1 Introduccion a R | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -213,8 +213,8 @@ div.csl-indent {
 <li class="chapter" data-level="2.10.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.10.1</b> Eliminar valores missing</a></li>
 </ul></li>
 <li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.11</b> Loop</a></li>
-<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot"><i class="fa fa-check"></i><b>2.12</b> Pivot</a></li>
-<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#append"><i class="fa fa-check"></i><b>2.13</b> Append</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.12</b> Pivot (Reshape)</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.13</b> Row bind (Append)</a></li>
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
@@ -505,7 +505,7 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <pre><code>## a c 
 ## 0 5</code></pre>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="intro.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># muestra las posiciones que cumplen</span></span>
-<span id="cb93-2"><a href="intro.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co">#con la condición (no los valores)</span></span>
+<span id="cb93-2"><a href="intro.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con la condición (no los valores)</span></span>
 <span id="cb93-3"><a href="intro.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(a <span class="sc">&lt;</span> <span class="dv">4</span>) </span></code></pre></div>
 <pre><code>## a b d 
 ## 1 2 4</code></pre>
@@ -550,8 +550,8 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 </div>
 <div id="factores" class="section level2 hasAnchor" number="1.11">
 <h2><span class="header-section-number">1.11</span> Factores<a href="intro.html#factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="intro.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Variables categóricas con valores limitados </span></span>
-<span id="cb119-2"><a href="intro.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">#(importante para modelos de clasificación)</span></span>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="intro.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables categóricas con valores limitados </span></span>
+<span id="cb119-2"><a href="intro.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (importante para modelos de clasificación)</span></span>
 <span id="cb119-3"><a href="intro.html#cb119-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
 <span id="cb119-4"><a href="intro.html#cb119-4" aria-hidden="true" tabindex="-1"></a>fdata <span class="ot">=</span> <span class="fu">as.factor</span>(data)</span>
 <span id="cb119-5"><a href="intro.html#cb119-5" aria-hidden="true" tabindex="-1"></a>fdata</span></code></pre></div>
@@ -829,14 +829,14 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 ##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="intro.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplica una funcion a un vector en los subvectores que </span></span>
-<span id="cb220-2"><a href="intro.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="co">#define otro vector. Notar que la variable Species es factor</span></span>
+<span id="cb220-2"><a href="intro.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="co"># define otro vector. Notar que la variable Species es factor</span></span>
 <span id="cb220-3"><a href="intro.html#cb220-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(iris<span class="sc">$</span>Petal.Length, iris<span class="sc">$</span>Species, mean)</span></code></pre></div>
 <pre><code>##     setosa versicolor  virginica 
 ##      1.462      4.260      5.552</code></pre>
 </div>
 <div id="map" class="section level2 hasAnchor" number="1.17">
 <h2><span class="header-section-number">1.17</span> Map<a href="intro.html#map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Toma un vector como entrada, aplica una función a cada pieza y luego devuelve un nuevo vector que tiene la misma longitud (y tiene los mismos nombres) que el de entrada.</p>
+<p>Toma un vector como entrada, aplica una función a cada pieza y devuelve un nuevo vector que tiene la misma longitud (y los mismos nombres) que el de entrada.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="intro.html#cb222-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">map</span>(lista, mean)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 3
@@ -877,7 +877,7 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 ## [1] &quot;listo&quot;
 ## [1] 10
 ## [1] &quot;listo&quot;</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="intro.html#cb228-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">=</span> <span class="fu">c</span>()</span>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="intro.html#cb228-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">=</span> <span class="fu">c</span>()   <span class="co"># Inicializa vector de resultados</span></span>
 <span id="cb228-2"><a href="intro.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(a)) {</span>
 <span id="cb228-3"><a href="intro.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  resultado[i] <span class="ot">=</span> a[i] <span class="sc">*</span> <span class="dv">2</span></span>
 <span id="cb228-4"><a href="intro.html#cb228-4" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -886,11 +886,12 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="intro.html#cb230-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>##  a  b  c  d  e 
 ##  0  4 10  6 16</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="intro.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seq_along vs. length(). En un vector de vacío </span></span>
-<span id="cb232-2"><a href="intro.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="co">#length(0) hace el proceso correcto</span></span>
-<span id="cb232-3"><a href="intro.html#cb232-3" aria-hidden="true" tabindex="-1"></a>conj1 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>; conj2 <span class="ot">=</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">30</span></span>
-<span id="cb232-4"><a href="intro.html#cb232-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">intersect</span>(conj1, conj2)</span>
-<span id="cb232-5"><a href="intro.html#cb232-5" aria-hidden="true" tabindex="-1"></a><span class="fu">seq_along</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="intro.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seq_along vs. length(). En un vector vacío el primero </span></span>
+<span id="cb232-2"><a href="intro.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hace el proceso correcto (con integer(0) se interrumpe)</span></span>
+<span id="cb232-3"><a href="intro.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Útil para un entorno de programación</span></span>
+<span id="cb232-4"><a href="intro.html#cb232-4" aria-hidden="true" tabindex="-1"></a>conj1 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>; conj2 <span class="ot">=</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb232-5"><a href="intro.html#cb232-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">intersect</span>(conj1, conj2)</span>
+<span id="cb232-6"><a href="intro.html#cb232-6" aria-hidden="true" tabindex="-1"></a><span class="fu">seq_along</span>(x)</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="intro.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span><span class="fu">seq_along</span>(x)</span></code></pre></div>
 <pre><code>## Error in 3:seq_along(x): argument of length 0</code></pre>
@@ -973,7 +974,7 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <pre><code>## [1] 9</code></pre>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="intro.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suma3</span>(<span class="dv">7</span>, <span class="at">y =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<p><strong>Nota:</strong> se puede escribir una funcion (o varias) en un <em>script</em> y luego utilizar <code>source(mifuncion.R)</code> para tenerlas diponibles en el espacio de trabajo.</p>
+<p><strong>Nota:</strong> se puede escribir una funcion (o varias) en un <em>script</em> y luego utilizar <code>source('mifuncion.R')</code> para tenerlas diponibles en el espacio de trabajo.</p>
 
 </div>
 </div>
@@ -1050,7 +1051,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
