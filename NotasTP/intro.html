@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 1 Introduccion a R | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 1 Introduccion a R | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -486,7 +486,7 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <pre><code>## a c 
 ## 0 5</code></pre>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="intro.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># muestra las posiciones que cumplen</span></span>
-<span id="cb93-2"><a href="intro.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co">#con la condición (no los valores)</span></span>
+<span id="cb93-2"><a href="intro.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con la condición (no los valores)</span></span>
 <span id="cb93-3"><a href="intro.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(a <span class="sc">&lt;</span> <span class="dv">4</span>) </span></code></pre></div>
 <pre><code>## a b d 
 ## 1 2 4</code></pre>
@@ -531,8 +531,8 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 </div>
 <div id="factores" class="section level2 hasAnchor" number="1.11">
 <h2><span class="header-section-number">1.11</span> Factores<a href="intro.html#factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="intro.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Variables categóricas con valores limitados </span></span>
-<span id="cb119-2"><a href="intro.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">#(importante para modelos de clasificación)</span></span>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="intro.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables categóricas con valores limitados </span></span>
+<span id="cb119-2"><a href="intro.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (importante para modelos de clasificación)</span></span>
 <span id="cb119-3"><a href="intro.html#cb119-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
 <span id="cb119-4"><a href="intro.html#cb119-4" aria-hidden="true" tabindex="-1"></a>fdata <span class="ot">=</span> <span class="fu">as.factor</span>(data)</span>
 <span id="cb119-5"><a href="intro.html#cb119-5" aria-hidden="true" tabindex="-1"></a>fdata</span></code></pre></div>
@@ -955,7 +955,7 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <pre><code>## [1] 9</code></pre>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="intro.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suma3</span>(<span class="dv">7</span>, <span class="at">y =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<p><strong>Nota:</strong> se puede escribir una funcion (o varias) en un <em>script</em> y luego utilizar <code>source(mifuncion.R)</code> para tenerlas diponibles en el espacio de trabajo.</p>
+<p><strong>Nota:</strong> se puede escribir una funcion (o varias) en un <em>script</em> y luego utilizar <code>source('mifuncion.R')</code> para tenerlas diponibles en el espacio de trabajo.</p>
 
 </div>
 </div>
@@ -1032,7 +1032,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
