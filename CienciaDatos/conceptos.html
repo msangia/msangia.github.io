@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Conceptos generales | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Conceptos generales | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -436,10 +436,10 @@ Figura 3.3: Estimacion y EMC
 varianza de <span class="math inline">\(\hat{f}(x_0)\)</span>, el sesgo al cuadrado de <span class="math inline">\(\hat{f}(x_0)\)</span> y la varianza del error <span class="math inline">\(\epsilon\)</span>.</p>
 <p><span class="math display" id="eq:sv">\[\begin{equation}
 \tag{3.7}
-  E(y_0 - \hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + [Sesgo(\hat{f}(x_0))]^2 + Var(\epsilon)
+  E(y_0 - \hat{f}(x_0))^2 = \text{Var}(\hat{f}(x_0)) + [\text{Sesgo}(\hat{f}(x_0))]^2 + \text{Var}(\epsilon)
 \end{equation}\]</span></p>
-<p>donde <span class="math inline">\(E(y_0 - \hat{f}(x_0))^2\)</span> el valor esperado de <span class="math inline">\(EMC\)</span> de <em>test</em> en <span class="math inline">\(x_0\)</span>. Para minimizar el error de <em>test</em> esperado, se necesita seleccionar un método de aprendizaje estadístico que logre simultáneamente <strong>baja varianza</strong> y <strong>bajo sesgo</strong>.</p>
-<p>La <strong>varianza</strong> se refiere al valor en que <span class="math inline">\(f\)</span> cambiaría si
+<p>donde <span class="math inline">\(E(y_0 - \hat{f}(x_0))^2\)</span> el valor esperado del <span class="math inline">\(EMC\)</span> de <em>test</em> en <span class="math inline">\(x_0\)</span>. Para minimizar el error de <em>test</em> esperado, se necesita seleccionar un método de aprendizaje estadístico que logre simultáneamente <strong>baja varianza</strong> y <strong>bajo sesgo</strong>.</p>
+<p>La <strong>varianza</strong> se refiere al valor en que <span class="math inline">\(\hat{f}\)</span> cambiaría si
 se estimara utilizando una base de datos de entrenamiento diferente. <strong>Sesgo</strong> se refiere al error que se introduce al aproximar un problema de la vida real, que puede ser extremadamente complicado, por un modelo mucho más simple. Como regla general, a medida que se utilizan métodos más flexibles, la varianza aumenta y el sesgo disminuye. La tasa relativa de cambio de estas dos cantidades determina si el <span class="math inline">\(EMC\)</span> de <em>test</em> aumenta o disminuye.</p>
 <p>Los dos paneles de la Figura <a href="conceptos.html#fig:f212">3.4</a> ilustran la Ecuación <a href="conceptos.html#eq:sv">(3.7)</a> para los ejemplos en Figuras <a href="conceptos.html#fig:f29">3.1</a> y <a href="conceptos.html#fig:f210">3.2</a>. En cada caso, la curva sólida azul representa el cuadrado del sesgo, para diferentes niveles de flexibilidad, mientras que la curva naranja corresponde a la varianza. La línea discontinua horizontal representa <span class="math inline">\(Var(\epsilon)\)</span>, el error irreducible. Finalmente, la curva roja, corresponde al <span class="math inline">\(EMC\)</span> de <em>test</em>, es la suma de estas tres cantidades.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:f212"></span>
@@ -732,7 +732,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
