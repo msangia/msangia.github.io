@@ -245,9 +245,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
 <li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7</b> Cross Validation</a></li>
-<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.8</b> Bootstrap</a></li>
-<li class="chapter" data-level="3.9" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.9</b> Resumen</a></li>
+<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>3.7</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="3.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.8</b> Resumen</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
 <ul>
@@ -525,8 +528,12 @@ Figura 3.6: Curva ROC puntos importantes
 <p><span class="math inline">\(AUC\)</span> (o <span class="math inline">\(AUROC\)</span>): área bajo la curva <span class="math inline">\(ROC\)</span>. Cuán parecida es la curva <span class="math inline">\(ROC\)</span> a la ideal, es decir cuanto <span class="math inline">\(AUC\)</span> está más cerca de <span class="math inline">\(1\)</span> mejor es el clasificador. Por su parte, un clasificador aleatorio debe tener un <span class="math inline">\(AUC = 0,5\)</span> (línea de <span class="math inline">\(45^\circ\)</span>).</p>
 </div>
 </div>
-<div id="cv" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Cross Validation<a href="conceptos.html#cv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="resampling-methods" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Resampling Methods<a href="conceptos.html#resampling-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los métodos de remuestreo implican extraer muestras repetidamente de una base de datos de entrenamiento y re-estimar un modelo sobre cada muestra con el fin de obtener información adicional sobre el modelo estimado originalmente.</p>
+<p><em>Cross validation</em> se puede utilizar para estimar el error en <em>test</em> asociado con un método de aprendizaje estadístico dado para evaluar su desempeño (<em>model assessment</em>), o para seleccionar el nivel de flexibilidad apropiado (<em>model selection</em>). <em>Bootstrap</em> se utiliza en varios contextos comúnmente para proporcionar una medida de precisión de la estimación de un parámetro o de un método de aprendizaje estadístico dado.</p>
+<div id="cv" class="section level3 hasAnchor" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Cross Validation<a href="conceptos.html#cv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recordar la diferencia entre la tasa de error de <em>test</em> y la tasa de error de entrenamiento. El error de <em>test</em> es el error promedio que resulta de usar un método de aprendizaje estadístico para predecir la respuesta en una nueva observación, es decir, que no fue utilizada en el entrenamiento del método.</p>
 <p>Modelos complejos predicen bien dentro de la muestra pero mal fuera de la misma (<em>overfit</em>) y nuestro interés está puesto en esta última.</p>
 <p><strong>Objetivo:</strong> buscar el nivel de complejidad óptimo para predecir fuera de la muestra.</p>
@@ -561,8 +568,8 @@ Figura 3.7: K-Fold cross-validation
 \end{equation}\]</span></p>
 <p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 </div>
-<div id="bootstrap" class="section level2 hasAnchor" number="3.8">
-<h2><span class="header-section-number">3.8</span> Bootstrap<a href="conceptos.html#bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bootstrap" class="section level3 hasAnchor" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Bootstrap<a href="conceptos.html#bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><em>Bootstrap</em> es una herramienta estadística que se puede utilizar para cuantificar la incertidumbre asociada con un estimador o un método de aprendizaje estadístico.</p>
 <p>Dado <span class="math inline">\(Y_1, Y_2,...,Y_n\)</span> iid <span class="math inline">\(Y \sim (\mu, \sigma^2)\)</span></p>
 <p>Se quiere estimar la varianza de la media muestral <span class="math inline">\(V(\overline{Y}) = \frac{\sigma^2}{n}\)</span></p>
@@ -617,8 +624,9 @@ Figura 3.7: K-Fold cross-validation
 <pre><code>## [1] 0.9946825</code></pre>
 <pre><code>## [1] 0.9938018</code></pre>
 </div>
-<div id="resumen" class="section level2 hasAnchor" number="3.9">
-<h2><span class="header-section-number">3.9</span> Resumen<a href="conceptos.html#resumen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="resumen" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Resumen<a href="conceptos.html#resumen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Como señala <span class="citation">(<a href="#ref-MLR" role="doc-biblioref">Boehmke y Greenwell 2020</a>)</span> abordar correctamente el análisis de <em>machine learning</em> significa utilizar estratégicamente los datos en procesos de aprendizaje y validación, preprocesar correctamente las variables explicativas y la variable de respuesta, ajustar los hiperparámetros y evaluar la <em>performance</em> del modelo.</p>
 <p>La Figura <a href="conceptos.html#fig:ml">3.8</a> muestra gráficamente este proceso.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ml"></span>
