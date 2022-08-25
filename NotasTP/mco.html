@@ -363,7 +363,7 @@ Y_i = X_i^{&#39;} \beta + u_i
 <p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
 <p><span class="math display" id="eq:ecm">\[\begin{equation}
 \tag{4.8}
-EMC(\hat{\beta}) = E(\hat{\beta} - \beta)^2
+EMC(\hat{\beta}) \equiv E(\hat{\beta} - \beta)^2
 \end{equation}\]</span></p>
 <p>El <span class="math inline">\(EMC\)</span> mide en promedio cuan lejos esta <span class="math inline">\(\hat{\beta}\)</span> (estimador) de <span class="math inline">\(\beta\)</span> el parámetro que se quiere estimar.</p>
 <p>Recordar que por definición:</p>
@@ -376,7 +376,7 @@ EMC(\hat{\beta}) = E(\hat{\beta} - \beta)^2
 \tag{4.9}
 EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
 \end{equation}\]</span></p>
-<p>Es decir, cuán mal estima <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
+<p>Es decir, cuán mal <strong>estima</strong> <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
 <p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
 <p><span class="math display" id="eq:err">\[\begin{equation}
 \tag{4.10}
@@ -400,13 +400,13 @@ Err(\hat{Y}) = E(Y - \hat{f})^2
 \tag{4.12}
 Err(Y - \hat{f}) = EMC(\hat{f}) + \sigma^2
 \end{equation}\]</span></p>
-<p>En términos de la ecuación <a href="conceptos.html#eq:ri">(3.3)</a> es la suma de un error reducible <span class="math inline">\((EMC)\)</span> y otro irreducible <span class="math inline">\((\sigma^2)\)</span>.</p>
+<p>En términos de la ecuación <a href="conceptos.html#eq:ri">(3.3)</a> el error de pronóstico es la suma de un error reducible <span class="math inline">\((EMC)\)</span> y otro irreducible <span class="math inline">\((\sigma^2)\)</span>. Además, notar que el error de predicción y el <span class="math inline">\(EMC\)</span> difieren solo por una constante <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>Nuevamente, puede verse la relación entre predicción y estimación. <em>Predecir</em> correctamente <span class="math inline">\((Err(Y - \hat{f}))\)</span> requiere <em>estimar</em> <span class="math inline">\((EMC(\hat{f}))\)</span> correctamente (porque <span class="math inline">\(\sigma^2\)</span> no se puede controlar). Es decir, tener bajo sesgo y baja varianza. Utilizando la descomposición:</p>
 <p><span class="math display" id="eq:err4">\[\begin{equation}
 \tag{4.13}
 Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigma^2
 \end{equation}\]</span></p>
-<p><em>Machine learning</em> hace uso de que estrategias sesgadas pueden implicar una reducción drástica en la varianza, por lo tanto, puede ser que el mínimo <span class="math inline">\(EMC\)</span> ocurra para predictores sesgados.</p>
+<p>En la econometría tradicional si <span class="math inline">\(\hat{f}\)</span> es insesgado minimizar el error de pronóstico es minimizar la varianza. <em>Machine learning</em> hace uso de que estrategias sesgadas pueden implicar una reducción drástica en la varianza, por lo tanto, puede ser que el mínimo <span class="math inline">\(EMC\)</span> ocurra para predictores sesgados.</p>
 </div>
 <div id="aplicacion-practica" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
