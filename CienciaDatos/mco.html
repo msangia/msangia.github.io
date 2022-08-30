@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Regresion lineal | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Regresion lineal | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -444,8 +444,8 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7  5.33 36.2
 ## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7  5.21 28.7</code></pre>
 <p>Comenzaremos usando la función <code>lm()</code> para ajustar un modelo de regresión lineal simple, con <code>medv</code> como respuesta y <code>lstat</code> como predictor.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="mco.html#cb363-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
-<span id="cb363-2"><a href="mco.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="mco.html#cb363-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
+<span id="cb363-2"><a href="mco.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ lstat, data = Boston)
@@ -464,13 +464,13 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Residual standard error: 6.216 on 504 degrees of freedom
 ## Multiple R-squared:  0.5441, Adjusted R-squared:  0.5432 
 ## F-statistic: 601.6 on 1 and 504 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="mco.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="mco.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit1)</span></code></pre></div>
 <pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
 ##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
 ##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="mco.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Boston)</span>
 <span id="cb367-2"><a href="mco.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lstat, medv, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb367-3"><a href="mco.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<span id="cb367-3"><a href="mco.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit1, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/ml3-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>A continuación se examinan algunos gráficos de diagnóstico con la función <code>plot()</code>. En general, este comando producirá un gráfico a la vez (presionando <em>Enter</em> se generará el siguiente gráfico). Sin embargo, se pueden ver los cuatro gráficos juntos con las funciones <code>par()</code> y <code>mfrow()</code>, que le dicen a <code>R</code> que divida la pantalla de visualización en paneles separados. Por ejemplo, <code>par(mfrow = c(2, 2))</code> divide la región del gráfico en una cuadrícula de paneles de <span class="math inline">\(2 \times 2\)</span>.</p>
 <ul>
@@ -480,16 +480,16 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <li><strong>Residuals vs. Leverage:</strong> el <em>leverage</em> es una medida de cuán influyente es una observación en el valor de los coeficientes. Este gráfico se utiliza para detectar las (posibles) observaciones influyentes y los valores atípicos al mismo tiempo.</li>
 </ul>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="mco.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb368-2"><a href="mco.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit)</span></code></pre></div>
+<span id="cb368-2"><a href="mco.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit1)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/ml5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Para obtener la predicción y el <span class="math inline">\(EMC\)</span>:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="mco.html#cb369-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit, <span class="at">data =</span> Boston)</span>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="mco.html#cb369-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit1, <span class="at">data =</span> Boston)</span>
 <span id="cb369-2"><a href="mco.html#cb369-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb369-3"><a href="mco.html#cb369-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
 <pre><code>## [1] 38.48297</code></pre>
 <p>Regresión lineal múltiple:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="mco.html#cb371-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb371-2"><a href="mco.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="mco.html#cb371-1" aria-hidden="true" tabindex="-1"></a>lm.fit2 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
+<span id="cb371-2"><a href="mco.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ lstat + age, data = Boston)
@@ -509,9 +509,16 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Residual standard error: 6.173 on 503 degrees of freedom
 ## Multiple R-squared:  0.5513, Adjusted R-squared:  0.5495 
 ## F-statistic:   309 on 2 and 503 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><strong>BONUS:</strong></p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="mco.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb373-2"><a href="mco.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm.fit1, lm.fit2, <span class="at">type =</span> <span class="st">&#39;latex&#39;</span>, </span>
+<span id="cb373-3"><a href="mco.html#cb373-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat=</span><span class="fu">c</span>(<span class="st">&#39;n&#39;</span>,<span class="st">&#39;adj.rsq&#39;</span>),</span>
+<span id="cb373-4"><a href="mco.html#cb373-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">dep.var.labels   =</span> <span class="st">&#39;Valor promedio de la vivienda&#39;</span>,</span>
+<span id="cb373-5"><a href="mco.html#cb373-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">&#39;Porcentaje socioeconómico bajo&#39;</span>,</span>
+<span id="cb373-6"><a href="mco.html#cb373-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;Antigüedad de las casas</span><span class="sc">\\</span><span class="st">textsubscript{t-1}&#39;</span>))</span></code></pre></div>
 <p>Utilizando todas las variables de la base de datos:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="mco.html#cb373-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
-<span id="cb373-2"><a href="mco.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="mco.html#cb374-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
+<span id="cb374-2"><a href="mco.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ ., data = Boston)
@@ -542,8 +549,8 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 ## Multiple R-squared:  0.7343, Adjusted R-squared:  0.7278 
 ## F-statistic: 113.5 on 12 and 493 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Utilizando todas las variables de la base de datos menos <code>age</code>:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="mco.html#cb375-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb375-2"><a href="mco.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="mco.html#cb376-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
+<span id="cb376-2"><a href="mco.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = medv ~ . - age, data = Boston)
@@ -660,7 +667,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
