@@ -417,7 +417,7 @@ Figura 5.2: Ridge
 <span id="cb390-2"><a href="shrinkage-methods.html#cb390-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> Hitters<span class="sc">$</span>Salary</span></code></pre></div>
 <p>Por primera vez dividimos la muestra en una base de entrenamiento y otra de <em>test</em> para estimar el error de <em>test</em> de la regresión <em>lasso</em>. Hay varias formas de dividir aleatoriamente una base de datos. Nuestro enfoque elige aleatoriamente un subconjunto de números entre <span class="math inline">\(1\)</span> y <span class="math inline">\(n\)</span>; estos se pueden usar como índices para las observaciones de entrenamiento.</p>
 <div class="infobox tip">
-<p>La función <code>createDataPartition()</code> de la librería <code>caret</code> es útil para crear particiones de <em>train</em> y <em>test</em>. La librería <code>rsample</code> permite realizar divisiones estratificadas.</p>
+<p>La función <code>createDataPartition()</code> de la librería <code>caret</code> es útil para crear particiones de <em>train</em> y <em>test</em>. La librería <code>rsample</code> permite realizar divisiones estratificadas (relevante cuando la clase está muy desbalanceada).</p>
 </div>
 <p>Primero establecemos una semilla aleatoria para que los resultados obtenidos sean reproducibles.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="shrinkage-methods.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
