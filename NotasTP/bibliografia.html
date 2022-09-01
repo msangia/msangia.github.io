@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Bibliografia | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Bibliografia | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -245,9 +245,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
 <li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7</b> Cross Validation</a></li>
-<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.8</b> Bootstrap</a></li>
-<li class="chapter" data-level="3.9" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.9</b> Resumen</a></li>
+<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>3.7</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="3.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.8</b> Resumen</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
 <ul>
@@ -313,6 +316,9 @@ Boehmke, Bradley, y Brandon Greenwell. 2020. <em>Hands-On Machine Learning with 
 Frost, Jon, Leonardo Gambacorta, Yi Huang, Hyun Song Shin, y Pablo Zbinden. 2019. <span>«BigTech and the changing structure of financial intermediation»</span>. <em>BIS Working Papers</em>, n.º 779. <a href="https://www.bis.org/publ/work779.htm">https://www.bis.org/publ/work779.htm</a>.
 </div>
 <div class="csl-entry">
+Hastie, Trevor, Robert Tibshirani, y Jerome Friedman. 2008. <em>The Elements of Statistical Learning. Data Mining, Inference, and Prediction</em>. Springer. <a href="https://hastie.su.domains/Papers/ESLII.pdf">https://hastie.su.domains/Papers/ESLII.pdf</a>.
+</div>
+<div class="csl-entry">
 Petropoulos, Anastasios, Vasilis Siakoulis, Evaggelos Stavroulakis, y Aristotelis Klamargias. 2018. <span>«A robust machine learning approach for credit risk analysis of large loan-level datasets using deep learning and extreme gradient boosting»</span>. <em>Irving Fisher Committee</em>. <a href="https://www.bis.org/ifc/publ/ifcb49_49.pdf">https://www.bis.org/ifc/publ/ifcb49_49.pdf</a>.
 </div>
 <div class="csl-entry">
@@ -326,6 +332,7 @@ Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>
 </div>
 </div>
 </div>
+
 
 
 
@@ -418,7 +425,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
