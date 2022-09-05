@@ -319,12 +319,16 @@ div.csl-indent {
 \end{equation}\]</span></p>
 <p>donde la primera columna de <span class="math inline">\(X\)</span> es la constante.</p>
 <p><strong>Método</strong> de Mínimos Cuadrados Ordinarios <span class="math inline">\((MCO)\)</span></p>
-<p><span class="math display" id="eq:beta">\[\begin{equation}
+<p><span class="math display" id="eq:rss">\[\begin{equation}
 \tag{4.3}
+\text{RSS} = \sum_{i=1}^{n}(y_{i} - \beta_{0} - \sum_{j=1}^{p} \beta_{j} x_{ij} )^2  
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:beta">\[\begin{equation}
+\tag{4.4}
 \hat{\beta} = min \sum_{i=1}^{n}e_i^2  
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:beta2">\[\begin{equation}
-\tag{4.4}
+\tag{4.5}
 \hat{\beta} = (X&#39;X)^{-1}X&#39;Y  
 \end{equation}\]</span></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mco"></span>
@@ -336,7 +340,7 @@ Figura 4.1: Modelo lineal y MCO
 <p><strong>Teorema de Gauss/Markov (TGM)</strong>: Bajo los supuestos clásicos el estimador de <span class="math inline">\(MCO\)</span> es el mejor dentro de los lineales e insesgados (MELI).</p>
 <p><strong>Definición</strong>: el <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
 <p><span class="math display" id="eq:r2">\[\begin{equation}
-\tag{4.5}
+\tag{4.6}
 R^2 = 1 - \frac{SCR}{SCT}
 \end{equation}\]</span></p>
 <p>Dado que la suma de cuadrados totales es igual a la suma de cuadrados explicada y la suma de cuadrados residual (<span class="math inline">\(SCT = SCE + SCR\)</span>) y que <span class="math inline">\(SCT\)</span> es una magnitud fija, por lo tanto, <span class="math inline">\(MCO\)</span> <strong>maximiza el</strong> <span class="math inline">\(R^2\)</span>.</p>
@@ -344,13 +348,13 @@ R^2 = 1 - \frac{SCR}{SCT}
 <h2><span class="header-section-number">4.1</span> Relacion entre estimacion optima y prediccion optima<a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Dado:</p>
 <p><span class="math display" id="eq:ols3">\[\begin{equation}
-\tag{4.6}
+\tag{4.7}
 Y_i = X_i^{&#39;} \beta + u_i
 \end{equation}\]</span></p>
 <p>con <span class="math inline">\(i=1,...,n\)</span></p>
 <p>La predicción de <span class="math inline">\(Y\)</span> se define como:</p>
 <p><span class="math display" id="eq:ols4">\[\begin{equation}
-\tag{4.7}
+\tag{4.8}
 \hat{Y_i} \equiv X_i^{&#39;} \hat{\beta}
 \end{equation}\]</span></p>
 <p>Donde <span class="math inline">\(\hat{Y_i}\)</span> es el <strong>predictor</strong> (variable aleatoria) y <span class="math inline">\(\hat{\beta}\)</span> es el <strong>estimador</strong> (parámetro). Por el TGM:</p>
@@ -362,7 +366,7 @@ Y_i = X_i^{&#39;} \beta + u_i
 <p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
 <p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
 <p><span class="math display" id="eq:ecm">\[\begin{equation}
-\tag{4.8}
+\tag{4.9}
 EMC(\hat{\beta}) \equiv E(\hat{\beta} - \beta)^2
 \end{equation}\]</span></p>
 <p>El <span class="math inline">\(EMC\)</span> mide en promedio cuan lejos esta <span class="math inline">\(\hat{\beta}\)</span> (estimador) de <span class="math inline">\(\beta\)</span>, el parámetro que se quiere estimar.</p>
@@ -371,15 +375,15 @@ EMC(\hat{\beta}) \equiv E(\hat{\beta} - \beta)^2
 <li><p><span class="math inline">\(V(\hat{\beta}) \equiv E(\hat{\beta} - E(\hat{\beta}))^2\)</span> (dispersión)</p></li>
 <li><p><span class="math inline">\(Sesgo(\hat{\beta}) \equiv E(\hat{\beta}) - \beta\)</span> (centro)</p></li>
 </ul>
-<p>A partir de <a href="mco.html#eq:ecm">(4.8)</a> y las definiciones anteriores reescribimos el <span class="math inline">\(EMC\)</span> en términos de la descomposición sesgo-varianza:</p>
+<p>A partir de <a href="mco.html#eq:ecm">(4.9)</a> y las definiciones anteriores reescribimos el <span class="math inline">\(EMC\)</span> en términos de la descomposición sesgo-varianza:</p>
 <p><span class="math display" id="eq:ecm2">\[\begin{equation}
-\tag{4.9}
+\tag{4.10}
 EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
 \end{equation}\]</span></p>
 <p>Es decir, cuán mal <strong>estima</strong> <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
 <p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
 <p><span class="math display" id="eq:err">\[\begin{equation}
-\tag{4.10}
+\tag{4.11}
 Err(\hat{Y}) \equiv E(Y - \hat{Y})^2
 \end{equation}\]</span></p>
 <p>Como vimos antes, dado el modelo genérico<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> <span class="math inline">\(Y = f(X) + u\)</span> donde <span class="math inline">\(E(u) = 0\)</span> y <span class="math inline">\(V(u) = \sigma^2\)</span>:</p>
@@ -393,17 +397,17 @@ Err(\hat{Y}) \equiv E(Y - \hat{Y})^2
 <p>Entonces, si <span class="math inline">\(E(Y) = f(X)\)</span>, <span class="math inline">\(u\)</span> es no observable y <span class="math inline">\(f(X)\)</span> es conocida, <span class="math inline">\(f(X)\)</span> es el mejor predictor porque, como se dijo arriba, el mejor predictor de una variable aleatoria es su esperanza.</p>
 <p>En la práctica <span class="math inline">\(f(X)\)</span> es desconocida y, por lo tanto, se debe estimar <span class="math inline">\(\hat{f}(X)\)</span>.</p>
 <p><span class="math display" id="eq:err2">\[\begin{equation}
-\tag{4.11}
+\tag{4.12}
 Err(\hat{Y}) = E(Y - \hat{f})^2
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:err3">\[\begin{equation}
-\tag{4.12}
+\tag{4.13}
 Err(Y - \hat{f}) = EMC(\hat{f}) + \sigma^2
 \end{equation}\]</span></p>
 <p>En términos de la ecuación <a href="conceptos.html#eq:ri">(3.3)</a> el error de pronóstico es la suma de un error reducible <span class="math inline">\((EMC)\)</span> y otro irreducible <span class="math inline">\((\sigma^2)\)</span>. Además, notar que el error de predicción y el <span class="math inline">\(EMC\)</span> difieren solo por una constante <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>Nuevamente, puede verse la relación entre predicción y estimación. <em>Predecir</em> correctamente <span class="math inline">\((Err(Y - \hat{f}))\)</span> requiere <em>estimar</em> <span class="math inline">\((EMC(\hat{f}))\)</span> correctamente (porque <span class="math inline">\(\sigma^2\)</span> no se puede controlar). Es decir, tener bajo sesgo y baja varianza. Utilizando la descomposición:</p>
 <p><span class="math display" id="eq:err4">\[\begin{equation}
-\tag{4.13}
+\tag{4.14}
 Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigma^2
 \end{equation}\]</span></p>
 <p>En la econometría tradicional si <span class="math inline">\(\hat{f}\)</span> es insesgado minimizar el error de pronóstico es minimizar la varianza. <em>Machine learning</em> hace uso de que estrategias sesgadas pueden implicar una reducción drástica en la varianza, por lo tanto, puede ser que el mínimo <span class="math inline">\(EMC\)</span> ocurra para predictores sesgados.</p>
@@ -496,7 +500,7 @@ Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigm
 <span id="cb373-3"><a href="mco.html#cb373-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat=</span><span class="fu">c</span>(<span class="st">&#39;n&#39;</span>,<span class="st">&#39;adj.rsq&#39;</span>),</span>
 <span id="cb373-4"><a href="mco.html#cb373-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">dep.var.labels   =</span> <span class="st">&#39;Valor promedio de la vivienda&#39;</span>,</span>
 <span id="cb373-5"><a href="mco.html#cb373-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">&#39;Porcentaje socioeconómico bajo&#39;</span>,</span>
-<span id="cb373-6"><a href="mco.html#cb373-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;Antigüedad de las casas</span><span class="sc">\\</span><span class="st">textsubscript{t-1}&#39;</span>))</span></code></pre></div>
+<span id="cb373-6"><a href="mco.html#cb373-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;Antigüedad de las casas}&#39;</span>))</span></code></pre></div>
 <p>Utilizando todas las variables de la base de datos:</p>
 <div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="mco.html#cb374-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
 <span id="cb374-2"><a href="mco.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
