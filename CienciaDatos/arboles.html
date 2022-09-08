@@ -727,7 +727,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb477-37"><a href="arboles.html#cb477-37" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb477-38"><a href="arboles.html#cb477-38" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.003803 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.004265 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>
@@ -745,11 +745,9 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="arboles.html#cb481-1" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">rpart =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, rpart, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
 <span id="cb481-2"><a href="arboles.html#cb481-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">prune.tree =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, prune.tree, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
 <span id="cb481-3"><a href="arboles.html#cb481-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ranger =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, ranger, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb481-4"><a href="arboles.html#cb481-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">lightgbm =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, lightgbm, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb481-5"><a href="arboles.html#cb481-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">aux =</span> <span class="dv">1</span>)</span>
-<span id="cb481-6"><a href="arboles.html#cb481-6" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">-</span>aux, <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb481-7"><a href="arboles.html#cb481-7" aria-hidden="true" tabindex="-1"></a>                dplyr<span class="sc">::</span><span class="fu">select</span>(Modelo, AUC) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
-<span id="cb481-8"><a href="arboles.html#cb481-8" aria-hidden="true" tabindex="-1"></a>tab_auc</span></code></pre></div>
+<span id="cb481-4"><a href="arboles.html#cb481-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">lightgbm =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, lightgbm, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate)</span>
+<span id="cb481-5"><a href="arboles.html#cb481-5" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
+<span id="cb481-6"><a href="arboles.html#cb481-6" aria-hidden="true" tabindex="-1"></a>tab_auc</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 2
 ##   Modelo       AUC
 ##   &lt;chr&gt;      &lt;dbl&gt;
