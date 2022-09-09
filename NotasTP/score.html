@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 Trabajo Practico | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 Trabajo Practico | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -349,8 +349,8 @@ div.csl-indent {
 <span id="cb413-2"><a href="score.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb413-3"><a href="score.html#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <pre><code>##           used  (Mb) gc trigger  (Mb) max used  (Mb)
-## Ncells 2801157 149.6    4154582 221.9  4154582 221.9
-## Vcells 4828664  36.9   10146329  77.5  8388595  64.0</code></pre>
+## Ncells 2787901 148.9    4247908 226.9  4247908 226.9
+## Vcells 4795638  36.6   10146329  77.5  8388431  64.0</code></pre>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="score.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerias</span></span>
 <span id="cb415-2"><a href="score.html#cb415-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb415-3"><a href="score.html#cb415-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
@@ -361,7 +361,7 @@ div.csl-indent {
 <span id="cb415-8"><a href="score.html#cb415-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
 <p>Se cargan los datos desde un archivo separado por comas y se analizan los valores <em>missing</em>. En la Figura de abajo las variables están en el eje <code>y</code> y las observaciones en el eje <code>x</code>.</p>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="score.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar datos</span></span>
-<span id="cb416-2"><a href="score.html#cb416-2" aria-hidden="true" tabindex="-1"></a>score_data_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;./data/CreditScore1.csv&#39;</span>)</span>
+<span id="cb416-2"><a href="score.html#cb416-2" aria-hidden="true" tabindex="-1"></a>score_data_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;./data/CreditScore1.csv&#39;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb416-3"><a href="score.html#cb416-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb416-4"><a href="score.html#cb416-4" aria-hidden="true" tabindex="-1"></a>score_data_raw <span class="sc">%&gt;%</span></span>
 <span id="cb416-5"><a href="score.html#cb416-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>() <span class="sc">%&gt;%</span></span>
@@ -382,7 +382,7 @@ div.csl-indent {
 <span id="cb417-2"><a href="score.html#cb417-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>id) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span></code></pre></div>
 <p>Se realiza una inspección inicial de la base de datos.</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="score.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(score_data_tbl)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 10
+<pre><code>## # A tibble: 6 x 10
 ##   default personal_total  edad nro_atraso3059 gastos_ingreso ingreso
 ##     &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;   &lt;dbl&gt;
 ## 1       1          0.766    45              2         0.803     9120
@@ -391,21 +391,21 @@ div.csl-indent {
 ## 4       0          0.234    30              0         0.0360    3300
 ## 5       0          0.907    49              1         0.0249   63588
 ## 6       0          0.213    74              0         0.376     3500
-## # … with 4 more variables: lineas_credito &lt;dbl&gt;, nro_atraso90 &lt;dbl&gt;,
+## # ... with 4 more variables: lineas_credito &lt;dbl&gt;, nro_atraso90 &lt;dbl&gt;,
 ## #   nro_hipoteca &lt;dbl&gt;, familia &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="score.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(score_data_tbl)</span></code></pre></div>
 <pre><code>## Rows: 120,269
 ## Columns: 10
-## $ default        &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1…
-## $ personal_total &lt;dbl&gt; 0.76612663, 0.95715100, 0.65818012, 0.23380977, 0.90723…
-## $ edad           &lt;dbl&gt; 45, 40, 38, 30, 49, 74, 39, 57, 30, 51, 46, 40, 76, 64,…
-## $ nro_atraso3059 &lt;dbl&gt; 2, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0…
-## $ gastos_ingreso &lt;dbl&gt; 0.80298215, 0.12187620, 0.08511338, 0.03604968, 0.02492…
-## $ ingreso        &lt;dbl&gt; 9120, 2600, 3042, 3300, 63588, 3500, 3500, 23684, 2500,…
-## $ lineas_credito &lt;dbl&gt; 13, 4, 2, 5, 7, 3, 8, 9, 5, 7, 13, 9, 6, 7, 7, 7, 2, 10…
-## $ nro_atraso90   &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0…
-## $ nro_hipoteca   &lt;dbl&gt; 6, 0, 0, 0, 1, 1, 0, 4, 0, 2, 2, 1, 1, 1, 0, 1, 0, 2, 1…
-## $ familia        &lt;dbl&gt; 2, 1, 0, 0, 0, 1, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2…</code></pre>
+## $ default        &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1~
+## $ personal_total &lt;dbl&gt; 0.76612663, 0.95715100, 0.65818012, 0.23380977, 0.90723~
+## $ edad           &lt;dbl&gt; 45, 40, 38, 30, 49, 74, 39, 57, 30, 51, 46, 40, 76, 64,~
+## $ nro_atraso3059 &lt;dbl&gt; 2, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0~
+## $ gastos_ingreso &lt;dbl&gt; 0.80298215, 0.12187620, 0.08511338, 0.03604968, 0.02492~
+## $ ingreso        &lt;dbl&gt; 9120, 2600, 3042, 3300, 63588, 3500, 3500, 23684, 2500,~
+## $ lineas_credito &lt;dbl&gt; 13, 4, 2, 5, 7, 3, 8, 9, 5, 7, 13, 9, 6, 7, 7, 7, 2, 10~
+## $ nro_atraso90   &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0~
+## $ nro_hipoteca   &lt;dbl&gt; 6, 0, 0, 0, 1, 1, 0, 4, 0, 2, 2, 1, 1, 1, 0, 1, 0, 2, 1~
+## $ familia        &lt;dbl&gt; 2, 1, 0, 0, 0, 1, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2~</code></pre>
 <div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="score.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(score_data_tbl)</span></code></pre></div>
 <pre><code>##     default        personal_total          edad        nro_atraso3059   
 ##  Min.   :0.00000   Min.   :    0.00   Min.   :  0.00   Min.   : 0.0000  
@@ -451,7 +451,7 @@ div.csl-indent {
 <span id="cb430-11"><a href="score.html#cb430-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="cb430-12"><a href="score.html#cb430-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb430-13"><a href="score.html#cb430-13" aria-hidden="true" tabindex="-1"></a>stat</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 7
+<pre><code>## # A tibble: 10 x 7
 ##    Variable          Obs     Media  Mediana        SD   Min      Max
 ##    &lt;chr&gt;           &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 default        120269    0.0695    0         0.254     0       1 
@@ -595,12 +595,12 @@ div.csl-indent {
 <span id="cb446-4"><a href="score.html#cb446-4" aria-hidden="true" tabindex="-1"></a>cm_rpart <span class="ot">=</span> <span class="fu">confusionMatrix</span>(rpart.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
 <span id="cb446-5"><a href="score.html#cb446-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb446-6"><a href="score.html#cb446-6" aria-hidden="true" tabindex="-1"></a><span class="fu">prp</span>(rpart.mod, <span class="at">extra=</span><span class="dv">101</span>, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">branch=</span><span class="dv">1</span>, <span class="at">type=</span><span class="dv">4</span>, <span class="at">varlen=</span><span class="dv">0</span>, <span class="at">faclen=</span><span class="dv">0</span>)</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/tp10-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<p><img src="NotasTP_files/figure-html/tp11-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="score.html#cb447-1" aria-hidden="true" tabindex="-1"></a>rpartVarImp <span class="ot">=</span> <span class="fu">as_tibble_row</span>(rpart.mod<span class="sc">$</span>variable.importance) <span class="sc">%&gt;%</span></span>
 <span id="cb447-2"><a href="score.html#cb447-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb447-3"><a href="score.html#cb447-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
 <span id="cb447-4"><a href="score.html#cb447-4" aria-hidden="true" tabindex="-1"></a>rpartVarImp</span></code></pre></div>
-<pre><code>## # A tibble: 9 × 2
+<pre><code>## # A tibble: 9 x 2
 ##   Variable        Value
 ##   &lt;chr&gt;           &lt;dbl&gt;
 ## 1 nro_atraso90   1451. 
@@ -622,12 +622,14 @@ div.csl-indent {
 <span id="cb449-7"><a href="score.html#cb449-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mtry =</span> <span class="dv">3</span>, </span>
 <span id="cb449-8"><a href="score.html#cb449-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">splitrule =</span><span class="st">&#39;gini&#39;</span>,</span>
 <span id="cb449-9"><a href="score.html#cb449-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">importance =</span><span class="st">&#39;impurity&#39;</span>)  </span>
-<span id="cb449-10"><a href="score.html#cb449-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(rpart.mod)</span></code></pre></div>
-<pre><code>##  [1] &quot;frame&quot;               &quot;where&quot;               &quot;call&quot;               
-##  [4] &quot;terms&quot;               &quot;cptable&quot;             &quot;method&quot;             
-##  [7] &quot;parms&quot;               &quot;control&quot;             &quot;functions&quot;          
-## [10] &quot;numresp&quot;             &quot;splits&quot;              &quot;variable.importance&quot;
-## [13] &quot;y&quot;                   &quot;ordered&quot;</code></pre>
+<span id="cb449-10"><a href="score.html#cb449-10" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ranger.mod)</span></code></pre></div>
+<pre><code>##  [1] &quot;predictions&quot;               &quot;num.trees&quot;                
+##  [3] &quot;num.independent.variables&quot; &quot;mtry&quot;                     
+##  [5] &quot;min.node.size&quot;             &quot;variable.importance&quot;      
+##  [7] &quot;prediction.error&quot;          &quot;forest&quot;                   
+##  [9] &quot;splitrule&quot;                 &quot;treetype&quot;                 
+## [11] &quot;call&quot;                      &quot;importance.mode&quot;          
+## [13] &quot;num.samples&quot;               &quot;replace&quot;</code></pre>
 <div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="score.html#cb451-1" aria-hidden="true" tabindex="-1"></a>ranger.prob <span class="ot">=</span> <span class="fu">predict</span>(ranger.mod, test_tbl)</span>
 <span id="cb451-2"><a href="score.html#cb451-2" aria-hidden="true" tabindex="-1"></a>ranger.class <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(ranger.prob<span class="sc">$</span>predictions[, <span class="st">&#39;1&#39;</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
 <span id="cb451-3"><a href="score.html#cb451-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -637,7 +639,7 @@ div.csl-indent {
 <span id="cb451-7"><a href="score.html#cb451-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb451-8"><a href="score.html#cb451-8" aria-hidden="true" tabindex="-1"></a>               <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
 <span id="cb451-9"><a href="score.html#cb451-9" aria-hidden="true" tabindex="-1"></a>rangerVarImp</span></code></pre></div>
-<pre><code>## # A tibble: 9 × 2
+<pre><code>## # A tibble: 9 x 2
 ##   Variable       Value
 ##   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 personal_total 1741.
@@ -649,31 +651,39 @@ div.csl-indent {
 ## 7 lineas_credito  607.
 ## 8 nro_hipoteca    237.
 ## 9 familia_bin     204.</code></pre>
+<p>Se pueden realizar <strong>gráficos de dependencia parcial</strong> para distintas variables. Estos gráficos ilustran el efecto marginal de las variables seleccionadas en la respuesta después de <strong>integrar</strong> las otras variables. En este caso la probabilidad de <em>default</em> al principio cae con el <code>ingreso</code> aunque luego de un determinado humbral comienza a aumentar.</p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="score.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iml)</span>
+<span id="cb453-2"><a href="score.html#cb453-2" aria-hidden="true" tabindex="-1"></a>train_tbl1 <span class="ot">=</span> train_tbl <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>default)</span>
+<span id="cb453-3"><a href="score.html#cb453-3" aria-hidden="true" tabindex="-1"></a>pfun <span class="ot">&lt;-</span> <span class="cf">function</span>(object, newdata) <span class="fu">predict</span>(object, <span class="at">data =</span> newdata)<span class="sc">$</span>predictions[, <span class="dv">2</span>]</span>
+<span id="cb453-4"><a href="score.html#cb453-4" aria-hidden="true" tabindex="-1"></a>predictor <span class="ot">&lt;-</span> Predictor<span class="sc">$</span><span class="fu">new</span>(ranger.mod, <span class="at">data =</span> train_tbl1, <span class="at">y =</span> <span class="fu">factor</span>(train_tbl<span class="sc">$</span>default), <span class="at">predict.fun =</span> pfun)</span>
+<span id="cb453-5"><a href="score.html#cb453-5" aria-hidden="true" tabindex="-1"></a>pdp <span class="ot">&lt;-</span> FeatureEffect<span class="sc">$</span><span class="fu">new</span>(predictor, <span class="at">feature =</span> <span class="st">&quot;ingreso&quot;</span>, <span class="at">method =</span> <span class="st">&#39;pdp&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">plot</span>()</span>
+<span id="cb453-6"><a href="score.html#cb453-6" aria-hidden="true" tabindex="-1"></a>pdp</span></code></pre></div>
+<p><img src="NotasTP_files/figure-html/tp13-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Se presentan los resultados (no se analizan…) en tabla resumen.</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="score.html#cb453-1" aria-hidden="true" tabindex="-1"></a>tab_acc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit  =</span> cm_logit<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
-<span id="cb453-2"><a href="score.html#cb453-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rpart  =</span> cm_rpart<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
-<span id="cb453-3"><a href="score.html#cb453-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ranger =</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]])</span>
-<span id="cb453-4"><a href="score.html#cb453-4" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb453-5"><a href="score.html#cb453-5" aria-hidden="true" tabindex="-1"></a>tab_acc <span class="ot">=</span> tab_acc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&#39;Modelo&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Accuracy&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Accuracy))</span>
-<span id="cb453-6"><a href="score.html#cb453-6" aria-hidden="true" tabindex="-1"></a>tab_acc </span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="score.html#cb454-1" aria-hidden="true" tabindex="-1"></a>tab_acc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit  =</span> cm_logit<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
+<span id="cb454-2"><a href="score.html#cb454-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rpart  =</span> cm_rpart<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
+<span id="cb454-3"><a href="score.html#cb454-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ranger =</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]])</span>
+<span id="cb454-4"><a href="score.html#cb454-4" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb454-5"><a href="score.html#cb454-5" aria-hidden="true" tabindex="-1"></a>tab_acc <span class="ot">=</span> tab_acc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&#39;Modelo&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Accuracy&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Accuracy))</span>
+<span id="cb454-6"><a href="score.html#cb454-6" aria-hidden="true" tabindex="-1"></a>tab_acc </span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
 ##   Modelo Accuracy
 ##   &lt;chr&gt;     &lt;dbl&gt;
 ## 1 ranger    0.933
 ## 2 logit     0.930
 ## 3 rpart     0.926</code></pre>
 <p>Finalmente se calculan las AUC:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="score.html#cb455-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">obs =</span> <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default),</span>
-<span id="cb455-2"><a href="score.html#cb455-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">logit =</span> glm.probs,</span>
-<span id="cb455-3"><a href="score.html#cb455-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">rpart =</span> rpart.prob[, <span class="st">&#39;1&#39;</span>],</span>
-<span id="cb455-4"><a href="score.html#cb455-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">ranger =</span> ranger.prob<span class="sc">$</span>predictions[,<span class="st">&#39;1&#39;</span>])</span>
-<span id="cb455-5"><a href="score.html#cb455-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-6"><a href="score.html#cb455-6" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, logit, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb455-7"><a href="score.html#cb455-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">rpart =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, rpart, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb455-8"><a href="score.html#cb455-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">ranger =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, ranger, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate)</span>
-<span id="cb455-9"><a href="score.html#cb455-9" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
-<span id="cb455-10"><a href="score.html#cb455-10" aria-hidden="true" tabindex="-1"></a>tab_auc</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="score.html#cb456-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">obs =</span> <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default),</span>
+<span id="cb456-2"><a href="score.html#cb456-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">logit =</span> glm.probs,</span>
+<span id="cb456-3"><a href="score.html#cb456-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">rpart =</span> rpart.prob[, <span class="st">&#39;1&#39;</span>],</span>
+<span id="cb456-4"><a href="score.html#cb456-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">ranger =</span> ranger.prob<span class="sc">$</span>predictions[,<span class="st">&#39;1&#39;</span>])</span>
+<span id="cb456-5"><a href="score.html#cb456-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb456-6"><a href="score.html#cb456-6" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, logit, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
+<span id="cb456-7"><a href="score.html#cb456-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">rpart =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, rpart, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
+<span id="cb456-8"><a href="score.html#cb456-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">ranger =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, ranger, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate)</span>
+<span id="cb456-9"><a href="score.html#cb456-9" aria-hidden="true" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
+<span id="cb456-10"><a href="score.html#cb456-10" aria-hidden="true" tabindex="-1"></a>tab_auc</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
 ##   Modelo   AUC
 ##   &lt;chr&gt;  &lt;dbl&gt;
 ## 1 ranger 0.842
@@ -766,7 +776,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
