@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 Arboles de decision | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 Arboles de decision | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -607,17 +607,20 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <p>Curva ROC:</p>
 <div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="arboles.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb470-2"><a href="arboles.html#cb470-2" aria-hidden="true" tabindex="-1"></a>plot_roc <span class="ot">=</span> <span class="cf">function</span>(tab_obs_pred) {</span>
-<span id="cb470-3"><a href="arboles.html#cb470-3" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">=</span> tab_obs_pred <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">-</span>obs, <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;prob&quot;</span>)</span>
-<span id="cb470-4"><a href="arboles.html#cb470-4" aria-hidden="true" tabindex="-1"></a>  dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Modelo) <span class="sc">%&gt;%</span> </span>
-<span id="cb470-5"><a href="arboles.html#cb470-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc_curve</span>(obs, prob, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span>
-<span id="cb470-6"><a href="arboles.html#cb470-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb470-7"><a href="arboles.html#cb470-7" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(</span>
-<span id="cb470-8"><a href="arboles.html#cb470-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> <span class="fu">factor</span>(High.test),</span>
-<span id="cb470-9"><a href="arboles.html#cb470-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tree9 =</span> tree.pred9[,<span class="st">&#39;Yes&#39;</span>],</span>
-<span id="cb470-10"><a href="arboles.html#cb470-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tree14 =</span> tree.pred14[,<span class="st">&#39;Yes&#39;</span>],</span>
-<span id="cb470-11"><a href="arboles.html#cb470-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Azar =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(bd), <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb470-12"><a href="arboles.html#cb470-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb470-13"><a href="arboles.html#cb470-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_roc</span>(tab)</span></code></pre></div>
+<span id="cb470-3"><a href="arboles.html#cb470-3" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">=</span> tab_obs_pred <span class="sc">|&gt;</span> </span>
+<span id="cb470-4"><a href="arboles.html#cb470-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>obs, <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;prob&quot;</span>) </span>
+<span id="cb470-5"><a href="arboles.html#cb470-5" aria-hidden="true" tabindex="-1"></a>  tab <span class="sc">|&gt;</span> </span>
+<span id="cb470-6"><a href="arboles.html#cb470-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Modelo) <span class="sc">|&gt;</span>  </span>
+<span id="cb470-7"><a href="arboles.html#cb470-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc_curve</span>(obs, prob, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb470-8"><a href="arboles.html#cb470-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span>
+<span id="cb470-9"><a href="arboles.html#cb470-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb470-10"><a href="arboles.html#cb470-10" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb470-11"><a href="arboles.html#cb470-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">obs =</span> <span class="fu">factor</span>(High.test),</span>
+<span id="cb470-12"><a href="arboles.html#cb470-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tree9 =</span> tree.pred9[,<span class="st">&#39;Yes&#39;</span>],</span>
+<span id="cb470-13"><a href="arboles.html#cb470-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Tree14 =</span> tree.pred14[,<span class="st">&#39;Yes&#39;</span>],</span>
+<span id="cb470-14"><a href="arboles.html#cb470-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Azar =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(bd), <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb470-15"><a href="arboles.html#cb470-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb470-16"><a href="arboles.html#cb470-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_roc</span>(tab)</span></code></pre></div>
 <p><img src="CienciaDatosMS_files/figure-html/tree12c-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="compara" class="section level3 hasAnchor" number="7.5.2">
@@ -726,7 +729,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb477-36"><a href="arboles.html#cb477-36" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb477-37"><a href="arboles.html#cb477-37" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000893 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000502 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>
