@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 Trabajo Practico | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 Trabajo Practico | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -349,9 +349,9 @@ div.csl-indent {
 <div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="score.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiar memoria</span></span>
 <span id="cb413-2"><a href="score.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb413-3"><a href="score.html#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
-<pre><code>##           used  (Mb) gc trigger  (Mb) max used (Mb)
-## Ncells 2801335 149.7    4155831 222.0  4155831  222
-## Vcells 4829578  36.9   10146329  77.5  8388608   64</code></pre>
+<pre><code>##           used  (Mb) gc trigger  (Mb) max used  (Mb)
+## Ncells 2827645 151.1    5456082 291.4  3855228 205.9
+## Vcells 4868569  37.2   10146329  77.5  8388606  64.0</code></pre>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="score.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerias</span></span>
 <span id="cb415-2"><a href="score.html#cb415-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb415-3"><a href="score.html#cb415-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
@@ -752,52 +752,53 @@ div.csl-indent {
 <div id="grid-search" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Grid search<a href="score.html#grid-search" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se muestra un ejemplo con <em>random forest</em>:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="score.html#cb464-1" aria-hidden="true" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(train_tbl), <span class="st">&#39;default&#39;</span>))</span>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="score.html#cb464-1" aria-hidden="true" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(train_tbl), <span class="st">&quot;default&quot;</span>))</span>
 <span id="cb464-2"><a href="score.html#cb464-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb464-3"><a href="score.html#cb464-3" aria-hidden="true" tabindex="-1"></a><span class="co"># crea la grilla de hyperparametros</span></span>
-<span id="cb464-4"><a href="score.html#cb464-4" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb464-5"><a href="score.html#cb464-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">333</span>, .<span class="dv">4</span>)),</span>
-<span id="cb464-6"><a href="score.html#cb464-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">min.node.size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>), </span>
-<span id="cb464-7"><a href="score.html#cb464-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),                               </span>
-<span id="cb464-8"><a href="score.html#cb464-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample.fraction =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">63</span>, .<span class="dv">8</span>)               </span>
-<span id="cb464-9"><a href="score.html#cb464-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb464-10"><a href="score.html#cb464-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb464-11"><a href="score.html#cb464-11" aria-hidden="true" tabindex="-1"></a><span class="co"># realiza el grid search</span></span>
-<span id="cb464-12"><a href="score.html#cb464-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
-<span id="cb464-13"><a href="score.html#cb464-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># estima el modelo para la combinacion i de hyperparametros</span></span>
-<span id="cb464-14"><a href="score.html#cb464-14" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
-<span id="cb464-15"><a href="score.html#cb464-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula         =</span> formula, </span>
-<span id="cb464-16"><a href="score.html#cb464-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data            =</span> train_tbl,  </span>
-<span id="cb464-17"><a href="score.html#cb464-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability     =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb464-18"><a href="score.html#cb464-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">num.trees       =</span> n_features <span class="sc">*</span> <span class="dv">10</span>,</span>
-<span id="cb464-19"><a href="score.html#cb464-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">mtry            =</span> hyper_grid<span class="sc">$</span>mtry[i],</span>
-<span id="cb464-20"><a href="score.html#cb464-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.node.size   =</span> hyper_grid<span class="sc">$</span>min.node.size[i],</span>
-<span id="cb464-21"><a href="score.html#cb464-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace         =</span> hyper_grid<span class="sc">$</span>replace[i],</span>
-<span id="cb464-22"><a href="score.html#cb464-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample.fraction =</span> hyper_grid<span class="sc">$</span>sample.fraction[i],</span>
-<span id="cb464-23"><a href="score.html#cb464-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose         =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb464-24"><a href="score.html#cb464-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed            =</span> <span class="dv">1234</span>,</span>
-<span id="cb464-25"><a href="score.html#cb464-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">respect.unordered.factors =</span> <span class="st">&#39;order&#39;</span>,</span>
-<span id="cb464-26"><a href="score.html#cb464-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">splitrule       =</span> <span class="st">&#39;gini&#39;</span>,</span>
-<span id="cb464-27"><a href="score.html#cb464-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">importance      =</span> <span class="st">&#39;impurity&#39;</span></span>
-<span id="cb464-28"><a href="score.html#cb464-28" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb464-29"><a href="score.html#cb464-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># error (1 - accuracy) </span></span>
-<span id="cb464-30"><a href="score.html#cb464-30" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>error[i] <span class="ot">=</span> fit<span class="sc">$</span>prediction.error</span>
-<span id="cb464-31"><a href="score.html#cb464-31" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb464-32"><a href="score.html#cb464-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb464-33"><a href="score.html#cb464-33" aria-hidden="true" tabindex="-1"></a><span class="co"># top 10 </span></span>
-<span id="cb464-34"><a href="score.html#cb464-34" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="sc">|&gt;</span></span>
-<span id="cb464-35"><a href="score.html#cb464-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(error) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##    mtry min.node.size replace sample.fraction      error
-## 1     2            10    TRUE             0.5 0.06648651
-## 2     2            10    TRUE             0.5 0.06648651
-## 3     2             3    TRUE             0.5 0.06656966
-## 4     2             3    TRUE             0.5 0.06656966
-## 5     2             5   FALSE             0.5 0.06664242
-## 6     2             5   FALSE             0.5 0.06664242
-## 7     2             3   FALSE             0.5 0.06670478
-## 8     2             3   FALSE             0.5 0.06670478
-## 9     2             1    TRUE             0.5 0.06672556
-## 10    2             1    TRUE             0.5 0.06672556</code></pre>
+<span id="cb464-4"><a href="score.html#cb464-4" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb464-5"><a href="score.html#cb464-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">num.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
+<span id="cb464-6"><a href="score.html#cb464-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">333</span>, .<span class="dv">4</span>)),</span>
+<span id="cb464-7"><a href="score.html#cb464-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">min.node.size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>), </span>
+<span id="cb464-8"><a href="score.html#cb464-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),                               </span>
+<span id="cb464-9"><a href="score.html#cb464-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample.fraction =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">63</span>, .<span class="dv">75</span>, .<span class="dv">8</span>)               </span>
+<span id="cb464-10"><a href="score.html#cb464-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb464-11"><a href="score.html#cb464-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb464-12"><a href="score.html#cb464-12" aria-hidden="true" tabindex="-1"></a><span class="co"># realiza el grid search</span></span>
+<span id="cb464-13"><a href="score.html#cb464-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
+<span id="cb464-14"><a href="score.html#cb464-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># estima el modelo para la combinacion i de hyperparametros</span></span>
+<span id="cb464-15"><a href="score.html#cb464-15" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
+<span id="cb464-16"><a href="score.html#cb464-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula         =</span> formula, </span>
+<span id="cb464-17"><a href="score.html#cb464-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data            =</span> train_tbl,  </span>
+<span id="cb464-18"><a href="score.html#cb464-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability     =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb464-19"><a href="score.html#cb464-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">num.trees       =</span> hyper_grid<span class="sc">$</span>num.trees[i],</span>
+<span id="cb464-20"><a href="score.html#cb464-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">mtry            =</span> hyper_grid<span class="sc">$</span>mtry[i],</span>
+<span id="cb464-21"><a href="score.html#cb464-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.node.size   =</span> hyper_grid<span class="sc">$</span>min.node.size[i],</span>
+<span id="cb464-22"><a href="score.html#cb464-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace         =</span> hyper_grid<span class="sc">$</span>replace[i],</span>
+<span id="cb464-23"><a href="score.html#cb464-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample.fraction =</span> hyper_grid<span class="sc">$</span>sample.fraction[i],</span>
+<span id="cb464-24"><a href="score.html#cb464-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose         =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb464-25"><a href="score.html#cb464-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed            =</span> <span class="dv">1234</span>,</span>
+<span id="cb464-26"><a href="score.html#cb464-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">respect.unordered.factors =</span> <span class="st">&#39;order&#39;</span>,</span>
+<span id="cb464-27"><a href="score.html#cb464-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">splitrule       =</span> <span class="st">&#39;gini&#39;</span>,</span>
+<span id="cb464-28"><a href="score.html#cb464-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">importance      =</span> <span class="st">&#39;impurity&#39;</span></span>
+<span id="cb464-29"><a href="score.html#cb464-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb464-30"><a href="score.html#cb464-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># error (1 - accuracy) </span></span>
+<span id="cb464-31"><a href="score.html#cb464-31" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>error[i] <span class="ot">=</span> fit<span class="sc">$</span>prediction.error</span>
+<span id="cb464-32"><a href="score.html#cb464-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb464-33"><a href="score.html#cb464-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb464-34"><a href="score.html#cb464-34" aria-hidden="true" tabindex="-1"></a><span class="co"># top 10 </span></span>
+<span id="cb464-35"><a href="score.html#cb464-35" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="sc">|&gt;</span></span>
+<span id="cb464-36"><a href="score.html#cb464-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(error) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    num.trees mtry min.node.size replace sample.fraction      error
+## 1        150    2             1    TRUE            0.50 0.06624747
+## 2        150    2             1    TRUE            0.50 0.06624747
+## 3        150    2             3    TRUE            0.75 0.06630983
+## 4        150    2             3    TRUE            0.75 0.06630983
+## 5        200    2             1    TRUE            0.75 0.06633061
+## 6        200    2             1    TRUE            0.75 0.06633061
+## 7        200    2            10    TRUE            0.50 0.06635140
+## 8        200    2            10    TRUE            0.50 0.06635140
+## 9        150    2             1    TRUE            0.75 0.06636179
+## 10       150    2             1    TRUE            0.75 0.06636179</code></pre>
 </div>
 </div>
 <h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
