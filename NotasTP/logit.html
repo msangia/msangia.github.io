@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Logit | Politica Economica II</title>
+  <title>Capítulo 8 Logit | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Logit | Politica Economica II" />
+  <meta property="og:title" content="Capítulo 8 Logit | Politica Economica II" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="UNLP" />
   <meta name="github-repo" content="msangia/msangia.github" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Logit | Politica Economica II" />
+  <meta name="twitter:title" content="Capítulo 8 Logit | Politica Economica II" />
   <meta name="twitter:site" content="@msangia" />
   <meta name="twitter:description" content="UNLP" />
   
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -125,6 +125,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -226,58 +230,92 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.17</b> group_by, summarise</a></li>
 <li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.18</b> Vector de resultados</a></li>
-<li class="chapter" data-level="2.19" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.19</b> Gráficos</a></li>
-<li class="chapter" data-level="2.20" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.20</b> GGPlot</a></li>
-<li class="chapter" data-level="2.21" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.21</b> Guardar un gráfico</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a>
+<li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>3.1</b> Estimacion</a></li>
-<li class="chapter" data-level="3.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>3.2</b> Prediccion</a></li>
-<li class="chapter" data-level="3.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>3.3</b> Inferencia</a></li>
-<li class="chapter" data-level="3.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>3.4</b> Metodos parametricos</a></li>
-<li class="chapter" data-level="3.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>3.5</b> Metodos no parametricos</a></li>
-<li class="chapter" data-level="3.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>3.6</b> Evaluacion de la precision del modelo</a>
+<li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
+<li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
+<li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
+<li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>3.6.1</b> Calidad del ajuste</a></li>
-<li class="chapter" data-level="3.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>3.6.2</b> Trade-off Sesgo-Varianza</a></li>
-<li class="chapter" data-level="3.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>3.6.3</b> Clasificacion</a></li>
-<li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
-<li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
+<li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>3.7</b> Resampling Methods</a>
+<li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
-<li class="chapter" data-level="3.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7.1</b> Cross Validation</a></li>
-<li class="chapter" data-level="3.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap</a></li>
-</ul></li>
-<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.8</b> Resumen</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
+<li class="chapter" data-level="5.1" data-path="rmd.html"><a href="rmd.html#informes-con-r-markdown"><i class="fa fa-check"></i><b>5.1</b> Informes con R Markdown</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>4.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
-<li class="chapter" data-level="4.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>4.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="5.1.1" data-path="rmd.html"><a href="rmd.html#intrormd"><i class="fa fa-check"></i><b>5.1.1</b> Introduccion</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmd.html"><a href="rmd.html#referencias-cruzadas"><i class="fa fa-check"></i><b>5.1.2</b> Referencias cruzadas</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmd.html"><a href="rmd.html#regresion"><i class="fa fa-check"></i><b>5.1.3</b> Regresion</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
+<li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>5</b> Logit</a>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>5.1</b> Modelo <em>logit</em></a>
+<li class="chapter" data-level="6.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>6.1</b> Estimacion</a></li>
+<li class="chapter" data-level="6.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>6.2</b> Prediccion</a></li>
+<li class="chapter" data-level="6.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>6.3</b> Inferencia</a></li>
+<li class="chapter" data-level="6.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>6.4</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="6.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>6.5</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="6.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>6.6</b> Evaluacion de la precision del modelo</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>5.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+<li class="chapter" data-level="6.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>6.6.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="6.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>6.6.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="6.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>6.6.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="6.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>6.6.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="6.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>6.6.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>5.2</b> Aplicacion practica</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>6</b> Arboles de decision</a>
+<li class="chapter" data-level="6.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>6.7</b> Resampling Methods</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>6.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="6.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>6.2</b> Bagging</a></li>
-<li class="chapter" data-level="6.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>6.3</b> Random Forest</a></li>
+<li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>7</b> Trabajo Practico</a>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>7.1</b> Reglas del Trabajo practico</a></li>
-<li class="chapter" data-level="7.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>7.2</b> Enunciado del Trabajo Practico</a></li>
-<li class="chapter" data-level="7.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>7.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
+<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>7.2</b> Aplicacion practica</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="8" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>8</b> Logit</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>8.1</b> Modelo <em>logit</em></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>8.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>8.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>9</b> Arboles de decision</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>9.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
+<li class="chapter" data-level="9.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>9.2</b> Bagging</a></li>
+<li class="chapter" data-level="9.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>9.3</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>10</b> Trabajo Practico</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>10.1</b> Reglas del Trabajo practico</a></li>
+<li class="chapter" data-level="10.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>10.2</b> Enunciado del Trabajo Practico</a></li>
+<li class="chapter" data-level="10.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>10.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="10.4" data-path="score.html"><a href="score.html#grid-search"><i class="fa fa-check"></i><b>10.4</b> Grid search</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="./" target="blank">Maximo Sangiacomo</a></li>
 
@@ -302,81 +340,81 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="images/background.jpg">
 </div>
-<div id="logit" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Capítulo 5</span> Logit<a href="logit.html#logit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En la base de datos <code>Default</code>,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> la variable <em>default</em> pertenece a una de dos categorías, <strong>Yes</strong> o <strong>No</strong>. En vez de modelar esta respuesta <span class="math inline">\(Y\)</span> directamente, la regresión logística modela la probabilidad de que <span class="math inline">\(Y\)</span> pertenezca a una categoría. Por lo tanto, si se busca estimar la probabilidad de <em>default</em>, se puede transformar la variable original en una variable binaria <span class="math inline">\(1\)</span> (Yes); <span class="math inline">\(0\)</span> (No).</p>
+<div id="logit" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Logit<a href="logit.html#logit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En la base de datos <code>Default</code>,<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> la variable <em>default</em> pertenece a una de dos categorías, <strong>Yes</strong> o <strong>No</strong>. En vez de modelar esta respuesta <span class="math inline">\(Y\)</span> directamente, la regresión logística modela la probabilidad de que <span class="math inline">\(Y\)</span> pertenezca a una categoría. Por lo tanto, si se busca estimar la probabilidad de <em>default</em>, se puede transformar la variable original en una variable binaria <span class="math inline">\(1\)</span> (Yes); <span class="math inline">\(0\)</span> (No).</p>
 <p>En general, la estrategia consiste en:</p>
 <p><span class="math inline">\(Y\)</span> variable binaria <span class="math inline">\(0/1\)</span>.</p>
 <p><span class="math inline">\(X\)</span> vector de <span class="math inline">\(K\)</span> predictores.</p>
 <p>Se debe construir un modelo para:</p>
 <p><span class="math inline">\(p = Pr(Y = 1 \mid X)\)</span></p>
-<p>Como vimos en la subsección <a href="conceptos.html#bayes">3.6.3.1</a> el <strong>clasificador de Bayes</strong>:</p>
+<p>Como vimos en la subsección <a href="conceptos.html#bayes">6.6.3.1</a> el <strong>clasificador de Bayes</strong>:</p>
 <ul>
 <li><p><span class="math inline">\(\hat{Y} = 1\)</span> si <span class="math inline">\(p &gt; 0,5\)</span></p></li>
 <li><p><span class="math inline">\(\hat{Y} = 0\)</span> si <span class="math inline">\(p \le 0,5\)</span></p></li>
 </ul>
 <p>Recordar que en el caso particular de la probabilidad de <em>default</em> puede resultar relativamente más costoso para un banco clasificar a un deudor malo en la categoría <strong>No</strong> <em>default</em> que a un deudor bueno como <strong>Si</strong> <em>default</em> (pérdida asimétrica). Por lo tanto, podría elegirse un umbral más bajo (ej. <span class="math inline">\(p &gt; 0,3\)</span>) para la categoría <strong>Si</strong> <em>default</em>.</p>
-<div id="modelo-logit" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Modelo <em>logit</em><a href="logit.html#modelo-logit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelo-logit" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Modelo <em>logit</em><a href="logit.html#modelo-logit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display" id="eq:logit">\[\begin{equation}
-\tag{5.1}
+\tag{8.1}
   p = \frac{e^z}{1+e^z}
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(z \equiv X \beta\)</span> con <span class="math inline">\(\beta\)</span> un vector de <span class="math inline">\(K\)</span> coeficientes.</p>
-<p>El panel izquierdo de la Figura <a href="logit.html#fig:logit">5.1</a> muestra la probabilidad estimada usando regresión lineal donde algunos valores de probabilidad son negativos (también podría haber valores mayores a <span class="math inline">\(1\)</span> para valores elevados de la variable <code>balance</code>, ambos extremos inconsistentes con la noción de probabilidad). Los puntos naranja indican los valores <span class="math inline">\(0/1\)</span> codificados por defecto (No o Si). El panel derecho exhibe la probabilidad de incumplimiento estimada mediante regresión logística donde todos los valores <span class="math inline">\(\in (0,1)\)</span>.</p>
+<p>El panel izquierdo de la Figura <a href="logit.html#fig:logit">8.1</a> muestra la probabilidad estimada usando regresión lineal donde algunos valores de probabilidad son negativos (también podría haber valores mayores a <span class="math inline">\(1\)</span> para valores elevados de la variable <code>balance</code>, ambos extremos inconsistentes con la noción de probabilidad). Los puntos naranja indican los valores <span class="math inline">\(0/1\)</span> codificados por defecto (No o Si). El panel derecho exhibe la probabilidad de incumplimiento estimada mediante regresión logística donde todos los valores <span class="math inline">\(\in (0,1)\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:logit"></span>
 <img src="figures/4.2logit.png" alt="Regresión lineal vs. logística" width="80%" height="40%" />
 <p class="caption">
-Figura 5.1: Regresión lineal vs. logística
+Figura 8.1: Regresión lineal vs. logística
 </p>
 </div>
-<div id="interpretacion-de-coeficientes-en-el-modelo-logit" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Interpretacion de coeficientes en el modelo <em>logit</em><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interpretacion-de-coeficientes-en-el-modelo-logit" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Interpretacion de coeficientes en el modelo <em>logit</em><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dada la forma funcional del modelo <em>logit</em>, primero se introduce el concepto de <strong><em>odds ratio</em></strong> (<span class="math inline">\(\frac{p}{1 - p}\)</span>) para luego derivar la interpretación de un coeficiente. El se define <em>odds ratio</em> como la probabilidad de que un evento suceda en relación a que el mismo evento no suceda. Por ejemplo, en promedio <span class="math inline">\(1\)</span> de cada <span class="math inline">\(5\)</span> personas con un <em>odds</em> de <span class="math inline">\(1/4\)</span> no pagará su deuda, ya que la probabilidad de <em>default</em> <span class="math inline">\(p(X) = 0,2\)</span> implica un <em>odds</em> de <span class="math inline">\(\frac{0,2}{1 − 0,2} = 0,25 = 1/4\)</span>.</p>
 <p>En el modelo <em>logit</em>:</p>
 <p><span class="math display" id="eq:logit2">\[\begin{equation}
-\tag{5.2}
+\tag{8.2}
   (1 - p) = \frac{1}{1+e^z}
 \end{equation}\]</span></p>
 <p>Entonces el <em>odds ratio</em>:</p>
 <p><span class="math display" id="eq:logit3">\[\begin{equation}
-\tag{5.3}
+\tag{8.3}
   \frac{p}{1 - p} = e^z
 \end{equation}\]</span></p>
 <p>Si se toma el logaritmo del <em>odds ratio</em> queda:</p>
 <p><span class="math display" id="eq:logit4">\[\begin{equation}
-\tag{5.4}
+\tag{8.4}
   ln(\frac{p}{1 - p}) = z = X \beta
 \end{equation}\]</span></p>
-<p>El lado izquierdo se llama <em>log odds</em> o <em>logit</em>. El modelo de regresión logística <a href="logit.html#eq:logit">(5.1)</a> tiene un <em>logit</em> que es lineal en <span class="math inline">\(X\)</span>. Por lo tanto, el <span class="math inline">\(k-ésimo\)</span> coeficiente es:</p>
+<p>El lado izquierdo se llama <em>log odds</em> o <em>logit</em>. El modelo de regresión logística <a href="logit.html#eq:logit">(8.1)</a> tiene un <em>logit</em> que es lineal en <span class="math inline">\(X\)</span>. Por lo tanto, el <span class="math inline">\(k-ésimo\)</span> coeficiente es:</p>
 <p><span class="math display" id="eq:logit5">\[\begin{equation}
-\tag{5.5}
+\tag{8.5}
   \beta_k = \frac{\partial ln(\frac{p}{1 - p})}{\partial X_k}
 \end{equation}\]</span></p>
-<p>Aumentar <span class="math inline">\(X_k\)</span> en una unidad cambia el <em>log odds</em> en <span class="math inline">\(\beta_k\)</span>. Dado que la relación entre <span class="math inline">\(p(X)\)</span> y <span class="math inline">\(X\)</span> en <a href="logit.html#eq:logit">(5.1)</a> no es lineal, <span class="math inline">\(\beta_k\)</span> no corresponde al cambio en <span class="math inline">\(p(X)\)</span> asociado con el aumento de una unidad en <span class="math inline">\(X\)</span>. La cantidad que <span class="math inline">\(p(X)\)</span> cambia debido a un cambio de una unidad en <span class="math inline">\(X\)</span> depende del valor actual de <span class="math inline">\(X\)</span>. Pero independientemente del valor de <span class="math inline">\(X\)</span>, si <span class="math inline">\(\beta_k\)</span> es positivo, entonces el aumento de <span class="math inline">\(X\)</span> se asocia con el aumento de <span class="math inline">\(p(X)\)</span>, y si <span class="math inline">\(\beta_k\)</span> es negativo, el aumento de <span class="math inline">\(X\)</span> se asocia con la disminución de <span class="math inline">\(p(X)\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+<p>Aumentar <span class="math inline">\(X_k\)</span> en una unidad cambia el <em>log odds</em> en <span class="math inline">\(\beta_k\)</span>. Dado que la relación entre <span class="math inline">\(p(X)\)</span> y <span class="math inline">\(X\)</span> en <a href="logit.html#eq:logit">(8.1)</a> no es lineal, <span class="math inline">\(\beta_k\)</span> no corresponde al cambio en <span class="math inline">\(p(X)\)</span> asociado con el aumento de una unidad en <span class="math inline">\(X\)</span>. La cantidad que <span class="math inline">\(p(X)\)</span> cambia debido a un cambio de una unidad en <span class="math inline">\(X\)</span> depende del valor actual de <span class="math inline">\(X\)</span>. Pero independientemente del valor de <span class="math inline">\(X\)</span>, si <span class="math inline">\(\beta_k\)</span> es positivo, entonces el aumento de <span class="math inline">\(X\)</span> se asocia con el aumento de <span class="math inline">\(p(X)\)</span>, y si <span class="math inline">\(\beta_k\)</span> es negativo, el aumento de <span class="math inline">\(X\)</span> se asocia con la disminución de <span class="math inline">\(p(X)\)</span>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <p>En este caso, <span class="math inline">\(\hat{{\beta}}\)</span> se estima por máxima verosimilitud (no es una forma cerrada como <span class="math inline">\(MCO\)</span>).</p>
 <p><span class="math display" id="eq:ml2">\[\begin{equation}
-\tag{5.6}
+\tag{8.6}
   \hat{\theta} = argmax_{\theta} \prod_{i = 1}^{n} L(\theta; y_i)
 \end{equation}\]</span></p>
-<p>Luego se reemplazan los coeficientes estimados en <a href="logit.html#eq:logit6">(5.7)</a> para obtener las probabilidades estimadas.</p>
+<p>Luego se reemplazan los coeficientes estimados en <a href="logit.html#eq:logit6">(8.7)</a> para obtener las probabilidades estimadas.</p>
 <p><span class="math display" id="eq:logit6">\[\begin{equation}
-\tag{5.7}
+\tag{8.7}
   \hat{p_i} = \frac{e^{X_i \hat{\beta}}}{1+e^{X_i \hat{\beta}}}
 \end{equation}\]</span></p>
 </div>
 </div>
-<div id="aplicacion-practica-1" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Aplicacion practica<a href="logit.html#aplicacion-practica-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="aplicacion-practica-1" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Aplicacion practica<a href="logit.html#aplicacion-practica-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Comenzaremos examinando algunas estadísticas y gráficos de
 los datos <code>Smarket</code>, que forman parte de la biblioteca <code>ISLR2</code>. Esta base de datos consiste en rendimientos porcentuales para el índice bursátil <span class="math inline">\(S\&amp;P 500\)</span> para más de <span class="math inline">\(1.250\)</span> días, desde principios de <span class="math inline">\(2001\)</span> hasta finales de <span class="math inline">\(2005\)</span>. Para cada fecha, registra los rendimientos porcentuales de los cinco días hábiles anteriores, de <code>Lag1</code> a <code>Lag5</code>. También registra el <code>volume</code> (el número de acciones negociadas el día anterior, en miles de millones), <code>Today</code> (el rendimiento porcentual en la fecha en cuestión) y <code>direction</code> (si el mercado estaba <code>Up</code> o <code>Down</code> en este día). El objetivo es predecir la “dirección” (una respuesta cualitativa) usando las otras características.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="logit.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb378-2"><a href="logit.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Smarket)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="logit.html#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb464-2"><a href="logit.html#cb464-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Smarket)</span></code></pre></div>
 <pre><code>## [1] &quot;Year&quot;      &quot;Lag1&quot;      &quot;Lag2&quot;      &quot;Lag3&quot;      &quot;Lag4&quot;      &quot;Lag5&quot;     
 ## [7] &quot;Volume&quot;    &quot;Today&quot;     &quot;Direction&quot;</code></pre>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="logit.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Smarket)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="logit.html#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Smarket)</span></code></pre></div>
 <pre><code>## [1] 1250    9</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="logit.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Smarket)</span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="logit.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Smarket)</span></code></pre></div>
 <pre><code>##       Year           Lag1                Lag2                Lag3          
 ##  Min.   :2001   Min.   :-4.922000   Min.   :-4.922000   Min.   :-4.922000  
 ##  1st Qu.:2002   1st Qu.:-0.639500   1st Qu.:-0.639500   1st Qu.:-0.640000  
@@ -398,10 +436,10 @@ los datos <code>Smarket</code>, que forman parte de la biblioteca <code>ISLR2</c
 ##            
 ##            
 ## </code></pre>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="logit.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(Smarket)</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="logit.html#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(Smarket)</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/logit1-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>La función <code>cor()</code> produce una matriz que contiene todas las correlaciones por pares entre los predictores.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="logit.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Smarket[, <span class="sc">-</span><span class="dv">9</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="logit.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Smarket[, <span class="sc">-</span><span class="dv">9</span>])</span></code></pre></div>
 <pre><code>##              Year         Lag1         Lag2         Lag3         Lag4
 ## Year   1.00000000  0.029699649  0.030596422  0.033194581  0.035688718
 ## Lag1   0.02969965  1.000000000 -0.026294328 -0.010803402 -0.002985911
@@ -421,21 +459,17 @@ los datos <code>Smarket</code>, que forman parte de la biblioteca <code>ISLR2</c
 ## Volume -0.022002315  1.00000000  0.014591823
 ## Today  -0.034860083  0.01459182  1.000000000</code></pre>
 <p>Como era de esperar, las correlaciones entre las variables rezagadas y los rendimientos de hoy son cercanas a cero. En otras palabras, parece haber poca correlación entre los rendimientos de hoy y los rendimientos de días anteriores. La única correlación sustancial es entre <code>Year</code> y <code>volume</code>. Al graficar los datos, que están ordenados cronológicamente, vemos que el <code>volume</code> aumenta con el tiempo. En otras palabras, el número promedio de acciones negociadas diariamente aumentó de 2001 a 2005.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="logit.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Smarket)</span>
-<span id="cb387-2"><a href="logit.html#cb387-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume)</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="logit.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Smarket)</span>
+<span id="cb473-2"><a href="logit.html#cb473-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume)</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/logit3-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>A continuación, ajustaremos un modelo de regresión logística para predecir la <code>direction</code> utilizando <code>Lag1</code> hasta <code>Lag5</code> y <code>volume</code>. La función <code>glm()</code> se puede utilizar para muchos tipos de modelos lineales generalizados, incluida la regresión logística. La sintaxis de la función <code>glm()</code> es similar a la de <code>lm()</code>, excepto que debemos utilizar el argumento <code>family = binomial</code> para decirle a <code>R</code> que ejecute una regresión logística.</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="logit.html#cb388-1" aria-hidden="true" tabindex="-1"></a>glm.fits <span class="ot">&lt;-</span> <span class="fu">glm</span>(Direction <span class="sc">~</span> Lag1 <span class="sc">+</span> Lag2 <span class="sc">+</span> Lag3 <span class="sc">+</span> Lag4 <span class="sc">+</span> Lag5 <span class="sc">+</span> Volume,</span>
-<span id="cb388-2"><a href="logit.html#cb388-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Smarket, <span class="at">family =</span> binomial)</span>
-<span id="cb388-3"><a href="logit.html#cb388-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm.fits)</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="logit.html#cb474-1" aria-hidden="true" tabindex="-1"></a>glm.fits <span class="ot">&lt;-</span> <span class="fu">glm</span>(Direction <span class="sc">~</span> Lag1 <span class="sc">+</span> Lag2 <span class="sc">+</span> Lag3 <span class="sc">+</span> Lag4 <span class="sc">+</span> Lag5 <span class="sc">+</span> Volume,</span>
+<span id="cb474-2"><a href="logit.html#cb474-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Smarket, <span class="at">family =</span> binomial)</span>
+<span id="cb474-3"><a href="logit.html#cb474-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm.fits)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + 
 ##     Volume, family = binomial, data = Smarket)
-## 
-## Deviance Residuals: 
-##    Min      1Q  Median      3Q     Max  
-## -1.446  -1.203   1.065   1.145   1.326  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)
@@ -456,35 +490,35 @@ los datos <code>Smarket</code>, que forman parte de la biblioteca <code>ISLR2</c
 ## Number of Fisher Scoring iterations: 3</code></pre>
 <p>El valor <span class="math inline">\(p\)</span> más pequeño está asociado con <code>Lag1</code>. El coeficiente negativo sugiere que si el mercado tuvo un rendimiento positivo ayer, es menos probable que suba hoy. Sin embargo, con un valor de <span class="math inline">\(0,145\)</span>, el valor de <span class="math inline">\(p\)</span> sigue siendo relativamente grande, por lo que no hay pruebas claras de una asociación real entre <code>Lag1</code> y <code>direction</code>.</p>
 <p>La función <code>predict()</code> se puede utilizar para predecir la probabilidad de que el mercado suba, dados los valores de los predictores. La opción <code>type = "response"</code> le dice a <code>R</code> que genere probabilidades de la forma <span class="math inline">\(P(Y=1|X)\)</span>. Si no se proporciona ninguna base de datos a la función <code>predict()</code>, se calculan las probabilidades para los datos de entrenamiento que se usaron para ajustar el modelo de regresión logística. Se imprimen las primeras diez probabilidades estimadas. Sabemos que estos valores corresponden a la probabilidad de que el mercado suba, en lugar de que baje, porque la función <code>contrasts()</code> indica que <code>R</code> ha creado una variable ficticia con un 1 para <code>Up</code>.</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="logit.html#cb390-1" aria-hidden="true" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.fits, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb390-2"><a href="logit.html#cb390-2" aria-hidden="true" tabindex="-1"></a>glm.probs[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="logit.html#cb476-1" aria-hidden="true" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.fits, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb476-2"><a href="logit.html#cb476-2" aria-hidden="true" tabindex="-1"></a>glm.probs[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##         1         2         3         4         5         6         7         8 
 ## 0.5070841 0.4814679 0.4811388 0.5152224 0.5107812 0.5069565 0.4926509 0.5092292 
 ##         9        10 
 ## 0.5176135 0.4888378</code></pre>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="logit.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="logit.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(Direction)</span></code></pre></div>
 <pre><code>##      Up
 ## Down  0
 ## Up    1</code></pre>
 <p>Para hacer una predicción sobre si el mercado subirá o bajará en un día en particular, debemos convertir estas probabilidades pronosticadas en etiquetas de clase, <code>Up</code> o <code>Down</code>. Los siguientes dos comandos crean un vector de predicciones de clase basado en si la probabilidad prevista de un aumento del mercado es mayor o menor que <span class="math inline">\(0,5\)</span>.</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="logit.html#cb394-1" aria-hidden="true" tabindex="-1"></a>glm.pred <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&#39;Down&#39;</span>, <span class="dv">1250</span>)</span>
-<span id="cb394-2"><a href="logit.html#cb394-2" aria-hidden="true" tabindex="-1"></a>glm.pred[glm.probs <span class="sc">&gt;</span> .<span class="dv">5</span>] <span class="ot">=</span> <span class="st">&#39;Up&#39;</span></span></code></pre></div>
-<p>El primer comando crea un vector de <span class="math inline">\(1.250\)</span> elementos <code>Down</code>. La segunda línea transforma en <code>Up</code> todos los elementos para los que la probabilidad predicha de un aumento del mercado supera los <span class="math inline">\(0,5\)</span>. Dadas estas predicciones, la función <code>table()</code> se puede usar para producir una matriz de confusión (subsección <a href="conceptos.html#confusion">3.6.4</a>) para determinar cuántas observaciones se clasificaron correcta o incorrectamente. Al ingresar dos vectores cualitativos, <code>R</code> creará una tabla de <span class="math inline">\(2 \times 2\)</span> con recuentos del número de veces que ocurrió cada combinación. Por ejemplo, pronosticó <code>Up</code> y el mercado aumentó, predijo <code>Up</code> y el mercado disminuyó, etc.</p>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="logit.html#cb480-1" aria-hidden="true" tabindex="-1"></a>glm.pred <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&#39;Down&#39;</span>, <span class="dv">1250</span>)</span>
+<span id="cb480-2"><a href="logit.html#cb480-2" aria-hidden="true" tabindex="-1"></a>glm.pred[glm.probs <span class="sc">&gt;</span> .<span class="dv">5</span>] <span class="ot">=</span> <span class="st">&#39;Up&#39;</span></span></code></pre></div>
+<p>El primer comando crea un vector de <span class="math inline">\(1.250\)</span> elementos <code>Down</code>. La segunda línea transforma en <code>Up</code> todos los elementos para los que la probabilidad predicha de un aumento del mercado supera los <span class="math inline">\(0,5\)</span>. Dadas estas predicciones, la función <code>table()</code> se puede usar para producir una matriz de confusión (subsección <a href="conceptos.html#confusion">6.6.4</a>) para determinar cuántas observaciones se clasificaron correcta o incorrectamente. Al ingresar dos vectores cualitativos, <code>R</code> creará una tabla de <span class="math inline">\(2 \times 2\)</span> con recuentos del número de veces que ocurrió cada combinación. Por ejemplo, pronosticó <code>Up</code> y el mercado aumentó, predijo <code>Up</code> y el mercado disminuyó, etc.</p>
 <p>Los elementos de la diagonal de la matriz de confusión indican predicciones correctas (<em>accuracy</em>), mientras que los fuera de la diagonal representan predicciones incorrectas. Por lo tanto, el modelo predijo correctamente que el mercado subiría en <span class="math inline">\(507\)</span> días y que bajaría en <span class="math inline">\(145\)</span> días, para un total de <span class="math inline">\(507+145 = 652\)</span> predicciones correctas. La función <code>mean()</code> se puede utilizar para calcular la fracción de días en los que la predicción fue correcta. En este caso, la regresión logística predijo correctamente el movimiento del mercado <span class="math inline">\(52,2\%\)</span> del tiempo.</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="logit.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(glm.pred, Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="logit.html#cb481-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(glm.pred, Direction)</span></code></pre></div>
 <pre><code>##         Direction
 ## glm.pred Down  Up
 ##     Down  145 141
 ##     Up    457 507</code></pre>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="logit.html#cb397-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">507</span> <span class="sc">+</span> <span class="dv">145</span>) <span class="sc">/</span> <span class="dv">1250</span></span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="logit.html#cb483-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">507</span> <span class="sc">+</span> <span class="dv">145</span>) <span class="sc">/</span> <span class="dv">1250</span></span></code></pre></div>
 <pre><code>## [1] 0.5216</code></pre>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="logit.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">==</span> Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="logit.html#cb485-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">==</span> Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5216</code></pre>
 <div class="infobox tip">
 <p>La función <code>confusionMatrix()</code> de la librería <code>caret</code> calcula la matriz de confusión con estadísticas completas.</p>
 </div>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="logit.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;caret&#39;</span>)</span>
-<span id="cb401-2"><a href="logit.html#cb401-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">factor</span>(glm.pred), <span class="fu">factor</span>(Direction), <span class="at">positive =</span> <span class="st">&#39;Up&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="logit.html#cb487-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;caret&#39;</span>)</span>
+<span id="cb487-2"><a href="logit.html#cb487-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(<span class="fu">factor</span>(glm.pred), <span class="fu">factor</span>(Direction), <span class="at">positive =</span> <span class="st">&#39;Up&#39;</span>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -515,34 +549,34 @@ los datos <code>Smarket</code>, que forman parte de la biblioteca <code>ISLR2</c
 <p>A primera vista, parece que el modelo de regresión logística funciona un poco mejor que un modelo aleatorio. Sin embargo, este resultado es engañoso porque entrenamos y testeamos el modelo en el mismo conjunto de observaciones de <span class="math inline">\(1.250\)</span>. En otras palabras, <span class="math inline">\(100\%-52.2\%=47.8\%\)</span>, es la tasa de error de <strong>entrenamiento</strong>. Como hemos visto anteriormente, la tasa de error de entrenamiento suele ser demasiado optimista: tiende a subestimar la tasa de error de <em>test</em>.</p>
 <p>Para evaluar mejor la precisión del modelo de regresión logística, podemos ajustar el modelo usando parte de los datos y luego examinar qué tan bien predice los datos <strong>retenidos</strong>. Esto producirá una tasa de error más realista, en el sentido de que en la práctica estamos interesados en el rendimiento de nuestro modelo, no en los datos que usamos para ajustar el modelo, sino en los días futuros para los que se desconocen los movimientos del mercado.</p>
 <p>Para implementar esta estrategia, primero crearemos un vector correspondiente a las observaciones de <span class="math inline">\(2001\)</span> a <span class="math inline">\(2004\)</span>. Luego usaremos este vector para crear una base de datos retenidos de observaciones de <span class="math inline">\(2005\)</span>.</p>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="logit.html#cb403-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> (Year <span class="sc">&lt;</span> <span class="dv">2005</span>)</span>
-<span id="cb403-2"><a href="logit.html#cb403-2" aria-hidden="true" tabindex="-1"></a>Smarket<span class="fl">.2005</span> <span class="ot">&lt;-</span> Smarket[<span class="sc">!</span>train, ]</span>
-<span id="cb403-3"><a href="logit.html#cb403-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Smarket<span class="fl">.2005</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="logit.html#cb489-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> (Year <span class="sc">&lt;</span> <span class="dv">2005</span>)</span>
+<span id="cb489-2"><a href="logit.html#cb489-2" aria-hidden="true" tabindex="-1"></a>Smarket<span class="fl">.2005</span> <span class="ot">&lt;-</span> Smarket[<span class="sc">!</span>train, ]</span>
+<span id="cb489-3"><a href="logit.html#cb489-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Smarket<span class="fl">.2005</span>)</span></code></pre></div>
 <pre><code>## [1] 252   9</code></pre>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="logit.html#cb405-1" aria-hidden="true" tabindex="-1"></a>Direction<span class="fl">.2005</span> <span class="ot">&lt;-</span> Direction[<span class="sc">!</span>train]</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="logit.html#cb491-1" aria-hidden="true" tabindex="-1"></a>Direction<span class="fl">.2005</span> <span class="ot">&lt;-</span> Direction[<span class="sc">!</span>train]</span></code></pre></div>
 <p>El objeto <code>train</code> es un vector de <span class="math inline">\(1.250\)</span> elementos, correspondientes a las observaciones de la base de datos. Los elementos del vector que corresponden a observaciones que ocurrieron antes de <span class="math inline">\(2005\)</span> se establecen en <code>VERDADERO</code>, mientras que los que corresponden a observaciones en <span class="math inline">\(2005\)</span> se establecen en <code>FALSO</code>. El objeto <code>train</code> es un vector <em>booleano</em>, ya que sus elementos son <code>VERDADERO</code> y <code>FALSO</code>. Los vectores <em>booleanos</em> se pueden utilizar para obtener un subconjunto de filas o columnas de una matriz. Por ejemplo, el comando <code>Smarket[train, ]</code> elegirá una submatriz de la base de datos del mercado de valores, correspondiente solo a las fechas anteriores a <span class="math inline">\(2005\)</span>, ya que son aquellos para los que los elementos de <code>train</code> son <code>VERDADERO</code>. El símbolo <code>!</code> (negación) se puede utilizar para invertir todos los elementos de un vector <em>booleano</em>. Es decir, <code>!train</code> es un vector similar a <code>train</code>, excepto que los elementos que son <code>VERDADERO</code> en <code>train</code> se cambian a <code>FALSO</code> en <code>!train</code>, y los elementos que son <code>FALSO</code> en <code>train</code> se cambia a <code>VERDADERO</code> en <code>!train</code>. Por lo tanto, <code>Smarket[!train, ]</code> produce una submatriz de los datos del mercado de valores que contiene solo las observaciones para las cuales <code>train</code> es <code>FALSO</code>, es decir, las observaciones con fechas en <span class="math inline">\(2005\)</span> (<span class="math inline">\(252\)</span> observaciones).</p>
 <p>Ahora ajustamos un modelo de regresión logística usando solo el subconjunto de las observaciones que corresponden a fechas anteriores a <span class="math inline">\(2005\)</span>, usando el argumento <code>subset</code>. Luego obtenemos las probabilidades pronosticadas de que el mercado de valores suba para cada uno de los días de la base de <em>test</em>, es decir, para los días de <span class="math inline">\(2005\)</span>.</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="logit.html#cb406-1" aria-hidden="true" tabindex="-1"></a>glm.fits <span class="ot">&lt;-</span> <span class="fu">glm</span>(Direction <span class="sc">~</span> Lag1 <span class="sc">+</span> Lag2 <span class="sc">+</span> Lag3 <span class="sc">+</span> Lag4 <span class="sc">+</span> Lag5 <span class="sc">+</span> Volume,</span>
-<span id="cb406-2"><a href="logit.html#cb406-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Smarket, <span class="at">family =</span> binomial, <span class="at">subset =</span> train)</span>
-<span id="cb406-3"><a href="logit.html#cb406-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb406-4"><a href="logit.html#cb406-4" aria-hidden="true" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.fits, Smarket<span class="fl">.2005</span>,  <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="logit.html#cb492-1" aria-hidden="true" tabindex="-1"></a>glm.fits <span class="ot">&lt;-</span> <span class="fu">glm</span>(Direction <span class="sc">~</span> Lag1 <span class="sc">+</span> Lag2 <span class="sc">+</span> Lag3 <span class="sc">+</span> Lag4 <span class="sc">+</span> Lag5 <span class="sc">+</span> Volume,</span>
+<span id="cb492-2"><a href="logit.html#cb492-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> Smarket, <span class="at">family =</span> binomial, <span class="at">subset =</span> train)</span>
+<span id="cb492-3"><a href="logit.html#cb492-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb492-4"><a href="logit.html#cb492-4" aria-hidden="true" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.fits, Smarket<span class="fl">.2005</span>,  <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <p>Tener en cuenta que hemos entrenado y testeado el modelo en dos bases de datos completamente separadas: el entrenamiento se realizó solo con las fechas anteriores a <span class="math inline">\(2005\)</span> y el <em>test</em> se realizó solo con las fechas de <span class="math inline">\(2005\)</span>. Finalmente, calculamos las predicciones para <span class="math inline">\(2005\)</span> y las comparamos con los movimientos reales del mercado durante ese período de tiempo.</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="logit.html#cb407-1" aria-hidden="true" tabindex="-1"></a>glm.pred <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Down&quot;</span>, <span class="dv">252</span>)</span>
-<span id="cb407-2"><a href="logit.html#cb407-2" aria-hidden="true" tabindex="-1"></a>glm.pred[glm.probs <span class="sc">&gt;</span> .<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Up&quot;</span></span>
-<span id="cb407-3"><a href="logit.html#cb407-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(glm.pred, Direction<span class="fl">.2005</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="logit.html#cb493-1" aria-hidden="true" tabindex="-1"></a>glm.pred <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;Down&quot;</span>, <span class="dv">252</span>)</span>
+<span id="cb493-2"><a href="logit.html#cb493-2" aria-hidden="true" tabindex="-1"></a>glm.pred[glm.probs <span class="sc">&gt;</span> .<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Up&quot;</span></span>
+<span id="cb493-3"><a href="logit.html#cb493-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(glm.pred, Direction<span class="fl">.2005</span>)</span></code></pre></div>
 <pre><code>##         Direction.2005
 ## glm.pred Down Up
 ##     Down   77 97
 ##     Up     34 44</code></pre>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="logit.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">==</span> Direction<span class="fl">.2005</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="logit.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">==</span> Direction<span class="fl">.2005</span>)</span></code></pre></div>
 <pre><code>## [1] 0.4801587</code></pre>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="logit.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">!=</span> Direction<span class="fl">.2005</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="logit.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(glm.pred <span class="sc">!=</span> Direction<span class="fl">.2005</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5198413</code></pre>
 <p>La notación <code>!=</code> significa que <em>no es igual a</em> (o distinto), por lo que el último comando calcula la tasa de error en los datos de <em>test</em>. Los resultados son bastante decepcionantes: la tasa de error de <em>test</em> es de <span class="math inline">\(52 \%\)</span>. Por supuesto, este resultado no es tan sorprendente, dado que, en general, no se esperaría poder utilizar los rendimientos de días anteriores para predecir el rendimiento futuro del mercado.</p>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-IntroEco" class="csl-entry">
 Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>. Vol. 5th edition. South-Western College Publishing.
@@ -550,9 +584,9 @@ Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="16">
-<li id="fn16"><p>Esta base pertenece a la librería <code>ISLR2</code>.<a href="logit.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>Para la interpretación de coeficientes en la práctica usualmente se analizan los efectos marginales. Ver <span class="citation">(<a href="#ref-IntroEco" role="doc-biblioref">Wooldridge 2012</a>)</span> capítulo <span class="math inline">\(17\)</span>.<a href="logit.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<ol start="18">
+<li id="fn18"><p>Esta base pertenece a la librería <code>ISLR2</code>.<a href="logit.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Para la interpretación de coeficientes en la práctica usualmente se analizan los efectos marginales. Ver <span class="citation">(<a href="#ref-IntroEco" role="doc-biblioref">Wooldridge 2012</a>)</span> capítulo <span class="math inline">\(17\)</span>.<a href="logit.html#fnref19" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -603,7 +637,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["NotasTP.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

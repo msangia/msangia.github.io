@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 2 Base de datos | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 2 Base de datos | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="intro.html"/>
-<link rel="next" href="conceptos.html"/>
+<link rel="next" href="gph1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -125,6 +125,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -226,58 +230,92 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.17</b> group_by, summarise</a></li>
 <li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.18</b> Vector de resultados</a></li>
-<li class="chapter" data-level="2.19" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.19</b> Gráficos</a></li>
-<li class="chapter" data-level="2.20" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.20</b> GGPlot</a></li>
-<li class="chapter" data-level="2.21" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.21</b> Guardar un gráfico</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a>
+<li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>3.1</b> Estimacion</a></li>
-<li class="chapter" data-level="3.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>3.2</b> Prediccion</a></li>
-<li class="chapter" data-level="3.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>3.3</b> Inferencia</a></li>
-<li class="chapter" data-level="3.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>3.4</b> Metodos parametricos</a></li>
-<li class="chapter" data-level="3.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>3.5</b> Metodos no parametricos</a></li>
-<li class="chapter" data-level="3.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>3.6</b> Evaluacion de la precision del modelo</a>
+<li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
+<li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
+<li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
+<li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>3.6.1</b> Calidad del ajuste</a></li>
-<li class="chapter" data-level="3.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>3.6.2</b> Trade-off Sesgo-Varianza</a></li>
-<li class="chapter" data-level="3.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>3.6.3</b> Clasificacion</a></li>
-<li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
-<li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
+<li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>3.7</b> Resampling Methods</a>
+<li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
-<li class="chapter" data-level="3.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7.1</b> Cross Validation</a></li>
-<li class="chapter" data-level="3.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.7.2</b> Bootstrap</a></li>
-</ul></li>
-<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.8</b> Resumen</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
+<li class="chapter" data-level="5.1" data-path="rmd.html"><a href="rmd.html#informes-con-r-markdown"><i class="fa fa-check"></i><b>5.1</b> Informes con R Markdown</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>4.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
-<li class="chapter" data-level="4.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>4.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="5.1.1" data-path="rmd.html"><a href="rmd.html#intrormd"><i class="fa fa-check"></i><b>5.1.1</b> Introduccion</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmd.html"><a href="rmd.html#referencias-cruzadas"><i class="fa fa-check"></i><b>5.1.2</b> Referencias cruzadas</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmd.html"><a href="rmd.html#regresion"><i class="fa fa-check"></i><b>5.1.3</b> Regresion</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
+<li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>5</b> Logit</a>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>5.1</b> Modelo <em>logit</em></a>
+<li class="chapter" data-level="6.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>6.1</b> Estimacion</a></li>
+<li class="chapter" data-level="6.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>6.2</b> Prediccion</a></li>
+<li class="chapter" data-level="6.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>6.3</b> Inferencia</a></li>
+<li class="chapter" data-level="6.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>6.4</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="6.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>6.5</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="6.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>6.6</b> Evaluacion de la precision del modelo</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>5.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+<li class="chapter" data-level="6.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>6.6.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="6.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>6.6.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="6.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>6.6.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="6.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>6.6.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="6.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>6.6.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>5.2</b> Aplicacion practica</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>6</b> Arboles de decision</a>
+<li class="chapter" data-level="6.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>6.7</b> Resampling Methods</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>6.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="6.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>6.2</b> Bagging</a></li>
-<li class="chapter" data-level="6.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>6.3</b> Random Forest</a></li>
+<li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>7</b> Trabajo Practico</a>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>7.1</b> Reglas del Trabajo practico</a></li>
-<li class="chapter" data-level="7.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>7.2</b> Enunciado del Trabajo Practico</a></li>
-<li class="chapter" data-level="7.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>7.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
+<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>7.2</b> Aplicacion practica</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="8" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>8</b> Logit</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>8.1</b> Modelo <em>logit</em></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>8.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>8.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>9</b> Arboles de decision</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>9.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
+<li class="chapter" data-level="9.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>9.2</b> Bagging</a></li>
+<li class="chapter" data-level="9.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>9.3</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>10</b> Trabajo Practico</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>10.1</b> Reglas del Trabajo practico</a></li>
+<li class="chapter" data-level="10.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>10.2</b> Enunciado del Trabajo Practico</a></li>
+<li class="chapter" data-level="10.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>10.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="10.4" data-path="score.html"><a href="score.html#grid-search"><i class="fa fa-check"></i><b>10.4</b> Grid search</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="./" target="blank">Maximo Sangiacomo</a></li>
 
@@ -315,7 +353,7 @@ div.csl-indent {
 <span id="cb262-4"><a href="bd.html#cb262-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2000</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;numero&quot;</span></span>
 <span id="cb262-5"><a href="bd.html#cb262-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb262-6"><a href="bd.html#cb262-6" aria-hidden="true" tabindex="-1"></a>tb</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 2
+<pre><code>## # A tibble: 1 × 2
 ##   `Plazo Fijo` `2000`
 ##   &lt;chr&gt;        &lt;chr&gt; 
 ## 1 espacio      numero</code></pre>
@@ -339,9 +377,9 @@ div.csl-indent {
 <span id="cb265-6"><a href="bd.html#cb265-6" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">=</span> <span class="fu">read.delim</span>(<span class="st">&#39;./datos/b_datos.txt&#39;</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">stringsAsFactors=</span>F, <span class="at">sep=</span><span class="st">&#39;</span><span class="sc">\t</span><span class="st">&#39;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="bd.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excel</span></span>
 <span id="cb266-2"><a href="bd.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="co"># También puede suministrarse la ruta de acceso completa </span></span>
-<span id="cb266-3"><a href="bd.html#cb266-3" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_wb.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;1&#39;</span>)</span>
+<span id="cb266-3"><a href="bd.html#cb266-3" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_WB.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;1&#39;</span>)</span>
 <span id="cb266-4"><a href="bd.html#cb266-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd)</span></code></pre></div>
-<pre><code>## tibble [60 x 11] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble [60 × 11] (S3: tbl_df/tbl/data.frame)
 ##  $ year      : num [1:60] 2011 2011 2011 2011 2011 ...
 ##  $ cname     : chr [1:60] &quot;Argentina&quot; &quot;Brazil&quot; &quot;Chile&quot; &quot;France&quot; ...
 ##  $ ccode     : chr [1:60] &quot;ARG&quot; &quot;BRA&quot; &quot;CHL&quot; &quot;FRA&quot; ...
@@ -462,7 +500,7 @@ div.csl-indent {
 <pre><code>## [1] 1.23</code></pre>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="bd.html#cb279-1" aria-hidden="true" tabindex="-1"></a>challenge <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">readr_example</span>(<span class="st">&#39;challenge.csv&#39;</span>))</span>
 <span id="cb279-2"><a href="bd.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(challenge)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 2
+<pre><code>## # A tibble: 6 × 2
 ##       x y         
 ##   &lt;dbl&gt; &lt;date&gt;    
 ## 1 0.805 2019-11-21
@@ -476,7 +514,7 @@ div.csl-indent {
 <span id="cb281-3"><a href="bd.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">x =</span> <span class="fu">col_double</span>(),</span>
 <span id="cb281-4"><a href="bd.html#cb281-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">col_date</span>()))</span>
 <span id="cb281-5"><a href="bd.html#cb281-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(challenge)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 2
+<pre><code>## # A tibble: 6 × 2
 ##       x y         
 ##   &lt;dbl&gt; &lt;date&gt;    
 ## 1 0.805 2019-11-21
@@ -504,6 +542,7 @@ div.csl-indent {
 <div id="pipe" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Pipe<a href="bd.html#pipe" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se llama <strong>pipe</strong> al símbolo <code>%&gt;%</code> (<em>shortcut</em> con: Ctrl/Cmd + Shift + M) que cumple la función de una función compuesta. Es decir, una secuencia de operaciones del tipo: <span class="math inline">\(h(g(f(x)))\)</span>.</p>
+<p>A partir de la versión de R 4.1 se puede utilizar <code>|&gt;</code>.</p>
 <p>Dicho de otra forma: <span class="math inline">\(x\)</span> %&gt;% <span class="math inline">\(f\)</span> %&gt;% <span class="math inline">\(g\)</span> %&gt;% <span class="math inline">\(h\)</span>.</p>
 <p>La sintaxis general de una función es <code>FN(OBJETO, ...)</code> y lo que hace la pipa es enviar el objeto a la posición correspondiente sin necesidad de expresarlo explícitamente. Por lo tanto, la sintaxis anterior puede expresarse equivalentemente con una pipa de la siguiente manera: <code>OBJETO %&gt;% FN( , ...)</code>.</p>
 </div>
@@ -591,7 +630,7 @@ div.csl-indent {
 <div id="merge" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Merge<a href="bd.html#merge" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/join-venn.png" style="width:40.0%" /></p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="bd.html#cb285-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_wb.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;2&#39;</span>)</span>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="bd.html#cb285-1" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_WB.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;2&#39;</span>)</span>
 <span id="cb285-2"><a href="bd.html#cb285-2" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">=</span> <span class="fu">left_join</span>(bd, meta, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&#39;ccode&#39;</span>)) <span class="co"># clave de union character no suele ser la mejor</span></span></code></pre></div>
 <table>
 <thead>
@@ -651,7 +690,7 @@ div.csl-indent {
 <span id="cb286-12"><a href="bd.html#cb286-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">gdp_dem =</span> <span class="fu">demean</span>(gdp_pc2017)) <span class="sc">%&gt;%</span></span>
 <span id="cb286-13"><a href="bd.html#cb286-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb286-14"><a href="bd.html#cb286-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bd[<span class="fu">c</span>(<span class="st">&#39;ccode&#39;</span>, <span class="st">&#39;dev&#39;</span>, <span class="st">&#39;year&#39;</span>, <span class="st">&#39;gdp_pc2017&#39;</span>, <span class="st">&#39;gdp_gr&#39;</span>, <span class="st">&#39;gdp_dem&#39;</span>)],<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 10 x 6
+<pre><code>## # A tibble: 10 × 6
 ##    ccode   dev  year gdp_pc2017 gdp_gr  gdp_dem
 ##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 ARG       0  2011     24648.  NA     1451.  
@@ -674,7 +713,7 @@ div.csl-indent {
 <span id="cb288-8"><a href="bd.html#cb288-8" aria-hidden="true" tabindex="-1"></a>                                 a <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">&amp;</span> a <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
 <span id="cb288-9"><a href="bd.html#cb288-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.double</span>(a)))</span>
 <span id="cb288-10"><a href="bd.html#cb288-10" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##       a     b
 ##   &lt;int&gt; &lt;dbl&gt;
 ## 1     1     1
@@ -819,7 +858,7 @@ div.csl-indent {
 <span id="cb291-3"><a href="bd.html#cb291-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">seq</span>(<span class="dv">5</span>,<span class="dv">1</span>),</span>
 <span id="cb291-4"><a href="bd.html#cb291-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb291-5"><a href="bd.html#cb291-5" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
+<pre><code>## # A tibble: 5 × 2
 ##       a     b
 ##   &lt;int&gt; &lt;int&gt;
 ## 1     1     5
@@ -831,7 +870,7 @@ div.csl-indent {
 <span id="cb293-2"><a href="bd.html#cb293-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> df2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">c =</span> <span class="fu">ifelse</span>(b <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="dv">0</span>, b))</span>
 <span id="cb293-3"><a href="bd.html#cb293-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> df2 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(b)</span>
 <span id="cb293-4"><a href="bd.html#cb293-4" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 3
+<pre><code>## # A tibble: 5 × 3
 ##       a     b     c
 ##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
 ## 1     4     1     1
@@ -844,7 +883,7 @@ div.csl-indent {
 <p>Se debe tener presente que se elimina la fila completa, por lo tanto, antes de descartarlos hay considerar si los valores <em>missing</em> son aleatorios o contienen algo de información.</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="bd.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Volvemos a la base de WB. Recordamos la estructura</span></span>
 <span id="cb295-2"><a href="bd.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd)</span></code></pre></div>
-<pre><code>## tibble [60 x 7] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble [60 × 7] (S3: tbl_df/tbl/data.frame)
 ##  $ ccode    : chr [1:60] &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; ...
 ##  $ year     : num [1:60] 2011 2012 2013 2014 2015 ...
 ##  $ region   : chr [1:60] &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; ...
@@ -884,7 +923,7 @@ div.csl-indent {
 <span id="cb308-5"><a href="bd.html#cb308-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">3</span>),</span>
 <span id="cb308-6"><a href="bd.html#cb308-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb308-7"><a href="bd.html#cb308-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<pre><code>## # A tibble: 3 × 3
 ##       a      b     c
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1  11.4 -1.81   3.87
@@ -897,7 +936,7 @@ div.csl-indent {
 <span id="cb310-5"><a href="bd.html#cb310-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb310-6"><a href="bd.html#cb310-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb310-7"><a href="bd.html#cb310-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 3
+<pre><code>## # A tibble: 3 × 3
 ##       a      b     c
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1 1137. -181.   387.
@@ -916,7 +955,7 @@ div.csl-indent {
 <span id="cb312-11"><a href="bd.html#cb312-11" aria-hidden="true" tabindex="-1"></a>  df1[<span class="fu">paste0</span>(v,<span class="st">&#39;_a&#39;</span>)] <span class="ot">=</span> df1[v] <span class="sc">/</span> df1[[<span class="st">&#39;a&#39;</span>]]</span>
 <span id="cb312-12"><a href="bd.html#cb312-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb312-13"><a href="bd.html#cb312-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df1,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 5
+<pre><code>## # A tibble: 3 × 5
 ##       a      b     c    b_a   c_a
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1     2 -1.21   6.24 -0.604  3.12
@@ -928,8 +967,8 @@ div.csl-indent {
 <p><img src="figures/reshape.png" style="width:50.0%" /></p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="bd.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Long</span></span>
 <span id="cb314-2"><a href="bd.html#cb314-2" aria-hidden="true" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
-<span id="cb314-3"><a href="bd.html#cb314-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb314-4"><a href="bd.html#cb314-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">select</span>(year, credit_ps, inv) <span class="sc">%&gt;%</span></span>
+<span id="cb314-3"><a href="bd.html#cb314-3" aria-hidden="true" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb314-4"><a href="bd.html#cb314-4" aria-hidden="true" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">select</span>(year, credit_ps, inv) <span class="sc">%&gt;%</span></span>
 <span id="cb314-5"><a href="bd.html#cb314-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span>year, <span class="at">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb314-6"><a href="bd.html#cb314-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">arrange</span>(year, <span class="fu">desc</span>(Var))    <span class="co"># Sort</span></span></code></pre></div>
 <table>
@@ -975,7 +1014,7 @@ div.csl-indent {
 </table>
 <div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="bd.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wide</span></span>
 <span id="cb315-2"><a href="bd.html#cb315-2" aria-hidden="true" tabindex="-1"></a>bdAR2 <span class="ot">=</span> bdAR <span class="sc">%&gt;%</span> </span>
-<span id="cb315-3"><a href="bd.html#cb315-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(Var<span class="sc">==</span><span class="st">&#39;credit_ps&#39;</span>, year <span class="sc">&lt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb315-3"><a href="bd.html#cb315-3" aria-hidden="true" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(Var<span class="sc">==</span><span class="st">&#39;credit_ps&#39;</span>, year <span class="sc">&lt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb315-4"><a href="bd.html#cb315-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">ccode =</span> <span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb315-5"><a href="bd.html#cb315-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>ccode, <span class="at">names_from=</span>year, <span class="at">values_from=</span>Val) <span class="sc">%&gt;%</span></span>
 <span id="cb315-6"><a href="bd.html#cb315-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">paste0</span>(<span class="st">&quot;CREDIT&quot;</span>, <span class="dv">2011</span><span class="sc">:</span><span class="dv">2015</span>), <span class="fu">where</span>(is.numeric))</span></code></pre></div>
@@ -1052,13 +1091,13 @@ div.csl-indent {
 <div id="row-bind-append" class="section level2 hasAnchor" number="2.13">
 <h2><span class="header-section-number">2.13</span> Row bind (Append)<a href="bd.html#row-bind-append" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="bd.html#cb317-1" aria-hidden="true" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
-<span id="cb317-2"><a href="bd.html#cb317-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;ARG&quot;</span>,</span>
+<span id="cb317-2"><a href="bd.html#cb317-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;ARG&quot;</span>,</span>
 <span id="cb317-3"><a href="bd.html#cb317-3" aria-hidden="true" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb317-4"><a href="bd.html#cb317-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, ccode, gdp_gr)</span>
+<span id="cb317-4"><a href="bd.html#cb317-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
 <span id="cb317-5"><a href="bd.html#cb317-5" aria-hidden="true" tabindex="-1"></a>bdBR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
-<span id="cb317-6"><a href="bd.html#cb317-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;BRA&quot;</span>,</span>
+<span id="cb317-6"><a href="bd.html#cb317-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;BRA&quot;</span>,</span>
 <span id="cb317-7"><a href="bd.html#cb317-7" aria-hidden="true" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb317-8"><a href="bd.html#cb317-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, ccode, gdp_gr)</span>
+<span id="cb317-8"><a href="bd.html#cb317-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
 <span id="cb317-9"><a href="bd.html#cb317-9" aria-hidden="true" tabindex="-1"></a>bdARBR <span class="ot">=</span> <span class="fu">rbind</span>(bdAR, bdBR)</span>
 <span id="cb317-10"><a href="bd.html#cb317-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver bind_rows() de tidyverse</span></span></code></pre></div>
 <table>
@@ -1308,7 +1347,7 @@ div.csl-indent {
 <div id="análisis-de-datos" class="section level2 hasAnchor" number="2.16">
 <h2><span class="header-section-number">2.16</span> Análisis de datos<a href="bd.html#análisis-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="bd.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bd)</span></code></pre></div>
-<pre><code>## tibble [60 x 7] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble [60 × 7] (S3: tbl_df/tbl/data.frame)
 ##  $ ccode    : chr [1:60] &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; ...
 ##  $ year     : num [1:60] 2011 2012 2013 2014 2015 ...
 ##  $ region   : chr [1:60] &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; &quot;Latin America &amp; Caribbean&quot; ...
@@ -1324,15 +1363,15 @@ div.csl-indent {
 <div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="bd.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(bd)</span></code></pre></div>
 <pre><code>## Rows: 60
 ## Columns: 7
-## $ ccode     &lt;chr&gt; &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG~
-## $ year      &lt;dbl&gt; 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, ~
-## $ region    &lt;chr&gt; &quot;Latin America &amp; Caribbean&quot;, &quot;Latin America &amp; Caribbean&quot;, &quot;L~
-## $ gdp_gr    &lt;dbl&gt; NA, -2.1452844, 1.2656852, -3.5785805, 1.6296643, -3.1100639~
-## $ credit_ps &lt;dbl&gt; 14.00872, 15.21282, 15.72909, 13.82377, 14.41423, 13.66763, ~
-## $ inv       &lt;dbl&gt; 17.24828, 15.85753, 16.28951, 15.97995, 15.56475, 14.27236, ~
-## $ open      &lt;dbl&gt; 35.20615, 30.52654, 29.33393, 28.40679, 22.48623, 26.09389, ~</code></pre>
+## $ ccode     &lt;chr&gt; &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG…
+## $ year      &lt;dbl&gt; 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, …
+## $ region    &lt;chr&gt; &quot;Latin America &amp; Caribbean&quot;, &quot;Latin America &amp; Caribbean&quot;, &quot;L…
+## $ gdp_gr    &lt;dbl&gt; NA, -2.1452844, 1.2656852, -3.5785805, 1.6296643, -3.1100639…
+## $ credit_ps &lt;dbl&gt; 14.00872, 15.21282, 15.72909, 13.82377, 14.41423, 13.66763, …
+## $ inv       &lt;dbl&gt; 17.24828, 15.85753, 16.28951, 15.97995, 15.56475, 14.27236, …
+## $ open      &lt;dbl&gt; 35.20615, 30.52654, 29.33393, 28.40679, 22.48623, 26.09389, …</code></pre>
 <div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="bd.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bd)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
+<pre><code>## # A tibble: 6 × 7
 ##   ccode  year region                    gdp_gr credit_ps   inv  open
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 ARG    2011 Latin America &amp; Caribbean  NA         14.0  17.2  35.2
@@ -1349,7 +1388,7 @@ div.csl-indent {
 <span id="cb340-3"><a href="bd.html#cb340-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">inv_max =</span> <span class="fu">max</span>(inv),</span>
 <span id="cb340-4"><a href="bd.html#cb340-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">open_min =</span> <span class="fu">min</span>(open)</span>
 <span id="cb340-5"><a href="bd.html#cb340-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   credit_ps_media inv_max open_min
 ##             &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
 ## 1              NA    24.9     22.5</code></pre>
@@ -1370,7 +1409,7 @@ div.csl-indent {
 <span id="cb342-11"><a href="bd.html#cb342-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="cb342-12"><a href="bd.html#cb342-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb342-13"><a href="bd.html#cb342-13" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
-<pre><code>## # A tibble: 5 x 7
+<pre><code>## # A tibble: 5 × 7
 ##   Variable    Obs    Media  Mediana    SD    Min     Max
 ##   &lt;chr&gt;     &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 credit_ps    60   89.7     94.6   38.9    13.7  171.  
@@ -1379,7 +1418,7 @@ div.csl-indent {
 ## 4 open         60   49.1     56.2   15.7    22.5   72.2 
 ## 5 year         60 2016.    2016.     2.90 2011   2020</code></pre>
 <div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="bd.html#cb344-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
-<span id="cb344-2"><a href="bd.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb344-2"><a href="bd.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb344-3"><a href="bd.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, region) <span class="sc">%&gt;%</span> </span>
 <span id="cb344-4"><a href="bd.html#cb344-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb344-5"><a href="bd.html#cb344-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">inv_sum =</span> <span class="fu">sum</span>(inv, <span class="at">na.rm =</span> T),</span>
@@ -1390,7 +1429,7 @@ div.csl-indent {
 <span id="cb344-10"><a href="bd.html#cb344-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span> </span>
 <span id="cb344-11"><a href="bd.html#cb344-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
 <span id="cb344-12"><a href="bd.html#cb344-12" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
-<pre><code>## # A tibble: 12 x 6
+<pre><code>## # A tibble: 12 × 6
 ##     year region                    inv_sum inv_sd credit_ps_p50   obs
 ##    &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
 ##  1  2015 Europe &amp; Central Asia        55.7   2.55          95.1     3
@@ -1405,12 +1444,13 @@ div.csl-indent {
 ## 10  2019 Latin America &amp; Caribbean    51.8   4.98          93.2     3
 ## 11  2020 Europe &amp; Central Asia        58.2   3.02         124.      3
 ## 12  2020 Latin America &amp; Caribbean    50.7   3.78          70.2     3</code></pre>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="bd.html#cb346-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> tab <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">str_replace</span>(region, <span class="fu">c</span>(<span class="st">&#39;Europe &amp; Central Asia&#39;</span>, <span class="st">&#39;Latin America &amp; Caribbean&#39;</span>), <span class="fu">c</span>(<span class="st">&#39;EU&#39;</span>, <span class="st">&#39;LA&#39;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-2"><a href="bd.html#cb346-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span><span class="fu">c</span>(year, region), <span class="at">names_to=</span><span class="st">&#39;Var&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Val&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb346-3"><a href="bd.html#cb346-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">unite</span>(id,region, Var) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-4"><a href="bd.html#cb346-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>year, <span class="at">names_from=</span>id, <span class="at">values_from=</span>Val)</span>
-<span id="cb346-5"><a href="bd.html#cb346-5" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 9
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="bd.html#cb346-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">=</span> tab <span class="sc">%&gt;%</span> </span>
+<span id="cb346-2"><a href="bd.html#cb346-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">str_replace_all</span>(region, (<span class="fu">c</span>(<span class="st">&quot;Europe &amp; Central Asia&quot;</span> <span class="ot">=</span> <span class="st">&quot;EU&quot;</span>, <span class="st">&quot;Latin America &amp; Caribbean&quot;</span> <span class="ot">=</span> <span class="st">&quot;LA&quot;</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb346-3"><a href="bd.html#cb346-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span><span class="fu">c</span>(year, region), <span class="at">names_to=</span><span class="st">&#39;Var&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Val&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb346-4"><a href="bd.html#cb346-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">unite</span>(id,region, Var) <span class="sc">%&gt;%</span> </span>
+<span id="cb346-5"><a href="bd.html#cb346-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>year, <span class="at">names_from=</span>id, <span class="at">values_from=</span>Val)</span>
+<span id="cb346-6"><a href="bd.html#cb346-6" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
 ##    year EU_inv_sum EU_inv_sd EU_credit_ps_p50 EU_obs LA_inv_sum LA_inv_sd
 ##   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
 ## 1  2015       55.7      2.55             95.1      3       57.2      4.24
@@ -1419,7 +1459,7 @@ div.csl-indent {
 ## 4  2018       58.6      2.93            104.       3       51.2      3.81
 ## 5  2019       59.6      3.26            108.       3       51.8      4.98
 ## 6  2020       58.2      3.02            124.       3       50.7      3.78
-## # ... with 2 more variables: LA_credit_ps_p50 &lt;dbl&gt;, LA_obs &lt;dbl&gt;</code></pre>
+## # ℹ 2 more variables: LA_credit_ps_p50 &lt;dbl&gt;, LA_obs &lt;dbl&gt;</code></pre>
 </div>
 <div id="vector-de-resultados" class="section level2 hasAnchor" number="2.18">
 <h2><span class="header-section-number">2.18</span> Vector de resultados<a href="bd.html#vector-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1436,67 +1476,13 @@ div.csl-indent {
 <span id="cb348-11"><a href="bd.html#cb348-11" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb348-12"><a href="bd.html#cb348-12" aria-hidden="true" tabindex="-1"></a>output</span></code></pre></div>
 <pre><code>## [1] 43.74972619  0.07975381  5.40972645</code></pre>
-</div>
-<div id="gráficos" class="section level2 hasAnchor" number="2.19">
-<h2><span class="header-section-number">2.19</span> Gráficos<a href="bd.html#gráficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="bd.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos<span class="sc">$</span>fecha, datos<span class="sc">$</span>ipc)</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/plot-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="bd.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(datos<span class="sc">$</span>fecha, <span class="fu">log</span>(datos<span class="sc">$</span>ipc), <span class="at">type=</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">xlab =</span><span class="st">&#39;Mes&#39;</span>, <span class="at">ylab =</span><span class="st">&#39;Log(IPC)&#39;</span>)</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/plot2-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="ggplot" class="section level2 hasAnchor" number="2.20">
-<h2><span class="header-section-number">2.20</span> GGPlot<a href="bd.html#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Grammar of Graphics. Ver más detalles en <span class="citation">(<a href="#ref-ggplot2" role="doc-biblioref">Wickham, Navarro, y Pedersen 2016</a>)</span>.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="bd.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SINTAXIS</span></span>
-<span id="cb352-2"><a href="bd.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot(data = &lt;DATA&gt;) + </span></span>
-<span id="cb352-3"><a href="bd.html#cb352-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   &lt;GEOM_FUNCTION&gt;(mapping = aes(&lt;MAPPINGS&gt;)) </span></span>
-<span id="cb352-4"><a href="bd.html#cb352-4" aria-hidden="true" tabindex="-1"></a><span class="co"># se agregan layers (piont, line, etc.)</span></span>
-<span id="cb352-5"><a href="bd.html#cb352-5" aria-hidden="true" tabindex="-1"></a><span class="co"># aes() &quot;aesthetic&quot; define la estética del gráfico</span></span>
-<span id="cb352-6"><a href="bd.html#cb352-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb352-7"><a href="bd.html#cb352-7" aria-hidden="true" tabindex="-1"></a>datos1 <span class="ot">=</span> datos <span class="sc">%&gt;%</span> </span>
-<span id="cb352-8"><a href="bd.html#cb352-8" aria-hidden="true" tabindex="-1"></a>     <span class="fu">select</span>(fecha, ipc) </span>
-<span id="cb352-9"><a href="bd.html#cb352-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb352-10"><a href="bd.html#cb352-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datos1, <span class="fu">aes</span>(<span class="at">x=</span>fecha, <span class="at">y=</span>ipc)) <span class="sc">+</span></span>
-<span id="cb352-11"><a href="bd.html#cb352-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&#39;steelblue2&#39;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb352-12"><a href="bd.html#cb352-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb352-13"><a href="bd.html#cb352-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&#39;Indice de precios al consumidor&#39;</span>, <span class="at">x =</span> <span class="st">&#39;Mes&#39;</span>, <span class="at">y =</span><span class="st">&#39;IPC&#39;</span>) <span class="sc">+</span></span>
-<span id="cb352-14"><a href="bd.html#cb352-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;none&#39;</span>) <span class="sc">+</span></span>
-<span id="cb352-15"><a href="bd.html#cb352-15" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/ggplot-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="bd.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecciona el mejor de cada clase de acuerdo al consumo en highway</span></span>
-<span id="cb353-2"><a href="bd.html#cb353-2" aria-hidden="true" tabindex="-1"></a>best_in_class <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span></span>
-<span id="cb353-3"><a href="bd.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span></span>
-<span id="cb353-4"><a href="bd.html#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>(<span class="fu">desc</span>(hwy)) <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb353-5"><a href="bd.html#cb353-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb353-6"><a href="bd.html#cb353-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
-<span id="cb353-7"><a href="bd.html#cb353-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> class)) <span class="sc">+</span></span>
-<span id="cb353-8"><a href="bd.html#cb353-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb353-9"><a href="bd.html#cb353-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> model), <span class="at">data =</span> best_in_class, <span class="at">nudge_y =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb353-10"><a href="bd.html#cb353-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Fuel efficiency generally decreases with engine size&quot;</span>,</span>
-<span id="cb353-11"><a href="bd.html#cb353-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Two seaters (sports cars) are an exception because of their light weight&quot;</span>,</span>
-<span id="cb353-12"><a href="bd.html#cb353-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Engine displacement (L)&quot;</span>,</span>
-<span id="cb353-13"><a href="bd.html#cb353-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Highway fuel economy (mpg)&quot;</span>,</span>
-<span id="cb353-14"><a href="bd.html#cb353-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;Car type&quot;</span>,</span>
-<span id="cb353-15"><a href="bd.html#cb353-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data from fueleconomy.gov&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb353-16"><a href="bd.html#cb353-16" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NULL</span></span>
-<span id="cb353-17"><a href="bd.html#cb353-17" aria-hidden="true" tabindex="-1"></a>g</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/ggplot2-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="guardar-un-gráfico" class="section level2 hasAnchor" number="2.21">
-<h2><span class="header-section-number">2.21</span> Guardar un gráfico<a href="bd.html#guardar-un-gráfico" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="bd.html#cb354-1" aria-hidden="true" tabindex="-1"></a>work <span class="ot">=</span> <span class="st">&#39;C:/Users/msang/&#39;</span></span>
-<span id="cb354-2"><a href="bd.html#cb354-2" aria-hidden="true" tabindex="-1"></a>filesave <span class="ot">=</span> <span class="fu">paste0</span>(work,<span class="st">&#39;ts.png&#39;</span>)</span>
-<span id="cb354-3"><a href="bd.html#cb354-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(filesave, g, <span class="at">width=</span><span class="dv">10</span>, <span class="at">height=</span><span class="dv">8</span>) </span></code></pre></div>
 
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia.html#bibliografia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-R4DS" class="csl-entry">
 Wickham, Hadley, y Garrett Grolemund. 2017. <em>R for Data Science</em>. O’REILLY. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
-</div>
-<div id="ref-ggplot2" class="csl-entry">
-Wickham, Hadley, Danielle Navarro, y Thomas Lin Pedersen. 2016. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer. <a href="https://ggplot2-book.org/">https://ggplot2-book.org/</a>.
 </div>
 </div>
 <div class="footnotes">
@@ -1511,7 +1497,7 @@ Wickham, Hadley, Danielle Navarro, y Thomas Lin Pedersen. 2016. <em>ggplot2: Ele
         </div>
       </div>
 <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="conceptos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="gph1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1553,7 +1539,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["NotasTP.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
@@ -1571,7 +1557,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

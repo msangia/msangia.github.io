@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Arboles de decision | Politica Economica II</title>
+  <title>Capítulo 9 Arboles de decision | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Arboles de decision | Politica Economica II" />
+  <meta property="og:title" content="Capítulo 9 Arboles de decision | Politica Economica II" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="UNLP" />
   <meta name="github-repo" content="msangia/msangia.github" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Arboles de decision | Politica Economica II" />
+  <meta name="twitter:title" content="Capítulo 9 Arboles de decision | Politica Economica II" />
   <meta name="twitter:site" content="@msangia" />
   <meta name="twitter:description" content="UNLP" />
   
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -125,6 +125,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -226,55 +230,92 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.17</b> group_by, summarise</a></li>
 <li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.18</b> Vector de resultados</a></li>
-<li class="chapter" data-level="2.19" data-path="bd.html"><a href="bd.html#gráficos"><i class="fa fa-check"></i><b>2.19</b> Gráficos</a></li>
-<li class="chapter" data-level="2.20" data-path="bd.html"><a href="bd.html#ggplot"><i class="fa fa-check"></i><b>2.20</b> GGPlot</a></li>
-<li class="chapter" data-level="2.21" data-path="bd.html"><a href="bd.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>2.21</b> Guardar un gráfico</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>3</b> Conceptos generales</a>
+<li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>3.1</b> Estimacion</a></li>
-<li class="chapter" data-level="3.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>3.2</b> Prediccion</a></li>
-<li class="chapter" data-level="3.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>3.3</b> Inferencia</a></li>
-<li class="chapter" data-level="3.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>3.4</b> Metodos parametricos</a></li>
-<li class="chapter" data-level="3.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>3.5</b> Metodos no parametricos</a></li>
-<li class="chapter" data-level="3.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>3.6</b> Evaluacion de la precision del modelo</a>
+<li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
+<li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
+<li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
+<li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>3.6.1</b> Calidad del ajuste</a></li>
-<li class="chapter" data-level="3.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>3.6.2</b> Trade-off Sesgo-Varianza</a></li>
-<li class="chapter" data-level="3.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>3.6.3</b> Clasificacion</a></li>
-<li class="chapter" data-level="3.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>3.6.4</b> Matriz de confusion</a></li>
-<li class="chapter" data-level="3.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>3.6.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
+<li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>3.7</b> Cross Validation</a></li>
-<li class="chapter" data-level="3.8" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>3.8</b> Bootstrap</a></li>
-<li class="chapter" data-level="3.9" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>3.9</b> Resumen</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>4</b> Regresion lineal</a>
+<li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>4.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
-<li class="chapter" data-level="4.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>4.2</b> Aplicacion practica</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>5</b> Logit</a>
+<li class="chapter" data-level="5.1" data-path="rmd.html"><a href="rmd.html#informes-con-r-markdown"><i class="fa fa-check"></i><b>5.1</b> Informes con R Markdown</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>5.1</b> Modelo <em>logit</em></a>
+<li class="chapter" data-level="5.1.1" data-path="rmd.html"><a href="rmd.html#intrormd"><i class="fa fa-check"></i><b>5.1.1</b> Introduccion</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmd.html"><a href="rmd.html#referencias-cruzadas"><i class="fa fa-check"></i><b>5.1.2</b> Referencias cruzadas</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmd.html"><a href="rmd.html#regresion"><i class="fa fa-check"></i><b>5.1.3</b> Regresion</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
+<li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>5.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>5.2</b> Aplicacion practica</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>6</b> Arboles de decision</a>
+<li class="chapter" data-level="6.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>6.1</b> Estimacion</a></li>
+<li class="chapter" data-level="6.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>6.2</b> Prediccion</a></li>
+<li class="chapter" data-level="6.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>6.3</b> Inferencia</a></li>
+<li class="chapter" data-level="6.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>6.4</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="6.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>6.5</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="6.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>6.6</b> Evaluacion de la precision del modelo</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>6.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="6.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>6.2</b> Bagging</a></li>
-<li class="chapter" data-level="6.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>6.3</b> Random Forest</a></li>
+<li class="chapter" data-level="6.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>6.6.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="6.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>6.6.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="6.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>6.6.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="6.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>6.6.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="6.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>6.6.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>7</b> Trabajo Practico</a>
+<li class="chapter" data-level="6.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>6.7</b> Resampling Methods</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>7.1</b> Reglas del Trabajo practico</a></li>
-<li class="chapter" data-level="7.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>7.2</b> Enunciado del Trabajo Practico</a></li>
-<li class="chapter" data-level="7.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>7.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
+<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>7.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>8</b> Logit</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="logit.html"><a href="logit.html#modelo-logit"><i class="fa fa-check"></i><b>8.1</b> Modelo <em>logit</em></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>8.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>8.2</b> Aplicacion practica</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>9</b> Arboles de decision</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>9.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
+<li class="chapter" data-level="9.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>9.2</b> Bagging</a></li>
+<li class="chapter" data-level="9.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>9.3</b> Random Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="score.html"><a href="score.html"><i class="fa fa-check"></i><b>10</b> Trabajo Practico</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="score.html"><a href="score.html#reglas-del-trabajo-practico"><i class="fa fa-check"></i><b>10.1</b> Reglas del Trabajo practico</a></li>
+<li class="chapter" data-level="10.2" data-path="score.html"><a href="score.html#enunciado-del-trabajo-practico"><i class="fa fa-check"></i><b>10.2</b> Enunciado del Trabajo Practico</a></li>
+<li class="chapter" data-level="10.3" data-path="score.html"><a href="score.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>10.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="10.4" data-path="score.html"><a href="score.html#grid-search"><i class="fa fa-check"></i><b>10.4</b> Grid search</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="./" target="blank">Maximo Sangiacomo</a></li>
 
@@ -299,18 +340,18 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="images/background.jpg">
 </div>
-<div id="arboles" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Capítulo 6</span> Arboles de decision<a href="arboles.html#arboles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="arboles" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Capítulo 9</span> Arboles de decision<a href="arboles.html#arboles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Los métodos basados en árboles para regresión y clasificación estratifican o segmentan el espacio predictor en varias regiones. Para hacer una predicción de una observación dada normalmente utiliza el valor de respuesta promedio de las observaciones de la base de entrenamiento en la región a la que pertenece. En el caso de clasificación se asigna a la categoría mayoritaria dentro del nodo terminal.</p>
-<div id="classification-and-regression-tree-cart" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> <em>Classification and Regression Tree</em> (CART)<a href="arboles.html#classification-and-regression-tree-cart" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="classification-and-regression-tree-cart" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> <em>Classification and Regression Tree</em> (CART)<a href="arboles.html#classification-and-regression-tree-cart" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En el caso de árboles de regresión, si <span class="math inline">\(Y\)</span> es la respuesta y <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> los <em>inputs</em> se parte el espacio <span class="math inline">\((X_1, X_2)\)</span> en dos regiones, en base a una sola variable (partición horizontal o vertical). Dentro de cada región proponemos como predicción la media muestral de <span class="math inline">\(Y\)</span>.</p>
 <p>Se busca elegir la variable y el punto de partición de manera óptima (mejor ajuste global). Es computacionalmente inviable considerar cada posible partición del espacio de atributos en <span class="math inline">\(J\)</span> regiones. Por lo tanto, toma un enfoque <em>top-down greedy</em> que se conoce como división binaria recursiva. El enfoque es <em>top-down</em> porque comienza en la parte superior del árbol (en cuyo punto todas las observaciones pertenecen a una sola región) y luego divide sucesivamente el espacio predictor; cada división se indica a través de dos nuevas ramas más abajo en el árbol. Es <em>greedy</em> porque en cada paso del proceso de construcción del árbol, la mejor división se hace en ese paso en particular, en lugar de mirar hacia adelante y elegir una división que conducirá a un mejor árbol en algún paso futuro.</p>
-<p>El panel izquierdo de la Figura <a href="arboles.html#fig:tree">6.1</a> muestra un árbol de regresión para predecir el logaritmo del salario (en miles de dólares) de un jugador de béisbol, basado en la cantidad de años que ha jugado en las ligas mayores y la cantidad de <em>hits</em> que hizo en el año anterior. En un nodo interno dado, la etiqueta (de la forma <span class="math inline">\(X_j &lt; t_k\)</span>) indica la rama izquierda que sale de esa división, y la rama de la derecha corresponde a <span class="math inline">\(X_j \ge t_k\)</span>. Por ejemplo, la división en la parte superior del árbol da como resultado dos ramas grandes. La rama izquierda corresponde a <code>Years &lt; 4,5</code>, y la rama derecha corresponde a <code>Years &gt;= 4,5</code>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> El árbol tiene dos nodos internos y tres nodos terminales u hojas. El número en cada hoja es la media de la variable de respuesta de las observaciones que caen allí. Por ejemplo, la predicción para el nodo terminal de la izquierda es <span class="math inline">\(e^{5,107} \times 1.000 = \$165.174\)</span>. El panel derecho la Figura <a href="arboles.html#fig:tree">6.1</a> muestra las regiones en función de <code>Years</code> y <code>Hits</code>.</p>
+<p>El panel izquierdo de la Figura <a href="arboles.html#fig:tree">9.1</a> muestra un árbol de regresión para predecir el logaritmo del salario (en miles de dólares) de un jugador de béisbol, basado en la cantidad de años que ha jugado en las ligas mayores y la cantidad de <em>hits</em> que hizo en el año anterior. En un nodo interno dado, la etiqueta (de la forma <span class="math inline">\(X_j &lt; t_k\)</span>) indica la rama izquierda que sale de esa división, y la rama de la derecha corresponde a <span class="math inline">\(X_j \ge t_k\)</span>. Por ejemplo, la división en la parte superior del árbol da como resultado dos ramas grandes. La rama izquierda corresponde a <code>Years &lt; 4,5</code>, y la rama derecha corresponde a <code>Years &gt;= 4,5</code>.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> El árbol tiene dos nodos internos y tres nodos terminales u hojas. El número en cada hoja es la media de la variable de respuesta de las observaciones que caen allí. Por ejemplo, la predicción para el nodo terminal de la izquierda es <span class="math inline">\(e^{5,107} \times 1.000 = \$165.174\)</span>. El panel derecho la Figura <a href="arboles.html#fig:tree">9.1</a> muestra las regiones en función de <code>Years</code> y <code>Hits</code>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:tree"></span>
 <img src="figures/8Tree.png" alt="Arbol de regresión" width="80%" height="40%" />
 <p class="caption">
-Figura 6.1: Arbol de regresión
+Figura 9.1: Arbol de regresión
 </p>
 </div>
 <p>Notar:</p>
@@ -325,17 +366,17 @@ Figura 6.1: Arbol de regresión
 \end{align*}\]</span></p>
 <p>Se trata de buscar la variable de partición <span class="math inline">\(X_j\)</span> y el punto de partición <span class="math inline">\(s\)</span> que resuelvan (minimizar el <span class="math inline">\(EMC\)</span> en cada región):</p>
 <p><span class="math display" id="eq:region">\[\begin{equation}
-\tag{6.1}
+\tag{9.1}
   \sum_{i: x_i \in R_1(j,s)} (y_i - \hat{y}_{R_1})^2 +  \sum_{i: x_i \in R_2(j,s)} (y_i - \hat{y}_{R_2})^2
 \end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\hat{y}_{R_1}\)</span> y <span class="math inline">\(\hat{y}_{R_2}\)</span> es el promedio de la respuesta en las regiones <span class="math inline">\(1\)</span> y <span class="math inline">\(2\)</span>, respectivamente. Para cada variable y punto de partición, la minimización interna se corresponde con la <strong>media</strong> dentro de cada región.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<p>Donde <span class="math inline">\(\hat{y}_{R_1}\)</span> y <span class="math inline">\(\hat{y}_{R_2}\)</span> es el promedio de la respuesta en las regiones <span class="math inline">\(1\)</span> y <span class="math inline">\(2\)</span>, respectivamente. Para cada variable y punto de partición, la minimización interna se corresponde con la <strong>media</strong> dentro de cada región.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
 <p><strong>¿Cuándo parar de realizar divisiones?</strong></p>
 <p>Un árbol demasiado extenso sobreajusta (<em>overfit</em>) los datos. Pero dado que el proceso es secuencial y cada corte no mira lo que puede suceder después, si se detiene el proceso demasiado pronto se puede perder un “gran” corte más abajo. <em>Prunning</em>: ajustar un árbol grande y luego podarlo (<em>prune</em>) usando un criterio de <em>cost-complexity</em>.</p>
 <p><strong><em>Classification tree</em></strong></p>
 <p>Un árbol de clasificación es muy similar a un árbol de regresión, excepto que se utiliza para predecir una respuesta cualitativa en lugar de una cuantitativa. Recordar que para un árbol de regresión, la respuesta predicha para una observación esta dada por la respuesta media de las observaciones de entrenamiento que pertenecen al mismo nodo terminal. En contraste, para un árbol de clasificación, predice que cada observación pertenece a la clase que ocurre más comúnmente en las observaciones de entrenamiento en la región a la que pertenece. Se basa en el error de clasificación o índice de Gini (pureza), análogo a <span class="math inline">\(EMC\)</span> en un árbol de regresión.</p>
 </div>
-<div id="bagging" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Bagging<a href="arboles.html#bagging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bagging" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Bagging<a href="arboles.html#bagging" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Ventajas y desventajas de <span class="math inline">\(CART\)</span>:</p>
 <ul>
 <li><p>Forma inteligente de representar no linealidades.</p></li>
@@ -344,25 +385,25 @@ Figura 6.1: Arbol de regresión
 <li><p>Poco robusto, variaciones en los datos modifican el resultado.</p></li>
 </ul>
 <p>Un método de <em>ensemble</em> es un enfoque que combina muchos modelos simples en uno único y potencialmente muy poderoso. Los modelos simples se conocen como modelos de aprendizaje débil, ya que por sí mismos pueden generar predicciones mediocres.</p>
-<p>Una posible solución es el <em>bootstrap aggregation</em> que consiste en tomar como predicción el promedio de las predicciones <em>bootstrap</em>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p>Una posible solución es el <em>bootstrap aggregation</em> que consiste en tomar como predicción el promedio de las predicciones <em>bootstrap</em>.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
 <p><span class="math display" id="eq:bag">\[\begin{equation}
-\tag{6.2}
+\tag{9.2}
    \hat{f}_{bag} = \frac{1}{B} \sum_{b=1}^{B} \hat{f}^{*b}(x)
 \end{equation}\]</span></p>
 <p>Esta idea se basa en que la varianza del promedio es menor que la de una predicción sola. Bajo independencia si <span class="math inline">\(V(x) = \sigma^2\)</span> entonces <span class="math inline">\(V(\overline{x}) = \frac{\sigma^2}{n}\)</span>. Pero existe el <strong>problema</strong> que si hay un predictor fuerte (siempre va a ser seleccionado primero), los distintos árboles son muy similares entre sí por lo que habrá alta correlación.</p>
 </div>
-<div id="random-forest" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Random Forest<a href="arboles.html#random-forest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="random-forest" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Random Forest<a href="arboles.html#random-forest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Busca bajar la correlación entre los árboles del <em>bootstrap</em>. Al igual que en <em>bagging</em>, construye una serie de árboles de decisión en muestras de entrenamiento <em>bootstrap</em>. Pero al construir estos árboles de decisión, cada vez que se considera una división en un árbol, se elige como candidatos de división una muestra aleatoria de <span class="math inline">\(m\)</span> predictores del conjunto completo de <span class="math inline">\(p\)</span> predictores (<span class="math inline">\(m &lt; p\)</span>).</p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="17">
-<li id="fn17"><p>Al estar arriba, <code>Years</code> es la variable más importante para explicar el salario.<a href="arboles.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>Recordar que si se quiere predecir una variable aleatoria <span class="math inline">\(Y\)</span> con una constante <span class="math inline">\(m\)</span> el mejor predictor es su esperanza, es decir, <span class="math inline">\(m = E(Y)\)</span>.<a href="arboles.html#fnref18" class="footnote-back">↩︎</a></p></li>
-<li id="fn19"><p>Es decir, muestreo con reemplazo.<a href="arboles.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<ol start="20">
+<li id="fn20"><p>Al estar arriba, <code>Years</code> es la variable más importante para explicar el salario.<a href="arboles.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>Recordar que si se quiere predecir una variable aleatoria <span class="math inline">\(Y\)</span> con una constante <span class="math inline">\(m\)</span> el mejor predictor es su esperanza, es decir, <span class="math inline">\(m = E(Y)\)</span>.<a href="arboles.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>Es decir, muestreo con reemplazo.<a href="arboles.html#fnref22" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -413,7 +454,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["NotasTP.pdf"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
@@ -431,7 +472,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

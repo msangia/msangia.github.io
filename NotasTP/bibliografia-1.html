@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 7 Regresion lineal | Politica Economica II</title>
+  <title>Bibliografia | Politica Economica II</title>
   <meta name="description" content="UNLP" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 7 Regresion lineal | Politica Economica II" />
+  <meta property="og:title" content="Bibliografia | Politica Economica II" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="UNLP" />
   <meta name="github-repo" content="msangia/msangia.github" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 7 Regresion lineal | Politica Economica II" />
+  <meta name="twitter:title" content="Bibliografia | Politica Economica II" />
   <meta name="twitter:site" content="@msangia" />
   <meta name="twitter:description" content="UNLP" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="conceptos.html"/>
-<link rel="next" href="logit.html"/>
+<link rel="prev" href="score.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -340,306 +340,81 @@ div.csl-indent {
 <div class="hero-image-container"> 
   <img class= "hero-image" src="images/background.jpg">
 </div>
-<div id="mco" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Capítulo 7</span> Regresion lineal<a href="mco.html#mco" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En <em>machine learning</em> el objetivo principal no es estimar y hacer inferencia como en la econometría clásica sino hacer predicciones/clasificar. El modelo de regresión lineal es una herramienta útil para predecir cuando la variable de respuesta es cuantitativa.</p>
-<p><strong>Modelo</strong> lineal simple</p>
-<p><span class="math display" id="eq:ols">\[\begin{equation}
-\tag{7.1}
-  y = \beta_0 + \beta_1 x_1 + u
-\end{equation}\]</span></p>
-<p>donde <span class="math inline">\(u\)</span> es un término de error aleatorio que captura todo lo que no puede representarse con este modelo simple (factores no observables, errores de medición, etc.).</p>
-<p><strong>Modelo</strong> lineal múltiple</p>
-<p>En notación matricial:<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
-<p><span class="math display" id="eq:ols2">\[\begin{equation}
-\tag{7.2}
-  Y = X \beta + u
-\end{equation}\]</span></p>
-<p>donde la primera columna de <span class="math inline">\(X\)</span> es la constante.</p>
-<p><strong>Método</strong> de Mínimos Cuadrados Ordinarios <span class="math inline">\((MCO)\)</span></p>
-<p><span class="math display" id="eq:rss">\[\begin{equation}
-\tag{7.3}
-\text{RSS} = \sum_{i=1}^{n}(y_{i} - \beta_{0} - \sum_{j=1}^{p} \beta_{j} x_{ij} )^2  
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:beta">\[\begin{equation}
-\tag{7.4}
-\hat{\beta} = min \sum_{i=1}^{n}e_i^2  
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:beta2">\[\begin{equation}
-\tag{7.5}
-\hat{\beta} = (X&#39;X)^{-1}X&#39;Y  
-\end{equation}\]</span></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mco"></span>
-<img src="figures/3.1LReg.png" alt="Modelo lineal y MCO" width="80%" height="40%" />
-<p class="caption">
-Figura 7.1: Modelo lineal y MCO
-</p>
-</div>
-<p><strong>Teorema de Gauss/Markov (TGM)</strong>: Bajo los supuestos clásicos el estimador de <span class="math inline">\(MCO\)</span> es el mejor dentro de los lineales e insesgados (MELI).</p>
-<p><strong>Definición</strong>: el <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
-<p><span class="math display" id="eq:r2">\[\begin{equation}
-\tag{7.6}
-R^2 = 1 - \frac{SCR}{SCT}
-\end{equation}\]</span></p>
-<p>Dado que la suma de cuadrados totales es igual a la suma de cuadrados explicada y la suma de cuadrados residual (<span class="math inline">\(SCT = SCE + SCR\)</span>) y que <span class="math inline">\(SCT\)</span> es una magnitud fija, por lo tanto, <span class="math inline">\(MCO\)</span> <strong>maximiza el</strong> <span class="math inline">\(R^2\)</span>.</p>
-<div id="relacion-entre-estimacion-optima-y-prediccion-optima" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Relacion entre estimacion optima y prediccion optima<a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dado:</p>
-<p><span class="math display" id="eq:ols3">\[\begin{equation}
-\tag{7.7}
-Y_i = X_i^{&#39;} \beta + u_i
-\end{equation}\]</span></p>
-<p>con <span class="math inline">\(i=1,...,n\)</span></p>
-<p>La predicción de <span class="math inline">\(Y\)</span> se define como:</p>
-<p><span class="math display" id="eq:ols4">\[\begin{equation}
-\tag{7.8}
-\hat{Y_i} \equiv X_i^{&#39;} \hat{\beta}
-\end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\hat{Y_i}\)</span> es el <strong>predictor</strong> (variable aleatoria) y <span class="math inline">\(\hat{\beta}\)</span> es el <strong>estimador</strong> (parámetro). Por el TGM:</p>
-<ul>
-<li><p><span class="math inline">\(E(\hat{Y_i}) = X_i^{&#39;} \beta\)</span> (predictor insesgado)</p></li>
-<li><p><span class="math inline">\(V(\hat{Y_i}) = X_i^{&#39;} V(\hat{\beta})X_i = \sigma^2X_i^{&#39;}(X&#39;X)^{-1}X_i\)</span></p></li>
-</ul>
-<p>donde <span class="math inline">\(V(\hat{\beta}) = \sigma^2(X&#39;X)^{-1}\)</span></p>
-<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
-<p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
-<p><span class="math display" id="eq:ecm">\[\begin{equation}
-\tag{7.9}
-EMC(\hat{\beta}) \equiv E(\hat{\beta} - \beta)^2
-\end{equation}\]</span></p>
-<p>El <span class="math inline">\(EMC\)</span> mide en promedio cuan lejos esta <span class="math inline">\(\hat{\beta}\)</span> (estimador) de <span class="math inline">\(\beta\)</span>, el parámetro que se quiere estimar.</p>
-<p>Recordar que por definición:</p>
-<ul>
-<li><p><span class="math inline">\(V(\hat{\beta}) \equiv E(\hat{\beta} - E(\hat{\beta}))^2\)</span> (dispersión)</p></li>
-<li><p><span class="math inline">\(Sesgo(\hat{\beta}) \equiv E(\hat{\beta}) - \beta\)</span> (centro)</p></li>
-</ul>
-<p>A partir de <a href="mco.html#eq:ecm">(7.9)</a> y las definiciones anteriores reescribimos el <span class="math inline">\(EMC\)</span> en términos de la descomposición sesgo-varianza:</p>
-<p><span class="math display" id="eq:ecm2">\[\begin{equation}
-\tag{7.10}
-EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
-\end{equation}\]</span></p>
-<p>Es decir, cuán mal <strong>estima</strong> <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
-<p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
-<p><span class="math display" id="eq:err">\[\begin{equation}
-\tag{7.11}
-Err(\hat{Y}) \equiv E(Y - \hat{Y})^2
-\end{equation}\]</span></p>
-<p>Como vimos antes, dado el modelo genérico<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> <span class="math inline">\(Y = f(X) + u\)</span> donde <span class="math inline">\(E(u) = 0\)</span> y <span class="math inline">\(V(u) = \sigma^2\)</span>:</p>
-<ul>
-<li><p><span class="math inline">\(f(X)\)</span> es la parte sistemática</p></li>
-<li><p><span class="math inline">\(u\)</span> la parte no sistemática</p></li>
-</ul>
-<div class="infobox note">
-<p>Resultado importante en <strong>teoría de la predicción:</strong> si se quiere predecir una variable aleatoria <span class="math inline">\(Y\)</span> con una constante <span class="math inline">\(m\)</span> el mejor predictor es su esperanza,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> es decir, <span class="math inline">\(m = E(Y)\)</span>.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
-</div>
-<p>Entonces, si <span class="math inline">\(E(Y) = f(X)\)</span>, <span class="math inline">\(u\)</span> es no observable y <span class="math inline">\(f(X)\)</span> es conocida, <span class="math inline">\(f(X)\)</span> es el mejor predictor porque, como se dijo arriba, el mejor predictor de una variable aleatoria es su esperanza.</p>
-<p>En la práctica <span class="math inline">\(f(X)\)</span> es desconocida y, por lo tanto, se debe estimar <span class="math inline">\(\hat{f}(X)\)</span>.</p>
-<p><span class="math display" id="eq:err2">\[\begin{equation}
-\tag{7.12}
-Err(\hat{Y}) = E(Y - \hat{f})^2
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:err3">\[\begin{equation}
-\tag{7.13}
-Err(Y - \hat{f}) = EMC(\hat{f}) + \sigma^2
-\end{equation}\]</span></p>
-<p>En términos de la ecuación <a href="conceptos.html#eq:ri">(6.3)</a> el error de pronóstico es la suma de un error reducible <span class="math inline">\((EMC)\)</span> y otro irreducible <span class="math inline">\((\sigma^2)\)</span>. Además, notar que el error de predicción y el <span class="math inline">\(EMC\)</span> difieren solo por una constante <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>Nuevamente, puede verse la relación entre predicción y estimación. <em>Predecir</em> correctamente <span class="math inline">\((Err(Y - \hat{f}))\)</span> requiere <em>estimar</em> <span class="math inline">\((EMC(\hat{f}))\)</span> correctamente (porque <span class="math inline">\(\sigma^2\)</span> no se puede controlar). Es decir, tener bajo sesgo y baja varianza. Utilizando la descomposición:</p>
-<p><span class="math display" id="eq:err4">\[\begin{equation}
-\tag{7.14}
-Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigma^2
-\end{equation}\]</span></p>
-<p>En la econometría tradicional si <span class="math inline">\(\hat{f}\)</span> es insesgado minimizar el error de pronóstico es minimizar la varianza. <em>Machine learning</em> hace uso de que estrategias sesgadas pueden implicar una reducción drástica en la varianza, por lo tanto, puede ser que el mínimo <span class="math inline">\(EMC\)</span> ocurra para predictores sesgados.</p>
-</div>
-<div id="aplicacion-practica" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="infobox tip">
-<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> y en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
-</div>
-<p>La biblioteca <code>ISLR2</code> contiene la base de datos de <code>Boston</code>, que registra <code>medv</code> (mediana del valor de las casas en miles de USD) para <span class="math inline">\(506\)</span> distritos censales en Boston. Buscaremos predecir <code>medv</code> usando <span class="math inline">\(12\)</span> predictores como <code>rm</code> (número promedio de habitaciones por casa), <code>age</code> (edad promedio de las casas) y <code>lstat</code> (porcentaje de hogares con bajo <em>status</em> socioeconómico).</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="mco.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb447-2"><a href="mco.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb447-3"><a href="mco.html#cb447-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Boston)</span></code></pre></div>
-<pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black lstat
-## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98
-## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14
-## 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03
-## 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94
-## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33
-## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21
-##   medv
-## 1 24.0
-## 2 21.6
-## 3 34.7
-## 4 33.4
-## 5 36.2
-## 6 28.7</code></pre>
-<p>Comenzaremos usando la función <code>lm()</code> para ajustar un modelo de regresión lineal simple, con <code>medv</code> como respuesta y <code>lstat</code> como predictor.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="mco.html#cb449-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
-<span id="cb449-2"><a href="mco.html#cb449-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ lstat, data = Boston)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.168  -3.990  -1.318   2.034  24.500 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 34.55384    0.56263   61.41   &lt;2e-16 ***
-## lstat       -0.95005    0.03873  -24.53   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 6.216 on 504 degrees of freedom
-## Multiple R-squared:  0.5441, Adjusted R-squared:  0.5432 
-## F-statistic: 601.6 on 1 and 504 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="mco.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit1)</span></code></pre></div>
-<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
-##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
-##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="mco.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Boston)</span>
-<span id="cb453-2"><a href="mco.html#cb453-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lstat, medv, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb453-3"><a href="mco.html#cb453-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit1, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/ml3-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>A continuación se examinan algunos gráficos de diagnóstico con la función <code>plot()</code>. En general, este comando producirá un gráfico a la vez (presionando <em>Enter</em> se generará el siguiente gráfico). Sin embargo, se pueden ver los cuatro gráficos juntos con las funciones <code>par()</code> y <code>mfrow()</code>, que le dicen a <code>R</code> que divida la pantalla de visualización en paneles separados. Por ejemplo, <code>par(mfrow = c(2, 2))</code> divide la región del gráfico en una cuadrícula de paneles de <span class="math inline">\(2 \times 2\)</span>.</p>
-<ul>
-<li><strong>Residuals vs. fitted values:</strong> residuos vs. valores ajustados se utiliza para detectar patrones de variables omitidas, heterocedasticidad, etc.</li>
-<li><strong>Scale Location:</strong> residuos estandarizados vs. valores ajustados. Similar al anterior y se utiliza para detectar patrones en los residuos.</li>
-<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la distribución normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
-<li><strong>Residuals vs. Leverage:</strong> el <em>leverage</em> es una medida de cuán influyente es una observación en el valor de los coeficientes. Este gráfico se utiliza para detectar las (posibles) observaciones influyentes y los valores atípicos al mismo tiempo.</li>
-</ul>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="mco.html#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb454-2"><a href="mco.html#cb454-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit1)</span></code></pre></div>
-<p><img src="NotasTP_files/figure-html/ml5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>Para obtener la predicción y el <span class="math inline">\(EMC\)</span>:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="mco.html#cb455-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit1, <span class="at">data =</span> Boston)</span>
-<span id="cb455-2"><a href="mco.html#cb455-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb455-3"><a href="mco.html#cb455-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
-<pre><code>## [1] 38.48297</code></pre>
-<p>Regresión lineal múltiple:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="mco.html#cb457-1" aria-hidden="true" tabindex="-1"></a>lm.fit2 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb457-2"><a href="mco.html#cb457-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit2)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ lstat + age, data = Boston)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.981  -3.978  -1.283   1.968  23.158 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 33.22276    0.73085  45.458  &lt; 2e-16 ***
-## lstat       -1.03207    0.04819 -21.416  &lt; 2e-16 ***
-## age          0.03454    0.01223   2.826  0.00491 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 6.173 on 503 degrees of freedom
-## Multiple R-squared:  0.5513, Adjusted R-squared:  0.5495 
-## F-statistic:   309 on 2 and 503 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><strong>BONUS:</strong></p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="mco.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb459-2"><a href="mco.html#cb459-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm.fit1, lm.fit2, <span class="at">type =</span> <span class="st">&#39;latex&#39;</span>, </span>
-<span id="cb459-3"><a href="mco.html#cb459-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat=</span><span class="fu">c</span>(<span class="st">&#39;n&#39;</span>,<span class="st">&#39;adj.rsq&#39;</span>),</span>
-<span id="cb459-4"><a href="mco.html#cb459-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">dep.var.labels   =</span> <span class="st">&#39;Valor promedio de la vivienda&#39;</span>,</span>
-<span id="cb459-5"><a href="mco.html#cb459-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">&#39;Porcentaje socioeconómico bajo&#39;</span>,</span>
-<span id="cb459-6"><a href="mco.html#cb459-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;Antigüedad de las casas}&#39;</span>))</span></code></pre></div>
-<p>Utilizando todas las variables de la base de datos:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="mco.html#cb460-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
-<span id="cb460-2"><a href="mco.html#cb460-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ ., data = Boston)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.595  -2.730  -0.518   1.777  26.199 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  3.646e+01  5.103e+00   7.144 3.28e-12 ***
-## crim        -1.080e-01  3.286e-02  -3.287 0.001087 ** 
-## zn           4.642e-02  1.373e-02   3.382 0.000778 ***
-## indus        2.056e-02  6.150e-02   0.334 0.738288    
-## chas         2.687e+00  8.616e-01   3.118 0.001925 ** 
-## nox         -1.777e+01  3.820e+00  -4.651 4.25e-06 ***
-## rm           3.810e+00  4.179e-01   9.116  &lt; 2e-16 ***
-## age          6.922e-04  1.321e-02   0.052 0.958229    
-## dis         -1.476e+00  1.995e-01  -7.398 6.01e-13 ***
-## rad          3.060e-01  6.635e-02   4.613 5.07e-06 ***
-## tax         -1.233e-02  3.760e-03  -3.280 0.001112 ** 
-## ptratio     -9.527e-01  1.308e-01  -7.283 1.31e-12 ***
-## black        9.312e-03  2.686e-03   3.467 0.000573 ***
-## lstat       -5.248e-01  5.072e-02 -10.347  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 4.745 on 492 degrees of freedom
-## Multiple R-squared:  0.7406, Adjusted R-squared:  0.7338 
-## F-statistic: 108.1 on 13 and 492 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Utilizando todas las variables de la base de datos menos <code>age</code>:</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="mco.html#cb462-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb462-2"><a href="mco.html#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ . - age, data = Boston)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -15.6054  -2.7313  -0.5188   1.7601  26.2243 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  36.436927   5.080119   7.172 2.72e-12 ***
-## crim         -0.108006   0.032832  -3.290 0.001075 ** 
-## zn            0.046334   0.013613   3.404 0.000719 ***
-## indus         0.020562   0.061433   0.335 0.737989    
-## chas          2.689026   0.859598   3.128 0.001863 ** 
-## nox         -17.713540   3.679308  -4.814 1.97e-06 ***
-## rm            3.814394   0.408480   9.338  &lt; 2e-16 ***
-## dis          -1.478612   0.190611  -7.757 5.03e-14 ***
-## rad           0.305786   0.066089   4.627 4.75e-06 ***
-## tax          -0.012329   0.003755  -3.283 0.001099 ** 
-## ptratio      -0.952211   0.130294  -7.308 1.10e-12 ***
-## black         0.009321   0.002678   3.481 0.000544 ***
-## lstat        -0.523852   0.047625 -10.999  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 4.74 on 493 degrees of freedom
-## Multiple R-squared:  0.7406, Adjusted R-squared:  0.7343 
-## F-statistic: 117.3 on 12 and 493 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div id="bibliografia-1" class="section level1 unnumbered hasAnchor">
+<h1>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-</div>
-</div>
-<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-eslii" class="csl-entry">
+<div class="csl-entry">
+Bazarbash, Majid. 2019. <span>«FinTech in Financial Inclusion Machine Learning Applications in Assessing Credit Risk»</span>. <em>IMF Working Paper</em>, n.º 109. <a href="https://www.imf.org/~/media/Files/Publications/WP/2019/WPIEA2019109.ashx">https://www.imf.org/~/media/Files/Publications/WP/2019/WPIEA2019109.ashx</a>.
+</div>
+<div class="csl-entry">
+Boehmke, Bradley, y Brandon Greenwell. 2020. <em>Hands-On Machine Learning with R</em>. Taylor &amp; Francis Group. <a href="https://bradleyboehmke.github.io/HOML/">https://bradleyboehmke.github.io/HOML/</a>.
+</div>
+<div class="csl-entry">
+Frost, Jon, Leonardo Gambacorta, Yi Huang, Hyun Song Shin, y Pablo Zbinden. 2019. <span>«BigTech and the changing structure of financial intermediation»</span>. <em>BIS Working Papers</em>, n.º 779. <a href="https://www.bis.org/publ/work779.htm">https://www.bis.org/publ/work779.htm</a>.
+</div>
+<div class="csl-entry">
 Hastie, Trevor, Robert Tibshirani, y Jerome Friedman. 2008. <em>The Elements of Statistical Learning. Data Mining, Inference, and Prediction</em>. Springer. <a href="https://hastie.su.domains/Papers/ESLII.pdf">https://hastie.su.domains/Papers/ESLII.pdf</a>.
 </div>
-<div id="ref-IntroEco" class="csl-entry">
+<div class="csl-entry">
+Petropoulos, Anastasios, Vasilis Siakoulis, Evaggelos Stavroulakis, y Aristotelis Klamargias. 2018. <span>«A robust machine learning approach for credit risk analysis of large loan-level datasets using deep learning and extreme gradient boosting»</span>. <em>Irving Fisher Committee</em>. <a href="https://www.bis.org/ifc/publ/ifcb49_49.pdf">https://www.bis.org/ifc/publ/ifcb49_49.pdf</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, y Garrett Grolemund. 2017. <em>R for Data Science</em>. O’REILLY. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Danielle Navarro, y Thomas Lin Pedersen. 2016. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer. <a href="https://ggplot2-book.org/">https://ggplot2-book.org/</a>.
+</div>
+<div class="csl-entry">
 Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>. Vol. 5th edition. South-Western College Publishing.
 </div>
+<div class="csl-entry">
+Xie, Yihui, J. J. Allaire, y Garrett Grolemund. 2021. <em>R Markdown: The Definitive Guide</em>. <em>CRC Press</em>. Chapman; Hall Book. <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a>.
 </div>
-<div class="footnotes">
-<hr />
-<ol start="13">
-<li id="fn13"><p>Para más detalles véase <span class="citation">(<a href="#ref-IntroEco" role="doc-biblioref">Wooldridge 2012</a>)</span> Apéndice E (página 807).<a href="mco.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>No necesariamente lineal.<a href="mco.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>Cuando lo “mejor” se mide con el <span class="math inline">\(EMC\)</span>. Para más detalles véase <span class="citation">(<a href="#ref-eslii" role="doc-biblioref">Hastie, Tibshirani, y Friedman 2008</a>)</span>.<a href="mco.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>En el Capítulo <a href="arboles.html#arboles">9</a> veremos que este resultado es importante para la metodología de arboles de decisión.<a href="mco.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>Para más detalles véase <code>?stats::lm</code>.<a href="mco.html#fnref17" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div class="csl-entry">
+Xie, Yihui, Christophe Dervieux, y Emily Riederer. 2021. <em>bookdown: Authoring Books and Technical Documents with R Markdown</em>. <em>CRC Press</em>. Chapman; Hall Book. <a href="https://bookdown.org/yihui/bookdown/">https://bookdown.org/yihui/bookdown/</a>.
 </div>
+<div class="csl-entry">
+———. 2022. <em>R Markdown Cookbook</em>. <em>CRC Press</em>. Chapman; Hall Book. <a href="https://bookdown.org/yihui/rmarkdown-cookbook/">https://bookdown.org/yihui/rmarkdown-cookbook/</a>.
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="conceptos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="logit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="score.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
