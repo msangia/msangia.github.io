@@ -6,7 +6,7 @@
 
 # Politica Economica II
 
-**Trabajo Practico 2022** 
+**Trabajo Practico 2023** 
 
 [Guia del curso](https://msangia.github.io/NotasTP/index.html "Guia completa.")    
 
