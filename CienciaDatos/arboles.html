@@ -317,10 +317,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.5.1</b> Arboles de clasificacion</a></li>
 <li class="chapter" data-level="10.5.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.5.2</b> Comparacion de modelos para clasificacion</a></li>
-<li class="chapter" data-level="10.5.3" data-path="arboles.html"><a href="arboles.html#grid-search"><i class="fa fa-check"></i><b>10.5.3</b> Grid search</a></li>
-<li class="chapter" data-level="10.5.4" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.5.4</b> Arboles de regresion</a></li>
-<li class="chapter" data-level="10.5.5" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.5.5</b> Bagging y Random Forests</a></li>
-<li class="chapter" data-level="10.5.6" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.5.6</b> Boosting</a></li>
+<li class="chapter" data-level="10.5.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.5.3</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="10.5.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.5.4</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="10.5.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.5.5</b> Boosting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
@@ -763,7 +762,7 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 <span id="cb560-36"><a href="arboles.html#cb560-36" aria-hidden="true" tabindex="-1"></a>lgbm.mod <span class="ot">=</span> <span class="fu">lgb.train</span>(<span class="at">data =</span> dat_train,</span>
 <span id="cb560-37"><a href="arboles.html#cb560-37" aria-hidden="true" tabindex="-1"></a>                     <span class="at">params =</span> lgb.grid)</span></code></pre></div>
 <pre><code>## [LightGBM] [Info] Number of positive: 81, number of negative: 119
-## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000385 seconds.
+## [LightGBM] [Warning] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000604 seconds.
 ## You can set `force_col_wise=true` to remove the overhead.
 ## [LightGBM] [Info] Total Bins 221
 ....</code></pre>
@@ -792,64 +791,13 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 ## 3 rpart      0.804
 ## 4 prune.tree 0.792</code></pre>
 </div>
-<div id="grid-search" class="section level3 hasAnchor" number="10.5.3">
-<h3><span class="header-section-number">10.5.3</span> Grid search<a href="arboles.html#grid-search" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Se muestra un ejemplo con <em>random forest</em>:</p>
-<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="arboles.html#cb566-1" aria-hidden="true" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(Carseats.train), <span class="st">&quot;High&quot;</span>))</span>
-<span id="cb566-2"><a href="arboles.html#cb566-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb566-3"><a href="arboles.html#cb566-3" aria-hidden="true" tabindex="-1"></a><span class="co"># crea la grilla de hyperparametros</span></span>
-<span id="cb566-4"><a href="arboles.html#cb566-4" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb566-5"><a href="arboles.html#cb566-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">num.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
-<span id="cb566-6"><a href="arboles.html#cb566-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">333</span>, .<span class="dv">4</span>)),</span>
-<span id="cb566-7"><a href="arboles.html#cb566-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">min.node.size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>), </span>
-<span id="cb566-8"><a href="arboles.html#cb566-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),                               </span>
-<span id="cb566-9"><a href="arboles.html#cb566-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample.fraction =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">63</span>, .<span class="dv">75</span>, .<span class="dv">8</span>)               </span>
-<span id="cb566-10"><a href="arboles.html#cb566-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb566-11"><a href="arboles.html#cb566-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb566-12"><a href="arboles.html#cb566-12" aria-hidden="true" tabindex="-1"></a><span class="co"># realiza el grid search</span></span>
-<span id="cb566-13"><a href="arboles.html#cb566-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
-<span id="cb566-14"><a href="arboles.html#cb566-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># estima el modelo para la combinacion i de hyperparametros</span></span>
-<span id="cb566-15"><a href="arboles.html#cb566-15" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
-<span id="cb566-16"><a href="arboles.html#cb566-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula         =</span> formula, </span>
-<span id="cb566-17"><a href="arboles.html#cb566-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data            =</span> Carseats.train,  </span>
-<span id="cb566-18"><a href="arboles.html#cb566-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">probability     =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb566-19"><a href="arboles.html#cb566-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">num.trees       =</span> hyper_grid<span class="sc">$</span>num.trees[i],</span>
-<span id="cb566-20"><a href="arboles.html#cb566-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">mtry            =</span> hyper_grid<span class="sc">$</span>mtry[i],</span>
-<span id="cb566-21"><a href="arboles.html#cb566-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.node.size   =</span> hyper_grid<span class="sc">$</span>min.node.size[i],</span>
-<span id="cb566-22"><a href="arboles.html#cb566-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace         =</span> hyper_grid<span class="sc">$</span>replace[i],</span>
-<span id="cb566-23"><a href="arboles.html#cb566-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample.fraction =</span> hyper_grid<span class="sc">$</span>sample.fraction[i],</span>
-<span id="cb566-24"><a href="arboles.html#cb566-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose         =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb566-25"><a href="arboles.html#cb566-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed            =</span> <span class="dv">1234</span>,</span>
-<span id="cb566-26"><a href="arboles.html#cb566-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">respect.unordered.factors =</span> <span class="st">&#39;order&#39;</span>,</span>
-<span id="cb566-27"><a href="arboles.html#cb566-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">splitrule       =</span> <span class="st">&#39;gini&#39;</span>,</span>
-<span id="cb566-28"><a href="arboles.html#cb566-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">importance      =</span> <span class="st">&#39;impurity&#39;</span></span>
-<span id="cb566-29"><a href="arboles.html#cb566-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb566-30"><a href="arboles.html#cb566-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># error (1 - accuracy) </span></span>
-<span id="cb566-31"><a href="arboles.html#cb566-31" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>error[i] <span class="ot">=</span> fit<span class="sc">$</span>prediction.error</span>
-<span id="cb566-32"><a href="arboles.html#cb566-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb566-33"><a href="arboles.html#cb566-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb566-34"><a href="arboles.html#cb566-34" aria-hidden="true" tabindex="-1"></a><span class="co"># top 10 </span></span>
-<span id="cb566-35"><a href="arboles.html#cb566-35" aria-hidden="true" tabindex="-1"></a>hyper_grid <span class="sc">|&gt;</span></span>
-<span id="cb566-36"><a href="arboles.html#cb566-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(error) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##    num.trees mtry min.node.size replace sample.fraction error
-## 1         50    0             3    TRUE            0.50 0.215
-## 2         50    3             3    TRUE            0.50 0.215
-## 3        100    0             3    TRUE            0.50 0.220
-## 4        100    3             3    TRUE            0.50 0.220
-## 5        150    2            10    TRUE            0.50 0.220
-## 6        200    2            10    TRUE            0.50 0.225
-## 7         50    0             3    TRUE            0.75 0.225
-## 8         50    3             3    TRUE            0.75 0.225
-## 9        200    0             3    TRUE            0.50 0.230
-## 10       200    2             3    TRUE            0.50 0.230</code></pre>
-</div>
-<div id="arboles-de-regresion" class="section level3 hasAnchor" number="10.5.4">
-<h3><span class="header-section-number">10.5.4</span> Arboles de regresion<a href="arboles.html#arboles-de-regresion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="arboles-de-regresion" class="section level3 hasAnchor" number="10.5.3">
+<h3><span class="header-section-number">10.5.3</span> Arboles de regresion<a href="arboles.html#arboles-de-regresion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Aquí ajustamos un árbol de regresión a la base de datos <code>Boston</code>. Primero, creamos una base de entrenamiento y ajustamos el árbol a esos datos.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="arboles.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb568-2"><a href="arboles.html#cb568-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb568-3"><a href="arboles.html#cb568-3" aria-hidden="true" tabindex="-1"></a>tree.boston <span class="ot">&lt;-</span> <span class="fu">tree</span>(medv <span class="sc">~</span> ., Boston, <span class="at">subset =</span> train)</span>
-<span id="cb568-4"><a href="arboles.html#cb568-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tree.boston)</span></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="arboles.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb566-2"><a href="arboles.html#cb566-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb566-3"><a href="arboles.html#cb566-3" aria-hidden="true" tabindex="-1"></a>tree.boston <span class="ot">&lt;-</span> <span class="fu">tree</span>(medv <span class="sc">~</span> ., Boston, <span class="at">subset =</span> train)</span>
+<span id="cb566-4"><a href="arboles.html#cb566-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tree.boston)</span></code></pre></div>
 <pre><code>## 
 ## Regression tree:
 ## tree(formula = medv ~ ., data = Boston, subset = train)
@@ -861,22 +809,22 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ## -10.1800  -1.7770  -0.1775   0.0000   1.9230  16.5800</code></pre>
 <p>Notar que la salida de <code>summary()</code> indica que solo cuatro de las variables han sido usadas en la construcción del árbol. En el contexto de un árbol de regresión, el desvío es simplemente la suma de los errores al cuadrado del árbol. Ahora graficamos el árbol.</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="arboles.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree.boston)</span>
-<span id="cb570-2"><a href="arboles.html#cb570-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(tree.boston, <span class="at">pretty =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="arboles.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree.boston)</span>
+<span id="cb568-2"><a href="arboles.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(tree.boston, <span class="at">pretty =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree14-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>La variable <code>lstat</code> mide el porcentaje de personas con bajo nivel socioeconómico, mientras que la variable <code>rm</code> corresponde al número promedio de habitaciones. El árbol indica que valores más altos de <code>rm</code>, o valores más bajos de <code>lstat</code>, corresponden a casas más caras. Por ejemplo, el árbol predice un precio medio de vivienda de <span class="math inline">\(\$45.400\)</span> para viviendas en distritos censales en los que <code>rm &gt;= 7,553</code>.</p>
 <p>Podríamos haber estimado un árbol mucho más grande, usando el argumento <code>control = tree.control(nobs = length(train), mindev = 0)</code> en la función <code>tree()</code>.</p>
 <p>Ahora usamos la función <code>cv.tree()</code> para ver si podar el árbol mejorará el rendimiento.</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="arboles.html#cb571-1" aria-hidden="true" tabindex="-1"></a>cv.boston <span class="ot">&lt;-</span> <span class="fu">cv.tree</span>(tree.boston)</span>
-<span id="cb571-2"><a href="arboles.html#cb571-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.boston<span class="sc">$</span>size, cv.boston<span class="sc">$</span>dev, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="arboles.html#cb569-1" aria-hidden="true" tabindex="-1"></a>cv.boston <span class="ot">&lt;-</span> <span class="fu">cv.tree</span>(tree.boston)</span>
+<span id="cb569-2"><a href="arboles.html#cb569-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.boston<span class="sc">$</span>size, cv.boston<span class="sc">$</span>dev, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree15-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>En este caso, el árbol más complejo se selecciona mediante <em>cross-validation</em>. Sin embargo, si deseamos podar el árbol, podemos hacerlo de la siguiente manera, usando la función <code>prune.tree()</code>:</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="arboles.html#cb572-1" aria-hidden="true" tabindex="-1"></a>prune.boston <span class="ot">&lt;-</span> <span class="fu">prune.tree</span>(tree.boston, <span class="at">best =</span> <span class="dv">5</span>)</span>
-<span id="cb572-2"><a href="arboles.html#cb572-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prune.boston)</span>
-<span id="cb572-3"><a href="arboles.html#cb572-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(prune.boston, <span class="at">pretty =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="arboles.html#cb570-1" aria-hidden="true" tabindex="-1"></a>prune.boston <span class="ot">&lt;-</span> <span class="fu">prune.tree</span>(tree.boston, <span class="at">best =</span> <span class="dv">5</span>)</span>
+<span id="cb570-2"><a href="arboles.html#cb570-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prune.boston)</span>
+<span id="cb570-3"><a href="arboles.html#cb570-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(prune.boston, <span class="at">pretty =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree16-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>De acuerdo con los resultados de la <em>cross-validation</em>, usamos el árbol no podado para hacer predicciones en la base de <em>test</em>.</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="arboles.html#cb573-1" aria-hidden="true" tabindex="-1"></a>cv.boston</span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="arboles.html#cb571-1" aria-hidden="true" tabindex="-1"></a>cv.boston</span></code></pre></div>
 <pre><code>## $size
 ## [1] 7 6 5 4 3 2 1
 ## 
@@ -891,23 +839,23 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;prune&quot;         &quot;tree.sequence&quot;</code></pre>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="arboles.html#cb575-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
-<span id="cb575-2"><a href="arboles.html#cb575-2" aria-hidden="true" tabindex="-1"></a>boston.test <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>train, <span class="st">&quot;medv&quot;</span>]</span>
-<span id="cb575-3"><a href="arboles.html#cb575-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat, boston.test)</span>
-<span id="cb575-4"><a href="arboles.html#cb575-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="arboles.html#cb573-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
+<span id="cb573-2"><a href="arboles.html#cb573-2" aria-hidden="true" tabindex="-1"></a>boston.test <span class="ot">&lt;-</span> Boston[<span class="sc">-</span>train, <span class="st">&quot;medv&quot;</span>]</span>
+<span id="cb573-3"><a href="arboles.html#cb573-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat, boston.test)</span>
+<span id="cb573-4"><a href="arboles.html#cb573-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree17-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="arboles.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="arboles.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 35.28688</code></pre>
 <p>En otras palabras, el <span class="math inline">\(EMC\)</span> de la la base de <em>test</em> asociado con el árbol de regresión es de <span class="math inline">\(35,29\)</span>. Por lo tanto, la raíz cuadrada del <span class="math inline">\(EMC\)</span> es de alrededor de <span class="math inline">\(5,941\)</span>, lo que indica que este modelo produce predicciones de <em>test</em> que están (en promedio) dentro de aproximadamente <span class="math inline">\(\$5.941\)</span> del valor medio real de la vivienda para el distrito censal.</p>
 </div>
-<div id="bagging-y-random-forests" class="section level3 hasAnchor" number="10.5.5">
-<h3><span class="header-section-number">10.5.5</span> Bagging y Random Forests<a href="arboles.html#bagging-y-random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="bagging-y-random-forests" class="section level3 hasAnchor" number="10.5.4">
+<h3><span class="header-section-number">10.5.4</span> Bagging y Random Forests<a href="arboles.html#bagging-y-random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Aquí aplicamos <em>bagging</em> y <em>random forests</em> a los datos de <code>Boston</code>, usando el paquete <code>randomForest</code> en <code>R</code>. Los resultados exactos obtenidos en esta sección pueden depender de la versión de <code>R</code> y la versión del paquete <code>randomForest</code> instalado. Recordar que el <em>bagging</em> es simplemente un caso especial de un <em>random forests</em> con
 <span class="math inline">\(m = p\)</span>. Por lo tanto, la función <code>randomForest()</code> se puede utilizar para realizar <em>random forests</em> y <em>bagging</em>. Realizamos el <em>bagging</em> de la siguiente manera:</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="arboles.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
-<span id="cb578-2"><a href="arboles.html#cb578-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb578-3"><a href="arboles.html#cb578-3" aria-hidden="true" tabindex="-1"></a>bag.boston <span class="ot">=</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston, <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">12</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb578-4"><a href="arboles.html#cb578-4" aria-hidden="true" tabindex="-1"></a>bag.boston</span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="arboles.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb576-2"><a href="arboles.html#cb576-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb576-3"><a href="arboles.html#cb576-3" aria-hidden="true" tabindex="-1"></a>bag.boston <span class="ot">=</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston, <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">12</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb576-4"><a href="arboles.html#cb576-4" aria-hidden="true" tabindex="-1"></a>bag.boston</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##  randomForest(formula = medv ~ ., data = Boston, mtry = 12, importance = TRUE,      subset = train) 
@@ -919,29 +867,29 @@ con estos datos, debemos estimar el error de <em>test</em> en lugar de calcular 
 ##                     % Var explained: 85.56</code></pre>
 <p>El argumento <code>mtry = 12</code> indica que se deben considerar todos los predictores (hay <span class="math inline">\(12\)</span> en total) para cada división del árbol; en otras palabras, se debe realizar el <em>bagging</em>.</p>
 <p>¿Qué tan bien se desempeña este modelo en la base de <em>test</em>?</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="arboles.html#cb580-1" aria-hidden="true" tabindex="-1"></a>yhat.bag <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
-<span id="cb580-2"><a href="arboles.html#cb580-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat.bag, boston.test)</span>
-<span id="cb580-3"><a href="arboles.html#cb580-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="arboles.html#cb578-1" aria-hidden="true" tabindex="-1"></a>yhat.bag <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
+<span id="cb578-2"><a href="arboles.html#cb578-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat.bag, boston.test)</span>
+<span id="cb578-3"><a href="arboles.html#cb578-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree19-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="arboles.html#cb581-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.bag <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="arboles.html#cb579-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.bag <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 23.38773</code></pre>
 <p>El <span class="math inline">\(EMC\)</span> de la base de <em>test</em> asociado con el árbol de regresión <em>bagging</em> es de <span class="math inline">\(23,42\)</span>, aproximadamente dos tercios del obtenido utilizando un árbol único podado de manera óptima <span class="math inline">\((35,29)\)</span>.
 Podríamos cambiar el número de árboles elaborados por <code>randomForest()</code> usando el argumento <code>ntree</code>:</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="arboles.html#cb583-1" aria-hidden="true" tabindex="-1"></a>bag.boston <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston,</span>
-<span id="cb583-2"><a href="arboles.html#cb583-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">12</span>, <span class="at">ntree =</span> <span class="dv">25</span>)</span>
-<span id="cb583-3"><a href="arboles.html#cb583-3" aria-hidden="true" tabindex="-1"></a>yhat.bag <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
-<span id="cb583-4"><a href="arboles.html#cb583-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.bag <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="arboles.html#cb581-1" aria-hidden="true" tabindex="-1"></a>bag.boston <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston,</span>
+<span id="cb581-2"><a href="arboles.html#cb581-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">12</span>, <span class="at">ntree =</span> <span class="dv">25</span>)</span>
+<span id="cb581-3"><a href="arboles.html#cb581-3" aria-hidden="true" tabindex="-1"></a>yhat.bag <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
+<span id="cb581-4"><a href="arboles.html#cb581-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.bag <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 25.19144</code></pre>
 <p>La estimación de un <em>random forests</em> procede exactamente de la misma manera, excepto que usamos un valor más pequeño del argumento <code>mtry</code>. Por defecto, <code>randomForest()</code> usa <span class="math inline">\(p/3\)</span> variables cuando construye un <em>random forests</em> de árboles de regresión, y <span class="math inline">\(\sqrt{p}\)</span> variables cuando construye un <em>random forests</em> de árboles de clasificación. Aquí usamos <code>mtry = 6</code>.</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="arboles.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb585-2"><a href="arboles.html#cb585-2" aria-hidden="true" tabindex="-1"></a>rf.boston <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston,</span>
-<span id="cb585-3"><a href="arboles.html#cb585-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">6</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb585-4"><a href="arboles.html#cb585-4" aria-hidden="true" tabindex="-1"></a>yhat.rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
-<span id="cb585-5"><a href="arboles.html#cb585-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.rf <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="arboles.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb583-2"><a href="arboles.html#cb583-2" aria-hidden="true" tabindex="-1"></a>rf.boston <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston,</span>
+<span id="cb583-3"><a href="arboles.html#cb583-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">subset =</span> train, <span class="at">mtry =</span> <span class="dv">6</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb583-4"><a href="arboles.html#cb583-4" aria-hidden="true" tabindex="-1"></a>yhat.rf <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf.boston, <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ])</span>
+<span id="cb583-5"><a href="arboles.html#cb583-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.rf <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 19.62021</code></pre>
 <p>El <span class="math inline">\(EMC\)</span> de la base de datos de <em>test</em> es de <span class="math inline">\(20,07\)</span>; esto indica que <em>random forests</em> produjo una mejora con respecto a <em>bagging</em> en este caso.</p>
 <p>Usando la función <code>importance()</code>, podemos ver la importancia de cada variable.</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="arboles.html#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.boston)</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="arboles.html#cb585-1" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.boston)</span></code></pre></div>
 <pre><code>##           %IncMSE IncNodePurity
 ## crim    16.697017    1076.08786
 ## zn       3.625784      88.35342
@@ -957,20 +905,20 @@ Podríamos cambiar el número de árboles elaborados por <code>randomForest()</c
 ## black    7.579482     275.62272
 ## lstat   27.129817    6027.63740</code></pre>
 <p>Se reportan dos medidas de importancia de las variables. El primero se basa en la disminución media de la precisión en las predicciones sobre las muestras <em>out of bag</em> cuando se permuta una variable determinada. La segunda es una medida de la disminución total en la impureza de los nodos que resulta de las divisiones sobre esa variable, promediada sobre todos los árboles. En el caso de los árboles de regresión, la impureza del nodo se mide por el <span class="math inline">\(RSS\)</span> de entrenamiento, y para los árboles de clasificación por el desvío. Los gráficos de estas medidas de importancia se pueden producir utilizando la función <code>varImpPlot()</code>.</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="arboles.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.boston)</span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="arboles.html#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.boston)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree23-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Los resultados indican que en todos los árboles considerados en el <em>random forests</em>, el tamaño de la casa (<code>rm</code>) y la riqueza de la comunidad (<code>lstat</code>) son las dos variables más importantes.</p>
 </div>
-<div id="boosting-1" class="section level3 hasAnchor" number="10.5.6">
-<h3><span class="header-section-number">10.5.6</span> Boosting<a href="arboles.html#boosting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="boosting-1" class="section level3 hasAnchor" number="10.5.5">
+<h3><span class="header-section-number">10.5.5</span> Boosting<a href="arboles.html#boosting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Aquí usamos el paquete <code>gbm</code> y la función <code>gbm()</code>, para ajustar árboles de regresión <em>boosting</em> a la base de datos <code>Boston</code>. Ejecutamos <code>gbm()</code> con la opción <code>distribution = "gaussian"</code> ya que este es un problema de regresión; si fuera un problema de clasificación binaria, usaríamos <code>distribution = "bernoulli"</code>.
 El argumento <code>n.trees = 5000</code> indica que queremos <span class="math inline">\(5.000\)</span> árboles, y la opción <code>interaction.depth = 4</code> limita la profundidad de cada árbol.</p>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="arboles.html#cb590-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb590-2"><a href="arboles.html#cb590-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb590-3"><a href="arboles.html#cb590-3" aria-hidden="true" tabindex="-1"></a>boost.boston <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ],</span>
-<span id="cb590-4"><a href="arboles.html#cb590-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&#39;gaussian&#39;</span>, <span class="at">n.trees =</span> <span class="dv">5000</span>, <span class="at">interaction.depth =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="arboles.html#cb588-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb588-2"><a href="arboles.html#cb588-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb588-3"><a href="arboles.html#cb588-3" aria-hidden="true" tabindex="-1"></a>boost.boston <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ],</span>
+<span id="cb588-4"><a href="arboles.html#cb588-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&#39;gaussian&#39;</span>, <span class="at">n.trees =</span> <span class="dv">5000</span>, <span class="at">interaction.depth =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p>La función <code>summary()</code> produce un gráfico y estadísticas de influencia relativa.</p>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="arboles.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(boost.boston)</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="arboles.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(boost.boston)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree25-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <pre><code>##             var    rel.inf
 ## rm           rm 43.9919329
@@ -987,22 +935,22 @@ El argumento <code>n.trees = 5000</code> indica que queremos <span class="math i
 ## zn           zn  0.1446149
 ## chas       chas  0.1443986</code></pre>
 <p>Nuevamente, vemos que <code>rm</code> y <code>lstat</code> son las variables más importantes. También podemos producir <strong>gráficos de dependencia parcial</strong> para estas dos variables. Estos gráficos ilustran el efecto marginal de las variables seleccionadas en la respuesta después de <strong>integrar</strong> las otras variables. En este caso, como cabría esperar, los precios medios de la vivienda aumentan con <code>rm</code> y disminuyen con <code>lstat</code>.</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="arboles.html#cb593-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(boost.boston, <span class="at">i =</span> <span class="st">&quot;rm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="arboles.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(boost.boston, <span class="at">i =</span> <span class="st">&quot;rm&quot;</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree26-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="arboles.html#cb594-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(boost.boston, <span class="at">i =</span> <span class="st">&quot;lstat&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="arboles.html#cb592-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(boost.boston, <span class="at">i =</span> <span class="st">&quot;lstat&quot;</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/tree26-2.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Ahora usamos el modelo <em>boosting</em> para predecir <code>medv</code> en la base de <em>test</em>:</p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="arboles.html#cb595-1" aria-hidden="true" tabindex="-1"></a>yhat.boost <span class="ot">&lt;-</span> <span class="fu">predict</span>(boost.boston,</span>
-<span id="cb595-2"><a href="arboles.html#cb595-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ], <span class="at">n.trees =</span> <span class="dv">5000</span>)</span>
-<span id="cb595-3"><a href="arboles.html#cb595-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.boost <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="arboles.html#cb593-1" aria-hidden="true" tabindex="-1"></a>yhat.boost <span class="ot">&lt;-</span> <span class="fu">predict</span>(boost.boston,</span>
+<span id="cb593-2"><a href="arboles.html#cb593-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ], <span class="at">n.trees =</span> <span class="dv">5000</span>)</span>
+<span id="cb593-3"><a href="arboles.html#cb593-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.boost <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 18.84709</code></pre>
 <p>El <span class="math inline">\(EMC\)</span> de <em>test</em> obtenido es de <span class="math inline">\(18,39\)</span>, inferior al <span class="math inline">\(EMC\)</span> de <em>test</em> de <em>random forests</em> y <em>bagging</em>. Podemos realizar un <em>boosting</em> con un valor diferente del parámetro de contracción <span class="math inline">\(\lambda\)</span>. El valor predeterminado es <span class="math inline">\(0,001\)</span>, pero esto se modifica fácilmente. Aquí tomamos <span class="math inline">\(\lambda=0,2\)</span>.</p>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="arboles.html#cb597-1" aria-hidden="true" tabindex="-1"></a>boost.boston <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ],</span>
-<span id="cb597-2"><a href="arboles.html#cb597-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, <span class="at">n.trees =</span> <span class="dv">5000</span>,</span>
-<span id="cb597-3"><a href="arboles.html#cb597-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> <span class="dv">4</span>, <span class="at">shrinkage =</span> <span class="fl">0.2</span>, <span class="at">verbose =</span> F)</span>
-<span id="cb597-4"><a href="arboles.html#cb597-4" aria-hidden="true" tabindex="-1"></a>yhat.boost <span class="ot">&lt;-</span> <span class="fu">predict</span>(boost.boston,</span>
-<span id="cb597-5"><a href="arboles.html#cb597-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ], <span class="at">n.trees =</span> <span class="dv">5000</span>)</span>
-<span id="cb597-6"><a href="arboles.html#cb597-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.boost <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="arboles.html#cb595-1" aria-hidden="true" tabindex="-1"></a>boost.boston <span class="ot">&lt;-</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ],</span>
+<span id="cb595-2"><a href="arboles.html#cb595-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, <span class="at">n.trees =</span> <span class="dv">5000</span>,</span>
+<span id="cb595-3"><a href="arboles.html#cb595-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">interaction.depth =</span> <span class="dv">4</span>, <span class="at">shrinkage =</span> <span class="fl">0.2</span>, <span class="at">verbose =</span> F)</span>
+<span id="cb595-4"><a href="arboles.html#cb595-4" aria-hidden="true" tabindex="-1"></a>yhat.boost <span class="ot">&lt;-</span> <span class="fu">predict</span>(boost.boston,</span>
+<span id="cb595-5"><a href="arboles.html#cb595-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> Boston[<span class="sc">-</span>train, ], <span class="at">n.trees =</span> <span class="dv">5000</span>)</span>
+<span id="cb595-6"><a href="arboles.html#cb595-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((yhat.boost <span class="sc">-</span> boston.test)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 18.33455</code></pre>
 <p>En este caso, usar <span class="math inline">\(\lambda=0,2\)</span> produce a un <span class="math inline">\(EMC\)</span> de <em>test</em> más bajo que <span class="math inline">\(\lambda=0,001\)</span>.</p>
 

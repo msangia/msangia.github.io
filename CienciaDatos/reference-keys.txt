@@ -181,7 +181,6 @@ ada-boost
 aplicacion-practica-3
 arboles-de-clasificacion
 compara
-grid-search
 arboles-de-regresion
 bagging-y-random-forests
 boosting-1
