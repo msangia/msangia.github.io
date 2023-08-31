@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 1 Introduccion a R | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 1 Introduccion a R | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -216,20 +216,18 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.10.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.10.1</b> Eliminar valores missing</a></li>
 </ul></li>
-<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.11</b> Loop</a></li>
-<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.12</b> Pivot (Reshape)</a></li>
-<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.13</b> Row bind (Append)</a></li>
-<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
-<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
+<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.11</b> Pivot (Reshape)</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.12</b> Row bind (Append)</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.13</b> Strings</a></li>
+<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.14</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.14.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.14.1</b> Manipulación de fechas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.15</b> Análisis de datos</a>
 <ul>
-<li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.15.1</b> Tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.17</b> group_by, summarise</a></li>
-<li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.18</b> Vector de resultados</a></li>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.16</b> group_by, summarise</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
@@ -899,21 +897,24 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 ## [1] &quot;listo&quot;
 ## [1] 10
 ## [1] &quot;listo&quot;</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="intro.html#cb228-1" tabindex="-1"></a>resultado <span class="ot">=</span> <span class="fu">c</span>()   <span class="co"># Inicializa vector de resultados</span></span>
-<span id="cb228-2"><a href="intro.html#cb228-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(a)) {</span>
-<span id="cb228-3"><a href="intro.html#cb228-3" tabindex="-1"></a>  resultado[i] <span class="ot">=</span> a[i] <span class="sc">*</span> <span class="dv">2</span></span>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="intro.html#cb228-1" tabindex="-1"></a>resultado <span class="ot">=</span> <span class="fu">c</span>()              <span class="co"># 1. Inicializa vector de resultados</span></span>
+<span id="cb228-2"><a href="intro.html#cb228-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(a)) {    <span class="co"># 2. secuencia</span></span>
+<span id="cb228-3"><a href="intro.html#cb228-3" tabindex="-1"></a>  resultado[i] <span class="ot">=</span> a[i] <span class="sc">*</span> <span class="dv">2</span>    <span class="co"># 3. cuerpo</span></span>
 <span id="cb228-4"><a href="intro.html#cb228-4" tabindex="-1"></a>}</span>
 <span id="cb228-5"><a href="intro.html#cb228-5" tabindex="-1"></a>resultado</span></code></pre></div>
 <pre><code>## [1]  0  4 10  6 16</code></pre>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="intro.html#cb230-1" tabindex="-1"></a>a <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>##  a  b  c  d  e 
 ##  0  4 10  6 16</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="intro.html#cb232-1" tabindex="-1"></a><span class="co"># seq_along vs. length(). En un vector vacío el primero </span></span>
-<span id="cb232-2"><a href="intro.html#cb232-2" tabindex="-1"></a><span class="co"># hace el proceso correcto (con integer(0) se interrumpe)</span></span>
-<span id="cb232-3"><a href="intro.html#cb232-3" tabindex="-1"></a><span class="co"># Útil para un entorno de programación</span></span>
-<span id="cb232-4"><a href="intro.html#cb232-4" tabindex="-1"></a>conj1 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>; conj2 <span class="ot">=</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">30</span></span>
-<span id="cb232-5"><a href="intro.html#cb232-5" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">intersect</span>(conj1, conj2)</span>
-<span id="cb232-6"><a href="intro.html#cb232-6" tabindex="-1"></a><span class="fu">seq_along</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="intro.html#cb232-1" tabindex="-1"></a><span class="co"># resultado &lt;- vector(&quot;double&quot;, ncol(df)) Otra alternativa a 1.</span></span>
+<span id="cb232-2"><a href="intro.html#cb232-2" tabindex="-1"></a></span>
+<span id="cb232-3"><a href="intro.html#cb232-3" tabindex="-1"></a></span>
+<span id="cb232-4"><a href="intro.html#cb232-4" tabindex="-1"></a><span class="co"># seq_along vs. length(). En un vector vacío el primero </span></span>
+<span id="cb232-5"><a href="intro.html#cb232-5" tabindex="-1"></a><span class="co"># hace el proceso correcto (con integer(0) se interrumpe)</span></span>
+<span id="cb232-6"><a href="intro.html#cb232-6" tabindex="-1"></a><span class="co"># Útil para un entorno de programación</span></span>
+<span id="cb232-7"><a href="intro.html#cb232-7" tabindex="-1"></a>conj1 <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>; conj2 <span class="ot">=</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb232-8"><a href="intro.html#cb232-8" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">intersect</span>(conj1, conj2)</span>
+<span id="cb232-9"><a href="intro.html#cb232-9" tabindex="-1"></a><span class="fu">seq_along</span>(x)</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="intro.html#cb234-1" tabindex="-1"></a><span class="dv">3</span><span class="sc">:</span><span class="fu">seq_along</span>(x)</span></code></pre></div>
 <pre><code>## Error in 3:seq_along(x): argument of length 0</code></pre>

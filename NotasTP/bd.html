@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 2 Base de datos | Politica Economica II</title>
   <meta name="description" content="UNLP" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 2 Base de datos | Politica Economica II" />
   <meta property="og:type" content="book" />
@@ -216,20 +216,18 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.10.1" data-path="bd.html"><a href="bd.html#eliminar-valores-missing"><i class="fa fa-check"></i><b>2.10.1</b> Eliminar valores missing</a></li>
 </ul></li>
-<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#loop"><i class="fa fa-check"></i><b>2.11</b> Loop</a></li>
-<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.12</b> Pivot (Reshape)</a></li>
-<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.13</b> Row bind (Append)</a></li>
-<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
-<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
+<li class="chapter" data-level="2.11" data-path="bd.html"><a href="bd.html#pivot-reshape"><i class="fa fa-check"></i><b>2.11</b> Pivot (Reshape)</a></li>
+<li class="chapter" data-level="2.12" data-path="bd.html"><a href="bd.html#row-bind-append"><i class="fa fa-check"></i><b>2.12</b> Row bind (Append)</a></li>
+<li class="chapter" data-level="2.13" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.13</b> Strings</a></li>
+<li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.14</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.14.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.14.1</b> Manipulación de fechas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.15</b> Análisis de datos</a>
 <ul>
-<li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.15.1</b> Tablas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.17</b> group_by, summarise</a></li>
-<li class="chapter" data-level="2.18" data-path="bd.html"><a href="bd.html#vector-de-resultados"><i class="fa fa-check"></i><b>2.18</b> Vector de resultados</a></li>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#group_by-summarise"><i class="fa fa-check"></i><b>2.16</b> group_by, summarise</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
@@ -931,63 +929,15 @@ div.csl-indent {
 <div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="bd.html#cb311-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="st">&#39;bd1&#39;</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="loop" class="section level2 hasAnchor" number="2.11">
-<h2><span class="header-section-number">2.11</span> Loop<a href="bd.html#loop" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="bd.html#cb312-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb312-2"><a href="bd.html#cb312-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb312-3"><a href="bd.html#cb312-3" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">100</span>),</span>
-<span id="cb312-4"><a href="bd.html#cb312-4" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb312-5"><a href="bd.html#cb312-5" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">3</span>),</span>
-<span id="cb312-6"><a href="bd.html#cb312-6" tabindex="-1"></a>)</span>
-<span id="cb312-7"><a href="bd.html#cb312-7" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 3
-##       a      b     c
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1  11.4 -1.81   3.87
-## 2  62.2 -0.582  5.29
-## 3  60.9 -1.11   9.92</code></pre>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="bd.html#cb314-1" tabindex="-1"></a><span class="co"># Reemplazar variables existentes</span></span>
-<span id="cb314-2"><a href="bd.html#cb314-2" tabindex="-1"></a>vars <span class="ot">=</span> <span class="fu">names</span>(df)</span>
-<span id="cb314-3"><a href="bd.html#cb314-3" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> vars) {</span>
-<span id="cb314-4"><a href="bd.html#cb314-4" tabindex="-1"></a>  df[v] <span class="ot">=</span> df[v] <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb314-5"><a href="bd.html#cb314-5" tabindex="-1"></a>}</span>
-<span id="cb314-6"><a href="bd.html#cb314-6" tabindex="-1"></a></span>
-<span id="cb314-7"><a href="bd.html#cb314-7" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 3
-##       a      b     c
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1 1137. -181.   387.
-## 2 6223.  -58.2  529.
-## 3 6093. -111.   992.</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="bd.html#cb316-1" tabindex="-1"></a><span class="co"># Generar varaibles nuevas (estilo Stata, no se usa en R)</span></span>
-<span id="cb316-2"><a href="bd.html#cb316-2" tabindex="-1"></a><span class="co"># Dividir las dos ultimas (b y c) por la primera (a)</span></span>
-<span id="cb316-3"><a href="bd.html#cb316-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb316-4"><a href="bd.html#cb316-4" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb316-5"><a href="bd.html#cb316-5" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">100</span>),</span>
-<span id="cb316-6"><a href="bd.html#cb316-6" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb316-7"><a href="bd.html#cb316-7" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>, <span class="dv">3</span>),</span>
-<span id="cb316-8"><a href="bd.html#cb316-8" tabindex="-1"></a>)</span>
-<span id="cb316-9"><a href="bd.html#cb316-9" tabindex="-1"></a>vars <span class="ot">=</span> <span class="fu">names</span>(df1[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(df1)])</span>
-<span id="cb316-10"><a href="bd.html#cb316-10" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> vars) {</span>
-<span id="cb316-11"><a href="bd.html#cb316-11" tabindex="-1"></a>  df1[<span class="fu">paste0</span>(v,<span class="st">&#39;_a&#39;</span>)] <span class="ot">=</span> df1[v] <span class="sc">/</span> df1[[<span class="st">&#39;a&#39;</span>]]</span>
-<span id="cb316-12"><a href="bd.html#cb316-12" tabindex="-1"></a>}</span>
-<span id="cb316-13"><a href="bd.html#cb316-13" tabindex="-1"></a><span class="fu">head</span>(df1,<span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 5
-##       a      b     c    b_a   c_a
-##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1     2 -1.21   6.24 -0.604  3.12
-## 2     2  0.277  3.58  0.139  1.79
-## 3     2  1.08   5.20  0.542  2.60</code></pre>
-</div>
-<div id="pivot-reshape" class="section level2 hasAnchor" number="2.12">
-<h2><span class="header-section-number">2.12</span> Pivot (Reshape)<a href="bd.html#pivot-reshape" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pivot-reshape" class="section level2 hasAnchor" number="2.11">
+<h2><span class="header-section-number">2.11</span> Pivot (Reshape)<a href="bd.html#pivot-reshape" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><img src="figures/reshape.png" style="width:50.0%" /></p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="bd.html#cb318-1" tabindex="-1"></a><span class="co"># Long</span></span>
-<span id="cb318-2"><a href="bd.html#cb318-2" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
-<span id="cb318-3"><a href="bd.html#cb318-3" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb318-4"><a href="bd.html#cb318-4" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">select</span>(year, credit_ps, inv) <span class="sc">%&gt;%</span></span>
-<span id="cb318-5"><a href="bd.html#cb318-5" tabindex="-1"></a>         <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span>year, <span class="at">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb318-6"><a href="bd.html#cb318-6" tabindex="-1"></a>         <span class="fu">arrange</span>(year, <span class="fu">desc</span>(Var))    <span class="co"># Sort</span></span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="bd.html#cb312-1" tabindex="-1"></a><span class="co"># Long</span></span>
+<span id="cb312-2"><a href="bd.html#cb312-2" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
+<span id="cb312-3"><a href="bd.html#cb312-3" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb312-4"><a href="bd.html#cb312-4" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">select</span>(year, credit_ps, inv) <span class="sc">%&gt;%</span></span>
+<span id="cb312-5"><a href="bd.html#cb312-5" tabindex="-1"></a>         <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span>year, <span class="at">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb312-6"><a href="bd.html#cb312-6" tabindex="-1"></a>         <span class="fu">arrange</span>(year, <span class="fu">desc</span>(Var))    <span class="co"># Sort</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1029,12 +979,12 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="bd.html#cb319-1" tabindex="-1"></a><span class="co"># Wide</span></span>
-<span id="cb319-2"><a href="bd.html#cb319-2" tabindex="-1"></a>bdAR2 <span class="ot">=</span> bdAR <span class="sc">%&gt;%</span> </span>
-<span id="cb319-3"><a href="bd.html#cb319-3" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(Var<span class="sc">==</span><span class="st">&#39;credit_ps&#39;</span>, year <span class="sc">&lt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-4"><a href="bd.html#cb319-4" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">ccode =</span> <span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-5"><a href="bd.html#cb319-5" tabindex="-1"></a>         <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>ccode, <span class="at">names_from=</span>year, <span class="at">values_from=</span>Val) <span class="sc">%&gt;%</span></span>
-<span id="cb319-6"><a href="bd.html#cb319-6" tabindex="-1"></a>         <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">paste0</span>(<span class="st">&quot;CREDIT&quot;</span>, <span class="dv">2011</span><span class="sc">:</span><span class="dv">2015</span>), <span class="fu">where</span>(is.numeric))</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="bd.html#cb313-1" tabindex="-1"></a><span class="co"># Wide</span></span>
+<span id="cb313-2"><a href="bd.html#cb313-2" tabindex="-1"></a>bdAR2 <span class="ot">=</span> bdAR <span class="sc">%&gt;%</span> </span>
+<span id="cb313-3"><a href="bd.html#cb313-3" tabindex="-1"></a>         dplyr<span class="sc">::</span><span class="fu">filter</span>(Var<span class="sc">==</span><span class="st">&#39;credit_ps&#39;</span>, year <span class="sc">&lt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb313-4"><a href="bd.html#cb313-4" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">ccode =</span> <span class="st">&#39;ARG&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb313-5"><a href="bd.html#cb313-5" tabindex="-1"></a>         <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>ccode, <span class="at">names_from=</span>year, <span class="at">values_from=</span>Val) <span class="sc">%&gt;%</span></span>
+<span id="cb313-6"><a href="bd.html#cb313-6" tabindex="-1"></a>         <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">paste0</span>(<span class="st">&quot;CREDIT&quot;</span>, <span class="dv">2011</span><span class="sc">:</span><span class="dv">2015</span>), <span class="fu">where</span>(is.numeric))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1057,11 +1007,11 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="bd.html#cb320-1" tabindex="-1"></a><span class="co"># Otra forma de llevar a long starts_with()</span></span>
-<span id="cb320-2"><a href="bd.html#cb320-2" tabindex="-1"></a>bdAR3 <span class="ot">=</span> bdAR2 <span class="sc">%&gt;%</span> </span>
-<span id="cb320-3"><a href="bd.html#cb320-3" tabindex="-1"></a>       <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;CREDIT&quot;</span>), <span class="at">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb320-4"><a href="bd.html#cb320-4" tabindex="-1"></a>       <span class="fu">separate</span>(Var, <span class="fu">c</span>(<span class="st">&quot;V&quot;</span>,<span class="st">&quot;year&quot;</span>), <span class="at">sep =</span> <span class="dv">6</span>)</span>
-<span id="cb320-5"><a href="bd.html#cb320-5" tabindex="-1"></a><span class="co"># unite() para concatenar variables</span></span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="bd.html#cb314-1" tabindex="-1"></a><span class="co"># Otra forma de llevar a long starts_with()</span></span>
+<span id="cb314-2"><a href="bd.html#cb314-2" tabindex="-1"></a>bdAR3 <span class="ot">=</span> bdAR2 <span class="sc">%&gt;%</span> </span>
+<span id="cb314-3"><a href="bd.html#cb314-3" tabindex="-1"></a>       <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;CREDIT&quot;</span>), <span class="at">names_to=</span><span class="st">&quot;Var&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Val&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb314-4"><a href="bd.html#cb314-4" tabindex="-1"></a>       <span class="fu">separate</span>(Var, <span class="fu">c</span>(<span class="st">&quot;V&quot;</span>,<span class="st">&quot;year&quot;</span>), <span class="at">sep =</span> <span class="dv">6</span>)</span>
+<span id="cb314-5"><a href="bd.html#cb314-5" tabindex="-1"></a><span class="co"># unite() para concatenar variables</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1105,18 +1055,18 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="row-bind-append" class="section level2 hasAnchor" number="2.13">
-<h2><span class="header-section-number">2.13</span> Row bind (Append)<a href="bd.html#row-bind-append" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="bd.html#cb321-1" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
-<span id="cb321-2"><a href="bd.html#cb321-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;ARG&quot;</span>,</span>
-<span id="cb321-3"><a href="bd.html#cb321-3" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb321-4"><a href="bd.html#cb321-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
-<span id="cb321-5"><a href="bd.html#cb321-5" tabindex="-1"></a>bdBR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
-<span id="cb321-6"><a href="bd.html#cb321-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;BRA&quot;</span>,</span>
-<span id="cb321-7"><a href="bd.html#cb321-7" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb321-8"><a href="bd.html#cb321-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
-<span id="cb321-9"><a href="bd.html#cb321-9" tabindex="-1"></a>bdARBR <span class="ot">=</span> <span class="fu">rbind</span>(bdAR, bdBR)</span>
-<span id="cb321-10"><a href="bd.html#cb321-10" tabindex="-1"></a><span class="co"># Ver bind_rows() de tidyverse</span></span></code></pre></div>
+<div id="row-bind-append" class="section level2 hasAnchor" number="2.12">
+<h2><span class="header-section-number">2.12</span> Row bind (Append)<a href="bd.html#row-bind-append" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="bd.html#cb315-1" tabindex="-1"></a>bdAR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
+<span id="cb315-2"><a href="bd.html#cb315-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;ARG&quot;</span>,</span>
+<span id="cb315-3"><a href="bd.html#cb315-3" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb315-4"><a href="bd.html#cb315-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
+<span id="cb315-5"><a href="bd.html#cb315-5" tabindex="-1"></a>bdBR <span class="ot">=</span> bd <span class="sc">%&gt;%</span></span>
+<span id="cb315-6"><a href="bd.html#cb315-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ccode<span class="sc">==</span><span class="st">&quot;BRA&quot;</span>,</span>
+<span id="cb315-7"><a href="bd.html#cb315-7" tabindex="-1"></a>         year<span class="sc">&gt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb315-8"><a href="bd.html#cb315-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, ccode, gdp_gr)</span>
+<span id="cb315-9"><a href="bd.html#cb315-9" tabindex="-1"></a>bdARBR <span class="ot">=</span> <span class="fu">rbind</span>(bdAR, bdBR)</span>
+<span id="cb315-10"><a href="bd.html#cb315-10" tabindex="-1"></a><span class="co"># Ver bind_rows() de tidyverse</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1159,26 +1109,26 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="strings" class="section level2 hasAnchor" number="2.14">
-<h2><span class="header-section-number">2.14</span> Strings<a href="bd.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="strings" class="section level2 hasAnchor" number="2.13">
+<h2><span class="header-section-number">2.13</span> Strings<a href="bd.html#strings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se presentan algunas funciones básicas. Para más alternativas ver el paquete <a href="https://stringr.tidyverse.org/"><code>stringr</code></a>.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="bd.html#cb322-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;uno&#39;</span>, <span class="st">&#39;dos&#39;</span>, <span class="st">&#39;tres&#39;</span>)</span>
-<span id="cb322-2"><a href="bd.html#cb322-2" tabindex="-1"></a><span class="fu">length</span>(words)   <span class="co"># cuenta los elementos del vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="bd.html#cb316-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;uno&#39;</span>, <span class="st">&#39;dos&#39;</span>, <span class="st">&#39;tres&#39;</span>)</span>
+<span id="cb316-2"><a href="bd.html#cb316-2" tabindex="-1"></a><span class="fu">length</span>(words)   <span class="co"># cuenta los elementos del vector</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="bd.html#cb324-1" tabindex="-1"></a><span class="fu">str_length</span>(words)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="bd.html#cb318-1" tabindex="-1"></a><span class="fu">str_length</span>(words)</span></code></pre></div>
 <pre><code>## [1] 3 3 4</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="bd.html#cb326-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&#39;tres&#39;</span>, <span class="st">&#39;cinco&#39;</span>, words)</span>
-<span id="cb326-2"><a href="bd.html#cb326-2" tabindex="-1"></a>words</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="bd.html#cb320-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&#39;tres&#39;</span>, <span class="st">&#39;cinco&#39;</span>, words)</span>
+<span id="cb320-2"><a href="bd.html#cb320-2" tabindex="-1"></a>words</span></code></pre></div>
 <pre><code>## [1] &quot;uno&quot;   &quot;dos&quot;   &quot;cinco&quot;</code></pre>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="bd.html#cb328-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">str_replace</span>(words, <span class="st">&#39;uno&#39;</span>, <span class="st">&#39;diez&#39;</span>)</span>
-<span id="cb328-2"><a href="bd.html#cb328-2" tabindex="-1"></a>words</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="bd.html#cb322-1" tabindex="-1"></a>words <span class="ot">=</span> <span class="fu">str_replace</span>(words, <span class="st">&#39;uno&#39;</span>, <span class="st">&#39;diez&#39;</span>)</span>
+<span id="cb322-2"><a href="bd.html#cb322-2" tabindex="-1"></a>words</span></code></pre></div>
 <pre><code>## [1] &quot;diez&quot;  &quot;dos&quot;   &quot;cinco&quot;</code></pre>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="bd.html#cb330-1" tabindex="-1"></a>hi <span class="ot">=</span> <span class="st">&#39;hola&#39;</span></span>
-<span id="cb330-2"><a href="bd.html#cb330-2" tabindex="-1"></a><span class="fu">nchar</span>(hi)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="bd.html#cb324-1" tabindex="-1"></a>hi <span class="ot">=</span> <span class="st">&#39;hola&#39;</span></span>
+<span id="cb324-2"><a href="bd.html#cb324-2" tabindex="-1"></a><span class="fu">nchar</span>(hi)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
-<div id="fechas" class="section level2 hasAnchor" number="2.15">
-<h2><span class="header-section-number">2.15</span> Fechas<a href="bd.html#fechas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="fechas" class="section level2 hasAnchor" number="2.14">
+<h2><span class="header-section-number">2.14</span> Fechas<a href="bd.html#fechas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Formato de fechas.</p>
 <table>
 <thead>
@@ -1207,15 +1157,15 @@ div.csl-indent {
 </tbody>
 </table>
 <p><strong>Nota:</strong> <em>%y</em> 00-69 hace referencia a 2000-2069 y, 70-99 indica 1970-1999.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="bd.html#cb332-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
-<span id="cb332-2"><a href="bd.html#cb332-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb332-3"><a href="bd.html#cb332-3" tabindex="-1"></a>datos <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_ts.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;datos&#39;</span>)</span>
-<span id="cb332-4"><a href="bd.html#cb332-4" tabindex="-1"></a>datos<span class="sc">$</span>fecha <span class="ot">=</span> <span class="fu">as.Date</span>(datos<span class="sc">$</span>fecha, <span class="at">format =</span> <span class="st">&#39;%Y-%m-%d&#39;</span>)</span>
-<span id="cb332-5"><a href="bd.html#cb332-5" tabindex="-1"></a>datos<span class="sc">$</span>fecha2 <span class="ot">=</span> datos<span class="sc">$</span>fecha <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">15</span>)</span>
-<span id="cb332-6"><a href="bd.html#cb332-6" tabindex="-1"></a>datos<span class="sc">$</span>fecha3 <span class="ot">=</span> <span class="fu">floor_date</span>(datos<span class="sc">$</span>fecha2, <span class="st">&#39;month&#39;</span>)</span>
-<span id="cb332-7"><a href="bd.html#cb332-7" tabindex="-1"></a>datos<span class="sc">$</span>mes <span class="ot">=</span> <span class="fu">month</span>(datos<span class="sc">$</span>fecha)</span>
-<span id="cb332-8"><a href="bd.html#cb332-8" tabindex="-1"></a>datos<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">year</span>(datos<span class="sc">$</span>fecha)</span>
-<span id="cb332-9"><a href="bd.html#cb332-9" tabindex="-1"></a>datos <span class="ot">=</span> datos[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># reordena la base de datos</span></span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="bd.html#cb326-1" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb326-2"><a href="bd.html#cb326-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb326-3"><a href="bd.html#cb326-3" tabindex="-1"></a>datos <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_ts.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;datos&#39;</span>)</span>
+<span id="cb326-4"><a href="bd.html#cb326-4" tabindex="-1"></a>datos<span class="sc">$</span>fecha <span class="ot">=</span> <span class="fu">as.Date</span>(datos<span class="sc">$</span>fecha, <span class="at">format =</span> <span class="st">&#39;%Y-%m-%d&#39;</span>)</span>
+<span id="cb326-5"><a href="bd.html#cb326-5" tabindex="-1"></a>datos<span class="sc">$</span>fecha2 <span class="ot">=</span> datos<span class="sc">$</span>fecha <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">15</span>)</span>
+<span id="cb326-6"><a href="bd.html#cb326-6" tabindex="-1"></a>datos<span class="sc">$</span>fecha3 <span class="ot">=</span> <span class="fu">floor_date</span>(datos<span class="sc">$</span>fecha2, <span class="st">&#39;month&#39;</span>)</span>
+<span id="cb326-7"><a href="bd.html#cb326-7" tabindex="-1"></a>datos<span class="sc">$</span>mes <span class="ot">=</span> <span class="fu">month</span>(datos<span class="sc">$</span>fecha)</span>
+<span id="cb326-8"><a href="bd.html#cb326-8" tabindex="-1"></a>datos<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">year</span>(datos<span class="sc">$</span>fecha)</span>
+<span id="cb326-9"><a href="bd.html#cb326-9" tabindex="-1"></a>datos <span class="ot">=</span> datos[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># reordena la base de datos</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1292,11 +1242,11 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div id="manipulación-de-fechas" class="section level3 hasAnchor" number="2.15.1">
-<h3><span class="header-section-number">2.15.1</span> Manipulación de fechas<a href="bd.html#manipulación-de-fechas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="manipulación-de-fechas" class="section level3 hasAnchor" number="2.14.1">
+<h3><span class="header-section-number">2.14.1</span> Manipulación de fechas<a href="bd.html#manipulación-de-fechas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Utilizamos el paquete <code>zoo</code>.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="bd.html#cb333-1" tabindex="-1"></a>datosq <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_ts.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;trim&#39;</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb333-2"><a href="bd.html#cb333-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fecha=</span><span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(<span class="fu">paste</span>(year, trim), <span class="at">format=</span><span class="st">&quot;%Y %q&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="bd.html#cb327-1" tabindex="-1"></a>datosq <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;./data/datos_ts.xlsx&#39;</span>, <span class="at">sheet=</span><span class="st">&#39;trim&#39;</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb327-2"><a href="bd.html#cb327-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fecha=</span><span class="fu">as.Date</span>(<span class="fu">as.yearqtr</span>(<span class="fu">paste</span>(year, trim), <span class="at">format=</span><span class="st">&quot;%Y %q&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1361,9 +1311,9 @@ div.csl-indent {
 </table>
 </div>
 </div>
-<div id="análisis-de-datos" class="section level2 hasAnchor" number="2.16">
-<h2><span class="header-section-number">2.16</span> Análisis de datos<a href="bd.html#análisis-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="bd.html#cb334-1" tabindex="-1"></a><span class="fu">str</span>(bd)</span></code></pre></div>
+<div id="análisis-de-datos" class="section level2 hasAnchor" number="2.15">
+<h2><span class="header-section-number">2.15</span> Análisis de datos<a href="bd.html#análisis-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="bd.html#cb328-1" tabindex="-1"></a><span class="fu">str</span>(bd)</span></code></pre></div>
 <pre><code>## tibble [60 × 7] (S3: tbl_df/tbl/data.frame)
 ##  $ ccode    : chr [1:60] &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; &quot;ARG&quot; ...
 ##  $ year     : num [1:60] 2011 2012 2013 2014 2015 ...
@@ -1372,12 +1322,12 @@ div.csl-indent {
 ##  $ credit_ps: num [1:60] 14 15.2 15.7 13.8 14.4 ...
 ##  $ inv      : num [1:60] 17.2 15.9 16.3 16 15.6 ...
 ##  $ open     : num [1:60] 35.2 30.5 29.3 28.4 22.5 ...</code></pre>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="bd.html#cb336-1" tabindex="-1"></a><span class="fu">dim</span>(bd)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="bd.html#cb330-1" tabindex="-1"></a><span class="fu">dim</span>(bd)</span></code></pre></div>
 <pre><code>## [1] 60  7</code></pre>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="bd.html#cb338-1" tabindex="-1"></a><span class="fu">names</span>(bd)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="bd.html#cb332-1" tabindex="-1"></a><span class="fu">names</span>(bd)</span></code></pre></div>
 <pre><code>## [1] &quot;ccode&quot;     &quot;year&quot;      &quot;region&quot;    &quot;gdp_gr&quot;    &quot;credit_ps&quot; &quot;inv&quot;      
 ## [7] &quot;open&quot;</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="bd.html#cb340-1" tabindex="-1"></a><span class="fu">glimpse</span>(bd)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="bd.html#cb334-1" tabindex="-1"></a><span class="fu">glimpse</span>(bd)</span></code></pre></div>
 <pre><code>## Rows: 60
 ## Columns: 7
 ## $ ccode     &lt;chr&gt; &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG&quot;, &quot;ARG…
@@ -1387,7 +1337,7 @@ div.csl-indent {
 ## $ credit_ps &lt;dbl&gt; 14.00872, 15.21282, 15.72909, 13.82377, 14.41423, 13.66763, …
 ## $ inv       &lt;dbl&gt; 17.24828, 15.85753, 16.28951, 15.97995, 15.56475, 14.27236, …
 ## $ open      &lt;dbl&gt; 35.20615, 30.52654, 29.33393, 28.40679, 22.48623, 26.09389, …</code></pre>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="bd.html#cb342-1" tabindex="-1"></a><span class="fu">head</span>(bd)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="bd.html#cb336-1" tabindex="-1"></a><span class="fu">head</span>(bd)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 7
 ##   ccode  year region                    gdp_gr credit_ps   inv  open
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1397,35 +1347,35 @@ div.csl-indent {
 ## 4 ARG    2014 Latin America &amp; Caribbean  -3.58      13.8  16.0  28.4
 ## 5 ARG    2015 Latin America &amp; Caribbean   1.63      14.4  15.6  22.5
 ## 6 ARG    2016 Latin America &amp; Caribbean  -3.11      13.7  14.3  26.1</code></pre>
-<div id="tablas" class="section level3 hasAnchor" number="2.16.1">
-<h3><span class="header-section-number">2.16.1</span> Tablas<a href="bd.html#tablas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="tablas" class="section level3 hasAnchor" number="2.15.1">
+<h3><span class="header-section-number">2.15.1</span> Tablas<a href="bd.html#tablas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Los valores <code>NA</code> afectan a todas las estadísticas. Opción na.rm = <code>F</code> / <code>T</code>.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="bd.html#cb344-1" tabindex="-1"></a>bd <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb344-2"><a href="bd.html#cb344-2" tabindex="-1"></a>  <span class="at">credit_ps_media =</span> <span class="fu">mean</span>(credit_ps),</span>
-<span id="cb344-3"><a href="bd.html#cb344-3" tabindex="-1"></a>  <span class="at">inv_max =</span> <span class="fu">max</span>(inv),</span>
-<span id="cb344-4"><a href="bd.html#cb344-4" tabindex="-1"></a>  <span class="at">open_min =</span> <span class="fu">min</span>(open)</span>
-<span id="cb344-5"><a href="bd.html#cb344-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="bd.html#cb338-1" tabindex="-1"></a>bd <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb338-2"><a href="bd.html#cb338-2" tabindex="-1"></a>  <span class="at">credit_ps_media =</span> <span class="fu">mean</span>(credit_ps),</span>
+<span id="cb338-3"><a href="bd.html#cb338-3" tabindex="-1"></a>  <span class="at">inv_max =</span> <span class="fu">max</span>(inv),</span>
+<span id="cb338-4"><a href="bd.html#cb338-4" tabindex="-1"></a>  <span class="at">open_min =</span> <span class="fu">min</span>(open)</span>
+<span id="cb338-5"><a href="bd.html#cb338-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   credit_ps_media inv_max open_min
 ##             &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
 ## 1              NA    24.9     22.5</code></pre>
 </div>
 </div>
-<div id="group_by-summarise" class="section level2 hasAnchor" number="2.17">
-<h2><span class="header-section-number">2.17</span> group_by, summarise<a href="bd.html#group_by-summarise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="bd.html#cb346-1" tabindex="-1"></a>tab <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
-<span id="cb346-2"><a href="bd.html#cb346-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-3"><a href="bd.html#cb346-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb346-4"><a href="bd.html#cb346-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-5"><a href="bd.html#cb346-5" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb346-6"><a href="bd.html#cb346-6" tabindex="-1"></a>    <span class="at">Obs =</span> <span class="fu">n</span>(),</span>
-<span id="cb346-7"><a href="bd.html#cb346-7" tabindex="-1"></a>    <span class="at">Media =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb346-8"><a href="bd.html#cb346-8" tabindex="-1"></a>    <span class="at">Mediana =</span> <span class="fu">median</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb346-9"><a href="bd.html#cb346-9" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb346-10"><a href="bd.html#cb346-10" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb346-11"><a href="bd.html#cb346-11" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb346-12"><a href="bd.html#cb346-12" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb346-13"><a href="bd.html#cb346-13" tabindex="-1"></a>tab</span></code></pre></div>
+<div id="group_by-summarise" class="section level2 hasAnchor" number="2.16">
+<h2><span class="header-section-number">2.16</span> group_by, summarise<a href="bd.html#group_by-summarise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="bd.html#cb340-1" tabindex="-1"></a>tab <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
+<span id="cb340-2"><a href="bd.html#cb340-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> </span>
+<span id="cb340-3"><a href="bd.html#cb340-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb340-4"><a href="bd.html#cb340-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb340-5"><a href="bd.html#cb340-5" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb340-6"><a href="bd.html#cb340-6" tabindex="-1"></a>    <span class="at">Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb340-7"><a href="bd.html#cb340-7" tabindex="-1"></a>    <span class="at">Media =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb340-8"><a href="bd.html#cb340-8" tabindex="-1"></a>    <span class="at">Mediana =</span> <span class="fu">median</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb340-9"><a href="bd.html#cb340-9" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb340-10"><a href="bd.html#cb340-10" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb340-11"><a href="bd.html#cb340-11" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb340-12"><a href="bd.html#cb340-12" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb340-13"><a href="bd.html#cb340-13" tabindex="-1"></a>tab</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 7
 ##   Variable    Obs    Media  Mediana    SD    Min     Max
 ##   &lt;chr&gt;     &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -1434,18 +1384,18 @@ div.csl-indent {
 ## 3 inv          60   18.8     17.8    3.19   13.4   24.9 
 ## 4 open         60   49.1     56.2   15.7    22.5   72.2 
 ## 5 year         60 2016.    2016.     2.90 2011   2020</code></pre>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="bd.html#cb348-1" tabindex="-1"></a>tab <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
-<span id="cb348-2"><a href="bd.html#cb348-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb348-3"><a href="bd.html#cb348-3" tabindex="-1"></a>  <span class="fu">group_by</span>(year, region) <span class="sc">%&gt;%</span> </span>
-<span id="cb348-4"><a href="bd.html#cb348-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb348-5"><a href="bd.html#cb348-5" tabindex="-1"></a>    <span class="at">inv_sum =</span> <span class="fu">sum</span>(inv, <span class="at">na.rm =</span> T),</span>
-<span id="cb348-6"><a href="bd.html#cb348-6" tabindex="-1"></a>    <span class="at">inv_sd =</span> <span class="fu">sd</span>(inv, <span class="at">na.rm =</span> T),</span>
-<span id="cb348-7"><a href="bd.html#cb348-7" tabindex="-1"></a>    <span class="at">credit_ps_p50 =</span> <span class="fu">median</span>(credit_ps, <span class="at">na.rm =</span> T),</span>
-<span id="cb348-8"><a href="bd.html#cb348-8" tabindex="-1"></a>    <span class="at">obs =</span> <span class="fu">n</span>()</span>
-<span id="cb348-9"><a href="bd.html#cb348-9" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb348-10"><a href="bd.html#cb348-10" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span> </span>
-<span id="cb348-11"><a href="bd.html#cb348-11" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb348-12"><a href="bd.html#cb348-12" tabindex="-1"></a>tab</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="bd.html#cb342-1" tabindex="-1"></a>tab <span class="ot">=</span> bd <span class="sc">%&gt;%</span> </span>
+<span id="cb342-2"><a href="bd.html#cb342-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year<span class="sc">&gt;=</span><span class="dv">2015</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb342-3"><a href="bd.html#cb342-3" tabindex="-1"></a>  <span class="fu">group_by</span>(year, region) <span class="sc">%&gt;%</span> </span>
+<span id="cb342-4"><a href="bd.html#cb342-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb342-5"><a href="bd.html#cb342-5" tabindex="-1"></a>    <span class="at">inv_sum =</span> <span class="fu">sum</span>(inv, <span class="at">na.rm =</span> T),</span>
+<span id="cb342-6"><a href="bd.html#cb342-6" tabindex="-1"></a>    <span class="at">inv_sd =</span> <span class="fu">sd</span>(inv, <span class="at">na.rm =</span> T),</span>
+<span id="cb342-7"><a href="bd.html#cb342-7" tabindex="-1"></a>    <span class="at">credit_ps_p50 =</span> <span class="fu">median</span>(credit_ps, <span class="at">na.rm =</span> T),</span>
+<span id="cb342-8"><a href="bd.html#cb342-8" tabindex="-1"></a>    <span class="at">obs =</span> <span class="fu">n</span>()</span>
+<span id="cb342-9"><a href="bd.html#cb342-9" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb342-10"><a href="bd.html#cb342-10" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb342-11"><a href="bd.html#cb342-11" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb342-12"><a href="bd.html#cb342-12" tabindex="-1"></a>tab</span></code></pre></div>
 <pre><code>## # A tibble: 12 × 6
 ##     year region                    inv_sum inv_sd credit_ps_p50   obs
 ##    &lt;dbl&gt; &lt;chr&gt;                       &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt;
@@ -1461,12 +1411,12 @@ div.csl-indent {
 ## 10  2019 Latin America &amp; Caribbean    51.8   4.98          93.2     3
 ## 11  2020 Europe &amp; Central Asia        58.2   3.02         124.      3
 ## 12  2020 Latin America &amp; Caribbean    50.7   3.78          70.2     3</code></pre>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="bd.html#cb350-1" tabindex="-1"></a>tab <span class="ot">=</span> tab <span class="sc">%&gt;%</span> </span>
-<span id="cb350-2"><a href="bd.html#cb350-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">str_replace_all</span>(region, (<span class="fu">c</span>(<span class="st">&quot;Europe &amp; Central Asia&quot;</span> <span class="ot">=</span> <span class="st">&quot;EU&quot;</span>, <span class="st">&quot;Latin America &amp; Caribbean&quot;</span> <span class="ot">=</span> <span class="st">&quot;LA&quot;</span>)))) <span class="sc">%&gt;%</span></span>
-<span id="cb350-3"><a href="bd.html#cb350-3" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span><span class="fu">c</span>(year, region), <span class="at">names_to=</span><span class="st">&#39;Var&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Val&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb350-4"><a href="bd.html#cb350-4" tabindex="-1"></a> <span class="fu">unite</span>(id,region, Var) <span class="sc">%&gt;%</span> </span>
-<span id="cb350-5"><a href="bd.html#cb350-5" tabindex="-1"></a> <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>year, <span class="at">names_from=</span>id, <span class="at">values_from=</span>Val)</span>
-<span id="cb350-6"><a href="bd.html#cb350-6" tabindex="-1"></a>tab</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="bd.html#cb344-1" tabindex="-1"></a>tab <span class="ot">=</span> tab <span class="sc">%&gt;%</span> </span>
+<span id="cb344-2"><a href="bd.html#cb344-2" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">str_replace_all</span>(region, (<span class="fu">c</span>(<span class="st">&quot;Europe &amp; Central Asia&quot;</span> <span class="ot">=</span> <span class="st">&quot;EU&quot;</span>, <span class="st">&quot;Latin America &amp; Caribbean&quot;</span> <span class="ot">=</span> <span class="st">&quot;LA&quot;</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb344-3"><a href="bd.html#cb344-3" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="sc">-</span><span class="fu">c</span>(year, region), <span class="at">names_to=</span><span class="st">&#39;Var&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Val&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb344-4"><a href="bd.html#cb344-4" tabindex="-1"></a> <span class="fu">unite</span>(id,region, Var) <span class="sc">%&gt;%</span> </span>
+<span id="cb344-5"><a href="bd.html#cb344-5" tabindex="-1"></a> <span class="fu">pivot_wider</span>(<span class="at">id_cols=</span>year, <span class="at">names_from=</span>id, <span class="at">values_from=</span>Val)</span>
+<span id="cb344-6"><a href="bd.html#cb344-6" tabindex="-1"></a>tab</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 9
 ##    year EU_inv_sum EU_inv_sd EU_credit_ps_p50 EU_obs LA_inv_sum LA_inv_sd
 ##   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
@@ -1477,22 +1427,6 @@ div.csl-indent {
 ## 5  2019       59.6      3.26            108.       3       51.8      4.98
 ## 6  2020       58.2      3.02            124.       3       50.7      3.78
 ## # ℹ 2 more variables: LA_credit_ps_p50 &lt;dbl&gt;, LA_obs &lt;dbl&gt;</code></pre>
-</div>
-<div id="vector-de-resultados" class="section level2 hasAnchor" number="2.18">
-<h2><span class="header-section-number">2.18</span> Vector de resultados<a href="bd.html#vector-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="bd.html#cb352-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb352-2"><a href="bd.html#cb352-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb352-3"><a href="bd.html#cb352-3" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">100</span>),</span>
-<span id="cb352-4"><a href="bd.html#cb352-4" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>,<span class="dv">0</span>,<span class="dv">1</span>),</span>
-<span id="cb352-5"><a href="bd.html#cb352-5" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">3</span>),</span>
-<span id="cb352-6"><a href="bd.html#cb352-6" tabindex="-1"></a>)</span>
-<span id="cb352-7"><a href="bd.html#cb352-7" tabindex="-1"></a></span>
-<span id="cb352-8"><a href="bd.html#cb352-8" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="fu">ncol</span>(df)) <span class="co"># 1. verctor de resultados (vacio)</span></span>
-<span id="cb352-9"><a href="bd.html#cb352-9" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(df)) {           <span class="co"># 2. secuencia</span></span>
-<span id="cb352-10"><a href="bd.html#cb352-10" tabindex="-1"></a>  output[[i]] <span class="ot">&lt;-</span> <span class="fu">mean</span>(df[[i]])       <span class="co"># 3. cuerpo</span></span>
-<span id="cb352-11"><a href="bd.html#cb352-11" tabindex="-1"></a>}</span>
-<span id="cb352-12"><a href="bd.html#cb352-12" tabindex="-1"></a>output</span></code></pre></div>
-<pre><code>## [1] 43.74972619  0.07975381  5.40972645</code></pre>
 
 </div>
 </div>
