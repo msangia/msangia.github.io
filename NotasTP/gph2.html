@@ -242,7 +242,7 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
-<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combianar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combianar distintos graficos</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
 <li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
@@ -355,8 +355,8 @@ div.csl-indent {
 <span id="cb393-3"><a href="gph2.html#cb393-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> family, <span class="at">family =</span> family))</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/g1b-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="combianar-distintos-graficos" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Combianar distintos graficos<a href="gph2.html#combianar-distintos-graficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="combinar-distintos-graficos" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Combinar distintos graficos<a href="gph2.html#combinar-distintos-graficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>ggplot2</code> está pensado para la creación de gráficos individuales. Si bien la opción <code>facet</code> proporciona la posibilidad de producir varias tramas secundarias, todas ellas forman parte de la misma visualización principal, compartiendo capas, datos y escalas. Sin embargo, a menudo es necesario usar varias tramas diferentes para contar una historia. Existe una variedad de paquetes para organizar gráficos separados como por ejemplo <code>patchwork</code>.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="gph2.html#cb394-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg) <span class="sc">+</span> </span>
 <span id="cb394-2"><a href="gph2.html#cb394-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy))</span>
@@ -413,13 +413,11 @@ div.csl-indent {
 <span id="cb402-5"><a href="gph2.html#cb402-5" tabindex="-1"></a></span>
 <span id="cb402-6"><a href="gph2.html#cb402-6" tabindex="-1"></a>bars <span class="sc">+</span> </span>
 <span id="cb402-7"><a href="gph2.html#cb402-7" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb402-8"><a href="gph2.html#cb402-8" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb402-9"><a href="gph2.html#cb402-9" tabindex="-1"></a>      <span class="st">&quot;d&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>,</span>
-<span id="cb402-10"><a href="gph2.html#cb402-10" tabindex="-1"></a>      <span class="st">&quot;c&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>,</span>
-<span id="cb402-11"><a href="gph2.html#cb402-11" tabindex="-1"></a>      <span class="st">&quot;b&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb402-12"><a href="gph2.html#cb402-12" tabindex="-1"></a>      <span class="st">&quot;a&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span></span>
-<span id="cb402-13"><a href="gph2.html#cb402-13" tabindex="-1"></a>    )</span>
-<span id="cb402-14"><a href="gph2.html#cb402-14" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb402-8"><a href="gph2.html#cb402-8" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;d&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb402-9"><a href="gph2.html#cb402-9" tabindex="-1"></a>               <span class="st">&quot;c&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>,</span>
+<span id="cb402-10"><a href="gph2.html#cb402-10" tabindex="-1"></a>               <span class="st">&quot;b&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb402-11"><a href="gph2.html#cb402-11" tabindex="-1"></a>               <span class="st">&quot;a&quot;</span> <span class="ot">=</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb402-12"><a href="gph2.html#cb402-12" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/g42-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="límites-epacios-y-etiquetas" class="section level2 hasAnchor" number="4.5">
