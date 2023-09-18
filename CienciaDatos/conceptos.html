@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 6 Conceptos generales | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 6 Conceptos generales | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -125,6 +125,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -183,7 +187,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
 <li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
 <li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
-<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> apply, lapply y tapply</a></li>
 <li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
 <li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
 <li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
@@ -240,7 +244,7 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
-<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
 <li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
@@ -415,7 +419,7 @@ div.csl-indent {
 <div id="metodos-no-parametricos" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Metodos no parametricos<a href="conceptos.html#metodos-no-parametricos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>No realizan supuestos sobre la forma funcional de <span class="math inline">\(f\)</span> sino que tratan de buscar una estimación que se acerque lo más posible a los datos sin ser ni demasiado tosco ni demasiado ondulado.</p>
-<p>Este enfoque puede tener una gran ventaja sobre los métodos paramétricos: al evitar el supuesto de una forma funcional particular para <span class="math inline">\(f\)</span>, tiene el potencial para adaptarse con precisión a una gama más amplia de posibles formas para <span class="math inline">\(f\)</span>. Cualquier enfoque paramétrico tiene la posibilidad de que la forma funcional utilizada para estimar <span class="math inline">\(f\)</span> sea muy diferente de la verdadera <span class="math inline">\(f\)</span>, en cuyo caso el resultado modelo no se ajustará bien a los datos. El costo es que se necesitan más datos para estimar.</p>
+<p>Este enfoque puede tener una gran ventaja sobre los métodos paramétricos: al evitar el supuesto de una forma funcional particular para <span class="math inline">\(f\)</span>, tiene el potencial para adaptarse con precisión a una gama más amplia de posibles formas para <span class="math inline">\(f\)</span>. Cualquier enfoque paramétrico tiene la posibilidad de que la forma funcional utilizada para estimar <span class="math inline">\(f\)</span> sea muy diferente de la verdadera <span class="math inline">\(f\)</span>, en cuyo caso el resultado del modelo no se ajustará bien a los datos. El costo es que se necesitan más datos para estimar.</p>
 </div>
 <div id="evaluacion-de-la-precision-del-modelo" class="section level2 hasAnchor" number="6.6">
 <h2><span class="header-section-number">6.6</span> Evaluacion de la precision del modelo<a href="conceptos.html#evaluacion-de-la-precision-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -653,35 +657,35 @@ Figura 6.7: K-Fold cross-validation
   \hat{V}(\hat{\theta})_B = \frac{1}{B} \sum_{j=1}^{B}(\hat{\theta}_j - \overline{\hat{\theta}})^2
 \end{equation}\]</span></p>
 <p><strong>Ejemplo:</strong></p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="conceptos.html#cb438-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb438-2"><a href="conceptos.html#cb438-2" aria-hidden="true" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
-<span id="cb438-3"><a href="conceptos.html#cb438-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb438-4"><a href="conceptos.html#cb438-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
-<span id="cb438-5"><a href="conceptos.html#cb438-5" aria-hidden="true" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
-<span id="cb438-6"><a href="conceptos.html#cb438-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
-<span id="cb438-7"><a href="conceptos.html#cb438-7" aria-hidden="true" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb438-8"><a href="conceptos.html#cb438-8" aria-hidden="true" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
-<span id="cb438-9"><a href="conceptos.html#cb438-9" aria-hidden="true" tabindex="-1"></a>}  </span>
-<span id="cb438-10"><a href="conceptos.html#cb438-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb438-11"><a href="conceptos.html#cb438-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
-<span id="cb438-12"><a href="conceptos.html#cb438-12" aria-hidden="true" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
-<span id="cb438-13"><a href="conceptos.html#cb438-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb438-14"><a href="conceptos.html#cb438-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
-<span id="cb438-15"><a href="conceptos.html#cb438-15" aria-hidden="true" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb438-16"><a href="conceptos.html#cb438-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb438-17"><a href="conceptos.html#cb438-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
-<span id="cb438-18"><a href="conceptos.html#cb438-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="conceptos.html#cb442-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb442-2"><a href="conceptos.html#cb442-2" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb442-3"><a href="conceptos.html#cb442-3" tabindex="-1"></a></span>
+<span id="cb442-4"><a href="conceptos.html#cb442-4" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
+<span id="cb442-5"><a href="conceptos.html#cb442-5" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb442-6"><a href="conceptos.html#cb442-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb442-7"><a href="conceptos.html#cb442-7" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb442-8"><a href="conceptos.html#cb442-8" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
+<span id="cb442-9"><a href="conceptos.html#cb442-9" tabindex="-1"></a>}  </span>
+<span id="cb442-10"><a href="conceptos.html#cb442-10" tabindex="-1"></a></span>
+<span id="cb442-11"><a href="conceptos.html#cb442-11" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
+<span id="cb442-12"><a href="conceptos.html#cb442-12" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
+<span id="cb442-13"><a href="conceptos.html#cb442-13" tabindex="-1"></a></span>
+<span id="cb442-14"><a href="conceptos.html#cb442-14" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
+<span id="cb442-15"><a href="conceptos.html#cb442-15" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb442-16"><a href="conceptos.html#cb442-16" tabindex="-1"></a></span>
+<span id="cb442-17"><a href="conceptos.html#cb442-17" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
+<span id="cb442-18"><a href="conceptos.html#cb442-18" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
 <pre><code>## [1] -0.0265972</code></pre>
 <pre><code>## [1] -0.02612666</code></pre>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="conceptos.html#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
-<span id="cb441-2"><a href="conceptos.html#cb441-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="conceptos.html#cb445-1" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
+<span id="cb445-2"><a href="conceptos.html#cb445-2" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
 <pre><code>## [1] 0.9946825</code></pre>
 <pre><code>## [1] 0.9938018</code></pre>
 </div>
 </div>
 <div id="resumen" class="section level2 hasAnchor" number="6.8">
 <h2><span class="header-section-number">6.8</span> Resumen<a href="conceptos.html#resumen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Como señala <span class="citation">(<a href="#ref-MLR" role="doc-biblioref">Boehmke y Greenwell 2020</a>)</span> abordar correctamente el análisis de <em>machine learning</em> significa utilizar estratégicamente los datos en procesos de aprendizaje y validación, preprocesar correctamente las variables explicativas y la variable de respuesta, ajustar los hiperparámetros y evaluar la <em>performance</em> del modelo.</p>
+<p>Como señala <span class="citation">(<a href="#ref-MLR">Boehmke y Greenwell 2020</a>)</span> abordar correctamente el análisis de <em>machine learning</em> significa utilizar estratégicamente los datos en procesos de aprendizaje y validación, preprocesar correctamente las variables explicativas y la variable de respuesta, ajustar los hiperparámetros y evaluar la <em>performance</em> del modelo.</p>
 <p>La Figura <a href="conceptos.html#fig:ml">6.8</a> muestra gráficamente este proceso.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ml"></span>
 <img src="figures/modeling_process.png" alt="Proceso general de ML" width="65%" height="40%" />
