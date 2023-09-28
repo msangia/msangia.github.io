@@ -556,6 +556,8 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 \text{Sensibilidad} &amp; = \frac{VP}{VP + FN} \\
 \text{Especificidad} &amp; = \frac{VN}{VN + FP}
 \end{align*}\]</span></p>
+<p><strong>Problema de clases desbalanceadas</strong></p>
+<p>En el caso que existan clases desbalanceadas (ej. tasa de <em>default</em> = <span class="math inline">\(3\%\)</span>) un predictor que indique todos ceros tendrá una <strong>Precisión</strong> del <span class="math inline">\(97\%\)</span> (umbral base), una <strong>Especificidad</strong> del <span class="math inline">\(100\%\)</span> pero una <strong>Sensibilidad</strong> del <span class="math inline">\(0\%\)</span> (justamente lo que estamos tratando de averiguar).</p>
 </div>
 <div id="roc" class="section level3 hasAnchor" number="6.6.5">
 <h3><span class="header-section-number">6.6.5</span> Curva ROC<a href="conceptos.html#roc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
