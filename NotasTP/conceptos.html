@@ -534,6 +534,8 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 \text{Sensibilidad} &amp; = \frac{VP}{VP + FN} \\
 \text{Especificidad} &amp; = \frac{VN}{VN + FP}
 \end{align*}\]</span></p>
+<p><strong>Problema de clases desbalanceadas</strong></p>
+<p>En el caso que existan clases desbalanceadas (ej. tasa de <em>default</em> = <span class="math inline">\(3\%\)</span>) un predictor que indique todos ceros tendrá una <strong>Precisión</strong> del <span class="math inline">\(97\%\)</span> (umbral base), una <strong>Especificidad</strong> del <span class="math inline">\(100\%\)</span> pero una <strong>Sensibilidad</strong> del <span class="math inline">\(0\%\)</span> (justamente lo que estamos tratando de averiguar).</p>
 </div>
 <div id="roc" class="section level3 hasAnchor" number="6.6.5">
 <h3><span class="header-section-number">6.6.5</span> Curva ROC<a href="conceptos.html#roc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -635,28 +637,28 @@ Figura 6.7: K-Fold cross-validation
   \hat{V}(\hat{\theta})_B = \frac{1}{B} \sum_{j=1}^{B}(\hat{\theta}_j - \overline{\hat{\theta}})^2
 \end{equation}\]</span></p>
 <p><strong>Ejemplo:</strong></p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="conceptos.html#cb437-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb437-2"><a href="conceptos.html#cb437-2" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
-<span id="cb437-3"><a href="conceptos.html#cb437-3" tabindex="-1"></a></span>
-<span id="cb437-4"><a href="conceptos.html#cb437-4" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
-<span id="cb437-5"><a href="conceptos.html#cb437-5" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
-<span id="cb437-6"><a href="conceptos.html#cb437-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
-<span id="cb437-7"><a href="conceptos.html#cb437-7" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb437-8"><a href="conceptos.html#cb437-8" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
-<span id="cb437-9"><a href="conceptos.html#cb437-9" tabindex="-1"></a>}  </span>
-<span id="cb437-10"><a href="conceptos.html#cb437-10" tabindex="-1"></a></span>
-<span id="cb437-11"><a href="conceptos.html#cb437-11" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
-<span id="cb437-12"><a href="conceptos.html#cb437-12" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
-<span id="cb437-13"><a href="conceptos.html#cb437-13" tabindex="-1"></a></span>
-<span id="cb437-14"><a href="conceptos.html#cb437-14" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
-<span id="cb437-15"><a href="conceptos.html#cb437-15" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb437-16"><a href="conceptos.html#cb437-16" tabindex="-1"></a></span>
-<span id="cb437-17"><a href="conceptos.html#cb437-17" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
-<span id="cb437-18"><a href="conceptos.html#cb437-18" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="conceptos.html#cb434-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb434-2"><a href="conceptos.html#cb434-2" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb434-3"><a href="conceptos.html#cb434-3" tabindex="-1"></a></span>
+<span id="cb434-4"><a href="conceptos.html#cb434-4" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
+<span id="cb434-5"><a href="conceptos.html#cb434-5" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb434-6"><a href="conceptos.html#cb434-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb434-7"><a href="conceptos.html#cb434-7" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb434-8"><a href="conceptos.html#cb434-8" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
+<span id="cb434-9"><a href="conceptos.html#cb434-9" tabindex="-1"></a>}  </span>
+<span id="cb434-10"><a href="conceptos.html#cb434-10" tabindex="-1"></a></span>
+<span id="cb434-11"><a href="conceptos.html#cb434-11" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
+<span id="cb434-12"><a href="conceptos.html#cb434-12" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
+<span id="cb434-13"><a href="conceptos.html#cb434-13" tabindex="-1"></a></span>
+<span id="cb434-14"><a href="conceptos.html#cb434-14" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
+<span id="cb434-15"><a href="conceptos.html#cb434-15" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb434-16"><a href="conceptos.html#cb434-16" tabindex="-1"></a></span>
+<span id="cb434-17"><a href="conceptos.html#cb434-17" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
+<span id="cb434-18"><a href="conceptos.html#cb434-18" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
 <pre><code>## [1] -0.0265972</code></pre>
 <pre><code>## [1] -0.02612666</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="conceptos.html#cb440-1" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
-<span id="cb440-2"><a href="conceptos.html#cb440-2" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="conceptos.html#cb437-1" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
+<span id="cb437-2"><a href="conceptos.html#cb437-2" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
 <pre><code>## [1] 0.9946825</code></pre>
 <pre><code>## [1] 0.9938018</code></pre>
 </div>
