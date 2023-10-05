@@ -382,43 +382,43 @@ div.csl-indent {
 <p>La utilización de nuevas técnicas de análisis y fuentes de datos alternativos brindan a las empresas tecnológicas una ventaja informativa para la evaluación de deudores respecto de las entidades financieras, que utilizan métodos econométricos convencionales (ej. estimaciones <em>logit</em>) menos flexibles para capturar la información contenida en grandes volúmenes de datos.</p>
 <p>En esta sección se utiliza una base de datos bancaria para predecir la probabilidad de <em>default</em> con distintas metodologías, un modelo <em>logit</em>, un árbol simple y un <em>random forest</em>, para comparar las capacidades predictivas.</p>
 <p>Primero se limpia la memoria y se cargan las librerías que vamos a utilizar.</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="score.html#cb495-1" tabindex="-1"></a><span class="co"># Limpiar memoria</span></span>
-<span id="cb495-2"><a href="score.html#cb495-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb495-3"><a href="score.html#cb495-3" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="score.html#cb492-1" tabindex="-1"></a><span class="co"># Limpiar memoria</span></span>
+<span id="cb492-2"><a href="score.html#cb492-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb492-3"><a href="score.html#cb492-3" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 <pre><code>##           used  (Mb) gc trigger  (Mb) max used  (Mb)
-## Ncells 3136499 167.6    5964347 318.6  4022853 214.9
-## Vcells 5506317  42.1   12258388  93.6 12258355  93.6</code></pre>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="score.html#cb497-1" tabindex="-1"></a><span class="co"># Librerias</span></span>
-<span id="cb497-2"><a href="score.html#cb497-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb497-3"><a href="score.html#cb497-3" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb497-4"><a href="score.html#cb497-4" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span>
-<span id="cb497-5"><a href="score.html#cb497-5" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb497-6"><a href="score.html#cb497-6" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
-<span id="cb497-7"><a href="score.html#cb497-7" tabindex="-1"></a><span class="fu">library</span>(ranger)</span>
-<span id="cb497-8"><a href="score.html#cb497-8" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
+## Ncells 3138965 167.7    6226840 332.6  4049954 216.3
+## Vcells 5511369  42.1   12255594  93.6 10146179  77.5</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="score.html#cb494-1" tabindex="-1"></a><span class="co"># Librerias</span></span>
+<span id="cb494-2"><a href="score.html#cb494-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb494-3"><a href="score.html#cb494-3" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb494-4"><a href="score.html#cb494-4" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span>
+<span id="cb494-5"><a href="score.html#cb494-5" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb494-6"><a href="score.html#cb494-6" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb494-7"><a href="score.html#cb494-7" tabindex="-1"></a><span class="fu">library</span>(ranger)</span>
+<span id="cb494-8"><a href="score.html#cb494-8" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code></pre></div>
 <p>Se cargan los datos desde un archivo separado por comas y se analizan los valores <em>missing</em>. En la Figura de abajo las variables están en el eje <code>y</code> y las observaciones en el eje <code>x</code>.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="score.html#cb498-1" tabindex="-1"></a><span class="co"># Cargar datos</span></span>
-<span id="cb498-2"><a href="score.html#cb498-2" tabindex="-1"></a>score_data_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;./data/CreditScore1.csv&#39;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb498-3"><a href="score.html#cb498-3" tabindex="-1"></a></span>
-<span id="cb498-4"><a href="score.html#cb498-4" tabindex="-1"></a>score_data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb498-5"><a href="score.html#cb498-5" tabindex="-1"></a>  <span class="fu">is.na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb498-6"><a href="score.html#cb498-6" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">melt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb498-7"><a href="score.html#cb498-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Var2, Var1, <span class="at">fill=</span>value)) <span class="sc">+</span> </span>
-<span id="cb498-8"><a href="score.html#cb498-8" tabindex="-1"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb498-9"><a href="score.html#cb498-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb498-10"><a href="score.html#cb498-10" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, </span>
-<span id="cb498-11"><a href="score.html#cb498-11" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Dato&quot;</span>, </span>
-<span id="cb498-12"><a href="score.html#cb498-12" tabindex="-1"></a>                             <span class="st">&quot;Missing&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb498-13"><a href="score.html#cb498-13" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x=</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">title=</span> <span class="st">&#39;Valores missing&#39;</span>) <span class="sc">+</span></span>
-<span id="cb498-14"><a href="score.html#cb498-14" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb498-15"><a href="score.html#cb498-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb498-16"><a href="score.html#cb498-16" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="score.html#cb495-1" tabindex="-1"></a><span class="co"># Cargar datos</span></span>
+<span id="cb495-2"><a href="score.html#cb495-2" tabindex="-1"></a>score_data_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;./data/CreditScore1.csv&#39;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb495-3"><a href="score.html#cb495-3" tabindex="-1"></a></span>
+<span id="cb495-4"><a href="score.html#cb495-4" tabindex="-1"></a>score_data_raw <span class="sc">%&gt;%</span></span>
+<span id="cb495-5"><a href="score.html#cb495-5" tabindex="-1"></a>  <span class="fu">is.na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb495-6"><a href="score.html#cb495-6" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">melt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb495-7"><a href="score.html#cb495-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Var2, Var1, <span class="at">fill=</span>value)) <span class="sc">+</span> </span>
+<span id="cb495-8"><a href="score.html#cb495-8" tabindex="-1"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb495-9"><a href="score.html#cb495-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb495-10"><a href="score.html#cb495-10" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb495-11"><a href="score.html#cb495-11" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Dato&quot;</span>, </span>
+<span id="cb495-12"><a href="score.html#cb495-12" tabindex="-1"></a>                             <span class="st">&quot;Missing&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb495-13"><a href="score.html#cb495-13" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x=</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">title=</span> <span class="st">&#39;Valores missing&#39;</span>) <span class="sc">+</span></span>
+<span id="cb495-14"><a href="score.html#cb495-14" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb495-15"><a href="score.html#cb495-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb495-16"><a href="score.html#cb495-16" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/tp2-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>La variable <code>ingreso</code> es la que mayormente presenta observaciones con valores <em>missing</em>, dado que no existe una forma obvia de imputación y que tenemos 150.000 observaciones en total (y no se pierden tantas…), se eliminan las filas correspondientes.</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="score.html#cb499-1" tabindex="-1"></a>score_data_tbl <span class="ot">&lt;-</span> score_data_raw <span class="sc">%&gt;%</span></span>
-<span id="cb499-2"><a href="score.html#cb499-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>id) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="score.html#cb496-1" tabindex="-1"></a>score_data_tbl <span class="ot">&lt;-</span> score_data_raw <span class="sc">%&gt;%</span></span>
+<span id="cb496-2"><a href="score.html#cb496-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>id) <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span></code></pre></div>
 <p>Se realiza una inspección inicial de la base de datos.</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="score.html#cb500-1" tabindex="-1"></a><span class="fu">head</span>(score_data_tbl)</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="score.html#cb497-1" tabindex="-1"></a><span class="fu">head</span>(score_data_tbl)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##   default personal_total  edad nro_atraso3059 gastos_ingreso ingreso
 ##     &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;   &lt;dbl&gt;
@@ -430,7 +430,7 @@ div.csl-indent {
 ## 6       0          0.213    74              0         0.376     3500
 ## # ℹ 4 more variables: lineas_credito &lt;dbl&gt;, nro_atraso90 &lt;dbl&gt;,
 ## #   nro_hipoteca &lt;dbl&gt;, familia &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="score.html#cb502-1" tabindex="-1"></a><span class="fu">glimpse</span>(score_data_tbl)</span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="score.html#cb499-1" tabindex="-1"></a><span class="fu">glimpse</span>(score_data_tbl)</span></code></pre></div>
 <pre><code>## Rows: 120,269
 ## Columns: 10
 ## $ default        &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1…
@@ -443,7 +443,7 @@ div.csl-indent {
 ## $ nro_atraso90   &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0…
 ## $ nro_hipoteca   &lt;dbl&gt; 6, 0, 0, 0, 1, 1, 0, 4, 0, 2, 2, 1, 1, 1, 0, 1, 0, 2, 1…
 ## $ familia        &lt;dbl&gt; 2, 1, 0, 0, 0, 1, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 0, 2…</code></pre>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="score.html#cb504-1" tabindex="-1"></a><span class="fu">summary</span>(score_data_tbl)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="score.html#cb501-1" tabindex="-1"></a><span class="fu">summary</span>(score_data_tbl)</span></code></pre></div>
 <pre><code>##     default        personal_total          edad        nro_atraso3059   
 ##  Min.   :0.00000   Min.   :    0.00   Min.   :  0.00   Min.   : 0.0000  
 ##  1st Qu.:0.00000   1st Qu.:    0.04   1st Qu.: 40.00   1st Qu.: 0.0000  
@@ -465,29 +465,29 @@ div.csl-indent {
 ##  Mean   : 1.055   Mean   : 0.8518  
 ##  3rd Qu.: 2.000   3rd Qu.: 2.0000  
 ##  Max.   :54.000   Max.   :20.0000</code></pre>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="score.html#cb506-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">unique</span>(score_data_tbl<span class="sc">$</span>familia))</span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="score.html#cb503-1" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">unique</span>(score_data_tbl<span class="sc">$</span>familia))</span></code></pre></div>
 <pre><code>##  [1]  0  1  2  3  4  5  6  7  8  9 10 13 20</code></pre>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="score.html#cb508-1" tabindex="-1"></a><span class="fu">table</span>(score_data_tbl<span class="sc">$</span>default)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="score.html#cb505-1" tabindex="-1"></a><span class="fu">table</span>(score_data_tbl<span class="sc">$</span>default)</span></code></pre></div>
 <pre><code>## 
 ##      0      1 
 ## 111912   8357</code></pre>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="score.html#cb510-1" tabindex="-1"></a><span class="co"># Porcentaje de positivos</span></span>
-<span id="cb510-2"><a href="score.html#cb510-2" tabindex="-1"></a><span class="dv">8357</span> <span class="sc">/</span> (<span class="dv">8357</span> <span class="sc">+</span> <span class="dv">111912</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="score.html#cb507-1" tabindex="-1"></a><span class="co"># Porcentaje de positivos</span></span>
+<span id="cb507-2"><a href="score.html#cb507-2" tabindex="-1"></a><span class="dv">8357</span> <span class="sc">/</span> (<span class="dv">8357</span> <span class="sc">+</span> <span class="dv">111912</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0694859</code></pre>
 <p>Luego, se calculan algunas estadísticas descriptivas.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="score.html#cb512-1" tabindex="-1"></a>stat <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span> </span>
-<span id="cb512-2"><a href="score.html#cb512-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> </span>
-<span id="cb512-3"><a href="score.html#cb512-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb512-4"><a href="score.html#cb512-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span> </span>
-<span id="cb512-5"><a href="score.html#cb512-5" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb512-6"><a href="score.html#cb512-6" tabindex="-1"></a>    <span class="at">Obs =</span> <span class="fu">n</span>(),</span>
-<span id="cb512-7"><a href="score.html#cb512-7" tabindex="-1"></a>    <span class="at">Media =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb512-8"><a href="score.html#cb512-8" tabindex="-1"></a>    <span class="at">Mediana =</span> <span class="fu">median</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb512-9"><a href="score.html#cb512-9" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb512-10"><a href="score.html#cb512-10" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(Value, <span class="at">na.rm =</span> T),</span>
-<span id="cb512-11"><a href="score.html#cb512-11" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb512-12"><a href="score.html#cb512-12" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb512-13"><a href="score.html#cb512-13" tabindex="-1"></a>stat</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="score.html#cb509-1" tabindex="-1"></a>stat <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb509-2"><a href="score.html#cb509-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select_if</span>(is.numeric) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-3"><a href="score.html#cb509-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb509-4"><a href="score.html#cb509-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-5"><a href="score.html#cb509-5" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb509-6"><a href="score.html#cb509-6" tabindex="-1"></a>    <span class="at">Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb509-7"><a href="score.html#cb509-7" tabindex="-1"></a>    <span class="at">Media =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb509-8"><a href="score.html#cb509-8" tabindex="-1"></a>    <span class="at">Mediana =</span> <span class="fu">median</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb509-9"><a href="score.html#cb509-9" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb509-10"><a href="score.html#cb509-10" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(Value, <span class="at">na.rm =</span> T),</span>
+<span id="cb509-11"><a href="score.html#cb509-11" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(Value, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb509-12"><a href="score.html#cb509-12" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb509-13"><a href="score.html#cb509-13" tabindex="-1"></a>stat</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 7
 ##    Variable          Obs     Media  Mediana        SD   Min      Max
 ##    &lt;chr&gt;           &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
@@ -502,34 +502,34 @@ div.csl-indent {
 ##  9 nro_hipoteca   120269    1.05      1         1.15      0      54 
 ## 10 personal_total 120269    5.90      0.177   257.        0   50708</code></pre>
 <p>Se procede a realizar el <em>feature engineering</em> o creación de variables…notar que la capacidad de clasificación depende de los atributos disponibles y los valores de los hiperpárametros.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="score.html#cb514-1" tabindex="-1"></a><span class="co"># Transformacion</span></span>
-<span id="cb514-2"><a href="score.html#cb514-2" tabindex="-1"></a>score_data_tbl <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span></span>
-<span id="cb514-3"><a href="score.html#cb514-3" tabindex="-1"></a>                 <span class="fu">mutate</span>(</span>
-<span id="cb514-4"><a href="score.html#cb514-4" tabindex="-1"></a>                    <span class="at">default =</span> <span class="fu">factor</span>(default),</span>
-<span id="cb514-5"><a href="score.html#cb514-5" tabindex="-1"></a>                    <span class="at">ingreso =</span> <span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>ingreso), </span>
-<span id="cb514-6"><a href="score.html#cb514-6" tabindex="-1"></a>                    <span class="at">familia_bin =</span> <span class="fu">case_when</span>(familia <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb514-7"><a href="score.html#cb514-7" tabindex="-1"></a>                                            familia <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb514-8"><a href="score.html#cb514-8" tabindex="-1"></a>                                            familia <span class="sc">&gt;=</span> <span class="dv">2</span><span class="sc">&amp;</span>familia <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb514-9"><a href="score.html#cb514-9" tabindex="-1"></a>                                            familia <span class="sc">&gt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">4</span>))</span>
-<span id="cb514-10"><a href="score.html#cb514-10" tabindex="-1"></a>score_data_tbl <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>familia)</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="score.html#cb511-1" tabindex="-1"></a><span class="co"># Transformacion</span></span>
+<span id="cb511-2"><a href="score.html#cb511-2" tabindex="-1"></a>score_data_tbl <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span></span>
+<span id="cb511-3"><a href="score.html#cb511-3" tabindex="-1"></a>                 <span class="fu">mutate</span>(</span>
+<span id="cb511-4"><a href="score.html#cb511-4" tabindex="-1"></a>                    <span class="at">default =</span> <span class="fu">factor</span>(default),</span>
+<span id="cb511-5"><a href="score.html#cb511-5" tabindex="-1"></a>                    <span class="at">ingreso =</span> <span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>ingreso), </span>
+<span id="cb511-6"><a href="score.html#cb511-6" tabindex="-1"></a>                    <span class="at">familia_bin =</span> <span class="fu">case_when</span>(familia <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb511-7"><a href="score.html#cb511-7" tabindex="-1"></a>                                            familia <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb511-8"><a href="score.html#cb511-8" tabindex="-1"></a>                                            familia <span class="sc">&gt;=</span> <span class="dv">2</span><span class="sc">&amp;</span>familia <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb511-9"><a href="score.html#cb511-9" tabindex="-1"></a>                                            familia <span class="sc">&gt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">4</span>))</span>
+<span id="cb511-10"><a href="score.html#cb511-10" tabindex="-1"></a>score_data_tbl <span class="ot">=</span> score_data_tbl <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>familia)</span></code></pre></div>
 <p>Se divide la muestra en <span class="math inline">\(80\%\)</span> para entrenamiento y <span class="math inline">\(20\%\)</span> para <em>test</em>.</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="score.html#cb515-1" tabindex="-1"></a><span class="co"># Train / Test split</span></span>
-<span id="cb515-2"><a href="score.html#cb515-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb515-3"><a href="score.html#cb515-3" tabindex="-1"></a>train_test_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(score_data_tbl, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
-<span id="cb515-4"><a href="score.html#cb515-4" tabindex="-1"></a>train_test_split</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="score.html#cb512-1" tabindex="-1"></a><span class="co"># Train / Test split</span></span>
+<span id="cb512-2"><a href="score.html#cb512-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb512-3"><a href="score.html#cb512-3" tabindex="-1"></a>train_test_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(score_data_tbl, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb512-4"><a href="score.html#cb512-4" tabindex="-1"></a>train_test_split</span></code></pre></div>
 <pre><code>## &lt;Training/Testing/Total&gt;
 ## &lt;96215/24054/120269&gt;</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="score.html#cb517-1" tabindex="-1"></a>train_tbl <span class="ot">&lt;-</span> <span class="fu">training</span>(train_test_split)</span>
-<span id="cb517-2"><a href="score.html#cb517-2" tabindex="-1"></a>test_tbl  <span class="ot">&lt;-</span> <span class="fu">testing</span>(train_test_split) </span></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="score.html#cb514-1" tabindex="-1"></a>train_tbl <span class="ot">&lt;-</span> <span class="fu">training</span>(train_test_split)</span>
+<span id="cb514-2"><a href="score.html#cb514-2" tabindex="-1"></a>test_tbl  <span class="ot">&lt;-</span> <span class="fu">testing</span>(train_test_split) </span></code></pre></div>
 <p>Se definen dos objetos para utilizar más abajo.</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="score.html#cb518-1" tabindex="-1"></a><span class="co"># Formula</span></span>
-<span id="cb518-2"><a href="score.html#cb518-2" tabindex="-1"></a>formula  <span class="ot">&lt;-</span>  <span class="fu">formula</span>(default <span class="sc">~</span> .)</span>
-<span id="cb518-3"><a href="score.html#cb518-3" tabindex="-1"></a></span>
-<span id="cb518-4"><a href="score.html#cb518-4" tabindex="-1"></a><span class="co"># Y observado a 0/1 para confusionMatrix</span></span>
-<span id="cb518-5"><a href="score.html#cb518-5" tabindex="-1"></a>obs <span class="ot">=</span>  <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="score.html#cb515-1" tabindex="-1"></a><span class="co"># Formula</span></span>
+<span id="cb515-2"><a href="score.html#cb515-2" tabindex="-1"></a>formula  <span class="ot">&lt;-</span>  <span class="fu">formula</span>(default <span class="sc">~</span> .)</span>
+<span id="cb515-3"><a href="score.html#cb515-3" tabindex="-1"></a></span>
+<span id="cb515-4"><a href="score.html#cb515-4" tabindex="-1"></a><span class="co"># Y observado a 0/1 para confusionMatrix</span></span>
+<span id="cb515-5"><a href="score.html#cb515-5" tabindex="-1"></a>obs <span class="ot">=</span>  <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default)</span></code></pre></div>
 <p>Se estima el modelo lineal (<em>default</em> vs. resto de variables).</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="score.html#cb519-1" tabindex="-1"></a>lm.mod <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">as.numeric</span>(default) <span class="sc">~</span> ., <span class="at">data =</span> train_tbl)</span>
-<span id="cb519-2"><a href="score.html#cb519-2" tabindex="-1"></a><span class="fu">summary</span>(lm.mod)</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="score.html#cb516-1" tabindex="-1"></a>lm.mod <span class="ot">=</span> <span class="fu">lm</span>(<span class="fu">as.numeric</span>(default) <span class="sc">~</span> ., <span class="at">data =</span> train_tbl)</span>
+<span id="cb516-2"><a href="score.html#cb516-2" tabindex="-1"></a><span class="fu">summary</span>(lm.mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = as.numeric(default) ~ ., data = train_tbl)
@@ -557,7 +557,7 @@ div.csl-indent {
 ## Multiple R-squared:  0.02673,    Adjusted R-squared:  0.02664 
 ## F-statistic: 293.6 on 9 and 96205 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Alternativamente:</p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="score.html#cb521-1" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lm.mod)</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="score.html#cb518-1" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lm.mod)</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 5
 ##    term              estimate  std.error statistic   p.value
 ##    &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -571,7 +571,7 @@ div.csl-indent {
 ##  8 nro_atraso90   -0.0135     0.00107       -12.7  1.19e- 36
 ##  9 nro_hipoteca    0.00169    0.000791        2.13 3.31e-  2
 ## 10 familia_bin     0.00709    0.000980        7.23 4.78e- 13</code></pre>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="score.html#cb523-1" tabindex="-1"></a><span class="fu">t</span>(broom<span class="sc">::</span><span class="fu">glance</span>(lm.mod))</span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="score.html#cb520-1" tabindex="-1"></a><span class="fu">t</span>(broom<span class="sc">::</span><span class="fu">glance</span>(lm.mod))</span></code></pre></div>
 <pre><code>##                        [,1]
 ## r.squared      2.673354e-02
 ## adj.r.squared  2.664249e-02
@@ -586,8 +586,8 @@ div.csl-indent {
 ## df.residual    9.620500e+04
 ## nobs           9.621500e+04</code></pre>
 <p>Se estima el modelo logit.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="score.html#cb525-1" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(formula, <span class="at">data =</span> train_tbl, <span class="at">family =</span> binomial)</span>
-<span id="cb525-2"><a href="score.html#cb525-2" tabindex="-1"></a><span class="fu">summary</span>(glm.mod)</span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="score.html#cb522-1" tabindex="-1"></a>glm.mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(formula, <span class="at">data =</span> train_tbl, <span class="at">family =</span> binomial)</span>
+<span id="cb522-2"><a href="score.html#cb522-2" tabindex="-1"></a><span class="fu">summary</span>(glm.mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = formula, family = binomial, data = train_tbl)
@@ -614,35 +614,64 @@ div.csl-indent {
 ## AIC: 46571
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="score.html#cb527-1" tabindex="-1"></a><span class="co"># Efectos marginales ver:</span></span>
-<span id="cb527-2"><a href="score.html#cb527-2" tabindex="-1"></a><span class="co"># library(mfx)</span></span>
-<span id="cb527-3"><a href="score.html#cb527-3" tabindex="-1"></a><span class="co"># logitmfx(formula, data)</span></span>
-<span id="cb527-4"><a href="score.html#cb527-4" tabindex="-1"></a></span>
-<span id="cb527-5"><a href="score.html#cb527-5" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.mod, test_tbl,  <span class="at">type =</span> <span class="st">&#39;response&#39;</span>)</span>
-<span id="cb527-6"><a href="score.html#cb527-6" tabindex="-1"></a>glm.class <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(glm.probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb527-7"><a href="score.html#cb527-7" tabindex="-1"></a></span>
-<span id="cb527-8"><a href="score.html#cb527-8" tabindex="-1"></a>cm_logit <span class="ot">=</span> <span class="fu">confusionMatrix</span>(glm.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="score.html#cb524-1" tabindex="-1"></a><span class="co"># Efectos marginales ver:</span></span>
+<span id="cb524-2"><a href="score.html#cb524-2" tabindex="-1"></a><span class="co"># library(mfx)</span></span>
+<span id="cb524-3"><a href="score.html#cb524-3" tabindex="-1"></a><span class="co"># logitmfx(formula, data)</span></span>
+<span id="cb524-4"><a href="score.html#cb524-4" tabindex="-1"></a></span>
+<span id="cb524-5"><a href="score.html#cb524-5" tabindex="-1"></a>glm.probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm.mod, test_tbl,  <span class="at">type =</span> <span class="st">&#39;response&#39;</span>)</span>
+<span id="cb524-6"><a href="score.html#cb524-6" tabindex="-1"></a>glm.class <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(glm.probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb524-7"><a href="score.html#cb524-7" tabindex="-1"></a></span>
+<span id="cb524-8"><a href="score.html#cb524-8" tabindex="-1"></a>cm_logit <span class="ot">=</span> <span class="fu">confusionMatrix</span>(glm.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
+<span id="cb524-9"><a href="score.html#cb524-9" tabindex="-1"></a></span>
+<span id="cb524-10"><a href="score.html#cb524-10" tabindex="-1"></a>cm_logit</span></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction     0     1
+##          0 22347  1679
+##          1    11    17
+##                                           
+##                Accuracy : 0.9297          
+##                  95% CI : (0.9264, 0.9329)
+##     No Information Rate : 0.9295          
+##     P-Value [Acc &gt; NIR] : 0.4463          
+##                                           
+##                   Kappa : 0.0175          
+##                                           
+##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
+##                                           
+##             Sensitivity : 0.0100236       
+##             Specificity : 0.9995080       
+##          Pos Pred Value : 0.6071429       
+##          Neg Pred Value : 0.9301174       
+##              Prevalence : 0.0705080       
+##          Detection Rate : 0.0007067       
+##    Detection Prevalence : 0.0011640       
+##       Balanced Accuracy : 0.5047658       
+##                                           
+##        &#39;Positive&#39; Class : 1               
+## </code></pre>
 <p>Se estima un árbol simple.</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="score.html#cb528-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
-<span id="cb528-2"><a href="score.html#cb528-2" tabindex="-1"></a>rpart.mod <span class="ot">=</span> <span class="fu">rpart</span>(formula,</span>
-<span id="cb528-3"><a href="score.html#cb528-3" tabindex="-1"></a>                  <span class="at">data =</span> train_tbl,  </span>
-<span id="cb528-4"><a href="score.html#cb528-4" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">20</span>,  <span class="co"># obs minimas por nodo para partir</span></span>
-<span id="cb528-5"><a href="score.html#cb528-5" tabindex="-1"></a>                                          <span class="at">minbucket =</span> <span class="dv">6</span>,  <span class="co"># obs minimas en nodo terminal</span></span>
-<span id="cb528-6"><a href="score.html#cb528-6" tabindex="-1"></a>                                          <span class="at">cp =</span> <span class="dv">0</span>,         <span class="co"># complexidad</span></span>
-<span id="cb528-7"><a href="score.html#cb528-7" tabindex="-1"></a>                                          <span class="at">xval =</span> <span class="dv">0</span>,       <span class="co"># numero de cross-validations.</span></span>
-<span id="cb528-8"><a href="score.html#cb528-8" tabindex="-1"></a>                                          <span class="at">maxdepth =</span> <span class="dv">16</span>)) <span class="co"># profundidad del arbol</span></span>
-<span id="cb528-9"><a href="score.html#cb528-9" tabindex="-1"></a><span class="fu">names</span>(rpart.mod)</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="score.html#cb526-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
+<span id="cb526-2"><a href="score.html#cb526-2" tabindex="-1"></a>rpart.mod <span class="ot">=</span> <span class="fu">rpart</span>(formula,</span>
+<span id="cb526-3"><a href="score.html#cb526-3" tabindex="-1"></a>                  <span class="at">data =</span> train_tbl,  </span>
+<span id="cb526-4"><a href="score.html#cb526-4" tabindex="-1"></a>                  <span class="at">control =</span> <span class="fu">rpart.control</span>(<span class="at">minsplit =</span> <span class="dv">20</span>,  <span class="co"># obs minimas por nodo para partir</span></span>
+<span id="cb526-5"><a href="score.html#cb526-5" tabindex="-1"></a>                                          <span class="at">minbucket =</span> <span class="dv">6</span>,  <span class="co"># obs minimas en nodo terminal</span></span>
+<span id="cb526-6"><a href="score.html#cb526-6" tabindex="-1"></a>                                          <span class="at">cp =</span> <span class="dv">0</span>,         <span class="co"># complexidad</span></span>
+<span id="cb526-7"><a href="score.html#cb526-7" tabindex="-1"></a>                                          <span class="at">xval =</span> <span class="dv">0</span>,       <span class="co"># numero de cross-validations.</span></span>
+<span id="cb526-8"><a href="score.html#cb526-8" tabindex="-1"></a>                                          <span class="at">maxdepth =</span> <span class="dv">16</span>)) <span class="co"># profundidad del arbol</span></span>
+<span id="cb526-9"><a href="score.html#cb526-9" tabindex="-1"></a><span class="fu">names</span>(rpart.mod)</span></code></pre></div>
 <pre><code>##  [1] &quot;frame&quot;               &quot;where&quot;               &quot;call&quot;               
 ##  [4] &quot;terms&quot;               &quot;cptable&quot;             &quot;method&quot;             
 ##  [7] &quot;parms&quot;               &quot;control&quot;             &quot;functions&quot;          
 ## [10] &quot;numresp&quot;             &quot;splits&quot;              &quot;variable.importance&quot;
 ## [13] &quot;y&quot;                   &quot;ordered&quot;</code></pre>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="score.html#cb530-1" tabindex="-1"></a>rpart.prob <span class="ot">=</span> <span class="fu">predict</span>(rpart.mod, test_tbl)</span>
-<span id="cb530-2"><a href="score.html#cb530-2" tabindex="-1"></a>rpart.class <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(rpart.prob[, <span class="st">&#39;1&#39;</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb530-3"><a href="score.html#cb530-3" tabindex="-1"></a></span>
-<span id="cb530-4"><a href="score.html#cb530-4" tabindex="-1"></a>cm_rpart <span class="ot">=</span> <span class="fu">confusionMatrix</span>(rpart.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
-<span id="cb530-5"><a href="score.html#cb530-5" tabindex="-1"></a></span>
-<span id="cb530-6"><a href="score.html#cb530-6" tabindex="-1"></a>cm_rpart</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="score.html#cb528-1" tabindex="-1"></a>rpart.prob <span class="ot">=</span> <span class="fu">predict</span>(rpart.mod, test_tbl)</span>
+<span id="cb528-2"><a href="score.html#cb528-2" tabindex="-1"></a>rpart.class <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(rpart.prob[, <span class="st">&#39;1&#39;</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb528-3"><a href="score.html#cb528-3" tabindex="-1"></a></span>
+<span id="cb528-4"><a href="score.html#cb528-4" tabindex="-1"></a>cm_rpart <span class="ot">=</span> <span class="fu">confusionMatrix</span>(rpart.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
+<span id="cb528-5"><a href="score.html#cb528-5" tabindex="-1"></a></span>
+<span id="cb528-6"><a href="score.html#cb528-6" tabindex="-1"></a>cm_rpart</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -670,12 +699,12 @@ div.csl-indent {
 ##                                           
 ##        &#39;Positive&#39; Class : 1               
 ## </code></pre>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="score.html#cb532-1" tabindex="-1"></a><span class="fu">prp</span>(rpart.mod, <span class="at">extra=</span><span class="dv">101</span>, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">branch=</span><span class="dv">1</span>, <span class="at">type=</span><span class="dv">4</span>, <span class="at">varlen=</span><span class="dv">0</span>, <span class="at">faclen=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="score.html#cb530-1" tabindex="-1"></a><span class="fu">prp</span>(rpart.mod, <span class="at">extra=</span><span class="dv">101</span>, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">branch=</span><span class="dv">1</span>, <span class="at">type=</span><span class="dv">4</span>, <span class="at">varlen=</span><span class="dv">0</span>, <span class="at">faclen=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/tp13-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="score.html#cb533-1" tabindex="-1"></a>rpartVarImp <span class="ot">=</span> <span class="fu">as_tibble_row</span>(rpart.mod<span class="sc">$</span>variable.importance) <span class="sc">%&gt;%</span></span>
-<span id="cb533-2"><a href="score.html#cb533-2" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb533-3"><a href="score.html#cb533-3" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
-<span id="cb533-4"><a href="score.html#cb533-4" tabindex="-1"></a>rpartVarImp</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="score.html#cb531-1" tabindex="-1"></a>rpartVarImp <span class="ot">=</span> <span class="fu">as_tibble_row</span>(rpart.mod<span class="sc">$</span>variable.importance) <span class="sc">%&gt;%</span></span>
+<span id="cb531-2"><a href="score.html#cb531-2" tabindex="-1"></a> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb531-3"><a href="score.html#cb531-3" tabindex="-1"></a> <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
+<span id="cb531-4"><a href="score.html#cb531-4" tabindex="-1"></a>rpartVarImp</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 2
 ##   Variable        Value
 ##   &lt;chr&gt;           &lt;dbl&gt;
@@ -689,16 +718,16 @@ div.csl-indent {
 ## 8 nro_hipoteca    112. 
 ## 9 familia_bin      69.5</code></pre>
 <p>Se estima un <em>random forest</em>.</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="score.html#cb535-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb535-2"><a href="score.html#cb535-2" tabindex="-1"></a>ranger.mod  <span class="ot">=</span> <span class="fu">ranger</span>(formula,</span>
-<span id="cb535-3"><a href="score.html#cb535-3" tabindex="-1"></a>                     <span class="at">data =</span> train_tbl,  </span>
-<span id="cb535-4"><a href="score.html#cb535-4" tabindex="-1"></a>                     <span class="at">probability =</span> <span class="cn">TRUE</span>,      <span class="co"># estima una probabilidad</span></span>
-<span id="cb535-5"><a href="score.html#cb535-5" tabindex="-1"></a>                     <span class="at">num.trees =</span> <span class="dv">300</span>,         <span class="co"># numero de arboles</span></span>
-<span id="cb535-6"><a href="score.html#cb535-6" tabindex="-1"></a>                     <span class="at">min.node.size =</span> <span class="dv">15</span>,      <span class="co"># tamaño mínimo de nodo a partir </span></span>
-<span id="cb535-7"><a href="score.html#cb535-7" tabindex="-1"></a>                     <span class="at">mtry =</span> <span class="dv">3</span>,                <span class="co"># nro de vars para separar por cada nodo</span></span>
-<span id="cb535-8"><a href="score.html#cb535-8" tabindex="-1"></a>                     <span class="at">splitrule =</span> <span class="st">&#39;gini&#39;</span>,       </span>
-<span id="cb535-9"><a href="score.html#cb535-9" tabindex="-1"></a>                     <span class="at">importance =</span> <span class="st">&#39;impurity&#39;</span>)   </span>
-<span id="cb535-10"><a href="score.html#cb535-10" tabindex="-1"></a><span class="fu">names</span>(ranger.mod)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="score.html#cb533-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb533-2"><a href="score.html#cb533-2" tabindex="-1"></a>ranger.mod  <span class="ot">=</span> <span class="fu">ranger</span>(formula,</span>
+<span id="cb533-3"><a href="score.html#cb533-3" tabindex="-1"></a>                     <span class="at">data =</span> train_tbl,  </span>
+<span id="cb533-4"><a href="score.html#cb533-4" tabindex="-1"></a>                     <span class="at">probability =</span> <span class="cn">TRUE</span>,      <span class="co"># estima una probabilidad</span></span>
+<span id="cb533-5"><a href="score.html#cb533-5" tabindex="-1"></a>                     <span class="at">num.trees =</span> <span class="dv">300</span>,         <span class="co"># numero de arboles</span></span>
+<span id="cb533-6"><a href="score.html#cb533-6" tabindex="-1"></a>                     <span class="at">min.node.size =</span> <span class="dv">15</span>,      <span class="co"># tamaño mínimo de nodo a partir </span></span>
+<span id="cb533-7"><a href="score.html#cb533-7" tabindex="-1"></a>                     <span class="at">mtry =</span> <span class="dv">3</span>,                <span class="co"># nro de vars para separar por cada nodo</span></span>
+<span id="cb533-8"><a href="score.html#cb533-8" tabindex="-1"></a>                     <span class="at">splitrule =</span> <span class="st">&#39;gini&#39;</span>,       </span>
+<span id="cb533-9"><a href="score.html#cb533-9" tabindex="-1"></a>                     <span class="at">importance =</span> <span class="st">&#39;impurity&#39;</span>)   </span>
+<span id="cb533-10"><a href="score.html#cb533-10" tabindex="-1"></a><span class="fu">names</span>(ranger.mod)</span></code></pre></div>
 <pre><code>##  [1] &quot;predictions&quot;               &quot;num.trees&quot;                
 ##  [3] &quot;num.independent.variables&quot; &quot;mtry&quot;                     
 ##  [5] &quot;min.node.size&quot;             &quot;variable.importance&quot;      
@@ -706,19 +735,19 @@ div.csl-indent {
 ##  [9] &quot;splitrule&quot;                 &quot;treetype&quot;                 
 ## [11] &quot;call&quot;                      &quot;importance.mode&quot;          
 ## [13] &quot;num.samples&quot;               &quot;replace&quot;</code></pre>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="score.html#cb537-1" tabindex="-1"></a>ranger.prob <span class="ot">=</span> <span class="fu">predict</span>(ranger.mod, test_tbl)</span>
-<span id="cb537-2"><a href="score.html#cb537-2" tabindex="-1"></a>ranger.class <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(ranger.prob<span class="sc">$</span>predictions[, <span class="st">&#39;1&#39;</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb537-3"><a href="score.html#cb537-3" tabindex="-1"></a></span>
-<span id="cb537-4"><a href="score.html#cb537-4" tabindex="-1"></a>cm_ranger <span class="ot">=</span> <span class="fu">confusionMatrix</span>(ranger.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
-<span id="cb537-5"><a href="score.html#cb537-5" tabindex="-1"></a></span>
-<span id="cb537-6"><a href="score.html#cb537-6" tabindex="-1"></a><span class="co"># Error del RF</span></span>
-<span id="cb537-7"><a href="score.html#cb537-7" tabindex="-1"></a></span>
-<span id="cb537-8"><a href="score.html#cb537-8" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="score.html#cb535-1" tabindex="-1"></a>ranger.prob <span class="ot">=</span> <span class="fu">predict</span>(ranger.mod, test_tbl)</span>
+<span id="cb535-2"><a href="score.html#cb535-2" tabindex="-1"></a>ranger.class <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(ranger.prob<span class="sc">$</span>predictions[, <span class="st">&#39;1&#39;</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb535-3"><a href="score.html#cb535-3" tabindex="-1"></a></span>
+<span id="cb535-4"><a href="score.html#cb535-4" tabindex="-1"></a>cm_ranger <span class="ot">=</span> <span class="fu">confusionMatrix</span>(ranger.class, obs, <span class="at">positive =</span> <span class="st">&#39;1&#39;</span>)</span>
+<span id="cb535-5"><a href="score.html#cb535-5" tabindex="-1"></a></span>
+<span id="cb535-6"><a href="score.html#cb535-6" tabindex="-1"></a><span class="co"># Error del RF</span></span>
+<span id="cb535-7"><a href="score.html#cb535-7" tabindex="-1"></a></span>
+<span id="cb535-8"><a href="score.html#cb535-8" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]]</span></code></pre></div>
 <pre><code>## [1] 0.066517</code></pre>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="score.html#cb539-1" tabindex="-1"></a>rangerVarImp <span class="ot">=</span> <span class="fu">as_tibble_row</span>(ranger.mod<span class="sc">$</span>variable.importance) <span class="sc">%&gt;%</span></span>
-<span id="cb539-2"><a href="score.html#cb539-2" tabindex="-1"></a>               <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb539-3"><a href="score.html#cb539-3" tabindex="-1"></a>               <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
-<span id="cb539-4"><a href="score.html#cb539-4" tabindex="-1"></a>rangerVarImp</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="score.html#cb537-1" tabindex="-1"></a>rangerVarImp <span class="ot">=</span> <span class="fu">as_tibble_row</span>(ranger.mod<span class="sc">$</span>variable.importance) <span class="sc">%&gt;%</span></span>
+<span id="cb537-2"><a href="score.html#cb537-2" tabindex="-1"></a>               <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Value&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb537-3"><a href="score.html#cb537-3" tabindex="-1"></a>               <span class="fu">arrange</span>(<span class="fu">desc</span>(Value)) </span>
+<span id="cb537-4"><a href="score.html#cb537-4" tabindex="-1"></a>rangerVarImp</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 2
 ##   Variable       Value
 ##   &lt;chr&gt;          &lt;dbl&gt;
@@ -732,28 +761,28 @@ div.csl-indent {
 ## 8 nro_hipoteca    237.
 ## 9 familia_bin     204.</code></pre>
 <p>Se pueden realizar <strong>gráficos de dependencia parcial</strong> para distintas variables. Estos gráficos ilustran el efecto marginal de las variables seleccionadas en la respuesta después de <strong>integrar</strong> las otras variables. En este caso la probabilidad de <em>default</em> al principio cae con el <code>ingreso</code> aunque luego de un determinado umbral comienza a aumentar.</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="score.html#cb541-1" tabindex="-1"></a><span class="fu">library</span>(iml)</span>
-<span id="cb541-2"><a href="score.html#cb541-2" tabindex="-1"></a><span class="co"># Se elimina la variable target</span></span>
-<span id="cb541-3"><a href="score.html#cb541-3" tabindex="-1"></a>train_tbl1 <span class="ot">=</span> train_tbl <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>default)</span>
-<span id="cb541-4"><a href="score.html#cb541-4" tabindex="-1"></a></span>
-<span id="cb541-5"><a href="score.html#cb541-5" tabindex="-1"></a><span class="co"># Se crea una funcion para usar como argumento mas abajo</span></span>
-<span id="cb541-6"><a href="score.html#cb541-6" tabindex="-1"></a>pfun <span class="ot">=</span> <span class="cf">function</span>(object, newdata) {<span class="fu">predict</span>(object, <span class="at">data =</span> newdata)<span class="sc">$</span>predictions[, <span class="dv">2</span>]}</span>
-<span id="cb541-7"><a href="score.html#cb541-7" tabindex="-1"></a></span>
-<span id="cb541-8"><a href="score.html#cb541-8" tabindex="-1"></a><span class="co"># Sentencia para el grafico de dependencia parcial</span></span>
-<span id="cb541-9"><a href="score.html#cb541-9" tabindex="-1"></a>predictor <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(ranger.mod, <span class="at">data =</span> train_tbl1, <span class="at">y =</span> <span class="fu">factor</span>(train_tbl<span class="sc">$</span>default), <span class="at">predict.fun =</span> pfun)</span>
-<span id="cb541-10"><a href="score.html#cb541-10" tabindex="-1"></a></span>
-<span id="cb541-11"><a href="score.html#cb541-11" tabindex="-1"></a>pdp <span class="ot">=</span> FeatureEffect<span class="sc">$</span><span class="fu">new</span>(predictor, <span class="at">feature =</span> <span class="st">&#39;ingreso&#39;</span>, <span class="at">method =</span> <span class="st">&#39;pdp&#39;</span>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span>
-<span id="cb541-12"><a href="score.html#cb541-12" tabindex="-1"></a>pdp</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="score.html#cb539-1" tabindex="-1"></a><span class="fu">library</span>(iml)</span>
+<span id="cb539-2"><a href="score.html#cb539-2" tabindex="-1"></a><span class="co"># Se elimina la variable target</span></span>
+<span id="cb539-3"><a href="score.html#cb539-3" tabindex="-1"></a>train_tbl1 <span class="ot">=</span> train_tbl <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>default)</span>
+<span id="cb539-4"><a href="score.html#cb539-4" tabindex="-1"></a></span>
+<span id="cb539-5"><a href="score.html#cb539-5" tabindex="-1"></a><span class="co"># Se crea una funcion para usar como argumento mas abajo</span></span>
+<span id="cb539-6"><a href="score.html#cb539-6" tabindex="-1"></a>pfun <span class="ot">=</span> <span class="cf">function</span>(object, newdata) {<span class="fu">predict</span>(object, <span class="at">data =</span> newdata)<span class="sc">$</span>predictions[, <span class="dv">2</span>]}</span>
+<span id="cb539-7"><a href="score.html#cb539-7" tabindex="-1"></a></span>
+<span id="cb539-8"><a href="score.html#cb539-8" tabindex="-1"></a><span class="co"># Sentencia para el grafico de dependencia parcial</span></span>
+<span id="cb539-9"><a href="score.html#cb539-9" tabindex="-1"></a>predictor <span class="ot">=</span> Predictor<span class="sc">$</span><span class="fu">new</span>(ranger.mod, <span class="at">data =</span> train_tbl1, <span class="at">y =</span> <span class="fu">factor</span>(train_tbl<span class="sc">$</span>default), <span class="at">predict.fun =</span> pfun)</span>
+<span id="cb539-10"><a href="score.html#cb539-10" tabindex="-1"></a></span>
+<span id="cb539-11"><a href="score.html#cb539-11" tabindex="-1"></a>pdp <span class="ot">=</span> FeatureEffect<span class="sc">$</span><span class="fu">new</span>(predictor, <span class="at">feature =</span> <span class="st">&#39;ingreso&#39;</span>, <span class="at">method =</span> <span class="st">&#39;pdp&#39;</span>) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span>
+<span id="cb539-12"><a href="score.html#cb539-12" tabindex="-1"></a>pdp</span></code></pre></div>
 <p><img src="NotasTP_files/figure-html/tp15-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Se presentan los resultados (no se analizan…) en tabla resumen.</p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="score.html#cb542-1" tabindex="-1"></a>tab_acc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit  =</span> cm_logit<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
-<span id="cb542-2"><a href="score.html#cb542-2" tabindex="-1"></a>                 <span class="at">rpart  =</span> cm_rpart<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
-<span id="cb542-3"><a href="score.html#cb542-3" tabindex="-1"></a>                 <span class="at">ranger =</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]])</span>
-<span id="cb542-4"><a href="score.html#cb542-4" tabindex="-1"></a>                </span>
-<span id="cb542-5"><a href="score.html#cb542-5" tabindex="-1"></a>tab_acc <span class="ot">=</span> tab_acc <span class="sc">|&gt;</span></span>
-<span id="cb542-6"><a href="score.html#cb542-6" tabindex="-1"></a>          <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&#39;Modelo&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Accuracy&#39;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb542-7"><a href="score.html#cb542-7" tabindex="-1"></a>          <span class="fu">arrange</span>(<span class="fu">desc</span>(Accuracy))</span>
-<span id="cb542-8"><a href="score.html#cb542-8" tabindex="-1"></a>tab_acc </span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="score.html#cb540-1" tabindex="-1"></a>tab_acc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit  =</span> cm_logit<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
+<span id="cb540-2"><a href="score.html#cb540-2" tabindex="-1"></a>                 <span class="at">rpart  =</span> cm_rpart<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]],</span>
+<span id="cb540-3"><a href="score.html#cb540-3" tabindex="-1"></a>                 <span class="at">ranger =</span> cm_ranger<span class="sc">$</span>overall[[<span class="st">&#39;Accuracy&#39;</span>]])</span>
+<span id="cb540-4"><a href="score.html#cb540-4" tabindex="-1"></a>                </span>
+<span id="cb540-5"><a href="score.html#cb540-5" tabindex="-1"></a>tab_acc <span class="ot">=</span> tab_acc <span class="sc">|&gt;</span></span>
+<span id="cb540-6"><a href="score.html#cb540-6" tabindex="-1"></a>          <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&#39;Modelo&#39;</span>, <span class="at">values_to=</span><span class="st">&#39;Accuracy&#39;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb540-7"><a href="score.html#cb540-7" tabindex="-1"></a>          <span class="fu">arrange</span>(<span class="fu">desc</span>(Accuracy))</span>
+<span id="cb540-8"><a href="score.html#cb540-8" tabindex="-1"></a>tab_acc </span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   Modelo Accuracy
 ##   &lt;chr&gt;     &lt;dbl&gt;
@@ -761,19 +790,19 @@ div.csl-indent {
 ## 2 logit     0.930
 ## 3 rpart     0.926</code></pre>
 <p>Finalmente se calculan las AUC:</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="score.html#cb544-1" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">obs =</span> <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default),</span>
-<span id="cb544-2"><a href="score.html#cb544-2" tabindex="-1"></a>             <span class="at">logit =</span> glm.probs,</span>
-<span id="cb544-3"><a href="score.html#cb544-3" tabindex="-1"></a>             <span class="at">rpart =</span> rpart.prob[, <span class="st">&#39;1&#39;</span>],</span>
-<span id="cb544-4"><a href="score.html#cb544-4" tabindex="-1"></a>             <span class="at">ranger =</span> ranger.prob<span class="sc">$</span>predictions[,<span class="st">&#39;1&#39;</span>])</span>
-<span id="cb544-5"><a href="score.html#cb544-5" tabindex="-1"></a></span>
-<span id="cb544-6"><a href="score.html#cb544-6" tabindex="-1"></a>tab_auc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, logit, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb544-7"><a href="score.html#cb544-7" tabindex="-1"></a>                 <span class="at">rpart =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, rpart, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
-<span id="cb544-8"><a href="score.html#cb544-8" tabindex="-1"></a>                 <span class="at">ranger =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, ranger, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate)</span>
-<span id="cb544-9"><a href="score.html#cb544-9" tabindex="-1"></a></span>
-<span id="cb544-10"><a href="score.html#cb544-10" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">|&gt;</span> </span>
-<span id="cb544-11"><a href="score.html#cb544-11" tabindex="-1"></a>          <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb544-12"><a href="score.html#cb544-12" tabindex="-1"></a>          <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
-<span id="cb544-13"><a href="score.html#cb544-13" tabindex="-1"></a>tab_auc</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="score.html#cb542-1" tabindex="-1"></a>tab <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">obs =</span> <span class="fu">factor</span>(test_tbl<span class="sc">$</span>default),</span>
+<span id="cb542-2"><a href="score.html#cb542-2" tabindex="-1"></a>             <span class="at">logit =</span> glm.probs,</span>
+<span id="cb542-3"><a href="score.html#cb542-3" tabindex="-1"></a>             <span class="at">rpart =</span> rpart.prob[, <span class="st">&#39;1&#39;</span>],</span>
+<span id="cb542-4"><a href="score.html#cb542-4" tabindex="-1"></a>             <span class="at">ranger =</span> ranger.prob<span class="sc">$</span>predictions[,<span class="st">&#39;1&#39;</span>])</span>
+<span id="cb542-5"><a href="score.html#cb542-5" tabindex="-1"></a></span>
+<span id="cb542-6"><a href="score.html#cb542-6" tabindex="-1"></a>tab_auc <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">logit =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, logit, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
+<span id="cb542-7"><a href="score.html#cb542-7" tabindex="-1"></a>                 <span class="at">rpart =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, rpart, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate,</span>
+<span id="cb542-8"><a href="score.html#cb542-8" tabindex="-1"></a>                 <span class="at">ranger =</span> <span class="fu">roc_auc</span>(tab, <span class="at">truth=</span>obs, ranger, <span class="at">event_level =</span> <span class="st">&#39;second&#39;</span>)<span class="sc">$</span>.estimate)</span>
+<span id="cb542-9"><a href="score.html#cb542-9" tabindex="-1"></a></span>
+<span id="cb542-10"><a href="score.html#cb542-10" tabindex="-1"></a>tab_auc <span class="ot">=</span> tab_auc <span class="sc">|&gt;</span> </span>
+<span id="cb542-11"><a href="score.html#cb542-11" tabindex="-1"></a>          <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">&quot;Modelo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;AUC&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb542-12"><a href="score.html#cb542-12" tabindex="-1"></a>          <span class="fu">arrange</span>(<span class="fu">desc</span>(AUC))</span>
+<span id="cb542-13"><a href="score.html#cb542-13" tabindex="-1"></a>tab_auc</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   Modelo   AUC
 ##   &lt;chr&gt;  &lt;dbl&gt;
@@ -784,42 +813,42 @@ div.csl-indent {
 <div id="grid-search" class="section level2 hasAnchor" number="10.4">
 <h2><span class="header-section-number">10.4</span> Grid search<a href="score.html#grid-search" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se muestra un ejemplo con <em>random forest</em>:</p>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="score.html#cb546-1" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(train_tbl), <span class="st">&quot;default&quot;</span>))</span>
-<span id="cb546-2"><a href="score.html#cb546-2" tabindex="-1"></a></span>
-<span id="cb546-3"><a href="score.html#cb546-3" tabindex="-1"></a><span class="co"># crea la grilla de hyperparametros</span></span>
-<span id="cb546-4"><a href="score.html#cb546-4" tabindex="-1"></a>hyper_grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb546-5"><a href="score.html#cb546-5" tabindex="-1"></a>  <span class="at">num.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
-<span id="cb546-6"><a href="score.html#cb546-6" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">333</span>, .<span class="dv">4</span>)),</span>
-<span id="cb546-7"><a href="score.html#cb546-7" tabindex="-1"></a>  <span class="at">min.node.size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>), </span>
-<span id="cb546-8"><a href="score.html#cb546-8" tabindex="-1"></a>  <span class="at">replace =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),                               </span>
-<span id="cb546-9"><a href="score.html#cb546-9" tabindex="-1"></a>  <span class="at">sample.fraction =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">63</span>, .<span class="dv">75</span>, .<span class="dv">8</span>)               </span>
-<span id="cb546-10"><a href="score.html#cb546-10" tabindex="-1"></a>)</span>
-<span id="cb546-11"><a href="score.html#cb546-11" tabindex="-1"></a></span>
-<span id="cb546-12"><a href="score.html#cb546-12" tabindex="-1"></a><span class="co"># realiza el grid search</span></span>
-<span id="cb546-13"><a href="score.html#cb546-13" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
-<span id="cb546-14"><a href="score.html#cb546-14" tabindex="-1"></a>  <span class="co"># estima el modelo para la combinacion i de hyperparametros</span></span>
-<span id="cb546-15"><a href="score.html#cb546-15" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
-<span id="cb546-16"><a href="score.html#cb546-16" tabindex="-1"></a>    <span class="at">formula         =</span> formula, </span>
-<span id="cb546-17"><a href="score.html#cb546-17" tabindex="-1"></a>    <span class="at">data            =</span> train_tbl,  </span>
-<span id="cb546-18"><a href="score.html#cb546-18" tabindex="-1"></a>    <span class="at">probability     =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb546-19"><a href="score.html#cb546-19" tabindex="-1"></a>    <span class="at">num.trees       =</span> hyper_grid<span class="sc">$</span>num.trees[i],</span>
-<span id="cb546-20"><a href="score.html#cb546-20" tabindex="-1"></a>    <span class="at">mtry            =</span> hyper_grid<span class="sc">$</span>mtry[i],</span>
-<span id="cb546-21"><a href="score.html#cb546-21" tabindex="-1"></a>    <span class="at">min.node.size   =</span> hyper_grid<span class="sc">$</span>min.node.size[i],</span>
-<span id="cb546-22"><a href="score.html#cb546-22" tabindex="-1"></a>    <span class="at">replace         =</span> hyper_grid<span class="sc">$</span>replace[i],</span>
-<span id="cb546-23"><a href="score.html#cb546-23" tabindex="-1"></a>    <span class="at">sample.fraction =</span> hyper_grid<span class="sc">$</span>sample.fraction[i],</span>
-<span id="cb546-24"><a href="score.html#cb546-24" tabindex="-1"></a>    <span class="at">verbose         =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb546-25"><a href="score.html#cb546-25" tabindex="-1"></a>    <span class="at">seed            =</span> <span class="dv">1234</span>,</span>
-<span id="cb546-26"><a href="score.html#cb546-26" tabindex="-1"></a>    <span class="at">respect.unordered.factors =</span> <span class="st">&#39;order&#39;</span>,</span>
-<span id="cb546-27"><a href="score.html#cb546-27" tabindex="-1"></a>    <span class="at">splitrule       =</span> <span class="st">&#39;gini&#39;</span>,</span>
-<span id="cb546-28"><a href="score.html#cb546-28" tabindex="-1"></a>    <span class="at">importance      =</span> <span class="st">&#39;impurity&#39;</span></span>
-<span id="cb546-29"><a href="score.html#cb546-29" tabindex="-1"></a>  )</span>
-<span id="cb546-30"><a href="score.html#cb546-30" tabindex="-1"></a>  <span class="co"># error (1 - accuracy) </span></span>
-<span id="cb546-31"><a href="score.html#cb546-31" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>error[i] <span class="ot">=</span> fit<span class="sc">$</span>prediction.error</span>
-<span id="cb546-32"><a href="score.html#cb546-32" tabindex="-1"></a>}</span>
-<span id="cb546-33"><a href="score.html#cb546-33" tabindex="-1"></a></span>
-<span id="cb546-34"><a href="score.html#cb546-34" tabindex="-1"></a><span class="co"># top 10 </span></span>
-<span id="cb546-35"><a href="score.html#cb546-35" tabindex="-1"></a>hyper_grid <span class="sc">|&gt;</span></span>
-<span id="cb546-36"><a href="score.html#cb546-36" tabindex="-1"></a>  <span class="fu">arrange</span>(error) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="score.html#cb544-1" tabindex="-1"></a>n_features <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">setdiff</span>(<span class="fu">names</span>(train_tbl), <span class="st">&quot;default&quot;</span>))</span>
+<span id="cb544-2"><a href="score.html#cb544-2" tabindex="-1"></a></span>
+<span id="cb544-3"><a href="score.html#cb544-3" tabindex="-1"></a><span class="co"># crea la grilla de hyperparametros</span></span>
+<span id="cb544-4"><a href="score.html#cb544-4" tabindex="-1"></a>hyper_grid <span class="ot">=</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb544-5"><a href="score.html#cb544-5" tabindex="-1"></a>  <span class="at">num.trees =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>),</span>
+<span id="cb544-6"><a href="score.html#cb544-6" tabindex="-1"></a>  <span class="at">mtry =</span> <span class="fu">floor</span>(n_features <span class="sc">*</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">15</span>, .<span class="dv">25</span>, .<span class="dv">333</span>, .<span class="dv">4</span>)),</span>
+<span id="cb544-7"><a href="score.html#cb544-7" tabindex="-1"></a>  <span class="at">min.node.size =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>), </span>
+<span id="cb544-8"><a href="score.html#cb544-8" tabindex="-1"></a>  <span class="at">replace =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>),                               </span>
+<span id="cb544-9"><a href="score.html#cb544-9" tabindex="-1"></a>  <span class="at">sample.fraction =</span> <span class="fu">c</span>(.<span class="dv">5</span>, .<span class="dv">63</span>, .<span class="dv">75</span>, .<span class="dv">8</span>)               </span>
+<span id="cb544-10"><a href="score.html#cb544-10" tabindex="-1"></a>)</span>
+<span id="cb544-11"><a href="score.html#cb544-11" tabindex="-1"></a></span>
+<span id="cb544-12"><a href="score.html#cb544-12" tabindex="-1"></a><span class="co"># realiza el grid search</span></span>
+<span id="cb544-13"><a href="score.html#cb544-13" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(hyper_grid))) {</span>
+<span id="cb544-14"><a href="score.html#cb544-14" tabindex="-1"></a>  <span class="co"># estima el modelo para la combinacion i de hyperparametros</span></span>
+<span id="cb544-15"><a href="score.html#cb544-15" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">ranger</span>(</span>
+<span id="cb544-16"><a href="score.html#cb544-16" tabindex="-1"></a>    <span class="at">formula         =</span> formula, </span>
+<span id="cb544-17"><a href="score.html#cb544-17" tabindex="-1"></a>    <span class="at">data            =</span> train_tbl,  </span>
+<span id="cb544-18"><a href="score.html#cb544-18" tabindex="-1"></a>    <span class="at">probability     =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb544-19"><a href="score.html#cb544-19" tabindex="-1"></a>    <span class="at">num.trees       =</span> hyper_grid<span class="sc">$</span>num.trees[i],</span>
+<span id="cb544-20"><a href="score.html#cb544-20" tabindex="-1"></a>    <span class="at">mtry            =</span> hyper_grid<span class="sc">$</span>mtry[i],</span>
+<span id="cb544-21"><a href="score.html#cb544-21" tabindex="-1"></a>    <span class="at">min.node.size   =</span> hyper_grid<span class="sc">$</span>min.node.size[i],</span>
+<span id="cb544-22"><a href="score.html#cb544-22" tabindex="-1"></a>    <span class="at">replace         =</span> hyper_grid<span class="sc">$</span>replace[i],</span>
+<span id="cb544-23"><a href="score.html#cb544-23" tabindex="-1"></a>    <span class="at">sample.fraction =</span> hyper_grid<span class="sc">$</span>sample.fraction[i],</span>
+<span id="cb544-24"><a href="score.html#cb544-24" tabindex="-1"></a>    <span class="at">verbose         =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb544-25"><a href="score.html#cb544-25" tabindex="-1"></a>    <span class="at">seed            =</span> <span class="dv">1234</span>,</span>
+<span id="cb544-26"><a href="score.html#cb544-26" tabindex="-1"></a>    <span class="at">respect.unordered.factors =</span> <span class="st">&#39;order&#39;</span>,</span>
+<span id="cb544-27"><a href="score.html#cb544-27" tabindex="-1"></a>    <span class="at">splitrule       =</span> <span class="st">&#39;gini&#39;</span>,</span>
+<span id="cb544-28"><a href="score.html#cb544-28" tabindex="-1"></a>    <span class="at">importance      =</span> <span class="st">&#39;impurity&#39;</span></span>
+<span id="cb544-29"><a href="score.html#cb544-29" tabindex="-1"></a>  )</span>
+<span id="cb544-30"><a href="score.html#cb544-30" tabindex="-1"></a>  <span class="co"># error (1 - accuracy) </span></span>
+<span id="cb544-31"><a href="score.html#cb544-31" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>error[i] <span class="ot">=</span> fit<span class="sc">$</span>prediction.error</span>
+<span id="cb544-32"><a href="score.html#cb544-32" tabindex="-1"></a>}</span>
+<span id="cb544-33"><a href="score.html#cb544-33" tabindex="-1"></a></span>
+<span id="cb544-34"><a href="score.html#cb544-34" tabindex="-1"></a><span class="co"># top 10 </span></span>
+<span id="cb544-35"><a href="score.html#cb544-35" tabindex="-1"></a>hyper_grid <span class="sc">|&gt;</span></span>
+<span id="cb544-36"><a href="score.html#cb544-36" tabindex="-1"></a>  <span class="fu">arrange</span>(error) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    num.trees mtry min.node.size replace sample.fraction      error
 ## 1        150    2             1    TRUE            0.50 0.06624747
 ## 2        150    2             1    TRUE            0.50 0.06624747
