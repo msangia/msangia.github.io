@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Gráficos - Parte II | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Gráficos - Parte II | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -62,7 +62,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -134,6 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -650,6 +651,36 @@ div.csl-indent {
 <span id="cb426-15"><a href="gph2.html#cb426-15" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Retorno&#39;</span>, <span class="st">&#39;Volumen (en LOGs)&#39;</span>)) <span class="sc">+</span></span>
 <span id="cb426-16"><a href="gph2.html#cb426-16" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
 <p><img src="CDbook_files/figure-html/gman-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<p>Similar al anterior pero definiendo el orden de la leyenda con <code>breaks</code> dado que por <em>default</em> <code>ggplot</code> utiliza un orden alfabético.</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="gph2.html#cb427-1" tabindex="-1"></a>y_obs <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">39.8</span>, <span class="fl">41.9</span>, <span class="fl">45.0</span>, <span class="fl">49.2</span>, <span class="fl">50.6</span>, <span class="fl">52.6</span>, <span class="fl">55.1</span>, <span class="fl">56.2</span>, <span class="fl">57.3</span>, <span class="fl">57.8</span>, <span class="fl">55.0</span>, <span class="fl">50.9</span>, <span class="fl">45.6</span>, <span class="fl">46.5</span>, <span class="fl">48.7</span>, <span class="fl">51.3</span>, <span class="fl">57.7</span>, <span class="fl">58.7</span>, <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span>))</span>
+<span id="cb427-2"><a href="gph2.html#cb427-2" tabindex="-1"></a>y_f <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">17</span>), <span class="fl">58.7</span>, <span class="fl">65.08</span>, <span class="fl">71.43</span>, <span class="fl">74.11</span>, <span class="fl">88.13</span>)</span>
+<span id="cb427-3"><a href="gph2.html#cb427-3" tabindex="-1"></a>y_fh <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">17</span>), <span class="fl">58.7</span>, <span class="fl">69.52</span>, <span class="fl">76.76</span>, <span class="fl">78.85</span>, <span class="fl">91.58</span>)</span>
+<span id="cb427-4"><a href="gph2.html#cb427-4" tabindex="-1"></a>y_fl <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">17</span>), <span class="fl">58.7</span>, <span class="fl">60.64</span>, <span class="fl">66.10</span>, <span class="fl">69.38</span>, <span class="fl">84.68</span>)</span>
+<span id="cb427-5"><a href="gph2.html#cb427-5" tabindex="-1"></a>date <span class="ot">=</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2028</span></span>
+<span id="cb427-6"><a href="gph2.html#cb427-6" tabindex="-1"></a></span>
+<span id="cb427-7"><a href="gph2.html#cb427-7" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb427-8"><a href="gph2.html#cb427-8" tabindex="-1"></a>  <span class="at">date =</span> date,</span>
+<span id="cb427-9"><a href="gph2.html#cb427-9" tabindex="-1"></a>  <span class="at">y_obs =</span> y_obs,</span>
+<span id="cb427-10"><a href="gph2.html#cb427-10" tabindex="-1"></a>  <span class="at">y_f =</span> y_f,</span>
+<span id="cb427-11"><a href="gph2.html#cb427-11" tabindex="-1"></a>  <span class="at">y_fh =</span> y_fh,</span>
+<span id="cb427-12"><a href="gph2.html#cb427-12" tabindex="-1"></a>  <span class="at">y_fl =</span> y_fl,</span>
+<span id="cb427-13"><a href="gph2.html#cb427-13" tabindex="-1"></a>)</span>
+<span id="cb427-14"><a href="gph2.html#cb427-14" tabindex="-1"></a></span>
+<span id="cb427-15"><a href="gph2.html#cb427-15" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;y_obs&#39;</span> <span class="ot">=</span> <span class="st">&#39;darkblue&#39;</span>, <span class="st">&#39;y_f&#39;</span> <span class="ot">=</span> <span class="st">&#39;darkred&#39;</span>)</span>
+<span id="cb427-16"><a href="gph2.html#cb427-16" tabindex="-1"></a>labs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Observado&#39;</span>, <span class="st">&#39;Estimado&#39;</span>)</span>
+<span id="cb427-17"><a href="gph2.html#cb427-17" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
+<span id="cb427-18"><a href="gph2.html#cb427-18" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y_obs,  <span class="at">color =</span> <span class="st">&#39;y_obs&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb427-19"><a href="gph2.html#cb427-19" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> y_f,    <span class="at">color =</span> <span class="st">&#39;y_f&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb427-20"><a href="gph2.html#cb427-20" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> y_fl, <span class="at">ymax =</span> y_fh), <span class="at">color =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">linewidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb427-21"><a href="gph2.html#cb427-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb427-22"><a href="gph2.html#cb427-22" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>), <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), </span>
+<span id="cb427-23"><a href="gph2.html#cb427-23" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>, <span class="at">legend.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb427-24"><a href="gph2.html#cb427-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&#39;Consumo&#39;</span>, <span class="at">x =</span> <span class="st">&#39;&#39;</span>, <span class="at">y =</span> <span class="st">&#39;&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;&#39;</span>) <span class="sc">+</span></span>
+<span id="cb427-25"><a href="gph2.html#cb427-25" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols,</span>
+<span id="cb427-26"><a href="gph2.html#cb427-26" tabindex="-1"></a>                     <span class="at">labels =</span> labs,</span>
+<span id="cb427-27"><a href="gph2.html#cb427-27" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&#39;y_obs&#39;</span>, <span class="st">&#39;y_f&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb427-28"><a href="gph2.html#cb427-28" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
+<p><img src="CDbook_files/figure-html/gman2-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="estadísticas" class="section level2 hasAnchor" number="4.12">
 <h2><span class="header-section-number">4.12</span> Estadísticas<a href="gph2.html#estadísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -665,13 +696,13 @@ div.csl-indent {
 <li><p>stat_smooth(): geom_smooth()</p></li>
 <li><p>stat_sum(): geom_count()</p></li>
 </ul>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="gph2.html#cb427-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(trans, cty)) <span class="sc">+</span> </span>
-<span id="cb427-2"><a href="gph2.html#cb427-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb427-3"><a href="gph2.html#cb427-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="dv">4</span>)</span>
-<span id="cb427-4"><a href="gph2.html#cb427-4" tabindex="-1"></a></span>
-<span id="cb427-5"><a href="gph2.html#cb427-5" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(trans, cty)) <span class="sc">+</span> </span>
-<span id="cb427-6"><a href="gph2.html#cb427-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb427-7"><a href="gph2.html#cb427-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="gph2.html#cb428-1" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(trans, cty)) <span class="sc">+</span> </span>
+<span id="cb428-2"><a href="gph2.html#cb428-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb428-3"><a href="gph2.html#cb428-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="dv">4</span>)</span>
+<span id="cb428-4"><a href="gph2.html#cb428-4" tabindex="-1"></a></span>
+<span id="cb428-5"><a href="gph2.html#cb428-5" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(trans, cty)) <span class="sc">+</span> </span>
+<span id="cb428-6"><a href="gph2.html#cb428-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb428-7"><a href="gph2.html#cb428-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/g91-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="themes" class="section level2 hasAnchor" number="4.13">
@@ -686,10 +717,10 @@ div.csl-indent {
 <li><p>Los <strong>temas</strong> completos, como <code>theme_grey()</code>, establecen todos los elementos del tema en valores diseñados para trabajar juntos en armonía.</p></li>
 </ul>
 <p>Por ejemplo, si se busca entender la relación entre <code>cty</code> y <code>hwy</code>:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="gph2.html#cb428-1" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
-<span id="cb428-2"><a href="gph2.html#cb428-2" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> </span>
-<span id="cb428-3"><a href="gph2.html#cb428-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">linewidth =</span> <span class="dv">2</span>)</span>
-<span id="cb428-4"><a href="gph2.html#cb428-4" tabindex="-1"></a>base</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="gph2.html#cb429-1" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(cty, hwy, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb429-2"><a href="gph2.html#cb429-2" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> </span>
+<span id="cb429-3"><a href="gph2.html#cb429-3" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="at">linewidth =</span> <span class="dv">2</span>)</span>
+<span id="cb429-4"><a href="gph2.html#cb429-4" tabindex="-1"></a>base</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/g13-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>El gráfico cumple su objetivo: hemos aprendido que <code>cty</code> y <code>hwy</code> están altamente correlacionados, ambos están estrechamente relacionados con <code>cyl</code>, y que <code>hwy</code> siempre es mayor que <code>cty</code> (y la diferencia aumenta a medida que <code>cty</code> aumenta). Ahora se busca compartir la trama con otros, tal vez publicándola en un documento, requiere algunos cambios. Primero, debe asegurarse de que la trama pueda mantenerse sola:</p>
 <ul>
@@ -698,15 +729,15 @@ div.csl-indent {
 <li><p>Ajustando la escala de colores.</p></li>
 </ul>
 <p>Procedamos:</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="gph2.html#cb429-1" tabindex="-1"></a>labelled <span class="ot">&lt;-</span> base <span class="sc">+</span></span>
-<span id="cb429-2"><a href="gph2.html#cb429-2" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb429-3"><a href="gph2.html#cb429-3" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;City mileage/gallon&quot;</span>,</span>
-<span id="cb429-4"><a href="gph2.html#cb429-4" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway mileage/gallon&quot;</span>,</span>
-<span id="cb429-5"><a href="gph2.html#cb429-5" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;Cylinders&quot;</span>,</span>
-<span id="cb429-6"><a href="gph2.html#cb429-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Highway and city mileage are highly correlated&quot;</span></span>
-<span id="cb429-7"><a href="gph2.html#cb429-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb429-8"><a href="gph2.html#cb429-8" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">&quot;seq&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</span>
-<span id="cb429-9"><a href="gph2.html#cb429-9" tabindex="-1"></a>labelled</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="gph2.html#cb430-1" tabindex="-1"></a>labelled <span class="ot">&lt;-</span> base <span class="sc">+</span></span>
+<span id="cb430-2"><a href="gph2.html#cb430-2" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb430-3"><a href="gph2.html#cb430-3" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;City mileage/gallon&quot;</span>,</span>
+<span id="cb430-4"><a href="gph2.html#cb430-4" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway mileage/gallon&quot;</span>,</span>
+<span id="cb430-5"><a href="gph2.html#cb430-5" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;Cylinders&quot;</span>,</span>
+<span id="cb430-6"><a href="gph2.html#cb430-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Highway and city mileage are highly correlated&quot;</span></span>
+<span id="cb430-7"><a href="gph2.html#cb430-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb430-8"><a href="gph2.html#cb430-8" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">type =</span> <span class="st">&quot;seq&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</span>
+<span id="cb430-9"><a href="gph2.html#cb430-9" tabindex="-1"></a>labelled</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/g131-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <p>Sin embargo, podría ser que la trama coincida con las pautas de estilo de la publicación:</p>
 <ul>
@@ -716,18 +747,18 @@ div.csl-indent {
 <li><p>El título de la trama debe ser texto en negrita de 12 puntos.</p></li>
 <li><p>En este capítulo, aprenderá a usar el sistema de temas para realizar esos cambios, como se muestra a continuación:</p></li>
 </ul>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="gph2.html#cb430-1" tabindex="-1"></a>styled <span class="ot">&lt;-</span> labelled <span class="sc">+</span></span>
-<span id="cb430-2"><a href="gph2.html#cb430-2" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb430-3"><a href="gph2.html#cb430-3" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb430-4"><a href="gph2.html#cb430-4" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb430-5"><a href="gph2.html#cb430-5" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">linewidth =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>),</span>
-<span id="cb430-6"><a href="gph2.html#cb430-6" tabindex="-1"></a>    <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb430-7"><a href="gph2.html#cb430-7" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb430-8"><a href="gph2.html#cb430-8" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>),</span>
-<span id="cb430-9"><a href="gph2.html#cb430-9" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>),</span>
-<span id="cb430-10"><a href="gph2.html#cb430-10" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb430-11"><a href="gph2.html#cb430-11" tabindex="-1"></a>  )</span>
-<span id="cb430-12"><a href="gph2.html#cb430-12" tabindex="-1"></a>styled</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="gph2.html#cb431-1" tabindex="-1"></a>styled <span class="ot">&lt;-</span> labelled <span class="sc">+</span></span>
+<span id="cb431-2"><a href="gph2.html#cb431-2" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb431-3"><a href="gph2.html#cb431-3" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb431-4"><a href="gph2.html#cb431-4" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb431-5"><a href="gph2.html#cb431-5" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">linewidth =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>),</span>
+<span id="cb431-6"><a href="gph2.html#cb431-6" tabindex="-1"></a>    <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb431-7"><a href="gph2.html#cb431-7" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb431-8"><a href="gph2.html#cb431-8" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>),</span>
+<span id="cb431-9"><a href="gph2.html#cb431-9" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>),</span>
+<span id="cb431-10"><a href="gph2.html#cb431-10" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb431-11"><a href="gph2.html#cb431-11" tabindex="-1"></a>  )</span>
+<span id="cb431-12"><a href="gph2.html#cb431-12" tabindex="-1"></a>styled</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/g132-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 
 </div>
