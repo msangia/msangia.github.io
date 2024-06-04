@@ -1,0 +1,325 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="stmarkdown.css">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+</head>
+<h1><a href="#política-económica-ii-2024" id="política-económica-ii-2024">Política Económica II - 2024</a></h1>
+<h1><a href="#conceptos-básicos-de-stata" id="conceptos-básicos-de-stata">Conceptos básicos de Stata</a></h1>
+<h1><a href="#importación-de-datos" id="importación-de-datos">Importación de datos</a></h1>
+<ul>
+<li>
+<p>Verificar que archivo fuente de datos posee los nombres de las variables en minúscula (y en caso que se requiera un espacio utilizar el guión bajo, ej.: gdp_growth) en la primera fila.</p>
+</li>
+<li>
+<p>Verificar el formato numérico de las variables y que los separadores de decimales coincidan en ambos programas (set dp {comma|period} [, permanently]).</p>
+</li>
+<li>
+<p>Se puede importar directamente desde Excel o se puede guardar el archivo como .csv delimitado por comas –o .txt delimitado por tabulaciones-. Excel avisa que el formato no soporta hojas múltiples, esto es lo que se está buscando.</p>
+</li>
+</ul>
+<pre><code></code></pre>
+<pre><code>. import excel using datos_WB.xlsx, first sheet(1) clear
+(8 vars, 78 obs)
+
+. sum
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       cname |          0
+        year |         78        2016    3.765875       2010       2022
+       ccode |          0
+  gdp_pc2021 |         78    37655.78    13920.48   16709.39   55183.63
+   credit_ps |         73    91.91709    38.87778   12.69011   184.5952
+-------------+---------------------------------------------------------
+         inv |         78    19.44815    3.405743   14.19905   26.75266
+     exports |         78    25.23548     8.03226   10.70565   37.90399
+     imports |         78    25.28862    8.182954   11.78057   39.34763
+
+. save wb_data.dta, replace
+file wb_data.dta saved
+
+</code></pre>
+<pre><code>. import excel using datos_WB.xlsx, first sheet(2) clear
+(2 vars, 6 obs)
+
+. save meta.dta, replace
+file meta.dta saved
+
+</code></pre>
+<h2><a href="#otra-forma" id="otra-forma">Otra forma</a></h2>
+<pre><code>import delimited using datos_WB.csv, clear
+</code></pre>
+<h1><a href="#exportación-de-datos" id="exportación-de-datos">Exportación de datos</a></h1>
+<ul>
+<li>El dataset que está en memoria en Stata puede ser exportado a Excel o un archivo separado por comas (o de texto), el cual puede ser abierto por Excel.</li>
+</ul>
+<pre><code>export excel using data.xlsx, firstrow(var) sheet(1, replace)
+</code></pre>
+<h2><a href="#otra-forma" id="otra-forma">Otra forma</a></h2>
+<pre><code>export delimited data.txt, replace
+</code></pre>
+<h1><a href="#merge" id="merge">Merge</a></h1>
+<pre><code>. use wb_data.dta, clear
+
+. merge m:1 ccode using meta.dta, keep(match master) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                                78  
+    -----------------------------------------
+
+</code></pre>
+<h1><a href="#collapse" id="collapse">Collapse</a></h1>
+<pre><code>. collapse gdp_pc2021 (max) expo_max = exports (p50) impo_p50 = imports, by(region)
+
+</code></pre>
+<pre><code>
+     +---------------------------------------------------------------+
+     |                    region   gdp_~2021    expo_max    impo_p50 |
+     |---------------------------------------------------------------|
+  1. |     Europe &amp; Central Asia   50935.996   36.630293   30.416032 |
+  2. | Latin America &amp; Caribbean   24375.559   37.903994   15.350952 |
+     +---------------------------------------------------------------+
+
+</code></pre>
+<ul>
+<li><code>append</code> une bases de datos (una debajo de la otra, agrega observaciones).</li>
+</ul>
+<h1><a href="#reshape" id="reshape">Reshape</a></h1>
+<h2><a href="#wide" id="wide">Wide</a></h2>
+<pre><code>. use wb_data.dta, clear
+
+. keep ccode year exports
+
+. drop if year &lt; 2018
+(48 observations deleted)
+
+. rename exports expo
+
+. reshape wide expo, i(ccode) j(year)
+(j = 2018 2019 2020 2021 2022)
+
+Data                               Long   -&gt;   Wide
+-----------------------------------------------------------------------------
+Number of observations               30   -&gt;   6           
+Number of variables                   3   -&gt;   6           
+j variable (5 values)              year   -&gt;   (dropped)
+xij variables:
+                                   expo   -&gt;   expo2018 expo2019 ... expo2022
+-----------------------------------------------------------------------------
+
+</code></pre>
+<pre><code>
+     +-------------------------------------------------------------------+
+     | ccode    expo2018    expo2019    expo2020    expo2021    expo2022 |
+     |-------------------------------------------------------------------|
+  1. |   ARG   14.436686   17.924878   16.605414   17.996588   16.299562 |
+  2. |   BRA   14.634999   14.122919   16.453552   19.561677   20.045537 |
+  3. |   CHL   28.529045   27.843268    31.30377   31.979668   35.670725 |
+  4. |   FRA   31.713667   31.592055   27.327736   30.034994     34.6864 |
+  5. |   GBR   31.580111    31.63478   29.691991   29.597313    33.42794 |
+  6. |   ITA   31.353554    31.60242   29.432277   32.069233   36.630293 |
+     +-------------------------------------------------------------------+
+
+</code></pre>
+<h2><a href="#long" id="long">Long</a></h2>
+<pre><code>. reshape long expo, i(ccode) j(year)
+(j = 2018 2019 2020 2021 2022)
+
+Data                               Wide   -&gt;   Long
+-----------------------------------------------------------------------------
+Number of observations                6   -&gt;   30          
+Number of variables                   6   -&gt;   3           
+j variable (5 values)                     -&gt;   year
+xij variables:
+         expo2018 expo2019 ... expo2022   -&gt;   expo
+-----------------------------------------------------------------------------
+
+</code></pre>
+<pre><code>
+     +--------------------------+
+     | ccode   year        expo |
+     |--------------------------|
+  1. |   ARG   2018   14.436686 |
+  2. |   ARG   2019   17.924878 |
+  3. |   ARG   2020   16.605414 |
+  4. |   ARG   2021   17.996588 |
+  5. |   ARG   2022   16.299562 |
+  6. |   BRA   2018   14.634999 |
+  7. |   BRA   2019   14.122919 |
+  8. |   BRA   2020   16.453552 |
+  9. |   BRA   2021   19.561677 |
+ 10. |   BRA   2022   20.045537 |
+     +--------------------------+
+
+</code></pre>
+<h1><a href="#datos-en-panel-repaso" id="datos-en-panel-repaso">Datos en panel. Repaso.</a></h1>
+<ul>
+<li>
+<p>Varias unidades (<em>N</em>) de <em>cross-section</em> en el tiempo (doble variabilidad).</p>
+</li>
+<li>
+<p>Efectos no observables que varian solo por individuo.</p>
+</li>
+<li>
+<p>Si no los incluimos: <strong>sesgo</strong> por variable omitida.</p>
+</li>
+</ul>
+<h2><a href="#estimador-de-efectos-fijos" id="estimador-de-efectos-fijos">Estimador de efectos fijos</a></h2>
+<p>\begin{equation} y_{it} = x&rsquo;_{it} \beta + \mu_i + \epsilon_{it} \end{equation}</p>
+<ul>
+<li>Incorpora <em>(N - 1)</em> variables binarias por individuo (distinto intercepto por individuo).</li>
+</ul>
+<p>\begin{equation} y_{it} = \underbrace{\mu_i + \beta_1} + \beta_2 x_{2,it} + &hellip; + \beta_K x_{K,it} + \epsilon_{it} \end{equation}</p>
+<ul>
+<li>El estimador de EF es el estimador de MCO con <em>(N - 1)</em> variables binarias.</li>
+<li><em>Transfomacion within</em>: controlar por efectos fijos es identico a restar a cada observacion la media individual (varaibles originales transformadas).</li>
+</ul>
+<pre><code></code></pre>
+<p><img src="Graph.svg" ></p>
+<h1><a href="#definición-de-unidad-de-información" id="definición-de-unidad-de-información">Definición de unidad de información</a></h1>
+<pre><code>. use wb_data.dta, clear
+
+. egen id = group(ccode)
+
+. order id year
+
+. tsset id year, yearly
+
+Panel variable: id (strongly balanced)
+ Time variable: year, 2010 to 2022
+         Delta: 1 year
+
+</code></pre>
+<h1><a href="#creación-de-variables" id="creación-de-variables">Creación de variables</a></h1>
+<pre><code>. gen gdp_gr = ((gdp_pc2021 / L.gdp_pc2021) - 1) * 100
+(6 missing values generated)
+
+. egen open = rowtotal(exports imports)
+
+. label var gdp_gr &quot;Crecimiento (PIBpc)&quot;
+
+. label var credit_ps &quot;Credito al Sector Privado (%PIB)&quot;
+
+. label var inv &quot;Inversion (%PIB)&quot;
+
+. label var open &quot;Apertura comercial (%PIB)&quot;
+
+</code></pre>
+<h1><a href="#estimación-de-datos-en-panel" id="estimación-de-datos-en-panel">Estimación de datos en panel</a></h1>
+<pre><code>. xtreg gdp_gr credit_ps inv open, fe rob
+
+Fixed-effects (within) regression               Number of obs     =         67
+Group variable: id                              Number of groups  =          6
+
+R-squared:                                      Obs per group:
+     Within  = 0.2602                                         min =          7
+     Between = 0.0026                                         avg =       11.2
+     Overall = 0.0868                                         max =         12
+
+                                                F(3, 5)           =     103.08
+corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.0001
+
+                                     (Std. err. adjusted for 6 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      gdp_gr | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   credit_ps |  -.1127859   .0304056    -3.71   0.014     -.190946   -.0346258
+         inv |   .4062065   .1992638     2.04   0.097    -.1060174    .9184304
+        open |   .2287612   .0308389     7.42   0.001     .1494872    .3080352
+       _cons |  -8.756356   4.634822    -1.89   0.117    -20.67054    3.157833
+-------------+----------------------------------------------------------------
+     sigma_u |  2.9609785
+     sigma_e |  3.3275459
+         rho |  .44190592   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+
+. 
+. eststo: xtreg gdp_gr credit_ps inv, fe rob
+
+Fixed-effects (within) regression               Number of obs     =         67
+Group variable: id                              Number of groups  =          6
+
+R-squared:                                      Obs per group:
+     Within  = 0.1822                                         min =          7
+     Between = 0.2697                                         avg =       11.2
+     Overall = 0.0067                                         max =         12
+
+                                                F(2, 5)           =       8.46
+corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.0249
+
+                                     (Std. err. adjusted for 6 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      gdp_gr | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   credit_ps |  -.1226118   .0463477    -2.65   0.046    -.2417524   -.0034712
+         inv |   .6964868    .203373     3.42   0.019     .1736998    1.219274
+       _cons |  -1.654366   5.516853    -0.30   0.776    -15.83589    12.52716
+-------------+----------------------------------------------------------------
+     sigma_u |   5.042625
+     sigma_e |  3.4687726
+         rho |  .67879768   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+(est11 stored)
+
+. eststo: xtreg gdp_gr credit_ps inv open, fe rob
+
+Fixed-effects (within) regression               Number of obs     =         67
+Group variable: id                              Number of groups  =          6
+
+R-squared:                                      Obs per group:
+     Within  = 0.2602                                         min =          7
+     Between = 0.0026                                         avg =       11.2
+     Overall = 0.0868                                         max =         12
+
+                                                F(3, 5)           =     103.08
+corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.0001
+
+                                     (Std. err. adjusted for 6 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+      gdp_gr | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   credit_ps |  -.1127859   .0304056    -3.71   0.014     -.190946   -.0346258
+         inv |   .4062065   .1992638     2.04   0.097    -.1060174    .9184304
+        open |   .2287612   .0308389     7.42   0.001     .1494872    .3080352
+       _cons |  -8.756356   4.634822    -1.89   0.117    -20.67054    3.157833
+-------------+----------------------------------------------------------------
+     sigma_u |  2.9609785
+     sigma_e |  3.3275459
+         rho |  .44190592   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+(est12 stored)
+
+. esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
+(output written to regs_cre.csv)
+
+</code></pre>
+<h1><a href="#comandos-útiles" id="comandos-útiles">Comandos útiles</a></h1>
+<ul>
+<li><code>sort</code> ordena las observaciones de acuerdo a una variable determinada en forma creciente.</li>
+<li><code>gsort –edad</code> ordena las observaciones de acuerdo a la variable edad en forma decreciente.</li>
+<li><code>order</code> ordena la lista de variables.</li>
+<li><code>move</code> cambia la posición de dos variables en la lista de variables.</li>
+<li><code>cd</code> cambia de directorio.</li>
+<li><code>use</code> carga una base de datos.</li>
+<li><code>save</code> guarda una base de datos.</li>
+<li><code>clear</code> limpia la memoria .</li>
+<li><code>drop</code> elimina variables u observaciones.</li>
+<li><code>keep</code> mantiene ciertas variables u observaciones.</li>
+<li><code>rename</code> renombra variables.</li>
+<li><code>summarize</code> estadísticas descriptivas.</li>
+<li><code>pwcorr</code> matrices de correlación.</li>
+<li><code>corrgram</code> muestra la autocorrelación y la autocorrelación parcial.</li>
+<li><code>regress</code> regresión por mínimos cuadrados ordinarios.</li>
+<li><code>label</code> incorpora etiquetas a las variables.</li>
+<li><code>predict</code> genera valores ajustados, residuos, etc.</li>
+<li><code>esttab</code> editar la salida de una regresión.</li>
+</ul>
