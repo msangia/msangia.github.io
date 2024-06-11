@@ -50,7 +50,7 @@ file wb_data.dta saved
 file meta.dta saved
 
 </code></pre>
-<h2><a href="#otra-forma" id="otra-forma">Otra forma</a></h2>
+<h2><a href="#otra-forma-csv-txt" id="otra-forma-csv-txt">Otra forma (.csv / .txt)</a></h2>
 <pre><code>import delimited using datos_WB.csv, clear
 </code></pre>
 <h1><a href="#exportación-de-datos" id="exportación-de-datos">Exportación de datos</a></h1>
@@ -59,7 +59,7 @@ file meta.dta saved
 </ul>
 <pre><code>export excel using data.xlsx, firstrow(var) sheet(1, replace)
 </code></pre>
-<h2><a href="#otra-forma" id="otra-forma">Otra forma</a></h2>
+<h2><a href="#otra-forma-csv-txt" id="otra-forma-csv-txt">Otra forma (.csv / .txt)</a></h2>
 <pre><code>export delimited data.txt, replace
 </code></pre>
 <h1><a href="#merge" id="merge">Merge</a></h1>
@@ -211,7 +211,7 @@ Panel variable: id (strongly balanced)
 . label var open &quot;Apertura comercial (%PIB)&quot;
 
 </code></pre>
-<h1><a href="#estimación-de-datos-en-panel" id="estimación-de-datos-en-panel">Estimación de datos en panel</a></h1>
+<h1><a href="#estimación-de-datos-en-panel-y-output-de-resultados" id="estimación-de-datos-en-panel-y-output-de-resultados">Estimación de datos en panel (y output de resultados)</a></h1>
 <pre><code>. xtreg gdp_gr credit_ps inv open, fe rob
 
 Fixed-effects (within) regression               Number of obs     =         67
@@ -267,7 +267,7 @@ corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.024
      sigma_e |  3.4687726
          rho |  .67879768   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est11 stored)
+(est1 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -296,7 +296,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
      sigma_e |  3.3275459
          rho |  .44190592   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est12 stored)
+(est2 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
