@@ -181,7 +181,7 @@ xij variables:
 <li><em>Transfomacion within</em>: controlar por efectos fijos es identico a restar a cada observacion la media individual (varaibles originales transformadas).</li>
 </ul>
 <pre><code></code></pre>
-<p><img src="Graph.svg" ></p>
+<p><img src="Graph2.svg" ></p>
 <h1><a href="#definición-de-unidad-de-información" id="definición-de-unidad-de-información">Definición de unidad de información</a></h1>
 <pre><code>. use wb_data.dta, clear
 
@@ -222,7 +222,7 @@ R-squared:                                      Obs per group:
      Between = 0.0026                                         avg =       11.2
      Overall = 0.0868                                         max =         12
 
-                                                F(3, 5)           =     103.08
+                                                F(3,5)            =     103.08
 corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.0001
 
                                      (Std. err. adjusted for 6 clusters in id)
@@ -251,7 +251,7 @@ R-squared:                                      Obs per group:
      Between = 0.2697                                         avg =       11.2
      Overall = 0.0067                                         max =         12
 
-                                                F(2, 5)           =       8.46
+                                                F(2,5)            =       8.46
 corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.0249
 
                                      (Std. err. adjusted for 6 clusters in id)
@@ -267,7 +267,7 @@ corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.024
      sigma_e |  3.4687726
          rho |  .67879768   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est1 stored)
+(est3 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -279,7 +279,7 @@ R-squared:                                      Obs per group:
      Between = 0.0026                                         avg =       11.2
      Overall = 0.0868                                         max =         12
 
-                                                F(3, 5)           =     103.08
+                                                F(3,5)            =     103.08
 corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.0001
 
                                      (Std. err. adjusted for 6 clusters in id)
@@ -296,7 +296,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
      sigma_e |  3.3275459
          rho |  .44190592   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est2 stored)
+(est4 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
@@ -321,5 +321,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
 <li><code>regress</code> regresión por mínimos cuadrados ordinarios.</li>
 <li><code>label</code> incorpora etiquetas a las variables.</li>
 <li><code>predict</code> genera valores ajustados, residuos, etc.</li>
+<li><code>table</code> crear tablas.</li>
+<li><code>collect</code> conjunto de comandos que permite crear tablas personalizadas (a partir de la Version 17).</li>
 <li><code>esttab</code> editar la salida de una regresión.</li>
 </ul>
