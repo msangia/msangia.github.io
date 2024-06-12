@@ -1,14 +1,12 @@
-# Ciencia de Datos  
-
-**Curso BCRA**   
+# Ciencia de Datos - BCRA
 
 [Guia del curso](https://msangia.github.io/CienciaDatos/index.html "Guia completa.")
 
-# Politica Economica II
+# Politica Economica II - UNLP
 
 **Trabajo Practico 2024** 
 
-[Conceptos básicos](https://msangia.github.io/Stata/stata24.html "Guia TP N°1.")   
+[Conceptos básicos Stata](https://msangia.github.io/Stata/stata24.html "Guia TP N°1.")   
 
 **Trabajo Practico 2023** 
 
