@@ -14,6 +14,6 @@
 
 [Guia del curso](https://msangia.github.io/NotasTP/index.html "Guia completa.")    
 
-# [Python](https://www.anaconda.com/)
+# Python
 
 [Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
