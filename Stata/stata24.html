@@ -46,6 +46,7 @@
 </ul>
 <h1><a href="#conceptos-básicos-de-stata" id="conceptos-básicos-de-stata">Conceptos básicos de Stata</a></h1>
 <h1><a href="#importación-de-datos" id="importación-de-datos">Importación de datos</a></h1>
+<p>Base de datos <a href="https://docs.google.com/spreadsheets/d/1-gRf-XQIcfy83Li8mecDp353BWj1m7S-/edit?usp=sharing&amp;ouid=116805214861841277710&amp;rtpof=true&amp;sd=true">aqui</a></p>
 <ul>
 <li>
 <p>Verificar que archivo fuente de datos posee los nombres de las variables en minúscula (y en caso que se requiera un espacio utilizar el guión bajo, ej.: gdp_growth) en la primera fila.</p>
@@ -303,7 +304,7 @@ corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.024
      sigma_e |  3.4687726
          rho |  .67879768   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est5 stored)
+(est1 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -332,7 +333,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
      sigma_e |  3.3275459
          rho |  .44190592   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est6 stored)
+(est2 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
