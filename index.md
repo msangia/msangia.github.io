@@ -16,4 +16,3 @@
 
 [Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
 
-[R](https://msangia.github.io/R/intro.html "Pagina en desarrollo.")   
