@@ -12,7 +12,7 @@
 
 [Clase](https://drive.google.com/file/d/10vKuVT78rPRA37wMpUe_k6ySgC0uCXCg/view?usp=sharing)
 
-[Enunciado TP](https://drive.google.com/file/d/10vKuVT78rPRA37wMpUe_k6ySgC0uCXCg/view?usp=sharing)
+[Enunciado TP](https://drive.google.com/file/d/1P5t5EDp3EeiJDmiMPoPDk5z8pc_m2LYQ/view?usp=sharing)
 
 **Trabajo Practico 2023** 
 
