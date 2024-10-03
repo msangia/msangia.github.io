@@ -14,6 +14,8 @@
 
 [Enunciado TP](https://drive.google.com/file/d/1P5t5EDp3EeiJDmiMPoPDk5z8pc_m2LYQ/view?usp=sharing)
 
+[Sostenibilidad deuda](https://drive.google.com/file/d/1BHRRX2EICRDkdLEIN4dkBULYHhXfgopw/view?usp=sharing)
+
 **Trabajo Practico 2023** 
 
 [Guia del curso](https://msangia.github.io/NotasTP/index.html "Guia completa.")    
