@@ -10,7 +10,7 @@
 
 **Trabajo Practico N°2 2024** 
 
-[Clase](https://drive.google.com/file/d/10vKuVT78rPRA37wMpUe_k6ySgC0uCXCg/view?usp=sharing)
+[Clase](https://drive.google.com/file/d/1jRHkGZQVwvO4D7lmUQM1Ix3lS-M_xlts/view?usp=sharing)
 
 [Enunciado TP](https://drive.google.com/file/d/1P5t5EDp3EeiJDmiMPoPDk5z8pc_m2LYQ/view?usp=sharing)
 
