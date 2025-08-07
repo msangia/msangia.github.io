@@ -22,5 +22,5 @@
 
 # Python
 
-[Conceptos básicos](https://msangia.github.io/Python/python.html "Pagina en desarrollo.")   
+[Conceptos básicos](https://msangia.github.io/Python/python_new.html "Pagina en desarrollo.")   
 
