@@ -6,7 +6,7 @@
 
 **Trabajo Practico N°1 2025** 
 
-[Conceptos básicos Stata](https://msangia.github.io/Stata/clsae2025.html "Guia TP N°1.")
+[Conceptos básicos Stata](https://msangia.github.io/Stata/clase2025.html "Guia TP N°1.")
 
 **Trabajo Practico N°2 2025** 
 
