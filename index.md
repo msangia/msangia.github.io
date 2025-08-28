@@ -4,17 +4,17 @@
 
 # Politica Economica II - UNLP
 
-**Trabajo Practico N°1 2024** 
+**Trabajo Practico N°1 2025** 
 
-[Conceptos básicos Stata](https://msangia.github.io/Stata/stata24.html "Guia TP N°1.")
+[Conceptos básicos Stata](https://msangia.github.io/Stata/clsae2025.html "Guia TP N°1.")
 
-**Trabajo Practico N°2 2024** 
+**Trabajo Practico N°2 2025** 
 
-[Clase](https://drive.google.com/file/d/1jRHkGZQVwvO4D7lmUQM1Ix3lS-M_xlts/view?usp=sharing)
+[Clase]()
 
-[Enunciado TP](https://drive.google.com/file/d/1P5t5EDp3EeiJDmiMPoPDk5z8pc_m2LYQ/view?usp=sharing)
+[Enunciado TP]()
 
-[Sostenibilidad deuda](https://drive.google.com/file/d/1BHRRX2EICRDkdLEIN4dkBULYHhXfgopw/view?usp=sharing)
+[Bibliografia]()
 
 **Trabajo Practico 2023** 
 
