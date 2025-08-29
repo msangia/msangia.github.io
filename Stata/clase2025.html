@@ -20,10 +20,10 @@
 <p>Copia o plagio: trabajo desaprobado, grupo fuera del régimen de promoción.</p>
 </li>
 <li>
-<p><strong>Entrega TP1</strong>: Lunes 30 de Septiembre (hasta las 12 del mediodía).</p>
+<p><strong>Entrega TP1</strong>: Lunes 06 de Octubre (hasta las 12 del mediodía).</p>
 </li>
 <li>
-<p><strong>Presentación TP2</strong>: Viernes 04 de Octubre.</p>
+<p><strong>Presentación TP2</strong>: Viernes 03 de Octubre.</p>
 </li>
 </ul>
 <h1><a href="#cuestiones-importantes" id="cuestiones-importantes">Cuestiones importantes</a></h1>
@@ -57,7 +57,7 @@
 <li>Evidencia empírica robusta</li>
 <li>Los gobiernos pueden \textbf{influir en el TCR} a través de políticas fiscales, gestión de la cuenta de capital y regímenes cambiarios, lo que les permite gestionar activamente la competitividad y el crecimiento</li>
 </ul>
-<p>Argentina ([LINK])(<a href="http://www.itf.org.ar/pdf/documentos/62-2008.pdf">http://www.itf.org.ar/pdf/documentos/62-2008.pdf</a>))</p>
+<p>Argentina (<a href="http://www.itf.org.ar/pdf/documentos/62-2008.pdf">LINK</a>)</p>
 <h1><a href="#conceptos-básicos-de-stata" id="conceptos-básicos-de-stata">Conceptos básicos de Stata</a></h1>
 <h1><a href="#importación-de-datos" id="importación-de-datos">Importación de datos</a></h1>
 <p>Base de datos <a href="https://docs.google.com/spreadsheets/d/1-gRf-XQIcfy83Li8mecDp353BWj1m7S-/edit?usp=sharing&amp;ouid=116805214861841277710&amp;rtpof=true&amp;sd=true">LINK</a></p>
@@ -400,7 +400,7 @@ corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.024
      sigma_e |  3.4687726
          rho |  .67879768   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est1 stored)
+(est5 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -429,7 +429,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
      sigma_e |  3.3275459
          rho |  .44190592   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est2 stored)
+(est6 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
