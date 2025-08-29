@@ -6,13 +6,13 @@
 
 **Trabajo Practico N°1 2025** 
 
-[Conceptos básicos Stata](https://msangia.github.io/Stata/clase2025.html "Guia TP N°1.")
+[Clase 01 y enunciado TP1](https://msangia.github.io/Stata/clase2025.html "Guia TP N°1.")
 
 **Trabajo Practico N°2 2025** 
 
-[Clase]()
+[Clase 02]()
 
-[Enunciado TP]()
+[Enunciado TP2]()
 
 [Bibliografia]()
 
