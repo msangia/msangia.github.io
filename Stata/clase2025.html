@@ -51,11 +51,11 @@
 <p>Metodología:</p>
 <p>The Real Exchange Rate and Economic Growth (Dani Rodrik. <a href="https://drodrik.scholar.harvard.edu/files/dani-rodrik/files/real-exchange-rate-and-growth.pdf">LINK</a>)</p>
 <ul>
-<li>La depreciación del TCR estimula el crecimiento económico, un efecto especialmente robusto y significativo para los \textbf{países en desarrollo}</li>
-<li>El crecimiento se produce principalmente a través de la \textbf{expansión del sector transable}, especialmente la industria, ya que el tipo de cambio más alto aumenta su rentabilidad relativa</li>
-<li>El sector transable es &ldquo;especial&rdquo; en países en desarrollo porque sufre desproporcionadamente las \textbf{debilidades institucionales} y \textbf{fallas de mercado}. La sub-valuación del TCR actúa como un mecanismo de &ldquo;segundo mejor&rdquo; para corregir estas distorsiones y fomentar el cambio estructural</li>
+<li>La depreciación del TCR estimula el crecimiento económico, un efecto especialmente robusto y significativo para los países en desarrollo</li>
+<li>El crecimiento se produce principalmente a través de la expansión del sector transable, especialmente la industria, ya que el tipo de cambio más alto aumenta su rentabilidad relativa</li>
+<li>El sector transable es &ldquo;especial&rdquo; en países en desarrollo porque sufre desproporcionadamente las debilidades institucionales y fallas de mercado. La sub-valuación del TCR actúa como un mecanismo de &ldquo;segundo mejor&rdquo; para corregir estas distorsiones y fomentar el cambio estructural</li>
 <li>Evidencia empírica robusta</li>
-<li>Los gobiernos pueden \textbf{influir en el TCR} a través de políticas fiscales, gestión de la cuenta de capital y regímenes cambiarios, lo que les permite gestionar activamente la competitividad y el crecimiento</li>
+<li>Los gobiernos pueden influir en el TCR a través de políticas fiscales, gestión de la cuenta de capital y regímenes cambiarios, lo que les permite gestionar activamente la competitividad y el crecimiento</li>
 </ul>
 <p>Argentina (<a href="http://www.itf.org.ar/pdf/documentos/62-2008.pdf">LINK</a>)</p>
 <h1><a href="#conceptos-básicos-de-stata" id="conceptos-básicos-de-stata">Conceptos básicos de Stata</a></h1>
@@ -400,7 +400,7 @@ corr(u_i, Xb) = -0.9287                         Prob &gt; F          =     0.024
      sigma_e |  3.4687726
          rho |  .67879768   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est5 stored)
+(est7 stored)
 
 . eststo: xtreg gdp_gr credit_ps inv open, fe rob
 
@@ -429,7 +429,7 @@ corr(u_i, Xb) = -0.8116                         Prob &gt; F          =     0.000
      sigma_e |  3.3275459
          rho |  .44190592   (fraction of variance due to u_i)
 ------------------------------------------------------------------------------
-(est6 stored)
+(est8 stored)
 
 . esttab using regs_cre.csv, se bracket r2 star(* 0.10 ** 0.05 *** 0.01) label replace
 (output written to regs_cre.csv)
