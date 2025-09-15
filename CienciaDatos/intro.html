@@ -393,13 +393,30 @@ A la gloria no se llega por un camino de rosas. <strong>Trabajar, trabajar y tra
 <span id="cb1-5"><a href="intro.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>Eventualmente se puede utilizar una función específica de un paquete previamente instalado sin cargar el paquete completo. Por ejemplo, si se quiere utilizar la función <code>read_excel()</code> del paquete <code>readxl</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="intro.html#cb2-1" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>()</span></code></pre></div>
-<p>Antes de aprender a programar, es importante entender <strong>cómo usar R y RStudio</strong>.</p>
+<p>Antes de aprender a programar, es importante entender <strong>cómo usar RStudio</strong>.</p>
+<p>Para abrir el archivo <strong>script0.R</strong> dirigirse a: <strong>File <span class="math inline">\(&gt;\)</span> Open File…</strong></p>
+<p>Una vez abierto se puede correr línea por línea posicionando el cursor al principio de cada una y presionando el botón de <code>&gt;Run</code> en el ángulo superior derecho de esa misma ventana. O, alternativamente, pintar todo y hacer lo mismo (también se puede seleccionar un grupo de filas).</p>
+<p>La Figura <a href="intro.html#fig:f0">1.1</a> muestra la interfase de <strong>RStudio</strong> con 4 ventanas:</p>
 <ul>
-<li><strong>Consola</strong>: ejecutar instrucciones rápidas.</li>
-<li><strong>Script</strong>: escribir y guardar código.</li>
-<li><strong>Ambiente</strong>: muestra los objetos creados.</li>
-<li><strong>Panel de resultados</strong>: gráficos y tablas.</li>
+<li><p>Editor (nombre de <em>script</em>): donde se escriben los <em>scripts</em> de R (secuencia de comandos). <code>&gt;Run</code> para ejecutar</p></li>
+<li><p>Environment: muestra los objetos disponibles en el entorno (memoria). Presionando sobre el nombre del objeto se puede ver el contenido</p>
+<ul>
+<li>History: historial de comandos</li>
+</ul></li>
+<li><p>Plot: muestra los gráficos</p>
+<ul>
+<li><p>Files: árbol de carpetas y archivos</p></li>
+<li><p>Packages: paquetes (permite instalar desde ahí)</p></li>
+<li><p>Help: muestra la ayuda</p></li>
+</ul></li>
+<li><p>Console: consola para trabajar de manera interactiva (introducir comandos) y también muestra los resultados de las sentencias</p></li>
 </ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:f0"></span>
+<img src="figures/RStudio.png" alt="R Studio - IDE" width="100%" height="40%" />
+<p class="caption">
+Figura 1.1: R Studio - IDE
+</p>
+</div>
 </div>
 <div id="tu-primer-código" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Tu primer código<a href="#tu-primer-c%C3%B3digo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
