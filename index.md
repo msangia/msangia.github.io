@@ -10,7 +10,7 @@
 
 **Trabajo Practico N°2 2025** 
 
-[Clase 02](https://docs.google.com/presentation/d/1sN0yHP_fmiNHdWQtmdF-Af6iJP8JIPLw/edit?usp=drive_link&ouid=116805214861841277710&rtpof=true&sd=true)
+[Clase 02](https://drive.google.com/file/d/17Dr7maoj3TSxBBzTuH_7cgBDX1yhuPcx/view?usp=drive_link)
 
 [Enunciado TP2](https://drive.google.com/file/d/140Vs3miKzAVAlr5OimGl9zFRLakvsUxn/view?usp=drive_link)
 
