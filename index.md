@@ -10,11 +10,11 @@
 
 **Trabajo Practico N°2 2025** 
 
-[Clase 02]()
+[Clase 02](https://docs.google.com/presentation/d/1sN0yHP_fmiNHdWQtmdF-Af6iJP8JIPLw/edit?usp=drive_link&ouid=116805214861841277710&rtpof=true&sd=true)
 
-[Enunciado TP2]()
+[Enunciado TP2](https://drive.google.com/file/d/140Vs3miKzAVAlr5OimGl9zFRLakvsUxn/view?usp=drive_link)
 
-[Bibliografia]()
+[Bibliografia](https://drive.google.com/file/d/1BHRRX2EICRDkdLEIN4dkBULYHhXfgopw/view?usp=drive_link)
 
 **Trabajo Practico 2023** 
 
