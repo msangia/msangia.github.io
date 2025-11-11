@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 6 Conceptos generales | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 6 Conceptos generales | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -62,7 +62,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -72,7 +72,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -134,6 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -173,28 +174,29 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
-<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
-<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
-<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
-<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
-<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
-<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
-<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
-<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> apply, lapply y tapply</a></li>
-<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
-<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
-<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
-<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#tu-primer-c%C3%B3digo"><i class="fa fa-check"></i><b>1.2</b> Tu primer código</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.3</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.4</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.5</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#asignaci%C3%B3n-de-valores"><i class="fa fa-check"></i><b>1.6</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-aritm%C3%A9ticos"><i class="fa fa-check"></i><b>1.7</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.8</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#operadores-l%C3%B3gicos"><i class="fa fa-check"></i><b>1.9</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.10</b> Vectores</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.11</b> Secuencias</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.12</b> Factores</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.13</b> Matrices</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.14</b> Listas</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.15</b> Data frames</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.16</b> R base</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.17</b> apply, lapply y tapply</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.18</b> Map</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.19</b> Loops</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.20</b> Condicionales</a></li>
+<li class="chapter" data-level="1.21" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.21</b> Funciones</a>
 <ul>
-<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
-<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+<li class="chapter" data-level="1.21.1" data-path="intro.html"><a href="intro.html#output-m%C3%A1s-de-un-resultado"><i class="fa fa-check"></i><b>1.21.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.21.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.21.2</b> Argumentos con valores default</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a>
@@ -205,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
 <li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputaci%C3%B3n"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
 <li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
 <li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#pipe"><i class="fa fa-check"></i><b>2.5</b> Pipe</a></li>
 <li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.6</b> Variables</a></li>
@@ -222,9 +224,10 @@ div.csl-indent {
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulaci%C3%B3n-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.2" data-path="bd.html"><a href="bd.html#parsing-robusto-con-lubridate"><i class="fa fa-check"></i><b>2.15.2</b> Parsing robusto con <code>lubridate</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
 <ul>
 <li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
 </ul></li>
@@ -234,27 +237,28 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
-<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estad%C3%ADsticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
 <li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
 <li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
 <li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
 <li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
-<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gr%C3%A1fico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#t%C3%ADtulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
 <li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
-<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#l%C3%ADmites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
 <li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
-<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
-<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
-<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
-<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
-<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
-<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posici%C3%B3n-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.8</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.9</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.10</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#leyenda-manual"><i class="fa fa-check"></i><b>4.11</b> Leyenda manual</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#estad%C3%ADsticas"><i class="fa fa-check"></i><b>4.12</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.13" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.13</b> Themes</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
@@ -287,7 +291,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
 <li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="conceptos.html"><a href="conceptos.html#dos-maneras-de-aproximar-f"><i class="fa fa-check"></i><b>6.8.1</b> Dos maneras de aproximar <span class="math inline">\(f\)</span></a></li>
+<li class="chapter" data-level="6.8.2" data-path="conceptos.html"><a href="conceptos.html#el-equilibrio-clave-sesgo-vs-varianza"><i class="fa fa-check"></i><b>6.8.2</b> El equilibrio clave: <em>Sesgo vs Varianza</em></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
 <ul>
@@ -362,8 +370,8 @@ div.csl-indent {
 </div>
 <div id="conceptos" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Capítulo 6</span> Conceptos generales<a href="conceptos.html#conceptos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>El <strong>objetivo</strong> de la Ciencia de Datos es <strong>preparar</strong>, <strong>analizar</strong> y <strong>aprender</strong> “algo” de los <strong>datos</strong>. Si se dispone de una variable <em>output</em><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> y otras <em>input</em><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> el aprendizaje se denomina <strong>supervisado</strong>, si sólo hay <em>inputs</em> el aprendizaje es <strong>no supervisado</strong>.</p>
-<p>Dentro aprendizaje supervisado podemos distinguir la <strong>predicción</strong>, cuando la variable <em>output</em> es cuantitativa, de la <strong>clasificación</strong> donde la la variable <em>output</em> es discreta/categórica (ej. <span class="math inline">\(0/1\)</span>).<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> Por su parte, el análisis no supervisado busca relaciones y estructura dentro de los datos (ej. distinguir <em>clusters</em>/grupos de clientes para promociones publicitarias).</p>
+<p>El <strong>objetivo</strong> de la Ciencia de Datos es <strong>preparar</strong>, <strong>analizar</strong> y <strong>aprender</strong> “algo” de los <strong>datos</strong>. Si se dispone de una variable <em>output</em><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> y otras <em>input</em><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> el aprendizaje se denomina <strong>supervisado</strong>, si sólo hay <em>inputs</em> el aprendizaje es <strong>no supervisado</strong>.</p>
+<p>Dentro aprendizaje supervisado podemos distinguir la <strong>predicción</strong>, cuando la variable <em>output</em> es cuantitativa, de la <strong>clasificación</strong> donde la la variable <em>output</em> es discreta/categórica (ej. <span class="math inline">\(0/1\)</span>).<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> Por su parte, el análisis no supervisado busca relaciones y estructura dentro de los datos (ej. distinguir <em>clusters</em>/grupos de clientes para promociones publicitarias).</p>
 <div id="estimacion" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Estimacion<a href="conceptos.html#estimacion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Supongamos que se quiere estudiar la relación entre el gasto en publicidad a través de diversos canales como televisión, radio, diarios (<em>inputs</em>) y las ventas en distintos mercados (<em>output</em>).</p>
@@ -376,7 +384,7 @@ div.csl-indent {
 </div>
 <div id="prediccion" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Prediccion<a href="conceptos.html#prediccion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Supongamos que se dispone de datos de variables independientes pero no de la variable dependiente, en ese caso, dado que el error en promedio es <span class="math inline">\(0\)</span> podríamos predecir <span class="math inline">\(Y\)</span> utilizando:</p>
+<p>Supongamos que se dispone de datos de variables independientes pero no de la variable dependiente, en ese caso, dado que el error en promedio es <span class="math inline">\(0\)</span> (ver ecuación <a href="conceptos.html#eq:estima">(6.1)</a>) podríamos predecir <span class="math inline">\(Y\)</span> utilizando:</p>
 <p><span class="math display" id="eq:pred">\[\begin{equation}
 \tag{6.2}
   \hat{Y} = \hat{f}(X)
@@ -390,7 +398,7 @@ div.csl-indent {
                    &amp; = \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{Reducible}} + \underbrace{Var(\epsilon)}_{\text{Irreducible}}
 \end{align}\]</span></p>
 <p>donde de <span class="math inline">\(E(Y − \hat{Y})^2\)</span> representa el promedio, o valor esperado, de la diferencia entre el valor predicho y el valor real de <span class="math inline">\(Y\)</span> elevado al cuadrado (diferencia por exceso y defecto ponderan igual), y <span class="math inline">\(Var(\epsilon)\)</span> representa la varianza asociada al término de error <span class="math inline">\(\epsilon\)</span>.</p>
-<p>El <strong>foco de este curso</strong> está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que la error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción de <span class="math inline">\(Y\)</span> que en la práctica casi siempre es desconocido.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p>El <strong>foco de este curso</strong> está en las técnicas para estimar <span class="math inline">\(f\)</span> con el objetivo de minimizar el error reducible. Es importante tener en cuenta que la error irreducible siempre proporcionará un límite superior en la precisión de nuestra predicción de <span class="math inline">\(Y\)</span> que en la práctica casi siempre es desconocido.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 </div>
 <div id="inferencia" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Inferencia<a href="conceptos.html#inferencia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -508,7 +516,7 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 <p>donde <span class="math inline">\(\hat{y_0}\)</span> es la etiqueta de clase predicha que resulta de aplicar el clasificador a la observación de <em>test</em> con predictor <span class="math inline">\(x_0\)</span>. Un buen clasificador es aquel para el cual el error de <em>test</em> <a href="conceptos.html#eq:terror2">(6.9)</a> es el más pequeño.</p>
 <div id="bayes" class="section level4 hasAnchor" number="6.6.3.1">
 <h4><span class="header-section-number">6.6.3.1</span> Clasificador de Bayes<a href="conceptos.html#bayes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Es posible mostrar que bajo penalidad simétrica<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> la tasa de error de <em>test</em> postulada en <a href="conceptos.html#eq:terror2">(6.9)</a> se minimiza, en promedio, por un clasificador muy simple que asigna cada observación a la clase más probable, dados sus valores predictores. En otras palabras, se debería asignar una observación de <em>test</em> con vector predictor <span class="math inline">\(x_0\)</span> a la clase <span class="math inline">\(j\)</span> para la cual <a href="conceptos.html#eq:bayes">(6.10)</a> es mayor.</p>
+<p>Es posible mostrar que bajo penalidad simétrica<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> la tasa de error de <em>test</em> postulada en <a href="conceptos.html#eq:terror2">(6.9)</a> se minimiza, en promedio, por un clasificador muy simple que asigna cada observación a la clase más probable, dados sus valores predictores. En otras palabras, se debería asignar una observación de <em>test</em> con vector predictor <span class="math inline">\(x_0\)</span> a la clase <span class="math inline">\(j\)</span> para la cual <a href="conceptos.html#eq:bayes">(6.10)</a> es mayor.</p>
 <p><span class="math display" id="eq:bayes">\[\begin{equation}
 \tag{6.10}
   Pr(Y = j \mid X = x_0)
@@ -600,7 +608,7 @@ Figura 6.6: Curva ROC puntos importantes
 <p>Definición de pérdida:</p>
 <ul>
 <li>Regresión = <span class="math inline">\((Y - \hat{Y})^2\)</span></li>
-<li>Clasificación = <span class="math inline">\(1(Y \neq \hat{Y})\)</span></li>
+<li>Clasificación = <span class="math inline">\(1(Y \neq  \hat{Y})\)</span></li>
 </ul>
 <p><strong><em>k-Fold cross-validation</em></strong></p>
 <ol style="list-style-type: decimal">
@@ -626,7 +634,7 @@ Figura 6.7: K-Fold cross-validation
 \tag{6.12}
   CV(\hat{f}, \alpha) = \frac{1}{N}L(Y_i - \hat{Y}_{-k}(x_i, \alpha))
 \end{equation}\]</span></p>
-<p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>Computar <span class="math inline">\(CV(\hat{f}, \alpha)\)</span> para distintos valores de <span class="math inline">\(\alpha\)</span> y elegir el modelo que minimiza el error.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 </div>
 <div id="bootstrap" class="section level3 hasAnchor" number="6.7.2">
 <h3><span class="header-section-number">6.7.2</span> Bootstrap<a href="conceptos.html#bootstrap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -659,34 +667,82 @@ Figura 6.7: K-Fold cross-validation
   \hat{V}(\hat{\theta})_B = \frac{1}{B} \sum_{j=1}^{B}(\hat{\theta}_j - \overline{\hat{\theta}})^2
 \end{equation}\]</span></p>
 <p><strong>Ejemplo:</strong></p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="conceptos.html#cb442-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb442-2"><a href="conceptos.html#cb442-2" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
-<span id="cb442-3"><a href="conceptos.html#cb442-3" tabindex="-1"></a></span>
-<span id="cb442-4"><a href="conceptos.html#cb442-4" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
-<span id="cb442-5"><a href="conceptos.html#cb442-5" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
-<span id="cb442-6"><a href="conceptos.html#cb442-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
-<span id="cb442-7"><a href="conceptos.html#cb442-7" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb442-8"><a href="conceptos.html#cb442-8" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
-<span id="cb442-9"><a href="conceptos.html#cb442-9" tabindex="-1"></a>}  </span>
-<span id="cb442-10"><a href="conceptos.html#cb442-10" tabindex="-1"></a></span>
-<span id="cb442-11"><a href="conceptos.html#cb442-11" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
-<span id="cb442-12"><a href="conceptos.html#cb442-12" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
-<span id="cb442-13"><a href="conceptos.html#cb442-13" tabindex="-1"></a></span>
-<span id="cb442-14"><a href="conceptos.html#cb442-14" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
-<span id="cb442-15"><a href="conceptos.html#cb442-15" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb442-16"><a href="conceptos.html#cb442-16" tabindex="-1"></a></span>
-<span id="cb442-17"><a href="conceptos.html#cb442-17" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
-<span id="cb442-18"><a href="conceptos.html#cb442-18" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="conceptos.html#cb459-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb459-2"><a href="conceptos.html#cb459-2" tabindex="-1"></a>poblacion <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb459-3"><a href="conceptos.html#cb459-3" tabindex="-1"></a></span>
+<span id="cb459-4"><a href="conceptos.html#cb459-4" tabindex="-1"></a><span class="co"># Bootstrap con muestras de 300 y 10000 repeticiones:</span></span>
+<span id="cb459-5"><a href="conceptos.html#cb459-5" tabindex="-1"></a>muestra_boot <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb459-6"><a href="conceptos.html#cb459-6" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb459-7"><a href="conceptos.html#cb459-7" tabindex="-1"></a>  muestra <span class="ot">=</span> <span class="fu">sample</span>(poblacion, <span class="dv">300</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb459-8"><a href="conceptos.html#cb459-8" tabindex="-1"></a>  muestra_boot <span class="ot">=</span> <span class="fu">c</span>(muestra_boot, <span class="fu">mean</span>(muestra))</span>
+<span id="cb459-9"><a href="conceptos.html#cb459-9" tabindex="-1"></a>}  </span>
+<span id="cb459-10"><a href="conceptos.html#cb459-10" tabindex="-1"></a></span>
+<span id="cb459-11"><a href="conceptos.html#cb459-11" tabindex="-1"></a><span class="co"># Media calculada con MUESTRA BOOTSTRAP</span></span>
+<span id="cb459-12"><a href="conceptos.html#cb459-12" tabindex="-1"></a>simulated_mean <span class="ot">=</span> <span class="fu">mean</span>(muestra_boot)</span>
+<span id="cb459-13"><a href="conceptos.html#cb459-13" tabindex="-1"></a></span>
+<span id="cb459-14"><a href="conceptos.html#cb459-14" tabindex="-1"></a><span class="co"># Varianza de la MUESTRA BOOTSTRAP</span></span>
+<span id="cb459-15"><a href="conceptos.html#cb459-15" tabindex="-1"></a>simulated_var <span class="ot">=</span> <span class="fu">sd</span>(muestra_boot)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb459-16"><a href="conceptos.html#cb459-16" tabindex="-1"></a></span>
+<span id="cb459-17"><a href="conceptos.html#cb459-17" tabindex="-1"></a><span class="co"># Comparemos medias:</span></span>
+<span id="cb459-18"><a href="conceptos.html#cb459-18" tabindex="-1"></a><span class="fu">mean</span>(poblacion); simulated_mean</span></code></pre></div>
 <pre><code>## [1] -0.0265972</code></pre>
 <pre><code>## [1] -0.02612666</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="conceptos.html#cb445-1" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
-<span id="cb445-2"><a href="conceptos.html#cb445-2" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="conceptos.html#cb462-1" tabindex="-1"></a><span class="co"># Comparemos varianza:</span></span>
+<span id="cb462-2"><a href="conceptos.html#cb462-2" tabindex="-1"></a><span class="fu">sd</span>(poblacion)<span class="sc">^</span><span class="dv">2</span>; simulated_var<span class="sc">*</span><span class="dv">300</span></span></code></pre></div>
 <pre><code>## [1] 0.9946825</code></pre>
 <pre><code>## [1] 0.9938018</code></pre>
 </div>
 </div>
 <div id="resumen" class="section level2 hasAnchor" number="6.8">
 <h2><span class="header-section-number">6.8</span> Resumen<a href="conceptos.html#resumen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>¿Qué aprendimos hasta acá?</p>
+<p>Supongamos que queremos predecir algo, por ejemplo:
+- el precio de una casa,
+- cuánta inflación habrá el mes que viene,
+- o la probabilidad de que un cliente deje de usar un servicio.</p>
+<p>La idea central es que existe una <strong>relación verdadera</strong> entre las variables que observamos y el resultado que queremos predecir. A esa relación la llamamos:</p>
+<p><span class="math display">\[ Y = f(X) \]</span></p>
+<p>El problema es que <strong>no conocemos</strong> esa función <span class="math inline">\(f\)</span>. Entonces debemos <strong>aproximarla</strong>.</p>
+<div id="dos-maneras-de-aproximar-f" class="section level3 hasAnchor" number="6.8.1">
+<h3><span class="header-section-number">6.8.1</span> Dos maneras de aproximar <span class="math inline">\(f\)</span><a href="conceptos.html#dos-maneras-de-aproximar-f" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="33%" />
+<col width="25%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Enfoque</th>
+<th>Cómo piensa</th>
+<th>Ventaja</th>
+<th>Costo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Paramétrico</strong> (ej. regresión lineal)</td>
+<td>“Voy a asumir una forma simple para <span class="math inline">\(f\)</span>”</td>
+<td>Fácil de interpretar</td>
+<td>Puede ser demasiado simple</td>
+</tr>
+<tr class="even">
+<td><strong>No Paramétrico</strong> (ej. árboles, k-NN)</td>
+<td>“Voy a dejar que los datos hablen por sí mismos”</td>
+<td>Se adapta mejor</td>
+<td>Puede requerir más datos</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="el-equilibrio-clave-sesgo-vs-varianza" class="section level3 hasAnchor" number="6.8.2">
+<h3><span class="header-section-number">6.8.2</span> El equilibrio clave: <em>Sesgo vs Varianza</em><a href="conceptos.html#el-equilibrio-clave-sesgo-vs-varianza" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Si el modelo es <strong>muy rígido</strong> (por ejemplo, una recta para todo), puede cometer errores sistemáticos → <strong>Alto Sesgo</strong></li>
+<li>Si el modelo es <strong>demasiado flexible</strong> (se ajusta a cada punto), puede volverse inestable → <strong>Alta Varianza</strong></li>
+</ul>
+<p>El buen modelado consiste en <strong>encontrar el punto medio</strong> entre ambos.</p>
 <p>Como señala <span class="citation">(<a href="#ref-MLR">Boehmke y Greenwell 2020</a>)</span> abordar correctamente el análisis de <em>machine learning</em> significa utilizar estratégicamente los datos en procesos de aprendizaje y validación, preprocesar correctamente las variables explicativas y la variable de respuesta, ajustar los hiperparámetros y evaluar la <em>performance</em> del modelo.</p>
 <p>La Figura <a href="conceptos.html#fig:ml">6.8</a> muestra gráficamente este proceso.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ml"></span>
@@ -698,21 +754,22 @@ Figura 6.8: Proceso general de ML
 
 </div>
 </div>
+</div>
 <h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-MLR" class="csl-entry">
 Boehmke, Bradley, y Brandon Greenwell. 2020. <em>Hands-On Machine Learning with R</em>. Taylor &amp; Francis Group. <a href="https://bradleyboehmke.github.io/HOML/">https://bradleyboehmke.github.io/HOML/</a>.
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="8">
-<li id="fn8"><p>También variable dependiente o variable explicada.<a href="conceptos.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>También variables independientes o variables explicativas.<a href="conceptos.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>En general el interés no esta puesto en realizar inferencia/análisis condicional.<a href="conceptos.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>Volveremos sobre este tema en el Capítulo <a href="mco.html#mco">7</a>.<a href="conceptos.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p>¿Útil para probabilidad de <em>default</em>?<a href="conceptos.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>Luego de seleccionar el modelo se estima con la muestra completa.<a href="conceptos.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<ol start="7">
+<li id="fn7"><p>También variable dependiente o variable explicada.<a href="conceptos.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>También variables independientes o variables explicativas.<a href="conceptos.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>En general el interés no esta puesto en realizar inferencia/análisis condicional.<a href="conceptos.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>Volveremos sobre este tema en el Capítulo <a href="mco.html#mco">7</a>.<a href="conceptos.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>¿Útil para probabilidad de <em>default</em>?<a href="conceptos.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Luego de seleccionar el modelo se estima con la muestra completa.<a href="conceptos.html#fnref12" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -735,42 +792,42 @@ Boehmke, Bradley, y Brandon Greenwell. 2020. <em>Hands-On Machine Learning with 
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CDbook.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
