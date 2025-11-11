@@ -575,7 +575,8 @@ el <em>trade-off</em> sesgo-varianza, se transfieren al entorno de clasificació
 TPR = &amp; VP / P \\
 FPR = &amp; FP / N
 \end{align*}\]</span></p>
-<p>La curva <span class="math inline">\(ROC\)</span> representa la relación entre <em>true positive rate</em> (<span class="math inline">\(TPR\)</span>) o Sensibilidad y <em>false positive rate</em> (<span class="math inline">\(FPR\)</span>) o, expresado de otra manera, <span class="math inline">\((1 - \text{Especificidad)}\)</span> para todos los valores posibles de <span class="math inline">\(c \in [0, 1]\)</span>. La curva <span class="math inline">\(ROC\)</span> compara la proporción de verdaderos positivos con (el complemento de) la proporción de verdaderos negativos, es decir, mide la pureza alcanzada en cada categoría. De esta forma, permite medir capacidad predictiva y comparar modelos.</p>
+<p>La curva <span class="math inline">\(ROC\)</span> representa la relación entre <em>true positive rate</em> (<span class="math inline">\(TPR\)</span>) o Sensibilidad y <em>false positive rate</em> (<span class="math inline">\(FPR\)</span>) o, expresado de otra manera, <span class="math inline">\((1 - \text{Especificidad)}\)</span> para todos los valores posibles de <span class="math inline">\(c \in [0, 1]\)</span>. La curva <span class="math inline">\(ROC\)</span> compara la proporción de verdaderos positivos con el complemento de la proporción de verdaderos negativos (de los que eran negativos, ¿cuántos marqué mal como positivos?), es decir, mide la pureza alcanzada en cada categoría. De esta forma, permite medir capacidad predictiva y comparar modelos.</p>
+<p>La curva muestra el equilibrio entre <strong>no perder positivos</strong> y <strong>no acusar inocentes</strong> según el umbral. La curva ROC muestra qué tan bien distingue el modelo entre positivos y negativos, sin fijar un umbral.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:roc"></span>
 <img src="figures/4.8ROC.png" alt="Curva ROC" width="75%" height="40%" />
 <p class="caption">
@@ -696,10 +697,12 @@ Figura 6.7: K-Fold cross-validation
 <div id="resumen" class="section level2 hasAnchor" number="6.8">
 <h2><span class="header-section-number">6.8</span> Resumen<a href="conceptos.html#resumen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>¿Qué aprendimos hasta acá?</p>
-<p>Supongamos que queremos predecir algo, por ejemplo:
-- el precio de una casa,
-- cuánta inflación habrá el mes que viene,
-- o la probabilidad de que un cliente deje de usar un servicio.</p>
+<p>Supongamos que queremos predecir algo, por ejemplo:</p>
+<ul>
+<li><p>el precio de una casa,</p></li>
+<li><p>cuánta inflación habrá el mes que viene,</p></li>
+<li><p>o la probabilidad de que un cliente deje de usar un servicio.</p></li>
+</ul>
 <p>La idea central es que existe una <strong>relación verdadera</strong> entre las variables que observamos y el resultado que queremos predecir. A esa relación la llamamos:</p>
 <p><span class="math display">\[ Y = f(X) \]</span></p>
 <p>El problema es que <strong>no conocemos</strong> esa función <span class="math inline">\(f\)</span>. Entonces debemos <strong>aproximarla</strong>.</p>
