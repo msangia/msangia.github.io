@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 5 R Markdown | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 5 R Markdown | Ciencia de Datos" />
   <meta property="og:type" content="book" />
@@ -62,7 +62,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -72,7 +72,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -126,10 +126,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -169,28 +174,29 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
-<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
-<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
-<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
-<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
-<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
-<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
-<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
-<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
-<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
-<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
-<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
-<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#tu-primer-c%C3%B3digo"><i class="fa fa-check"></i><b>1.2</b> Tu primer código</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.3</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.4</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.5</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#asignaci%C3%B3n-de-valores"><i class="fa fa-check"></i><b>1.6</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-aritm%C3%A9ticos"><i class="fa fa-check"></i><b>1.7</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.8</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#operadores-l%C3%B3gicos"><i class="fa fa-check"></i><b>1.9</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.10</b> Vectores</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.11</b> Secuencias</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.12</b> Factores</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.13</b> Matrices</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.14</b> Listas</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.15</b> Data frames</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.16</b> R base</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.17</b> apply, lapply y tapply</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.18</b> Map</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.19</b> Loops</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.20</b> Condicionales</a></li>
+<li class="chapter" data-level="1.21" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.21</b> Funciones</a>
 <ul>
-<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
-<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+<li class="chapter" data-level="1.21.1" data-path="intro.html"><a href="intro.html#output-m%C3%A1s-de-un-resultado"><i class="fa fa-check"></i><b>1.21.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.21.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.21.2</b> Argumentos con valores default</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a>
@@ -201,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
 <li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputaci%C3%B3n"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
 <li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
 <li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#pipe"><i class="fa fa-check"></i><b>2.5</b> Pipe</a></li>
 <li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.6</b> Variables</a></li>
@@ -218,9 +224,10 @@ div.csl-indent {
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulaci%C3%B3n-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.2" data-path="bd.html"><a href="bd.html#parsing-robusto-con-lubridate"><i class="fa fa-check"></i><b>2.15.2</b> Parsing robusto con <code>lubridate</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
 <ul>
 <li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
 </ul></li>
@@ -230,27 +237,28 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
-<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estad%C3%ADsticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
 <li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
 <li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
 <li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
 <li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
-<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gr%C3%A1fico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
-<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#t%C3%ADtulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
-<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#l%C3%ADmites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
 <li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
-<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
-<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
-<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
-<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
-<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
-<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posici%C3%B3n-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.8</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.9</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.10</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#leyenda-manual"><i class="fa fa-check"></i><b>4.11</b> Leyenda manual</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#estad%C3%ADsticas"><i class="fa fa-check"></i><b>4.12</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.13" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.13</b> Themes</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
@@ -262,6 +270,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
 <li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="rmd.html"><a href="rmd.html#abc-latex"><i class="fa fa-check"></i><b>5.2</b> Anexo. ABC de LaTeX</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
@@ -283,7 +292,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
 <li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="conceptos.html"><a href="conceptos.html#dos-maneras-de-aproximar-f"><i class="fa fa-check"></i><b>6.8.1</b> Dos maneras de aproximar <span class="math inline">\(f\)</span></a></li>
+<li class="chapter" data-level="6.8.2" data-path="conceptos.html"><a href="conceptos.html#el-equilibrio-clave-sesgo-vs-varianza"><i class="fa fa-check"></i><b>6.8.2</b> El equilibrio clave: <em>Sesgo vs Varianza</em></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
 <ul>
@@ -307,19 +320,20 @@ div.csl-indent {
 <li class="chapter" data-level="10" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>10</b> Arboles de decision</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>10.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.2</b> Bagging</a></li>
-<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.3</b> Random Forest</a></li>
-<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.4</b> Boosting</a>
+<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#m%C3%A9todos-de-ensamble-bagging-random-forest-y-boosting"><i class="fa fa-check"></i><b>10.2</b> Métodos de Ensamble: Bagging, Random Forest y Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.3</b> Bagging</a></li>
+<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.4</b> Random Forest</a></li>
+<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.5</b> Boosting</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.4.1</b> Ada Boost</a></li>
+<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.5.1</b> Ada Boost</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>10.5</b> Aplicacion practica</a>
+<li class="chapter" data-level="10.6" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>10.6</b> Aplicacion practica</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.5.1</b> Arboles de clasificacion</a></li>
-<li class="chapter" data-level="10.5.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.5.2</b> Comparacion de modelos para clasificacion</a></li>
-<li class="chapter" data-level="10.5.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.5.3</b> Arboles de regresion</a></li>
-<li class="chapter" data-level="10.5.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.5.4</b> Bagging y Random Forests</a></li>
-<li class="chapter" data-level="10.5.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.5.5</b> Boosting</a></li>
+<li class="chapter" data-level="10.6.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.6.1</b> Arboles de clasificacion</a></li>
+<li class="chapter" data-level="10.6.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.6.2</b> Comparacion de modelos para clasificacion</a></li>
+<li class="chapter" data-level="10.6.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.6.3</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="10.6.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.6.4</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="10.6.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.6.5</b> Boosting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
@@ -363,7 +377,7 @@ div.csl-indent {
 <div id="intrormd" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Introduccion<a href="rmd.html#intrormd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>Markdown</code> es un lenguaje que combinado con <code>R</code> y <span class="math inline">\(\textit{LaTeX}\)</span> permite realizar documentos que integran distintas posibilidades en un simple <em>script</em>.</p>
-<p>Si bien permite realizar documentos con diferentes formatos<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> este tutorial se concentra en archivos con formato PDF.</p>
+<p>Si bien permite realizar documentos con diferentes formatos<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> este tutorial se concentra en archivos con formato PDF.</p>
 <p>Para poder utilizarlo, además de las librerías que hemos visto, se necesitan las siguientes:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>markdown</code></p></li>
@@ -710,10 +724,10 @@ Nota:
 <ul>
 <li>Vamos a usar un segundo nivel con referencias.
 <ul>
-<li>Capítulo 27 de <span class="citation">Wickham y Grolemund (<a href="#ref-R4DS" role="doc-biblioref">2017</a>)</span>. Versión <a href="https://r4ds.had.co.nz/r-markdown.html">online</a></li>
-<li>Libro de recetas <span class="citation">Xie, Dervieux, y Riederer (<a href="#ref-Xie2022" role="doc-biblioref">2022</a>)</span></li>
-<li>R Markdown <span class="citation">Xie, Dervieux, y Riederer (<a href="#ref-Xie2021b" role="doc-biblioref">2021</a>)</span></li>
-<li>La guía definitiva <span class="citation">Xie, Allaire, y Grolemund (<a href="#ref-Xie2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Capítulo 27 de <span class="citation">Wickham y Grolemund (<a href="#ref-R4DS">2017</a>)</span>. Versión <a href="https://r4ds.had.co.nz/r-markdown.html">online</a></li>
+<li>Libro de recetas <span class="citation">Xie, Dervieux, y Riederer (<a href="#ref-Xie2022">2022</a>)</span></li>
+<li>R Markdown <span class="citation">Xie, Dervieux, y Riederer (<a href="#ref-Xie2021b">2021</a>)</span></li>
+<li>La guía definitiva <span class="citation">Xie, Allaire, y Grolemund (<a href="#ref-Xie2021">2021</a>)</span></li>
 <li>Más posibilidades <a href="https://rmarkdown.rstudio.com/">aquí</a> o <a href="https://bookdown.org/">aquí</a></li>
 </ul></li>
 </ul>
@@ -723,7 +737,7 @@ Nota:
 <pre><code>---
 title: &quot;Informes con R Markdown&quot;
 author: &quot;Máximo Sangiácomo&quot;
-date: &quot;2023-06-15&quot;
+date: &quot;2025-11-12&quot;
 output:
   bookdown::pdf_document2:
 fontsize: 12pt
@@ -851,12 +865,152 @@ stargazer(lm.fit1, lm.fit2, type = &#39;latex&#39;, header=FALSE, label = &#39;t
    + Más posibilidades [aquí](https://rmarkdown.rstudio.com/) o [aquí](https://bookdown.org/)
 </code></pre>
 <pre><code># Bibliografia {-}</code></pre>
+</div>
+</div>
+<div id="abc-latex" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Anexo. ABC de LaTeX<a href="rmd.html#abc-latex" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2>
+Estructura básica de un documento LaTeX
+</h2>
+<p>
+Todo archivo <code>LaTeX</code> comienza con la declaración de la clase del documento y finaliza con <code>\end{document}</code>.
+</p>
+<pre><code>\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Título del documento}
+\author{Autor o institución}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+...
+\end{document}
+</code></pre>
+<h3>
+Encabezado y configuración general
+</h3>
+<ul>
+<li>
+<code>\documentclass[]</code>: tipo de documento (<code>article</code>, <code>report</code>, <code>book</code>).
+</li>
+<li>
+<code>\usepackage{…}</code>: carga librerías.
+</li>
+<li>
+<code>\geometry{…}</code>: define márgenes.
+</li>
+<li>
+<code>\title</code>, <code>\author</code>, <code>\date</code>: metadatos.
+</li>
+<li>
+<code>\maketitle</code>: genera la portada.
+</li>
+</ul>
+<h3>
+Negrita, itálica y monoespaciado
+</h3>
+<pre><code>\textbf{negrita} \textit{itálica} \emph{énfasis} \texttt{monoespaciado} \textsc{versalitas}
+</code></pre>
+<h3>
+Insertar imágenes
+</h3>
+<pre><code>
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{ruta/a/imagen.png}
+  \caption{Una imagen de ejemplo}
+  \label{fig:ejemplo}
+\end{figure}
+</code></pre>
+<h3>
+Ecuaciones
+</h3>
+<pre><code>En línea: \( a^2 + b^2 = c^2 \)
+
+En bloque:
+\[
+\int_0^1 x^2 \, dx = \frac{1}{3}
+\]
+
+Numerada:
+\begin{equation}\label{eq:ols}
+\hat{\beta} = (X^\top X)^{-1} X^\top y
+\end{equation}
+</code></pre>
+<h3>
+Tablas
+</h3>
+<pre><code>\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Variable} & \textbf{Media} & \textbf{SD} \\
+\hline
+Ingreso & 1200 & 300 \\
+Edad & 35 & 10 \\
+\hline
+\end{tabular}
+\caption{Ejemplo de tabla simple}
+\label{tab:ejemplo}
+\end{table}
+</code></pre>
+<h3>
+Listas
+</h3>
+<pre><code>\begin{itemize}
+  \item Primer elemento
+  \item Segundo elemento
+  \item Tercer elemento
+\end{itemize}
+
+\begin{enumerate}
+  \item Paso uno
+  \item Paso dos
+  \item Paso tres
+\end{enumerate}
+</code></pre>
+<h3>
+Referencias bibliográficas
+</h3>
+<pre><code>% En el preámbulo:
+\usepackage[backend=biber,style=apa]{biblatex}
+\addbibresource{bibliografia.bib}
+
+% En el texto:
+Como explica \cite{Xie2021}, el formato R Markdown permite integrar \LaTeX.
+
+% Generar la sección de referencias:
+\printbibliography
+</code></pre>
+<h3>
+Recursos útiles
+</h3>
+<ul>
+<li>
+<a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Overleaf – Learn LaTeX in 30 minutes</a>
+</li>
+<li>
+<a href="https://es.wikibooks.org/wiki/LaTeX">Wikibooks: Guía de LaTeX</a>
+</li>
+<li>
+<a href="https://ctan.org/">CTAN: Comprehensive TeX Archive Network</a>
+</li>
+</ul>
 
 </div>
 </div>
-</div>
 <h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-R4DS" class="csl-entry">
 Wickham, Hadley, y Garrett Grolemund. 2017. <em>R for Data Science</em>. O’REILLY. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
 </div>
@@ -872,8 +1026,8 @@ Xie, Yihui, Christophe Dervieux, y Emily Riederer. 2021. <em>bookdown: Authoring
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>Por ejemplo, MS Word, HTML, PDF, beamer.<a href="rmd.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Por ejemplo, MS Word, HTML, PDF, beamer.<a href="rmd.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -896,42 +1050,42 @@ Xie, Yihui, Christophe Dervieux, y Emily Riederer. 2021. <em>bookdown: Authoring
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CDbook.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
