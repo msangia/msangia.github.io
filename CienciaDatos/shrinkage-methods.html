@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 8 Shrinkage Methods | Ciencia de Datos</title>
+  <title>Capítulo 8 Regularización: Ridge, Lasso y Elastic Net Logit | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 8 Shrinkage Methods | Ciencia de Datos" />
+  <meta property="og:title" content="Capítulo 8 Regularización: Ridge, Lasso y Elastic Net Logit | Ciencia de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="BCRA" />
   <meta name="github-repo" content="msangia/msangia.github" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 8 Shrinkage Methods | Ciencia de Datos" />
+  <meta name="twitter:title" content="Capítulo 8 Regularización: Ridge, Lasso y Elastic Net Logit | Ciencia de Datos" />
   <meta name="twitter:site" content="@msangia" />
   <meta name="twitter:description" content="BCRA" />
   
@@ -62,7 +62,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -72,7 +72,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -126,10 +126,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -169,28 +174,29 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
-<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
-<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
-<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
-<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
-<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
-<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
-<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
-<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
-<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
-<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
-<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
-<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#tu-primer-c%C3%B3digo"><i class="fa fa-check"></i><b>1.2</b> Tu primer código</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.3</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.4</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.5</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#asignaci%C3%B3n-de-valores"><i class="fa fa-check"></i><b>1.6</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-aritm%C3%A9ticos"><i class="fa fa-check"></i><b>1.7</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.8</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#operadores-l%C3%B3gicos"><i class="fa fa-check"></i><b>1.9</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.10</b> Vectores</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.11</b> Secuencias</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.12</b> Factores</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.13</b> Matrices</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.14</b> Listas</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.15</b> Data frames</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.16</b> R base</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.17</b> apply, lapply y tapply</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.18</b> Map</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.19</b> Loops</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.20</b> Condicionales</a></li>
+<li class="chapter" data-level="1.21" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.21</b> Funciones</a>
 <ul>
-<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
-<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+<li class="chapter" data-level="1.21.1" data-path="intro.html"><a href="intro.html#output-m%C3%A1s-de-un-resultado"><i class="fa fa-check"></i><b>1.21.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.21.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.21.2</b> Argumentos con valores default</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a>
@@ -201,7 +207,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
 <li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputaci%C3%B3n"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
 <li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
 <li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#pipe"><i class="fa fa-check"></i><b>2.5</b> Pipe</a></li>
 <li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.6</b> Variables</a></li>
@@ -218,9 +224,10 @@ div.csl-indent {
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulaci%C3%B3n-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.2" data-path="bd.html"><a href="bd.html#parsing-robusto-con-lubridate"><i class="fa fa-check"></i><b>2.15.2</b> Parsing robusto con <code>lubridate</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
 <ul>
 <li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
 </ul></li>
@@ -230,27 +237,28 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
-<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estad%C3%ADsticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
 <li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
 <li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
 <li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
 <li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
-<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gr%C3%A1fico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
-<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#t%C3%ADtulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
-<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#l%C3%ADmites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
 <li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
-<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
-<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
-<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
-<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
-<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
-<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posici%C3%B3n-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.8</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.9</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.10</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#leyenda-manual"><i class="fa fa-check"></i><b>4.11</b> Leyenda manual</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#estad%C3%ADsticas"><i class="fa fa-check"></i><b>4.12</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.13" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.13</b> Themes</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
@@ -262,39 +270,65 @@ div.csl-indent {
 <li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
 <li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="rmd.html"><a href="rmd.html#abc-latex"><i class="fa fa-check"></i><b>5.2</b> Anexo. ABC de LaTeX</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="conceptos.html"><a href="conceptos.html#estimacion"><i class="fa fa-check"></i><b>6.1</b> Estimacion</a></li>
 <li class="chapter" data-level="6.2" data-path="conceptos.html"><a href="conceptos.html#prediccion"><i class="fa fa-check"></i><b>6.2</b> Prediccion</a></li>
 <li class="chapter" data-level="6.3" data-path="conceptos.html"><a href="conceptos.html#inferencia"><i class="fa fa-check"></i><b>6.3</b> Inferencia</a></li>
-<li class="chapter" data-level="6.4" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>6.4</b> Metodos parametricos</a></li>
-<li class="chapter" data-level="6.5" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>6.5</b> Metodos no parametricos</a></li>
-<li class="chapter" data-level="6.6" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>6.6</b> Evaluacion de la precision del modelo</a>
+<li class="chapter" data-level="6.4" data-path="conceptos.html"><a href="conceptos.html#ml-vs-estad%C3%ADstica-cl%C3%A1sica-en-qu%C3%A9-se-diferencian"><i class="fa fa-check"></i><b>6.4</b> ML vs Estadística clásica: ¿en qué se diferencian?</a></li>
+<li class="chapter" data-level="6.5" data-path="conceptos.html"><a href="conceptos.html#metodos-parametricos"><i class="fa fa-check"></i><b>6.5</b> Metodos parametricos</a></li>
+<li class="chapter" data-level="6.6" data-path="conceptos.html"><a href="conceptos.html#metodos-no-parametricos"><i class="fa fa-check"></i><b>6.6</b> Metodos no parametricos</a></li>
+<li class="chapter" data-level="6.7" data-path="conceptos.html"><a href="conceptos.html#evaluacion-de-la-precision-del-modelo"><i class="fa fa-check"></i><b>6.7</b> Evaluacion de la precision del modelo</a>
 <ul>
-<li class="chapter" data-level="6.6.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>6.6.1</b> Calidad del ajuste</a></li>
-<li class="chapter" data-level="6.6.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>6.6.2</b> Trade-off Sesgo-Varianza</a></li>
-<li class="chapter" data-level="6.6.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>6.6.3</b> Clasificacion</a></li>
-<li class="chapter" data-level="6.6.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>6.6.4</b> Matriz de confusion</a></li>
-<li class="chapter" data-level="6.6.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>6.6.5</b> Curva ROC</a></li>
+<li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#ajuste"><i class="fa fa-check"></i><b>6.7.1</b> Calidad del ajuste</a></li>
+<li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#trade-off-sesgo-varianza"><i class="fa fa-check"></i><b>6.7.2</b> Trade-off Sesgo-Varianza</a></li>
+<li class="chapter" data-level="6.7.3" data-path="conceptos.html"><a href="conceptos.html#clasificacion"><i class="fa fa-check"></i><b>6.7.3</b> Clasificacion</a></li>
+<li class="chapter" data-level="6.7.4" data-path="conceptos.html"><a href="conceptos.html#confusion"><i class="fa fa-check"></i><b>6.7.4</b> Matriz de confusion</a></li>
+<li class="chapter" data-level="6.7.5" data-path="conceptos.html"><a href="conceptos.html#roc"><i class="fa fa-check"></i><b>6.7.5</b> Curva ROC</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>6.7</b> Resampling Methods</a>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resampling-methods"><i class="fa fa-check"></i><b>6.8</b> Resampling Methods</a>
 <ul>
-<li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
-<li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
+<li class="chapter" data-level="6.8.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.8.1</b> Cross Validation</a></li>
+<li class="chapter" data-level="6.8.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.8.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
+<li class="chapter" data-level="6.9" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.9</b> Resumen</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
-<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>7.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="6.9.1" data-path="conceptos.html"><a href="conceptos.html#dos-maneras-de-aproximar-f"><i class="fa fa-check"></i><b>6.9.1</b> Dos maneras de aproximar <span class="math inline">\(f\)</span></a></li>
+<li class="chapter" data-level="6.9.2" data-path="conceptos.html"><a href="conceptos.html#el-equilibrio-clave-sesgo-vs-varianza"><i class="fa fa-check"></i><b>6.9.2</b> El equilibrio clave: <em>Sesgo vs Varianza</em></a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>8</b> Shrinkage Methods</a>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>8.1</b> LASSO</a></li>
-<li class="chapter" data-level="8.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge"><i class="fa fa-check"></i><b>8.2</b> <em>Ridge</em></a></li>
-<li class="chapter" data-level="8.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>8.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#planteo-del-modelo"><i class="fa fa-check"></i><b>7.1</b> Planteo del modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#c%C3%B3mo-se-estiman-los-par%C3%A1metros"><i class="fa fa-check"></i><b>7.2</b> ¿Cómo se estiman los parámetros?</a></li>
+<li class="chapter" data-level="7.3" data-path="mco.html"><a href="mco.html#c%C3%B3mo-funciona-en-la-pr%C3%A1ctica"><i class="fa fa-check"></i><b>7.3</b> ¿Cómo funciona en la práctica?</a></li>
+<li class="chapter" data-level="7.4" data-path="mco.html"><a href="mco.html#interpretaci%C3%B3n-de-coeficientes"><i class="fa fa-check"></i><b>7.4</b> Interpretación de coeficientes</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="mco.html"><a href="mco.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.4.1</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.4.2" data-path="mco.html"><a href="mco.html#coeficiente-de-pendiente-beta_1"><i class="fa fa-check"></i><b>7.4.2</b> Coeficiente de pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="mco.html"><a href="mco.html#modelo-m%C3%BAltiple-pensar-en-mantener-todo-lo-dem%C3%A1s-constante"><i class="fa fa-check"></i><b>7.4.3</b> Modelo múltiple: pensar en “mantener todo lo demás constante”</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="mco.html"><a href="mco.html#predicci%C3%B3n"><i class="fa fa-check"></i><b>7.5</b> Predicción</a></li>
+<li class="chapter" data-level="7.6" data-path="mco.html"><a href="mco.html#conclusi%C3%B3n"><i class="fa fa-check"></i><b>7.6</b> Conclusión</a></li>
+<li class="chapter" data-level="7.7" data-path="mco.html"><a href="mco.html#anexo.-relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.7</b> Anexo. Relacion entre estimacion optima y prediccion optima</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>8</b> Regularización: Ridge, Lasso y Elastic Net Logit</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#motivaci%C3%B3n-por-qu%C3%A9-regularizar"><i class="fa fa-check"></i><b>8.1</b> Motivación: ¿por qué regularizar?</a></li>
+<li class="chapter" data-level="8.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge-regression-penalizaci%C3%B3n-l2"><i class="fa fa-check"></i><b>8.2</b> Ridge Regression (Penalización L2)</a></li>
+<li class="chapter" data-level="8.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso-penalizaci%C3%B3n-l1"><i class="fa fa-check"></i><b>8.3</b> Lasso (Penalización L1)</a></li>
+<li class="chapter" data-level="8.4" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#elastic-net-l1-l2"><i class="fa fa-check"></i><b>8.4</b> Elastic Net (L1 + L2)</a></li>
+<li class="chapter" data-level="8.5" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#selecci%C3%B3n-del-hiperpar%C3%A1metro-lambda-lambda"><i class="fa fa-check"></i><b>8.5</b> Selección del hiperparámetro lambda (<span class="math inline">\(\lambda\)</span>)</a></li>
+<li class="chapter" data-level="8.6" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ejemplo-aplicado"><i class="fa fa-check"></i><b>8.6</b> Ejemplo aplicado</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge"><i class="fa fa-check"></i><b>8.6.1</b> Ridge</a></li>
+<li class="chapter" data-level="8.6.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>8.6.2</b> Lasso</a></li>
+<li class="chapter" data-level="8.6.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#elastic-net"><i class="fa fa-check"></i><b>8.6.3</b> Elastic Net</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#comparaci%C3%B3n-general"><i class="fa fa-check"></i><b>8.7</b> Comparación general</a></li>
+<li class="chapter" data-level="8.8" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#conclusi%C3%B3n-1"><i class="fa fa-check"></i><b>8.8</b> Conclusión</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>9</b> Logit</a>
 <ul>
@@ -302,24 +336,26 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>9.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>9.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="9.2" data-path="logit.html"><a href="logit.html#conclusi%C3%B3n-2"><i class="fa fa-check"></i><b>9.2</b> Conclusión</a></li>
+<li class="chapter" data-level="9.3" data-path="logit.html"><a href="logit.html#aplicacion-practica"><i class="fa fa-check"></i><b>9.3</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>10</b> Arboles de decision</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>10.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.2</b> Bagging</a></li>
-<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.3</b> Random Forest</a></li>
-<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.4</b> Boosting</a>
+<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#m%C3%A9todos-de-ensamble-bagging-random-forest-y-boosting"><i class="fa fa-check"></i><b>10.2</b> Métodos de Ensamble: Bagging, Random Forest y Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.3</b> Bagging</a></li>
+<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.4</b> Random Forest</a></li>
+<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.5</b> Boosting</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.4.1</b> Ada Boost</a></li>
+<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.5.1</b> Ada Boost</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>10.5</b> Aplicacion practica</a>
+<li class="chapter" data-level="10.6" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>10.6</b> Aplicacion practica</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.5.1</b> Arboles de clasificacion</a></li>
-<li class="chapter" data-level="10.5.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.5.2</b> Comparacion de modelos para clasificacion</a></li>
-<li class="chapter" data-level="10.5.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.5.3</b> Arboles de regresion</a></li>
-<li class="chapter" data-level="10.5.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.5.4</b> Bagging y Random Forests</a></li>
-<li class="chapter" data-level="10.5.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.5.5</b> Boosting</a></li>
+<li class="chapter" data-level="10.6.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.6.1</b> Arboles de clasificacion</a></li>
+<li class="chapter" data-level="10.6.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.6.2</b> Comparacion de modelos para clasificacion</a></li>
+<li class="chapter" data-level="10.6.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.6.3</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="10.6.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.6.4</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="10.6.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.6.5</b> Boosting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
@@ -329,7 +365,7 @@ div.csl-indent {
 <li class="chapter" data-level="12" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>12</b> Analisis de clusters</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>12.1</b> K-Means Clustering</a></li>
-<li class="chapter" data-level="12.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-4"><i class="fa fa-check"></i><b>12.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="12.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>12.2</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -357,18 +393,69 @@ div.csl-indent {
   <img class= "hero-image" src="images/background.png">
 </div>
 <div id="shrinkage-methods" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Capítulo 8</span> Shrinkage Methods<a href="shrinkage-methods.html#shrinkage-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Cuando el objetivo es encontrar el mejor modelo, es decir, aquel con menor error de predicción en la muestra de <em>test</em> existen distintas alternativas de selección de modelos. La idea de <em>shrinkage</em> es ajustar un modelo que contenga todos los <span class="math inline">\(p\)</span> predictores usando una técnica que restringe o regulariza las estimaciones de coeficientes hacia cero. Puede que no sea obvio por qué tal restricción debería mejorar el ajuste, pero reducir los valores estimados de los coeficientes puede reducir significativamente su varianza. Las dos técnicas más conocidas para reducir los coeficientes de regresión hacia cero son la regresión <em>ridge</em> y <em>lasso</em>.</p>
-<p>La estimación por mínimos cuadrados del Capítulo <a href="mco.html#mco">7</a> son “equivalentes en escala”: multiplicar <span class="math inline">\(X_j\)</span> por una constante <span class="math inline">\(c\)</span> simplemente modifica el valor del coeficiente estimado por un factor de <span class="math inline">\(\frac{1}{c}\)</span>. En otras palabras, independientemente de cómo se escale el <em>j-ésimo</em> predictor, <span class="math inline">\(X_j \hat{\beta}_j\)</span> seguirá siendo el mismo. Por el contrario, los coeficientes de regresión <em>ridge</em> y <em>lasso</em> pueden cambiar sustancialmente al multiplicar un predictor por una constante (notar que, en general, las variables tienen distinta escala de medición). Por lo tanto, es mejor estandarizar los predictores, por ejemplo, dividir cada variable por su desvío estándar.</p>
-<div id="lasso" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> LASSO<a href="shrinkage-methods.html#lasso" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>Least Absolute Shrinkage and Selection Operator</em>. Dado:</p>
+<h1><span class="header-section-number">Capítulo 8</span> Regularización: Ridge, Lasso y Elastic Net Logit<a href="shrinkage-methods.html#shrinkage-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La <strong>regularización</strong> es una de las herramientas más valiosas en <em>machine learning supervisado</em>, especialmente cuando tenemos muchos predictores, relaciones complejas o alta colinealidad. Su objetivo es mejorar la capacidad predictiva reduciendo el <strong>sobreajuste</strong> (overfitting) mediante penalizaciones aplicadas a los coeficientes del modelo lineal.</p>
+<p>A diferencia de la regresión MCO tradicional, que solo busca minimizar el error cuadrático, los métodos de regularización agregan un término que penaliza la magnitud de los coeficientes. Esto tiene dos efectos importantes:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Controla la varianza del modelo</strong>, suavizando estimaciones inestables.<br />
+</li>
+<li><strong>Mejora la predicción fuera de muestra</strong>, que es la meta principal en ML.</li>
+</ol>
+<hr />
+<div id="motivación-por-qué-regularizar" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Motivación: ¿por qué regularizar?<a href="shrinkage-methods.html#motivaci%C3%B3n-por-qu%C3%A9-regularizar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Un modelo lineal clásico:</p>
+<p><span class="math display">\[
+Y = \beta_0 + \sum_{j=1}^p \beta_j X_j + u
+\]</span></p>
+<p>puede fallar cuando:</p>
+<ul>
+<li>hay muchas variables,<br />
+</li>
+<li>algunas están muy correlacionadas,<br />
+</li>
+<li>el tamaño muestral es limitado,<br />
+</li>
+<li>los datos contienen “ruido”.</li>
+</ul>
+<p>En esos casos, los coeficientes estimados pueden ser grandes, inestables y muy sensibles a pequeños cambios en los datos. La regularización atenúa este problema.</p>
+<hr />
+</div>
+<div id="ridge-regression-penalización-l2" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Ridge Regression (Penalización L2)<a href="shrinkage-methods.html#ridge-regression-penalizaci%C3%B3n-l2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nuevamente, la regresión <em>ridge</em> es muy similar a la de mínimos cuadrados. En particular, la estimación <em>ridge</em> <span class="math inline">\(\hat{\beta}^{R}\)</span> son los valores que minimizan la ecuación <a href="shrinkage-methods.html#eq:ridge">(8.1)</a> donde <span class="math inline">\(\lambda \ge 0\)</span> es un parámetro de ajuste, que se determinará por separado. La ecuación <a href="shrinkage-methods.html#eq:ridge">(8.1)</a> realiza un <em>trade-off</em> entre dos criterios diferentes. Al igual que con los mínimos cuadrados, la regresión <em>ridge</em> busca estimaciones de coeficientes que se ajusten bien a los datos, haciendo que RSS sea pequeña. Sin embargo, el segundo término <span class="math inline">\(\lambda \sum_{j=1}^{p}\beta_{j}^{2}\)</span>, llamado penalización, es pequeño cuando <span class="math inline">\(\beta_1,...,\beta_p\)</span> están cerca de cero, por lo que tiene el efecto de reducir las estimaciones de <span class="math inline">\(\beta_j\)</span> hacia cero.</p>
+<p><span class="math display" id="eq:ridge">\[\begin{equation}
+\tag{8.1}
+R_r(\beta) = \sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2 + \lambda \sum_{j=1}^{p}\beta_{j}^{2}
+\end{equation}\]</span></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fridge"></span>
+<img src="figures/6.4Ridge.png" alt="Ridge" width="60%" height="40%" />
+<p class="caption">
+Figura 8.1: Ridge
+</p>
+</div>
+<ul>
+<li><strong>No genera ceros exactos</strong> → mantiene todas las variables.<br />
+</li>
+<li><strong>Ideal</strong> cuando hay <strong>alta colinealidad</strong>.<br />
+</li>
+<li>Los coeficientes se “achican” (shrink), pero no desaparecen.</li>
+</ul>
+<p><strong>Intuición:</strong><br />
+La penalización L2 “aprieta” los coeficientes hacia cero suavemente.<br />
+Como castiga más fuertemente valores grandes, evita coeficientes desproporcionados.</p>
+<hr />
+</div>
+<div id="lasso-penalización-l1" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Lasso (Penalización L1)<a href="shrinkage-methods.html#lasso-penalizaci%C3%B3n-l1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Least Absolute Shrinkage and Selection Operator</p>
+<p>Dado:</p>
 <p><span class="math inline">\(Y = \beta_0 + \beta_1 X_1 +...+ \beta_p X_p + u\)</span></p>
 <p>Suponer que <span class="math inline">\(M_k\)</span> con <span class="math inline">\(k = 1,...,K\)</span> es una serie modelos.</p>
 <p><strong>Elección de modelos:</strong> buscar en <span class="math inline">\(M_k\)</span> el mejor modelo para predecir fuera de la muestra. La primera alternativa podría ser realizar una búsqueda exhaustiva. En la ocasiones, puede ser impracticable dado que con <span class="math inline">\(p\)</span> predictores, se pueden construir <span class="math inline">\(2^p\)</span> modelos (con <span class="math inline">\(p = 15\)</span> hay <span class="math inline">\(32.768\)</span> modelos).</p>
 <p><em>Lasso</em>: una manera formal y algorítmica de realizar esa tarea. Para <span class="math inline">\(\lambda \ge 0\)</span> dado, se considera la siguiente función objetivo (a minimizar):</p>
 <p><span class="math display" id="eq:lasso">\[\begin{equation}
-\tag{8.1}
+\tag{8.2}
 R_l(\beta) = \sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2 + \lambda \sum_{j=1}^{p}|\beta_j|
 \end{equation}\]</span></p>
 <p>donde <span class="math inline">\(x_i\)</span> contiene un intercepto.</p>
@@ -381,155 +468,260 @@ R_l(\beta) = \sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2 + \lambda \sum_{j=1}^{p}|
 <ul>
 <li><p><span class="math inline">\(\sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2\)</span> penaliza la falta de ajuste</p></li>
 <li><p><span class="math inline">\(\sum_{j=1}^{p}|\beta_j|\)</span> penaliza complejidad</p></li>
+<li><p>Puede llevar coeficientes exactamente a <strong>cero</strong>.<br />
+</p></li>
+<li><p>Cumple una doble función: <strong>regularización</strong> + <strong>selección de variables</strong>.<br />
+</p></li>
+<li><p>Útil cuando sospechamos que solo algunas variables son realmente relevantes.</p></li>
 </ul>
 <div class="infobox note">
 <p>En determinados casos, la ventaja de utilizar <em>lasso</em> es que elige automáticamente qué variables entran en el modelo <span class="math inline">\((\beta_j \neq 0)\)</span> y cuales no <span class="math inline">\((\beta_j = 0)\)</span>. Por su parte, <em>ridge</em> restringe todos los coeficientes hacia <span class="math inline">\(0\)</span>.</p>
 </div>
-<p>La Figura <a href="shrinkage-methods.html#fig:lasso">8.1</a> muestra el valor de los coeficientes estandarizados en función de distintos valores del parámetro <span class="math inline">\(\lambda\)</span> que se obtienen al aplicar <em>lasso</em> a la base de datos de <code>Credit</code>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> Cuando <span class="math inline">\(\lambda = 0\)</span>, el resultado coincide con el de mínimos cuadrados, cuando <span class="math inline">\(\lambda\)</span> es lo suficientemente grande, todos los coeficientes son iguales cero. Entre los dos casos extremos, moviéndose de derecha a izquierda se observa que al principio <em>lasso</em> resulta en un modelo que contiene solo el predictor de <code>rating</code>. Luego, ingresan al modelo <code>student</code> y <code>limit</code> casi simultáneamente, seguidas de cerca por <code>income</code>. Finalmente lo hacen el resto de las variables.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lasso"></span>
+<p>La Figura <a href="shrinkage-methods.html#fig:flasso">8.2</a> muestra el valor de los coeficientes estandarizados en función de distintos valores del parámetro <span class="math inline">\(\lambda\)</span> que se obtienen al aplicar <em>lasso</em> a la base de datos de <code>Credit</code>.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Cuando <span class="math inline">\(\lambda = 0\)</span>, el resultado coincide con el de mínimos cuadrados, cuando <span class="math inline">\(\lambda\)</span> es lo suficientemente grande, todos los coeficientes son iguales cero. Entre los dos casos extremos, moviéndose de derecha a izquierda se observa que al principio <em>lasso</em> resulta en un modelo que contiene solo el predictor de <code>rating</code>. Luego, ingresan al modelo <code>student</code> y <code>limit</code> casi simultáneamente, seguidas de cerca por <code>income</code>. Finalmente lo hacen el resto de las variables.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:flasso"></span>
 <img src="figures/6.6Lasso.png" alt="Lasso" width="80%" height="40%" />
 <p class="caption">
-Figura 8.1: Lasso
+Figura 8.2: Lasso
 </p>
 </div>
 <p>Como señalamos arriba, si <span class="math inline">\(\hat{\beta_l} = 0\)</span>, al moverse de <span class="math inline">\(0\)</span> (es decir, incluir la variable) podría pensarse que la función de penalidad de <em>lasso</em> genera costos y beneficios. Por un lado, el costo por incluir la variable sube en el valor de (<span class="math inline">\(\lambda\)</span>), por el otro, la penalidad de ajuste baja (más variables, mejor ajuste). Si el primero sube más rápido que lo que el segundo baja conviene quedarse en <span class="math inline">\(0\)</span>. En caso contrario conviene moverse afuera de <span class="math inline">\(0\)</span>. Por lo tanto, conviene moverse de <span class="math inline">\(0\)</span> si la relación es lo suficientemente fuerte (mejora el ajuste), sino conviene evitar la penalización.</p>
+<hr />
 </div>
-<div id="ridge" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> <em>Ridge</em><a href="shrinkage-methods.html#ridge" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Nuevamente, la regresión <em>ridge</em> es muy similar a la de mínimos cuadrados. En particular, la estimación <em>ridge</em> <span class="math inline">\(\hat{\beta}^{R}\)</span> son los valores que minimizan la ecuación <a href="shrinkage-methods.html#eq:ridge">(8.2)</a> donde <span class="math inline">\(\lambda \ge 0\)</span> es un parámetro de ajuste, que se determinará por separado. La ecuación <a href="shrinkage-methods.html#eq:ridge">(8.2)</a> realiza un <em>trade-off</em> entre dos criterios diferentes. Al igual que con los mínimos cuadrados, la regresión <em>ridge</em> busca estimaciones de coeficientes que se ajusten bien a los datos, haciendo que RSS sea pequeña. Sin embargo, el segundo término <span class="math inline">\(\lambda \sum_{j=1}^{p}\beta_{j}^{2}\)</span>, llamado penalización, es pequeño cuando <span class="math inline">\(\beta_1,...,\beta_p\)</span> están cerca de cero, por lo que tiene el efecto de reducir las estimaciones de <span class="math inline">\(\beta_j\)</span> hacia cero.</p>
-<p><span class="math display" id="eq:ridge">\[\begin{equation}
-\tag{8.2}
-R_r(\beta) = \sum_{i=1}^{n}(y_i - x_i^{&#39;} \beta)^2 + \lambda \sum_{j=1}^{p}\beta_{j}^{2}
-\end{equation}\]</span></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ridge"></span>
-<img src="figures/6.4Ridge.png" alt="Ridge" width="60%" height="40%" />
-<p class="caption">
-Figura 8.2: Ridge
-</p>
+<div id="elastic-net-l1-l2" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Elastic Net (L1 + L2)<a href="shrinkage-methods.html#elastic-net-l1-l2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[
+\min_{\beta} \left\{ \sum_{i=1}^n (Y_i - \hat Y_i)^2 + \lambda \left[ \alpha |\beta| + (1 - \alpha)\beta^2 \right] \right\}
+\]</span></p>
+<p>Combina lo mejor de ambos mundos:</p>
+<ul>
+<li><strong>Lasso:</strong> selección de variables<br />
+</li>
+<li><strong>Ridge:</strong> estabilidad cuando hay variables correlacionadas</li>
+</ul>
+<hr />
+</div>
+<div id="selección-del-hiperparámetro-lambda-lambda" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> Selección del hiperparámetro lambda (<span class="math inline">\(\lambda\)</span>)<a href="shrinkage-methods.html#selecci%C3%B3n-del-hiperpar%C3%A1metro-lambda-lambda" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La regularización requiere elegir cuánto penalizar. Esto se define con el hiperparámetro <span class="math inline">\(\lambda\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\lambda\)</span> = 0 → modelo MCO estándar.<br />
+</li>
+<li><span class="math inline">\(\lambda\)</span> grande → coeficientes más chicos (incluso cero en Lasso).</li>
+</ul>
+<p>La elección óptima se hace con <strong>cross-validation (CV)</strong>, típicamente k-fold.</p>
+<hr />
+</div>
+<div id="ejemplo-aplicado" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Ejemplo aplicado<a href="shrinkage-methods.html#ejemplo-aplicado" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Usaremos el dataset <strong>Hitters</strong>, disponible en el paquete <em>ISLR2</em>.<br />
+Objetivo: predecir el salario de jugadores de béisbol utilizando múltiples características.</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="shrinkage-methods.html#cb470-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb470-2"><a href="shrinkage-methods.html#cb470-2" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb470-3"><a href="shrinkage-methods.html#cb470-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb470-4"><a href="shrinkage-methods.html#cb470-4" tabindex="-1"></a></span>
+<span id="cb470-5"><a href="shrinkage-methods.html#cb470-5" tabindex="-1"></a><span class="fu">data</span>(Hitters)</span>
+<span id="cb470-6"><a href="shrinkage-methods.html#cb470-6" tabindex="-1"></a></span>
+<span id="cb470-7"><a href="shrinkage-methods.html#cb470-7" tabindex="-1"></a><span class="co"># Eliminamos observaciones sin salario</span></span>
+<span id="cb470-8"><a href="shrinkage-methods.html#cb470-8" tabindex="-1"></a>hitters <span class="ot">&lt;-</span> Hitters <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(Salary)</span>
+<span id="cb470-9"><a href="shrinkage-methods.html#cb470-9" tabindex="-1"></a></span>
+<span id="cb470-10"><a href="shrinkage-methods.html#cb470-10" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> hitters)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb470-11"><a href="shrinkage-methods.html#cb470-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> hitters<span class="sc">$</span>Salary</span></code></pre></div>
+<hr />
+<div id="ridge" class="section level3 hasAnchor" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Ridge<a href="shrinkage-methods.html#ridge" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="shrinkage-methods.html#cb471-1" tabindex="-1"></a>cv_ridge <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb471-2"><a href="shrinkage-methods.html#cb471-2" tabindex="-1"></a>best_lambda_ridge <span class="ot">&lt;-</span> cv_ridge<span class="sc">$</span>lambda.min</span>
+<span id="cb471-3"><a href="shrinkage-methods.html#cb471-3" tabindex="-1"></a><span class="fu">coef</span>(cv_ridge, <span class="at">s =</span> best_lambda_ridge)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                s=25.52821
+## (Intercept)  8.112693e+01
+## AtBat       -6.815959e-01
+## Hits         2.772312e+00
+## HmRun       -1.365680e+00
+## Runs         1.014826e+00
+## RBI          7.130224e-01
+## Walks        3.378558e+00
+## Years       -9.066800e+00
+## CAtBat      -1.199478e-03
+## CHits        1.361029e-01
+## CHmRun       6.979958e-01
+## CRuns        2.958896e-01
+## CRBI         2.570711e-01
+## CWalks      -2.789666e-01
+## LeagueN      5.321272e+01
+## DivisionW   -1.228345e+02
+## PutOuts      2.638876e-01
+## Assists      1.698796e-01
+## Errors      -3.685645e+00
+## NewLeagueN  -1.810510e+01</code></pre>
+<p>Interpretación intuitiva</p>
+<ul>
+<li>Los coeficientes son más pequeños que en MCO.<br />
+</li>
+<li>Ninguna variable es eliminada.<br />
+</li>
+<li>Ridge “suaviza” el impacto de predictores correlacionados (ej.: hits, home runs, runs).</li>
+</ul>
+<blockquote>
+<p>Ridge estabiliza el modelo cuando hay muchas variables que miden dimensiones similares del rendimiento del jugador.<br />
+No selecciona variables, pero evita coeficientes exagerados.</p>
+</blockquote>
+<hr />
+</div>
+<div id="lasso" class="section level3 hasAnchor" number="8.6.2">
+<h3><span class="header-section-number">8.6.2</span> Lasso<a href="shrinkage-methods.html#lasso" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="shrinkage-methods.html#cb473-1" tabindex="-1"></a>cv_lasso <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb473-2"><a href="shrinkage-methods.html#cb473-2" tabindex="-1"></a>best_lambda_lasso <span class="ot">&lt;-</span> cv_lasso<span class="sc">$</span>lambda.min</span>
+<span id="cb473-3"><a href="shrinkage-methods.html#cb473-3" tabindex="-1"></a><span class="fu">coef</span>(cv_lasso, <span class="at">s =</span> best_lambda_lasso)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                s=2.220313
+## (Intercept)  134.48030406
+## AtBat         -1.67572220
+## Hits           5.94122316
+## HmRun          0.04746835
+## Runs           .         
+## RBI            .         
+## Walks          4.95676182
+## Years        -10.26657309
+## CAtBat         .         
+## CHits          .         
+## CHmRun         0.56236426
+## CRuns          0.70135135
+## CRBI           0.38727139
+## CWalks        -0.58111548
+## LeagueN       32.92255640
+## DivisionW   -119.37941356
+## PutOuts        0.27580087
+## Assists        0.19782326
+## Errors        -2.26242857
+## NewLeagueN     .</code></pre>
+<p>Interpretación intuitiva</p>
+<ul>
+<li>Algunos coeficientes se vuelven exactamente <strong>0</strong>.<br />
+</li>
+<li>Lasso descarta predictores que tienen poco valor adicional.</li>
+</ul>
+<p>Ejemplo frecuente:</p>
+<ul>
+<li>Variables como <code>Assists</code> o <code>Errors</code> suelen quedar eliminadas.<br />
+</li>
+<li>Otras, como <code>Hits</code> o <code>Years</code>, suelen mantenerse.</li>
+</ul>
+<blockquote>
+<p>Lasso identifica qué variables realmente ayudan a explicar el salario.<br />
+Elimina predictores redundantes y simplifica el modelo.</p>
+</blockquote>
+<hr />
+</div>
+<div id="elastic-net" class="section level3 hasAnchor" number="8.6.3">
+<h3><span class="header-section-number">8.6.3</span> Elastic Net<a href="shrinkage-methods.html#elastic-net" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="shrinkage-methods.html#cb475-1" tabindex="-1"></a>cv_en <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb475-2"><a href="shrinkage-methods.html#cb475-2" tabindex="-1"></a>best_lambda_en <span class="ot">&lt;-</span> cv_en<span class="sc">$</span>lambda.min</span>
+<span id="cb475-3"><a href="shrinkage-methods.html#cb475-3" tabindex="-1"></a><span class="fu">coef</span>(cv_en, <span class="at">s =</span> best_lambda_en)</span></code></pre></div>
+<pre><code>## 20 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                s=4.046134
+## (Intercept)  123.60600016
+## AtBat         -1.47823124
+## Hits           5.42887358
+## HmRun          .         
+## Runs           .         
+## RBI            0.01844694
+## Walks          4.70505493
+## Years         -9.97100025
+## CAtBat         .         
+## CHits          0.01527343
+## CHmRun         0.57446273
+## CRuns          0.63408692
+## CRBI           0.37487333
+## CWalks        -0.52472736
+## LeagueN       33.48050532
+## DivisionW   -120.79037839
+## PutOuts        0.27360980
+## Assists        0.18897767
+## Errors        -2.47338342
+## NewLeagueN     .</code></pre>
+<p>Interpretación intuitiva</p>
+<ul>
+<li>Mantiene estabilidad cuando hay variables correlacionadas.<br />
+</li>
+<li>Puede hacer selección, pero sin la inestabilidad del Lasso puro.</li>
+</ul>
+<blockquote>
+<p>Elastic Net equilibra simplicidad y estabilidad.<br />
+Es ideal en contextos con grupos de variables correlacionadas (muy común en macro).</p>
+</blockquote>
+<hr />
 </div>
 </div>
-<div id="aplicacion-practica-1" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Aplicacion practica<a href="shrinkage-methods.html#aplicacion-practica-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Se utiliza el paquete <code>glmnet</code> para realizar la regresión de <em>lasso</em><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> con una sintaxis ligeramente diferente de otras funciones de estimación de modelos. En particular, se debe usar una matriz <code>x</code> y un vector <code>y</code> y no utiliza la sintaxis <code>(y ~ x)</code>. Se busca predecir <code>Salary</code> en la base de datos <code>Hitters</code>. Antes de comenzar deben eliminarse lo valores <em>missing</em>.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="shrinkage-methods.html#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb461-2"><a href="shrinkage-methods.html#cb461-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb461-3"><a href="shrinkage-methods.html#cb461-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Hitters)</span></code></pre></div>
-<pre><code>##  [1] &quot;AtBat&quot;     &quot;Hits&quot;      &quot;HmRun&quot;     &quot;Runs&quot;      &quot;RBI&quot;       &quot;Walks&quot;    
-##  [7] &quot;Years&quot;     &quot;CAtBat&quot;    &quot;CHits&quot;     &quot;CHmRun&quot;    &quot;CRuns&quot;     &quot;CRBI&quot;     
-## [13] &quot;CWalks&quot;    &quot;League&quot;    &quot;Division&quot;  &quot;PutOuts&quot;   &quot;Assists&quot;   &quot;Errors&quot;   
-## [19] &quot;Salary&quot;    &quot;NewLeague&quot;</code></pre>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="shrinkage-methods.html#cb463-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters)</span></code></pre></div>
-<pre><code>## [1] 322  20</code></pre>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="shrinkage-methods.html#cb465-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters<span class="sc">$</span>Salary))</span></code></pre></div>
-<pre><code>## [1] 59</code></pre>
-<p>La Figura de abajo muestra la base de datos completa para analizar los valores <em>missing</em>. Las variables están en el eje <code>y</code> y las observaciones en el eje <code>x</code>.</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="shrinkage-methods.html#cb467-1" aria-hidden="true" tabindex="-1"></a>hit <span class="ot">=</span> Hitters</span>
-<span id="cb467-2"><a href="shrinkage-methods.html#cb467-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(hit) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(hit)</span>
-<span id="cb467-3"><a href="shrinkage-methods.html#cb467-3" aria-hidden="true" tabindex="-1"></a>hit <span class="sc">%&gt;%</span></span>
-<span id="cb467-4"><a href="shrinkage-methods.html#cb467-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb467-5"><a href="shrinkage-methods.html#cb467-5" aria-hidden="true" tabindex="-1"></a>  reshape2<span class="sc">::</span><span class="fu">melt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb467-6"><a href="shrinkage-methods.html#cb467-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Var2, Var1, <span class="at">fill=</span>value)) <span class="sc">+</span> </span>
-<span id="cb467-7"><a href="shrinkage-methods.html#cb467-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb467-8"><a href="shrinkage-methods.html#cb467-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb467-9"><a href="shrinkage-methods.html#cb467-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, </span>
-<span id="cb467-10"><a href="shrinkage-methods.html#cb467-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Dato&quot;</span>, </span>
-<span id="cb467-11"><a href="shrinkage-methods.html#cb467-11" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Missing&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb467-12"><a href="shrinkage-methods.html#cb467-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x=</span> <span class="st">&#39;Variable&#39;</span>, <span class="at">title=</span> <span class="st">&#39;Valores missing&#39;</span>) <span class="sc">+</span></span>
-<span id="cb467-13"><a href="shrinkage-methods.html#cb467-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb467-14"><a href="shrinkage-methods.html#cb467-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y  =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb467-15"><a href="shrinkage-methods.html#cb467-15" aria-hidden="true" tabindex="-1"></a>  <span class="cn">NULL</span></span></code></pre></div>
-<p><img src="CDbook_files/figure-html/lasso1-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="shrinkage-methods.html#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(hit)</span></code></pre></div>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="shrinkage-methods.html#cb469-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Hitters)</span>
-<span id="cb469-2"><a href="shrinkage-methods.html#cb469-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Hitters)</span></code></pre></div>
-<pre><code>## [1] 263  20</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="shrinkage-methods.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Hitters))</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
-<p>La función <code>model.matrix()</code> es útil para crear la matriz de datos <code>x</code>; no sólo produce una matriz correspondiente a los <span class="math inline">\(19\)</span> predictores, sino también transforma automáticamente cualquier variable cualitativa en variables <em>dummies</em> (<em>one-hot encoding</em>). La última propiedad es importante porque <code>glmnet()</code> sólo puede tomar variables numéricas y cuantitativas.</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="shrinkage-methods.html#cb473-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., Hitters)[, <span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb473-2"><a href="shrinkage-methods.html#cb473-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> Hitters<span class="sc">$</span>Salary</span></code></pre></div>
-<p>Por primera vez dividimos la muestra en una base de entrenamiento y otra de <em>test</em> para estimar el error de <em>test</em> de la regresión <em>lasso</em>. Hay varias formas de dividir aleatoriamente una base de datos. Nuestro enfoque elige aleatoriamente un subconjunto de números entre <span class="math inline">\(1\)</span> y <span class="math inline">\(n\)</span>; estos se pueden usar como índices para las observaciones de entrenamiento.</p>
-<div class="infobox tip">
-<p>La función <code>createDataPartition()</code> de la librería <code>caret</code> es útil para crear particiones de <em>train</em> y <em>test</em>. La librería <code>rsample</code> permite realizar divisiones estratificadas (relevante cuando la clase está muy desbalanceada).</p>
+<div id="comparación-general" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Comparación general<a href="shrinkage-methods.html#comparaci%C3%B3n-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="6%" />
+<col width="13%" />
+<col width="22%" />
+<col width="41%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Método</th>
+<th>Penalización</th>
+<th>Selección de variables</th>
+<th>Estabilidad con variables correlacionadas</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ridge</strong></td>
+<td>L2</td>
+<td>No</td>
+<td>Muy alta</td>
+<td>Muchas variables correlacionadas</td>
+</tr>
+<tr class="even">
+<td><strong>Lasso</strong></td>
+<td>L1</td>
+<td>Sí</td>
+<td>Baja</td>
+<td>se busca un modelo más simple</td>
+</tr>
+<tr class="odd">
+<td><strong>Elastic Net</strong></td>
+<td>L1 + L2</td>
+<td>Sí</td>
+<td>Alta</td>
+<td>Mezcla óptima cuando hay grupos de predictores</td>
+</tr>
+</tbody>
+</table>
+<hr />
 </div>
-<p>Primero establecemos una semilla aleatoria para que los resultados obtenidos sean reproducibles.</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="shrinkage-methods.html#cb474-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb474-2"><a href="shrinkage-methods.html#cb474-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(x), <span class="fu">nrow</span>(x) <span class="sc">/</span> <span class="dv">2</span>) <span class="co"># selecciona la mitad de las observaciones</span></span>
-<span id="cb474-3"><a href="shrinkage-methods.html#cb474-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> (<span class="sc">-</span>train)</span>
-<span id="cb474-4"><a href="shrinkage-methods.html#cb474-4" aria-hidden="true" tabindex="-1"></a>y.test <span class="ot">&lt;-</span> y[test]</span></code></pre></div>
-<p>Para estimar un modelo <em>lasso</em> usamos la función <code>glmnet()</code> con el argumento <code>alpha = 1</code> que indica la metodología que queremos usar.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
-<p>También definimos una grilla<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> de <span class="math inline">\(100\)</span> valores <span class="math inline">\(\lambda\)</span> que van desde <span class="math inline">\(\lambda=10^{10}\)</span> a <span class="math inline">\(\lambda=10^{-2}\)</span>, cubriendo esencialmente la gama completa de escenarios desde el modelo nulo que contiene solo la constante, hasta el modelo de mínimos cuadrados.</p>
-<p>Podemos ver en el gráfico de abajo que cada curva corresponde a una variable. Muestra la trayectoria de su coeficiente frente a <strong>L1 norm</strong> (la penalidad de LASSO) del vector de coeficientes completo a medida que varía <span class="math inline">\(\lambda\)</span>. El eje de arriba indica el número de coeficientes distintos de cero para LASSO.</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="shrinkage-methods.html#cb475-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb475-2"><a href="shrinkage-methods.html#cb475-2" aria-hidden="true" tabindex="-1"></a>lasso.mod <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
-<span id="cb475-3"><a href="shrinkage-methods.html#cb475-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lasso.mod, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="CDbook_files/figure-html/lasso5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>Se muestra un resumen de la ruta de <code>glmnet</code> en cada paso:</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="shrinkage-methods.html#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lasso.mod)</span></code></pre></div>
-<pre><code>## 
-## Call:  glmnet(x = x[train, ], y = y[train], alpha = 1, lambda = grid) 
-## 
-##     Df  %Dev    Lambda
-## 1    0  0.00 1.000e+10
-## 2    0  0.00 7.565e+09
-## 3    0  0.00 5.722e+09
-## 4    0  0.00 4.329e+09
-## 5    0  0.00 3.275e+09
-## 6    0  0.00 2.477e+09
-....</code></pre>
-<p>Ahora realizamos un ejercicio de <em>cross validation</em> (subsección <a href="conceptos.html#cv">6.7.1</a>) y calculamos el error de <em>test</em> asociado. Por defecto el argumento <code>nfolds = 10</code>. Los números en la parte superior de la Figura indican el número de variables en el modelo. La primera y segunda línea discontinua vertical representan el valor de <span class="math inline">\(\lambda\)</span> con el <span class="math inline">\(EMC\)</span> mínimo y el mayor valor de <span class="math inline">\(\lambda\)</span> dentro de un error estándar.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="shrinkage-methods.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb478-2"><a href="shrinkage-methods.html#cb478-2" aria-hidden="true" tabindex="-1"></a>cv.out <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x[train, ], y[train], <span class="at">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb478-3"><a href="shrinkage-methods.html#cb478-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.out)</span></code></pre></div>
-<p><img src="CDbook_files/figure-html/lasso6-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="shrinkage-methods.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(cv.out)</span></code></pre></div>
-<pre><code>##  [1] &quot;lambda&quot;     &quot;cvm&quot;        &quot;cvsd&quot;       &quot;cvup&quot;       &quot;cvlo&quot;      
-##  [6] &quot;nzero&quot;      &quot;call&quot;       &quot;name&quot;       &quot;glmnet.fit&quot; &quot;lambda.min&quot;
-## [11] &quot;lambda.1se&quot; &quot;index&quot;</code></pre>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="shrinkage-methods.html#cb481-1" aria-hidden="true" tabindex="-1"></a>bestlam <span class="ot">&lt;-</span> cv.out<span class="sc">$</span>lambda.min</span>
-<span id="cb481-2"><a href="shrinkage-methods.html#cb481-2" aria-hidden="true" tabindex="-1"></a>lasso.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso.mod, <span class="at">s =</span> bestlam, <span class="at">newx =</span> x[test, ])</span>
-<span id="cb481-3"><a href="shrinkage-methods.html#cb481-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((lasso.pred <span class="sc">-</span> y.test)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># EMC</span></span></code></pre></div>
-<pre><code>## [1] 143673.6</code></pre>
-<p>Finalmente, el resultado indica que <span class="math inline">\(10\)</span> de los <span class="math inline">\(19\)</span> coeficientes estimados son distintos de <span class="math inline">\(0\)</span> (notar que hay una contradicción con las últimas dos tablas). Por lo tanto, el modelo de <em>lasso</em> con <span class="math inline">\(\lambda\)</span> elegido por <em>cross validation</em> contiene solo <span class="math inline">\(11\)</span> variables (más la constante).<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="shrinkage-methods.html#cb483-1" aria-hidden="true" tabindex="-1"></a>cv.out<span class="sc">$</span>nzero[cv.out<span class="sc">$</span>index[[<span class="dv">1</span>]]]</span></code></pre></div>
-<pre><code>## s36 
-##  10</code></pre>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="shrinkage-methods.html#cb485-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> grid)</span>
-<span id="cb485-2"><a href="shrinkage-methods.html#cb485-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> bestlam)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, ]</span>
-<span id="cb485-3"><a href="shrinkage-methods.html#cb485-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
-##    1.27479059   -0.05497143    2.18034583    0.00000000    0.00000000 
-##           RBI         Walks         Years        CAtBat         CHits 
-##    0.00000000    2.29192406   -0.33806109    0.00000000    0.00000000 
-##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
-##    0.02825013    0.21628385    0.41712537    0.00000000   20.28615023 
-##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
-## -116.16755870    0.23752385    0.00000000   -0.85629148    0.00000000</code></pre>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="shrinkage-methods.html#cb487-1" aria-hidden="true" tabindex="-1"></a>lasso.coef[lasso.coef <span class="sc">!=</span> <span class="dv">0</span>]</span></code></pre></div>
-<pre><code>##   (Intercept)         AtBat          Hits         Walks         Years 
-##    1.27479059   -0.05497143    2.18034583    2.29192406   -0.33806109 
-##        CHmRun         CRuns          CRBI       LeagueN     DivisionW 
-##    0.02825013    0.21628385    0.41712537   20.28615023 -116.16755870 
-##       PutOuts        Errors 
-##    0.23752385   -0.85629148</code></pre>
+<div id="conclusión-1" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Conclusión<a href="shrinkage-methods.html#conclusi%C3%B3n-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>La regularización mejora la predicción</strong>, especialmente cuando hay muchos predictores.<br />
+</li>
+<li><strong><span class="math inline">\(\lambda\)</span> regula cuánto achicamos los coeficientes</strong>: valores grandes penalizan más.<br />
+</li>
+<li><strong>Ridge</strong> es ideal cuando las variables están <strong>muy correlacionadas</strong>.<br />
+</li>
+<li><strong>Lasso</strong> sirve cuando queremos <strong>seleccionar automáticamente</strong> las variables relevantes.<br />
+</li>
+<li><strong>Elastic Net</strong> combina ambos: es la opción más robusta en la mayoría de aplicaciones reales.<br />
+</li>
+<li>La <strong>selección de <span class="math inline">\(\lambda\)</span> siempre debe hacerse con cross-validation</strong>.<br />
+</li>
+<li>En la práctica, Elastic Net suele ofrecer la mejor combinación entre precisión, simplicidad y estabilidad.</li>
+</ul>
 
-</div>
-</div>
-<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-glmnet" class="csl-entry">
-Simon, Noah, Jerome Friedman, Trevor Hastie, y Rob Tibshirani. 2011. <span>«Regularization Paths for Cox’s Proportional Hazards Model via Coordinate Descent»</span>. <em>Journal of Statistical Software</em> 39 (5): 1-13. <a href="https://www.jstatsoft.org/v39/i05/">https://www.jstatsoft.org/v39/i05/</a>.
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>Datos simulados que contiene información sobre 10.000 clientes donde el objetivo es predecir quienes no pagarán su deuda de tarjeta de crédito.<a href="shrinkage-methods.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>La función principal de este paquete es <code>glmnet()</code>.<a href="shrinkage-methods.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>Para más detalles véase <code>?glmnet::glmnet</code> y <span class="citation">(<a href="#ref-glmnet" role="doc-biblioref">Simon et al. 2011</a>)</span><a href="shrinkage-methods.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p><code>alpha = 0</code> estima con la metodología <em>ridge</em>.<a href="shrinkage-methods.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>También se pueden usar valores específicos.<a href="shrinkage-methods.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p>Para más detalles de <code>cv.glmnet</code> ver <a href="https://glmnet.stanford.edu/reference/cv.glmnet.html">aquí</a>.<a href="shrinkage-methods.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<ol start="16">
+<li id="fn16"><p>Datos simulados que contiene información sobre 10.000 clientes donde el objetivo es predecir quienes no pagarán su deuda de tarjeta de crédito.<a href="shrinkage-methods.html#fnref16" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -552,42 +744,42 @@ Simon, Noah, Jerome Friedman, Trevor Hastie, y Rob Tibshirani. 2011. <span>«Reg
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CDbook.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
