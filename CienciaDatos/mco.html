@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 7 Regresion lineal | Ciencia de Datos</title>
+  <title>Capítulo 7 Regresión lineal | Ciencia de Datos</title>
   <meta name="description" content="BCRA" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 7 Regresion lineal | Ciencia de Datos" />
+  <meta property="og:title" content="Capítulo 7 Regresión lineal | Ciencia de Datos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="BCRA" />
   <meta name="github-repo" content="msangia/msangia.github" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 7 Regresion lineal | Ciencia de Datos" />
+  <meta name="twitter:title" content="Capítulo 7 Regresión lineal | Ciencia de Datos" />
   <meta name="twitter:site" content="@msangia" />
   <meta name="twitter:description" content="BCRA" />
   
@@ -61,6 +61,7 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -98,7 +99,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +112,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -126,10 +127,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -169,28 +175,29 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduccion a R</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#primeros-pasos"><i class="fa fa-check"></i><b>1.1</b> Primeros pasos</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.2</b> Busacar ayuda</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.3</b> Tipos de datos</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.4</b> Limpieza de memoria</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#asignación-de-valores"><i class="fa fa-check"></i><b>1.5</b> Asignación de valores</a></li>
-<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#operadores-aritméticos"><i class="fa fa-check"></i><b>1.6</b> Operadores aritméticos</a></li>
-<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.7</b> Operadores relacionales</a></li>
-<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-lógicos"><i class="fa fa-check"></i><b>1.8</b> Operadores lógicos</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.9</b> Vectores</a></li>
-<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.10</b> Secuencias</a></li>
-<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.11</b> Factores</a></li>
-<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.12</b> Matrices</a></li>
-<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.13</b> Listas</a></li>
-<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.14</b> Data frames</a></li>
-<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.15</b> R base</a></li>
-<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#apply-y-tapply"><i class="fa fa-check"></i><b>1.16</b> Apply y tapply</a></li>
-<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.17</b> Map</a></li>
-<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.18</b> Loops</a></li>
-<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.19</b> Condicionales</a></li>
-<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.20</b> Funciones</a>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#tu-primer-c%C3%B3digo"><i class="fa fa-check"></i><b>1.2</b> Tu primer código</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#busacar-ayuda"><i class="fa fa-check"></i><b>1.3</b> Busacar ayuda</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#tipos-de-datos"><i class="fa fa-check"></i><b>1.4</b> Tipos de datos</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#limpieza-de-memoria"><i class="fa fa-check"></i><b>1.5</b> Limpieza de memoria</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#asignaci%C3%B3n-de-valores"><i class="fa fa-check"></i><b>1.6</b> Asignación de valores</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#operadores-aritm%C3%A9ticos"><i class="fa fa-check"></i><b>1.7</b> Operadores aritméticos</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#operadores-relacionales"><i class="fa fa-check"></i><b>1.8</b> Operadores relacionales</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#operadores-l%C3%B3gicos"><i class="fa fa-check"></i><b>1.9</b> Operadores lógicos</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#vectores"><i class="fa fa-check"></i><b>1.10</b> Vectores</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#secuencias"><i class="fa fa-check"></i><b>1.11</b> Secuencias</a></li>
+<li class="chapter" data-level="1.12" data-path="intro.html"><a href="intro.html#factores"><i class="fa fa-check"></i><b>1.12</b> Factores</a></li>
+<li class="chapter" data-level="1.13" data-path="intro.html"><a href="intro.html#matrices"><i class="fa fa-check"></i><b>1.13</b> Matrices</a></li>
+<li class="chapter" data-level="1.14" data-path="intro.html"><a href="intro.html#listas"><i class="fa fa-check"></i><b>1.14</b> Listas</a></li>
+<li class="chapter" data-level="1.15" data-path="intro.html"><a href="intro.html#data-frames"><i class="fa fa-check"></i><b>1.15</b> Data frames</a></li>
+<li class="chapter" data-level="1.16" data-path="intro.html"><a href="intro.html#r-base"><i class="fa fa-check"></i><b>1.16</b> R base</a></li>
+<li class="chapter" data-level="1.17" data-path="intro.html"><a href="intro.html#apply-lapply-y-tapply"><i class="fa fa-check"></i><b>1.17</b> apply, lapply y tapply</a></li>
+<li class="chapter" data-level="1.18" data-path="intro.html"><a href="intro.html#map"><i class="fa fa-check"></i><b>1.18</b> Map</a></li>
+<li class="chapter" data-level="1.19" data-path="intro.html"><a href="intro.html#loops"><i class="fa fa-check"></i><b>1.19</b> Loops</a></li>
+<li class="chapter" data-level="1.20" data-path="intro.html"><a href="intro.html#condicionales"><i class="fa fa-check"></i><b>1.20</b> Condicionales</a></li>
+<li class="chapter" data-level="1.21" data-path="intro.html"><a href="intro.html#funciones"><i class="fa fa-check"></i><b>1.21</b> Funciones</a>
 <ul>
-<li class="chapter" data-level="1.20.1" data-path="intro.html"><a href="intro.html#output-más-de-un-resultado"><i class="fa fa-check"></i><b>1.20.1</b> Output más de un resultado</a></li>
-<li class="chapter" data-level="1.20.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.20.2</b> Argumentos con valores default</a></li>
+<li class="chapter" data-level="1.21.1" data-path="intro.html"><a href="intro.html#output-m%C3%A1s-de-un-resultado"><i class="fa fa-check"></i><b>1.21.1</b> Output más de un resultado</a></li>
+<li class="chapter" data-level="1.21.2" data-path="intro.html"><a href="intro.html#argumentos-con-valores-default"><i class="fa fa-check"></i><b>1.21.2</b> Argumentos con valores default</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="bd.html"><a href="bd.html"><i class="fa fa-check"></i><b>2</b> Base de datos</a>
@@ -201,7 +208,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.2.1" data-path="bd.html"><a href="bd.html#ingrasar-datos-con-tidyverse"><i class="fa fa-check"></i><b>2.2.1</b> Ingrasar datos con <code>tidyverse</code></a></li>
 <li class="chapter" data-level="2.2.2" data-path="bd.html"><a href="bd.html#bases-de-stata"><i class="fa fa-check"></i><b>2.2.2</b> Bases de Stata</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputación"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
+<li class="chapter" data-level="2.3" data-path="bd.html"><a href="bd.html#problemas-de-imputaci%C3%B3n"><i class="fa fa-check"></i><b>2.3</b> Problemas de imputación</a></li>
 <li class="chapter" data-level="2.4" data-path="bd.html"><a href="bd.html#exportar-datos"><i class="fa fa-check"></i><b>2.4</b> Exportar datos</a></li>
 <li class="chapter" data-level="2.5" data-path="bd.html"><a href="bd.html#pipe"><i class="fa fa-check"></i><b>2.5</b> Pipe</a></li>
 <li class="chapter" data-level="2.6" data-path="bd.html"><a href="bd.html#variables"><i class="fa fa-check"></i><b>2.6</b> Variables</a></li>
@@ -218,9 +225,10 @@ div.csl-indent {
 <li class="chapter" data-level="2.14" data-path="bd.html"><a href="bd.html#strings"><i class="fa fa-check"></i><b>2.14</b> Strings</a></li>
 <li class="chapter" data-level="2.15" data-path="bd.html"><a href="bd.html#fechas"><i class="fa fa-check"></i><b>2.15</b> Fechas</a>
 <ul>
-<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulación-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.1" data-path="bd.html"><a href="bd.html#manipulaci%C3%B3n-de-fechas"><i class="fa fa-check"></i><b>2.15.1</b> Manipulación de fechas</a></li>
+<li class="chapter" data-level="2.15.2" data-path="bd.html"><a href="bd.html#parsing-robusto-con-lubridate"><i class="fa fa-check"></i><b>2.15.2</b> Parsing robusto con <code>lubridate</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#análisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
+<li class="chapter" data-level="2.16" data-path="bd.html"><a href="bd.html#an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>2.16</b> Análisis de datos</a>
 <ul>
 <li class="chapter" data-level="2.16.1" data-path="bd.html"><a href="bd.html#tablas"><i class="fa fa-check"></i><b>2.16.1</b> Tablas</a></li>
 </ul></li>
@@ -230,27 +238,28 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="gph1.html"><a href="gph1.html"><i class="fa fa-check"></i><b>3</b> Gráficos - Parte I</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="gph1.html"><a href="gph1.html#ggplot2"><i class="fa fa-check"></i><b>3.1</b> ggplot2</a></li>
-<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estadísticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
+<li class="chapter" data-level="3.2" data-path="gph1.html"><a href="gph1.html#estad%C3%ADsticas-con-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Estadísticas con <code>ggplot2</code></a></li>
 <li class="chapter" data-level="3.3" data-path="gph1.html"><a href="gph1.html#ggplot-position"><i class="fa fa-check"></i><b>3.3</b> GGPlot (position)</a></li>
 <li class="chapter" data-level="3.4" data-path="gph1.html"><a href="gph1.html#time-series"><i class="fa fa-check"></i><b>3.4</b> Time series</a></li>
 <li class="chapter" data-level="3.5" data-path="gph1.html"><a href="gph1.html#labels"><i class="fa fa-check"></i><b>3.5</b> Labels</a></li>
 <li class="chapter" data-level="3.6" data-path="gph1.html"><a href="gph1.html#orden-de-factores-en-los-ejes-variables-string"><i class="fa fa-check"></i><b>3.6</b> Orden de factores en los ejes (variables string)</a></li>
-<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gráfico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
+<li class="chapter" data-level="3.7" data-path="gph1.html"><a href="gph1.html#guardar-un-gr%C3%A1fico"><i class="fa fa-check"></i><b>3.7</b> Guardar un gráfico</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="gph2.html"><a href="gph2.html"><i class="fa fa-check"></i><b>4</b> Gráficos - Parte II</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#títulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
-<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#orden-de-los-graficos"><i class="fa fa-check"></i><b>4.2</b> Orden de los graficos</a></li>
+<li class="chapter" data-level="4.1" data-path="gph2.html"><a href="gph2.html#t%C3%ADtulos-en-los-ejes"><i class="fa fa-check"></i><b>4.1</b> Títulos en los ejes</a></li>
+<li class="chapter" data-level="4.2" data-path="gph2.html"><a href="gph2.html#combinar-distintos-graficos"><i class="fa fa-check"></i><b>4.2</b> Combinar distintos graficos</a></li>
 <li class="chapter" data-level="4.3" data-path="gph2.html"><a href="gph2.html#agrandar-una-parte-del-grafico"><i class="fa fa-check"></i><b>4.3</b> Agrandar una parte del grafico</a></li>
 <li class="chapter" data-level="4.4" data-path="gph2.html"><a href="gph2.html#escala-de-colores-manual"><i class="fa fa-check"></i><b>4.4</b> Escala de colores manual</a></li>
-<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#límites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
+<li class="chapter" data-level="4.5" data-path="gph2.html"><a href="gph2.html#l%C3%ADmites-epacios-y-etiquetas"><i class="fa fa-check"></i><b>4.5</b> Límites, epacios y etiquetas</a></li>
 <li class="chapter" data-level="4.6" data-path="gph2.html"><a href="gph2.html#leyendas"><i class="fa fa-check"></i><b>4.6</b> Leyendas</a></li>
-<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posición-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
-<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#estadísticas"><i class="fa fa-check"></i><b>4.8</b> Estadísticas</a></li>
-<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.9</b> Unir leyendas</a></li>
-<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.10</b> Separar leyendas</a></li>
-<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.11</b> Agrupar y desagrupar</a></li>
-<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.12</b> Themes</a></li>
+<li class="chapter" data-level="4.7" data-path="gph2.html"><a href="gph2.html#posici%C3%B3n-de-la-leyenda"><i class="fa fa-check"></i><b>4.7</b> Posición de la leyenda</a></li>
+<li class="chapter" data-level="4.8" data-path="gph2.html"><a href="gph2.html#unir-leyendas"><i class="fa fa-check"></i><b>4.8</b> Unir leyendas</a></li>
+<li class="chapter" data-level="4.9" data-path="gph2.html"><a href="gph2.html#separar-leyendas"><i class="fa fa-check"></i><b>4.9</b> Separar leyendas</a></li>
+<li class="chapter" data-level="4.10" data-path="gph2.html"><a href="gph2.html#agrupar-y-desagrupar"><i class="fa fa-check"></i><b>4.10</b> Agrupar y desagrupar</a></li>
+<li class="chapter" data-level="4.11" data-path="gph2.html"><a href="gph2.html#leyenda-manual"><i class="fa fa-check"></i><b>4.11</b> Leyenda manual</a></li>
+<li class="chapter" data-level="4.12" data-path="gph2.html"><a href="gph2.html#estad%C3%ADsticas"><i class="fa fa-check"></i><b>4.12</b> Estadísticas</a></li>
+<li class="chapter" data-level="4.13" data-path="gph2.html"><a href="gph2.html#themes"><i class="fa fa-check"></i><b>4.13</b> Themes</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
 <ul>
@@ -262,6 +271,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.1.4" data-path="rmd.html"><a href="rmd.html#bullets"><i class="fa fa-check"></i><b>5.1.4</b> Bullets</a></li>
 <li class="chapter" data-level="" data-path="rmd.html"><a href="rmd.html#bibliografia"><i class="fa fa-check"></i>Bibliografia</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="rmd.html"><a href="rmd.html#abc-latex"><i class="fa fa-check"></i><b>5.2</b> Anexo. ABC de LaTeX</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="conceptos.html"><a href="conceptos.html"><i class="fa fa-check"></i><b>6</b> Conceptos generales</a>
 <ul>
@@ -283,18 +293,31 @@ div.csl-indent {
 <li class="chapter" data-level="6.7.1" data-path="conceptos.html"><a href="conceptos.html#cv"><i class="fa fa-check"></i><b>6.7.1</b> Cross Validation</a></li>
 <li class="chapter" data-level="6.7.2" data-path="conceptos.html"><a href="conceptos.html#bootstrap"><i class="fa fa-check"></i><b>6.7.2</b> Bootstrap</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresion lineal</a>
+<li class="chapter" data-level="6.8" data-path="conceptos.html"><a href="conceptos.html#resumen"><i class="fa fa-check"></i><b>6.8</b> Resumen</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima"><i class="fa fa-check"></i><b>7.1</b> Relacion entre estimacion optima y prediccion optima</a></li>
-<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#aplicacion-practica"><i class="fa fa-check"></i><b>7.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="6.8.1" data-path="conceptos.html"><a href="conceptos.html#dos-maneras-de-aproximar-f"><i class="fa fa-check"></i><b>6.8.1</b> Dos maneras de aproximar <span class="math inline">\(f\)</span></a></li>
+<li class="chapter" data-level="6.8.2" data-path="conceptos.html"><a href="conceptos.html#el-equilibrio-clave-sesgo-vs-varianza"><i class="fa fa-check"></i><b>6.8.2</b> El equilibrio clave: <em>Sesgo vs Varianza</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="mco.html"><a href="mco.html"><i class="fa fa-check"></i><b>7</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="mco.html"><a href="mco.html#planteo-del-modelo"><i class="fa fa-check"></i><b>7.1</b> Planteo del modelo</a></li>
+<li class="chapter" data-level="7.2" data-path="mco.html"><a href="mco.html#c%C3%B3mo-se-estiman-los-par%C3%A1metros"><i class="fa fa-check"></i><b>7.2</b> ¿Cómo se estiman los parámetros?</a></li>
+<li class="chapter" data-level="7.3" data-path="mco.html"><a href="mco.html#c%C3%B3mo-funciona-en-la-pr%C3%A1ctica"><i class="fa fa-check"></i><b>7.3</b> ¿Cómo funciona en la práctica?</a></li>
+<li class="chapter" data-level="7.4" data-path="mco.html"><a href="mco.html#interpretaci%C3%B3n-de-coeficientes"><i class="fa fa-check"></i><b>7.4</b> Interpretación de coeficientes</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="mco.html"><a href="mco.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.4.1</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.4.2" data-path="mco.html"><a href="mco.html#coeficiente-de-pendiente-beta_1"><i class="fa fa-check"></i><b>7.4.2</b> Coeficiente de pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.4.3" data-path="mco.html"><a href="mco.html#modelo-m%C3%BAltiple-pensar-en-mantener-todo-lo-dem%C3%A1s-constante"><i class="fa fa-check"></i><b>7.4.3</b> Modelo múltiple: pensar en “mantener todo lo demás constante”</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="mco.html"><a href="mco.html#predicci%C3%B3n"><i class="fa fa-check"></i><b>7.5</b> Predicción</a></li>
+<li class="chapter" data-level="7.6" data-path="mco.html"><a href="mco.html#conclusi%C3%B3n"><i class="fa fa-check"></i><b>7.6</b> Conclusión</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html"><i class="fa fa-check"></i><b>8</b> Shrinkage Methods</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#lasso"><i class="fa fa-check"></i><b>8.1</b> LASSO</a></li>
 <li class="chapter" data-level="8.2" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#ridge"><i class="fa fa-check"></i><b>8.2</b> <em>Ridge</em></a></li>
-<li class="chapter" data-level="8.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>8.3</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="8.3" data-path="shrinkage-methods.html"><a href="shrinkage-methods.html#aplicacion-practica"><i class="fa fa-check"></i><b>8.3</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="logit.html"><a href="logit.html"><i class="fa fa-check"></i><b>9</b> Logit</a>
 <ul>
@@ -302,24 +325,25 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="logit.html"><a href="logit.html#interpretacion-de-coeficientes-en-el-modelo-logit"><i class="fa fa-check"></i><b>9.1.1</b> Interpretacion de coeficientes en el modelo <em>logit</em></a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>9.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="9.2" data-path="logit.html"><a href="logit.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>9.2</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="arboles.html"><a href="arboles.html"><i class="fa fa-check"></i><b>10</b> Arboles de decision</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="arboles.html"><a href="arboles.html#classification-and-regression-tree-cart"><i class="fa fa-check"></i><b>10.1</b> <em>Classification and Regression Tree</em> (CART)</a></li>
-<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.2</b> Bagging</a></li>
-<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.3</b> Random Forest</a></li>
-<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.4</b> Boosting</a>
+<li class="chapter" data-level="10.2" data-path="arboles.html"><a href="arboles.html#m%C3%A9todos-de-ensamble-bagging-random-forest-y-boosting"><i class="fa fa-check"></i><b>10.2</b> Métodos de Ensamble: Bagging, Random Forest y Boosting</a></li>
+<li class="chapter" data-level="10.3" data-path="arboles.html"><a href="arboles.html#bagging"><i class="fa fa-check"></i><b>10.3</b> Bagging</a></li>
+<li class="chapter" data-level="10.4" data-path="arboles.html"><a href="arboles.html#random-forest"><i class="fa fa-check"></i><b>10.4</b> Random Forest</a></li>
+<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#boosting"><i class="fa fa-check"></i><b>10.5</b> Boosting</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.4.1</b> Ada Boost</a></li>
+<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#ada-boost"><i class="fa fa-check"></i><b>10.5.1</b> Ada Boost</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>10.5</b> Aplicacion practica</a>
+<li class="chapter" data-level="10.6" data-path="arboles.html"><a href="arboles.html#aplicacion-practica-2"><i class="fa fa-check"></i><b>10.6</b> Aplicacion practica</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.5.1</b> Arboles de clasificacion</a></li>
-<li class="chapter" data-level="10.5.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.5.2</b> Comparacion de modelos para clasificacion</a></li>
-<li class="chapter" data-level="10.5.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.5.3</b> Arboles de regresion</a></li>
-<li class="chapter" data-level="10.5.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.5.4</b> Bagging y Random Forests</a></li>
-<li class="chapter" data-level="10.5.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.5.5</b> Boosting</a></li>
+<li class="chapter" data-level="10.6.1" data-path="arboles.html"><a href="arboles.html#arboles-de-clasificacion"><i class="fa fa-check"></i><b>10.6.1</b> Arboles de clasificacion</a></li>
+<li class="chapter" data-level="10.6.2" data-path="arboles.html"><a href="arboles.html#compara"><i class="fa fa-check"></i><b>10.6.2</b> Comparacion de modelos para clasificacion</a></li>
+<li class="chapter" data-level="10.6.3" data-path="arboles.html"><a href="arboles.html#arboles-de-regresion"><i class="fa fa-check"></i><b>10.6.3</b> Arboles de regresion</a></li>
+<li class="chapter" data-level="10.6.4" data-path="arboles.html"><a href="arboles.html#bagging-y-random-forests"><i class="fa fa-check"></i><b>10.6.4</b> Bagging y Random Forests</a></li>
+<li class="chapter" data-level="10.6.5" data-path="arboles.html"><a href="arboles.html#boosting-1"><i class="fa fa-check"></i><b>10.6.5</b> Boosting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
@@ -329,7 +353,7 @@ div.csl-indent {
 <li class="chapter" data-level="12" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>12</b> Analisis de clusters</a>
 <ul>
 <li class="chapter" data-level="12.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>12.1</b> K-Means Clustering</a></li>
-<li class="chapter" data-level="12.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-4"><i class="fa fa-check"></i><b>12.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="12.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-3"><i class="fa fa-check"></i><b>12.2</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -357,297 +381,172 @@ div.csl-indent {
   <img class= "hero-image" src="images/background.png">
 </div>
 <div id="mco" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Capítulo 7</span> Regresion lineal<a href="mco.html#mco" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En <em>machine learning</em> el objetivo principal no es estimar y hacer inferencia como en la econometría clásica sino hacer predicciones/clasificar. El modelo de regresión lineal es una herramienta útil para predecir cuando la variable de respuesta es cuantitativa.</p>
-<p><strong>Modelo</strong> lineal simple</p>
-<p><span class="math display" id="eq:ols">\[\begin{equation}
-\tag{7.1}
-  y = \beta_0 + \beta_1 x_1 + u
-\end{equation}\]</span></p>
-<p>donde <span class="math inline">\(u\)</span> es un término de error aleatorio que captura todo lo que no puede representarse con este modelo simple (factores no observables, errores de medición, etc.).</p>
-<p><strong>Modelo</strong> lineal múltiple</p>
-<p>En notación matricial:<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></p>
-<p><span class="math display" id="eq:ols2">\[\begin{equation}
-\tag{7.2}
-  Y = X \beta + u
-\end{equation}\]</span></p>
-<p>donde la primera columna de <span class="math inline">\(X\)</span> es la constante.</p>
-<p><strong>Método</strong> de Mínimos Cuadrados Ordinarios <span class="math inline">\((MCO)\)</span></p>
-<p><span class="math display" id="eq:rss">\[\begin{equation}
-\tag{7.3}
-\text{RSS} = \sum_{i=1}^{n}(y_{i} - \beta_{0} - \sum_{j=1}^{p} \beta_{j} x_{ij} )^2  
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:beta">\[\begin{equation}
-\tag{7.4}
-\hat{\beta} = min \sum_{i=1}^{n}e_i^2  
-\end{equation}\]</span></p>
+<h1><span class="header-section-number">Capítulo 7</span> Regresión lineal<a href="mco.html#mco" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La <strong>regresión lineal</strong> es uno de los métodos fundamentales tanto en estadística como en <em>machine learning supervisado</em>. Su objetivo es modelar la relación entre una variable de interés (variable dependiente u objetivo) y uno o más predictores (variables explicativas).</p>
+<p>Este modelo es especialmente valioso porque combina tres propiedades esenciales:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Interpretabilidad:</strong> Permite entender el efecto marginal de cada variable.</li>
+<li><strong>Simplicidad computacional:</strong> Puede estimarse incluso con grandes bases de datos.</li>
+<li><strong>Buena capacidad predictiva:</strong> Cuando la relación es más o menos lineal, funciona sorprendentemente bien.</li>
+</ol>
+<p>A lo largo de este documento veremos tanto la teoría detrás del modelo como su uso práctico con ejemplos simples en R.</p>
+<hr />
+<div id="planteo-del-modelo" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Planteo del modelo<a href="mco.html#planteo-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En el caso univariado, el modelo de regresión lineal tiene la forma:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + u_i
+\]</span></p>
+<p>donde:</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span> es el resultado observado,</li>
+<li><span class="math inline">\(X_i\)</span> es el predictor,</li>
+<li><span class="math inline">\(\beta_0\)</span> es el intercepto,</li>
+<li><span class="math inline">\(\beta_1\)</span> mide el cambio esperado en <span class="math inline">\(Y\)</span> ante un aumento de una unidad en <span class="math inline">\(X\)</span>,</li>
+<li><span class="math inline">\(u_i\)</span> es el error aleatorio que captura todo lo que no puede representarse con este modelo simple (factores no observables, errores de medición, etc.).</li>
+</ul>
+<p>En el caso múltiple, el modelo se generaliza a:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_{1i} + \cdots + \beta_k X_{ki} + u_i.
+\]</span></p>
+<hr />
+</div>
+<div id="cómo-se-estiman-los-parámetros" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> ¿Cómo se estiman los parámetros?<a href="mco.html#c%C3%B3mo-se-estiman-los-par%C3%A1metros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los parámetros se estiman por <strong>mínimos cuadrados ordinarios (MCO)</strong>, eligiendo los valores de <span class="math inline">\(\beta_0, \beta_1, ..., \beta_k\)</span> que minimizan la suma de cuadrados de los residuos:</p>
+<p><span class="math display">\[
+\min_{\beta} \sum_{i=1}^n (Y_i - \widehat{Y_i})^2
+\]</span></p>
+<p>La solución viene dada por:</p>
 <p><span class="math display" id="eq:beta2">\[\begin{equation}
-\tag{7.5}
+\tag{7.1}
 \hat{\beta} = (X&#39;X)^{-1}X&#39;Y  
 \end{equation}\]</span></p>
+<p>Intuitivamente, buscamos la recta o hiperplano que pasa “mejor” por los datos.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mco"></span>
 <img src="figures/3.1LReg.png" alt="Modelo lineal y MCO" width="80%" height="40%" />
 <p class="caption">
 Figura 7.1: Modelo lineal y MCO
 </p>
 </div>
-<p><strong>Teorema de Gauss/Markov (TGM)</strong>: Bajo los supuestos clásicos el estimador de <span class="math inline">\(MCO\)</span> es el mejor dentro de los lineales e insesgados (MELI).</p>
-<p><strong>Definición</strong>: el <span class="math inline">\(R^2\)</span> mide la proporción de la variabilidad de <span class="math inline">\(Y\)</span> explicada por el modelo. <span class="math inline">\(R^2 \in [0,1]\)</span>.</p>
-<p><span class="math display" id="eq:r2">\[\begin{equation}
-\tag{7.6}
-R^2 = 1 - \frac{SCR}{SCT}
-\end{equation}\]</span></p>
-<p>Dado que la suma de cuadrados totales es igual a la suma de cuadrados explicada y la suma de cuadrados residual (<span class="math inline">\(SCT = SCE + SCR\)</span>) y que <span class="math inline">\(SCT\)</span> es una magnitud fija, por lo tanto, <span class="math inline">\(MCO\)</span> <strong>maximiza el</strong> <span class="math inline">\(R^2\)</span>.</p>
-<div id="relacion-entre-estimacion-optima-y-prediccion-optima" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Relacion entre estimacion optima y prediccion optima<a href="mco.html#relacion-entre-estimacion-optima-y-prediccion-optima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Dado:</p>
-<p><span class="math display" id="eq:ols3">\[\begin{equation}
-\tag{7.7}
-Y_i = X_i^{&#39;} \beta + u_i
-\end{equation}\]</span></p>
-<p>con <span class="math inline">\(i=1,...,n\)</span></p>
-<p>La predicción de <span class="math inline">\(Y\)</span> se define como:</p>
-<p><span class="math display" id="eq:ols4">\[\begin{equation}
-\tag{7.8}
-\hat{Y_i} \equiv X_i^{&#39;} \hat{\beta}
-\end{equation}\]</span></p>
-<p>Donde <span class="math inline">\(\hat{Y_i}\)</span> es el <strong>predictor</strong> (variable aleatoria) y <span class="math inline">\(\hat{\beta}\)</span> es el <strong>estimador</strong> (parámetro). Por el TGM:</p>
-<ul>
-<li><p><span class="math inline">\(E(\hat{Y_i}) = X_i^{&#39;} \beta\)</span> (predictor insesgado)</p></li>
-<li><p><span class="math inline">\(V(\hat{Y_i}) = X_i^{&#39;} V(\hat{\beta})X_i = \sigma^2X_i^{&#39;}(X&#39;X)^{-1}X_i\)</span></p></li>
-</ul>
-<p>donde <span class="math inline">\(V(\hat{\beta}) = \sigma^2(X&#39;X)^{-1}\)</span></p>
-<p>Entonces, si el <em>estimador</em> <span class="math inline">\(\hat{\beta}\)</span> es insegado y de varianza mínima, <span class="math inline">\(\hat{Y_i}\)</span> es un <em>predictor</em> insegado y de varianza mínima, ambos en la clase de estimadores/predictores lineales e insesgados.</p>
-<p>El resultado anterior surge del hecho que predecir requiere estimar (en este caso <span class="math inline">\(\beta\)</span>). Retomamos el <span class="math inline">\(EMC\)</span> en el caso de los <strong>estimadores</strong>:</p>
-<p><span class="math display" id="eq:ecm">\[\begin{equation}
-\tag{7.9}
-EMC(\hat{\beta}) \equiv E(\hat{\beta} - \beta)^2
-\end{equation}\]</span></p>
-<p>El <span class="math inline">\(EMC\)</span> mide en promedio cuan lejos esta <span class="math inline">\(\hat{\beta}\)</span> (estimador) de <span class="math inline">\(\beta\)</span>, el parámetro que se quiere estimar.</p>
-<p>Recordar que por definición:</p>
-<ul>
-<li><p><span class="math inline">\(V(\hat{\beta}) \equiv E(\hat{\beta} - E(\hat{\beta}))^2\)</span> (dispersión)</p></li>
-<li><p><span class="math inline">\(Sesgo(\hat{\beta}) \equiv E(\hat{\beta}) - \beta\)</span> (centro)</p></li>
-</ul>
-<p>A partir de <a href="mco.html#eq:ecm">(7.9)</a> y las definiciones anteriores reescribimos el <span class="math inline">\(EMC\)</span> en términos de la descomposición sesgo-varianza:</p>
-<p><span class="math display" id="eq:ecm2">\[\begin{equation}
-\tag{7.10}
-EMC(\hat{\beta}) = Sesgo^2(\hat{\beta}) + V(\hat{\beta})
-\end{equation}\]</span></p>
-<p>Es decir, cuán mal <strong>estima</strong> <span class="math inline">\(\hat{\beta}\)</span> depende de cuán descentrado está en relación a la verdad (sesgo) más cuán disperso es en relación a su propio centro (varianza).</p>
-<p>Para ver la relación entre el error de estimación y el error de predicción se define el <strong>error de pronóstico</strong> como:</p>
-<p><span class="math display" id="eq:err">\[\begin{equation}
-\tag{7.11}
-Err(\hat{Y}) \equiv E(Y - \hat{Y})^2
-\end{equation}\]</span></p>
-<p>Como vimos antes, dado el modelo genérico<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> <span class="math inline">\(Y = f(X) + u\)</span> donde <span class="math inline">\(E(u) = 0\)</span> y <span class="math inline">\(V(u) = \sigma^2\)</span>:</p>
-<ul>
-<li><p><span class="math inline">\(f(X)\)</span> es la parte sistemática</p></li>
-<li><p><span class="math inline">\(u\)</span> la parte no sistemática</p></li>
-</ul>
-<div class="infobox note">
-<p>Resultado importante en <strong>teoría de la predicción:</strong> si se quiere predecir una variable aleatoria <span class="math inline">\(Y\)</span> con una constante <span class="math inline">\(m\)</span> el mejor predictor es su esperanza,<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> es decir, <span class="math inline">\(m = E(Y)\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+<hr />
 </div>
-<p>Entonces, si <span class="math inline">\(E(Y) = f(X)\)</span>, <span class="math inline">\(u\)</span> es no observable y <span class="math inline">\(f(X)\)</span> es conocida, <span class="math inline">\(f(X)\)</span> es el mejor predictor porque, como se dijo arriba, el mejor predictor de una variable aleatoria es su esperanza.</p>
-<p>En la práctica <span class="math inline">\(f(X)\)</span> es desconocida y, por lo tanto, se debe estimar <span class="math inline">\(\hat{f}(X)\)</span>.</p>
-<p><span class="math display" id="eq:err2">\[\begin{equation}
-\tag{7.12}
-Err(\hat{Y}) = E(Y - \hat{f})^2
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:err3">\[\begin{equation}
-\tag{7.13}
-Err(Y - \hat{f}) = EMC(\hat{f}) + \sigma^2
-\end{equation}\]</span></p>
-<p>En términos de la ecuación <a href="conceptos.html#eq:ri">(6.3)</a> el error de pronóstico es la suma de un error reducible <span class="math inline">\((EMC)\)</span> y otro irreducible <span class="math inline">\((\sigma^2)\)</span>. Además, notar que el error de predicción y el <span class="math inline">\(EMC\)</span> difieren solo por una constante <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>Nuevamente, puede verse la relación entre predicción y estimación. <em>Predecir</em> correctamente <span class="math inline">\((Err(Y - \hat{f}))\)</span> requiere <em>estimar</em> <span class="math inline">\((EMC(\hat{f}))\)</span> correctamente (porque <span class="math inline">\(\sigma^2\)</span> no se puede controlar). Es decir, tener bajo sesgo y baja varianza. Utilizando la descomposición:</p>
-<p><span class="math display" id="eq:err4">\[\begin{equation}
-\tag{7.14}
-Err(Y-\hat{f}) = \underbrace{Sesgo^2(\hat{f}) + V(\hat{f})}_{\text{EMC}} + \sigma^2
-\end{equation}\]</span></p>
-<p>En la econometría tradicional si <span class="math inline">\(\hat{f}\)</span> es insesgado minimizar el error de pronóstico es minimizar la varianza. <em>Machine learning</em> hace uso de que estrategias sesgadas pueden implicar una reducción drástica en la varianza, por lo tanto, puede ser que el mínimo <span class="math inline">\(EMC\)</span> ocurra para predictores sesgados.</p>
-</div>
-<div id="aplicacion-practica" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Aplicacion practica<a href="mco.html#aplicacion-practica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="infobox tip">
-<p>Para hacer tablas con los resultados de las regresiones se puede utilizar el paquete <code>stargazer</code>. Algunas referencias en este <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf">documento</a> y en este <a href="https://www.jakeruss.com/cheatsheets/stargazer/">blog</a>.</p>
-</div>
-<p>La biblioteca <code>ISLR2</code> contiene la base de datos de <code>Boston</code>, que registra <code>medv</code> (mediana del valor de las casas en miles de USD) para <span class="math inline">\(506\)</span> distritos censales en Boston. Buscaremos predecir <code>medv</code> usando <span class="math inline">\(12\)</span> predictores como <code>rm</code> (número promedio de habitaciones por casa), <code>age</code> (edad promedio de las casas) y <code>lstat</code> (porcentaje de hogares con bajo <em>status</em> socioeconómico).</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="mco.html#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb444-2"><a href="mco.html#cb444-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb444-3"><a href="mco.html#cb444-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Boston)</span></code></pre></div>
-<pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black lstat
-## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98
-## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14
-## 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03
-## 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94
-## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33
-## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21
-##   medv
-## 1 24.0
-## 2 21.6
-## 3 34.7
-## 4 33.4
-## 5 36.2
-## 6 28.7</code></pre>
-<p>Comenzaremos usando la función <code>lm()</code> para ajustar un modelo de regresión lineal simple, con <code>medv</code> como respuesta y <code>lstat</code> como predictor.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="mco.html#cb446-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat, <span class="at">data =</span> Boston)</span>
-<span id="cb446-2"><a href="mco.html#cb446-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
+<div id="cómo-funciona-en-la-práctica" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> ¿Cómo funciona en la práctica?<a href="mco.html#c%C3%B3mo-funciona-en-la-pr%C3%A1ctica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La teoría proporciona las ecuaciones y propiedades del modelo, pero en la práctica necesitamos:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Estimarlo con datos reales</strong>, lo cual hacemos con una función como <code>lm()</code> en R.<br />
+</li>
+<li><strong>Interpretar el resultado</strong> para entender cómo influyen las variables.<br />
+</li>
+<li><strong>Verificar si el modelo es adecuado</strong> mediante análisis de residuos.</li>
+</ol>
+<p>Veamos un ejemplo concreto usando el dataset <code>mtcars</code> donde:</p>
+<ul>
+<li><code>mpg</code>: rendimiento del auto,</li>
+<li><code>wt</code>: peso del vehículo en miles de libras.</li>
+</ul>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="mco.html#cb465-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb465-2"><a href="mco.html#cb465-2" tabindex="-1"></a></span>
+<span id="cb465-3"><a href="mco.html#cb465-3" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb465-4"><a href="mco.html#cb465-4" tabindex="-1"></a></span>
+<span id="cb465-5"><a href="mco.html#cb465-5" tabindex="-1"></a><span class="co"># Modelo simple: mpg explicado por peso</span></span>
+<span id="cb465-6"><a href="mco.html#cb465-6" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
+<span id="cb465-7"><a href="mco.html#cb465-7" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = medv ~ lstat, data = Boston)
+## lm(formula = mpg ~ wt, data = mtcars)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -15.168  -3.990  -1.318   2.034  24.500 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 34.55384    0.56263   61.41   &lt;2e-16 ***
-## lstat       -0.95005    0.03873  -24.53   &lt;2e-16 ***
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 6.216 on 504 degrees of freedom
-## Multiple R-squared:  0.5441, Adjusted R-squared:  0.5432 
-## F-statistic: 601.6 on 1 and 504 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="mco.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lm.fit1)</span></code></pre></div>
-<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
-##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
-##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="mco.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Boston)</span>
-<span id="cb450-2"><a href="mco.html#cb450-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lstat, medv, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb450-3"><a href="mco.html#cb450-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(lm.fit1, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="CDbook_files/figure-html/ml3-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>A continuación se examinan algunos gráficos de diagnóstico con la función <code>plot()</code>. En general, este comando producirá un gráfico a la vez (presionando <em>Enter</em> se generará el siguiente gráfico). Sin embargo, se pueden ver los cuatro gráficos juntos con las funciones <code>par()</code> y <code>mfrow()</code>, que le dicen a <code>R</code> que divida la pantalla de visualización en paneles separados. Por ejemplo, <code>par(mfrow = c(2, 2))</code> divide la región del gráfico en una cuadrícula de paneles de <span class="math inline">\(2 \times 2\)</span>.</p>
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+<hr />
+</div>
+<div id="interpretación-de-coeficientes" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Interpretación de coeficientes<a href="mco.html#interpretaci%C3%B3n-de-coeficientes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="intercepto-beta_0" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Intercepto (<span class="math inline">\(\beta_0\)</span>)<a href="mco.html#intercepto-beta_0" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el modelo:</p>
+<p><span class="math display">\[
+\widehat{mpg} = 37.285 - 5.344\cdot wt
+\]</span></p>
+<p>El intercepto 37.285 representa el consumo esperado cuando <code>wt = 0</code>.</p>
+<p>Aunque <code>wt = 0</code> no es realista, el intercepto permite “anclar” la recta. Su interés es principalmente técnico.</p>
+<hr />
+</div>
+<div id="coeficiente-de-pendiente-beta_1" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Coeficiente de pendiente (<span class="math inline">\(\beta_1\)</span>)<a href="mco.html#coeficiente-de-pendiente-beta_1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El coeficiente <span class="math inline">\(-5.344\)</span> indica que:</p>
+<blockquote>
+<p><strong>Por cada 1 unidad adicional de <code>wt</code> (mil libras), el rendimiento de combustible (<code>mpg</code>) disminuye en 5.344 unidades.</strong></p>
+</blockquote>
+<p>Ejemplo concreto:</p>
 <ul>
-<li><strong>Residuals vs. fitted values:</strong> residuos vs. valores ajustados se utiliza para detectar patrones de variables omitidas, heterocedasticidad, etc.</li>
-<li><strong>Scale Location:</strong> residuos estandarizados vs. valores ajustados. Similar al anterior y se utiliza para detectar patrones en los residuos.</li>
-<li><strong>Normal Q-Q:</strong> cuantiles teóricos de la distribución normal estándar vs. cuantiles reales de residuos estandarizados. Se utiliza para evaluar la normalidad de los errores.</li>
-<li><strong>Residuals vs. Leverage:</strong> el <em>leverage</em> es una medida de cuán influyente es una observación en el valor de los coeficientes. Este gráfico se utiliza para detectar las (posibles) observaciones influyentes y los valores atípicos al mismo tiempo.</li>
+<li><p>Un auto que pesa <strong>2.0</strong> (2000 lbs) tiene<br />
+<span class="math inline">\(\widehat{mpg} = 37.285 - 5.344(2) = 26.597\)</span></p></li>
+<li><p>Uno de <strong>3.0</strong> (3000 lbs):<br />
+<span class="math inline">\(\widehat{mpg} = 37.285 - 5.344(3) = 21.253\)</span></p></li>
 </ul>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="mco.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb451-2"><a href="mco.html#cb451-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.fit1)</span></code></pre></div>
-<p><img src="CDbook_files/figure-html/ml5-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
-<p>Para obtener la predicción y el <span class="math inline">\(EMC\)</span>:</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="mco.html#cb452-1" aria-hidden="true" tabindex="-1"></a>medv_hat <span class="ot">=</span> <span class="fu">predict</span>(lm.fit1, <span class="at">data =</span> Boston)</span>
-<span id="cb452-2"><a href="mco.html#cb452-2" aria-hidden="true" tabindex="-1"></a>emc <span class="ot">=</span> <span class="fu">mean</span>((medv <span class="sc">-</span> medv_hat)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb452-3"><a href="mco.html#cb452-3" aria-hidden="true" tabindex="-1"></a>emc</span></code></pre></div>
-<pre><code>## [1] 38.48297</code></pre>
-<p>Regresión lineal múltiple:</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="mco.html#cb454-1" aria-hidden="true" tabindex="-1"></a>lm.fit2 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> lstat <span class="sc">+</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb454-2"><a href="mco.html#cb454-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit2)</span></code></pre></div>
+<p><strong>Diferencia:</strong> el auto más pesado rinde <strong>5.344 mpg menos</strong> (valor del coeficiente).</p>
+<hr />
+</div>
+<div id="modelo-múltiple-pensar-en-mantener-todo-lo-demás-constante" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Modelo múltiple: pensar en “mantener todo lo demás constante”<a href="mco.html#modelo-m%C3%BAltiple-pensar-en-mantener-todo-lo-dem%C3%A1s-constante" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si agregamos el <code>hp</code> (caballos de fuerza):</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="mco.html#cb467-1" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt <span class="sc">+</span> hp, <span class="at">data =</span> mtcars)</span>
+<span id="cb467-2"><a href="mco.html#cb467-2" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = medv ~ lstat + age, data = Boston)
+## lm(formula = mpg ~ wt + hp, data = mtcars)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.981  -3.978  -1.283   1.968  23.158 
+##    Min     1Q Median     3Q    Max 
+## -3.941 -1.600 -0.182  1.050  5.854 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 33.22276    0.73085  45.458  &lt; 2e-16 ***
-## lstat       -1.03207    0.04819 -21.416  &lt; 2e-16 ***
-## age          0.03454    0.01223   2.826  0.00491 ** 
+## (Intercept) 37.22727    1.59879  23.285  &lt; 2e-16 ***
+## wt          -3.87783    0.63273  -6.129 1.12e-06 ***
+## hp          -0.03177    0.00903  -3.519  0.00145 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 6.173 on 503 degrees of freedom
-## Multiple R-squared:  0.5513, Adjusted R-squared:  0.5495 
-## F-statistic:   309 on 2 and 503 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><strong>BONUS:</strong></p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="mco.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb456-2"><a href="mco.html#cb456-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(lm.fit1, lm.fit2, <span class="at">type =</span> <span class="st">&#39;latex&#39;</span>, </span>
-<span id="cb456-3"><a href="mco.html#cb456-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">keep.stat=</span><span class="fu">c</span>(<span class="st">&#39;n&#39;</span>,<span class="st">&#39;adj.rsq&#39;</span>),</span>
-<span id="cb456-4"><a href="mco.html#cb456-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">dep.var.labels   =</span> <span class="st">&#39;Valor promedio de la vivienda&#39;</span>,</span>
-<span id="cb456-5"><a href="mco.html#cb456-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">&#39;Porcentaje socioeconómico bajo&#39;</span>,</span>
-<span id="cb456-6"><a href="mco.html#cb456-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;Antigüedad de las casas&#39;</span>))</span></code></pre></div>
-<p>Utilizando todas las variables de la base de datos:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="mco.html#cb457-1" aria-hidden="true" tabindex="-1"></a>lm.fit <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston)</span>
-<span id="cb457-2"><a href="mco.html#cb457-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ ., data = Boston)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.595  -2.730  -0.518   1.777  26.199 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  3.646e+01  5.103e+00   7.144 3.28e-12 ***
-## crim        -1.080e-01  3.286e-02  -3.287 0.001087 ** 
-## zn           4.642e-02  1.373e-02   3.382 0.000778 ***
-## indus        2.056e-02  6.150e-02   0.334 0.738288    
-## chas         2.687e+00  8.616e-01   3.118 0.001925 ** 
-## nox         -1.777e+01  3.820e+00  -4.651 4.25e-06 ***
-## rm           3.810e+00  4.179e-01   9.116  &lt; 2e-16 ***
-## age          6.922e-04  1.321e-02   0.052 0.958229    
-## dis         -1.476e+00  1.995e-01  -7.398 6.01e-13 ***
-## rad          3.060e-01  6.635e-02   4.613 5.07e-06 ***
-## tax         -1.233e-02  3.760e-03  -3.280 0.001112 ** 
-## ptratio     -9.527e-01  1.308e-01  -7.283 1.31e-12 ***
-## black        9.312e-03  2.686e-03   3.467 0.000573 ***
-## lstat       -5.248e-01  5.072e-02 -10.347  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 4.745 on 492 degrees of freedom
-## Multiple R-squared:  0.7406, Adjusted R-squared:  0.7338 
-## F-statistic: 108.1 on 13 and 492 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Utilizando todas las variables de la base de datos menos <code>age</code>:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="mco.html#cb459-1" aria-hidden="true" tabindex="-1"></a>lm.fit1 <span class="ot">=</span> <span class="fu">lm</span>(medv <span class="sc">~</span> . <span class="sc">-</span> age, <span class="at">data =</span> Boston)</span>
-<span id="cb459-2"><a href="mco.html#cb459-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.fit1)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = medv ~ . - age, data = Boston)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -15.6054  -2.7313  -0.5188   1.7601  26.2243 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  36.436927   5.080119   7.172 2.72e-12 ***
-## crim         -0.108006   0.032832  -3.290 0.001075 ** 
-## zn            0.046334   0.013613   3.404 0.000719 ***
-## indus         0.020562   0.061433   0.335 0.737989    
-## chas          2.689026   0.859598   3.128 0.001863 ** 
-## nox         -17.713540   3.679308  -4.814 1.97e-06 ***
-## rm            3.814394   0.408480   9.338  &lt; 2e-16 ***
-## dis          -1.478612   0.190611  -7.757 5.03e-14 ***
-## rad           0.305786   0.066089   4.627 4.75e-06 ***
-## tax          -0.012329   0.003755  -3.283 0.001099 ** 
-## ptratio      -0.952211   0.130294  -7.308 1.10e-12 ***
-## black         0.009321   0.002678   3.481 0.000544 ***
-## lstat        -0.523852   0.047625 -10.999  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 4.74 on 493 degrees of freedom
-## Multiple R-squared:  0.7406, Adjusted R-squared:  0.7343 
-## F-statistic: 117.3 on 12 and 493 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 2.593 on 29 degrees of freedom
+## Multiple R-squared:  0.8268, Adjusted R-squared:  0.8148 
+## F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
+<p>Esto significa:</p>
+<ul>
+<li><strong>wt:</strong> por cada mil libras adicionales, el mpg baja 3.9 puntos <em>manteniendo constante la potencia del motor</em>.</li>
+<li><strong>hp:</strong> por cada caballo de fuerza extra, el mpg baja 0.03 puntos <em>para un mismo peso</em>.</li>
+</ul>
+<p>Esto es clave:<br />
+<strong>los coeficientes miden relaciones ceteris paribus.</strong></p>
+<hr />
+</div>
+</div>
+<div id="predicción" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Predicción<a href="mco.html#predicci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para predecir:</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="mco.html#cb469-1" tabindex="-1"></a>new_car <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wt =</span> <span class="fl">2.5</span>, <span class="at">hp =</span> <span class="dv">120</span>)</span>
+<span id="cb469-2"><a href="mco.html#cb469-2" tabindex="-1"></a><span class="fu">predict</span>(m2, new_car)</span></code></pre></div>
+<hr />
+</div>
+<div id="conclusión" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Conclusión<a href="mco.html#conclusi%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La regresión lineal es una herramienta poderosa y flexible. Su valor radica tanto en su simplicidad como en la capacidad de interpretar el efecto marginal de cada variable.</p>
 
 </div>
-</div>
-<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-eslii" class="csl-entry">
-Hastie, Trevor, Robert Tibshirani, y Jerome Friedman. 2008. <em>The Elements of Statistical Learning. Data Mining, Inference, and Prediction</em>. Springer. <a href="https://hastie.su.domains/Papers/ESLII.pdf">https://hastie.su.domains/Papers/ESLII.pdf</a>.
-</div>
-<div id="ref-IntroEco" class="csl-entry">
-Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>. Vol. 5th edition. South-Western College Publishing.
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="14">
-<li id="fn14"><p>Para más detalles véase <span class="citation">(<a href="#ref-IntroEco" role="doc-biblioref">Wooldridge 2012</a>)</span> Apéndice E (página 807).<a href="mco.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>No necesariamente lineal.<a href="mco.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>Cuando lo “mejor” se mide con el <span class="math inline">\(EMC\)</span>. Para más detalles véase <span class="citation">(<a href="#ref-eslii" role="doc-biblioref">Hastie, Tibshirani, y Friedman 2008</a>)</span>.<a href="mco.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>En el Capítulo <a href="arboles.html#arboles">10</a> veremos que este resultado es importante para la metodología de arboles de decisión.<a href="mco.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>Para más detalles véase <code>?stats::lm</code>.<a href="mco.html#fnref18" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
@@ -669,42 +568,42 @@ Wooldridge, Jeffrey. 2012. <em>Introductory Econometrics: A Modern Approach</em>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CDbook.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
