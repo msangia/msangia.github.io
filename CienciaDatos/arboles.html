@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="logit.html"/>
-<link rel="next" href="nnet.html"/>
+<link rel="next" href="cluster.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,19 +363,20 @@ div.csl-indent {
 <li class="chapter" data-level="10.6.10" data-path="arboles.html"><a href="arboles.html#b%C3%BAsqueda-y-selecci%C3%B3n-de-hiperpar%C3%A1metros"><i class="fa fa-check"></i><b>10.6.10</b> Búsqueda y selección de hiperparámetros</a></li>
 <li class="chapter" data-level="10.6.11" data-path="arboles.html"><a href="arboles.html#validaci%C3%B3n-en-test-etiquetado"><i class="fa fa-check"></i><b>10.6.11</b> Validación en test etiquetado</a></li>
 <li class="chapter" data-level="10.6.12" data-path="arboles.html"><a href="arboles.html#entrenamiento-final"><i class="fa fa-check"></i><b>10.6.12</b> Entrenamiento final</a></li>
-<li class="chapter" data-level="10.6.13" data-path="arboles.html"><a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n"><i class="fa fa-check"></i><b>10.6.13</b> Aplicación final para predicción</a></li>
+<li class="chapter" data-level="10.6.13" data-path="arboles.html"><a href="arboles.html#an%C3%A1lisis-de-resultados"><i class="fa fa-check"></i><b>10.6.13</b> Análisis de resultados</a></li>
+<li class="chapter" data-level="10.6.14" data-path="arboles.html"><a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n"><i class="fa fa-check"></i><b>10.6.14</b> Aplicación final para predicción</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
+<li class="chapter" data-level="11" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>11</b> Analisis de clusters</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="nnet.html"><a href="nnet.html#single-layer-neural-networks"><i class="fa fa-check"></i><b>11.1</b> Single Layer Neural Networks</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>12</b> Analisis de clusters</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>12.1</b> K-Means Clustering</a></li>
-<li class="chapter" data-level="12.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>12.2</b> Aplicacion practica</a></li>
+<li class="chapter" data-level="11.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>11.1</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="11.2" data-path="cluster.html"><a href="cluster.html#aplicacion-practica-1"><i class="fa fa-check"></i><b>11.2</b> Aplicacion practica</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia-1.html"><a href="bibliografia-1.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="chapter" data-level="12" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>12</b> Neural Networks</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nnet.html"><a href="nnet.html#single-layer-neural-networks"><i class="fa fa-check"></i><b>12.1</b> Single Layer Neural Networks</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="./" target="blank">Maximo Sangiacomo - GMyP</a></li>
 
@@ -832,23 +833,48 @@ Figura 10.2: Ada boost
 <span id="cb544-3"><a href="arboles.html#cb544-3" tabindex="-1"></a>  <span class="at">data=</span>dtrain_full,</span>
 <span id="cb544-4"><a href="arboles.html#cb544-4" tabindex="-1"></a>  <span class="at">nrounds=</span>best_iter_candidate</span>
 <span id="cb544-5"><a href="arboles.html#cb544-5" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="análisis-de-resultados" class="section level3 hasAnchor" number="10.6.13">
+<h3><span class="header-section-number">10.6.13</span> Análisis de resultados<a href="arboles.html#an%C3%A1lisis-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Feature importance:</p>
+<p>En LightGBM, la importancia de variables se resume mediante tres métricas complementarias: Gain, Cover y Frequency. <strong>Gain</strong> es la más informativa y la que suele usarse como referencia principal: mide cuánto contribuye una variable a reducir la función de pérdida a lo largo de todo el modelo. En otras palabras, captura el “poder explicativo” real de cada predictor y su peso en la construcción del <em>score</em> final. <strong>Cover</strong> indica cuántas observaciones, en promedio, pasan por las divisiones donde interviene una variable; refleja qué tan “amplio” es el segmento del dataset donde esa variable influye. Una variable puede tener bajo Gain pero alto Cover si aparece en <em>splits</em> tempranos que afectan a muchos registros, pero sin mejorar demasiado la pérdida. Finalmente, <strong>Frequency</strong> simplemente cuenta cuántas veces una variable aparece en un split; es útil para detectar variables muy utilizadas, aunque su aporte marginal pueda ser pequeño. En la práctica, Gain es la métrica dominante, porque resume la mejora real del modelo, mientras que Cover y Frequency se interpretan como medidas auxiliares para entender el rol estructural de cada variable dentro de los árboles.</p>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="arboles.html#cb545-1" tabindex="-1"></a>importance_tbl <span class="ot">&lt;-</span> <span class="fu">lgb.importance</span>(final_model)</span>
+<span id="cb545-2"><a href="arboles.html#cb545-2" tabindex="-1"></a>importance_tbl <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">15</span>)</span></code></pre></div>
+<pre><code>##                                  Feature        Gain      Cover  Frequency
+##                                   &lt;char&gt;       &lt;num&gt;      &lt;num&gt;      &lt;num&gt;
+##  1: RevolvingUtilizationOfUnsecuredLines 0.420948827 0.18285849 0.16794872
+##  2:              NumberOfTimes90DaysLate 0.159647396 0.11429209 0.03942308
+##  3: NumberOfTime30-59DaysPastDueNotWorse 0.150636376 0.10458548 0.05448718
+##  4: NumberOfTime60-89DaysPastDueNotWorse 0.072908097 0.09346272 0.03621795
+##  5:                            DebtRatio 0.052068231 0.12781435 0.21282051
+##  6:                                  age 0.050448922 0.11211552 0.13365385
+##  7:                        MonthlyIncome 0.032433820 0.09698231 0.15416667
+##  8:      NumberOfOpenCreditLinesAndLoans 0.030901513 0.08828471 0.10929487
+##  9:         NumberRealEstateLoansOrLines 0.024426798 0.05705801 0.06089744
+## 10:                   NumberOfDependents 0.005580021 0.02254630 0.03108974</code></pre>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="arboles.html#cb547-1" tabindex="-1"></a><span class="fu">lgb.plot.importance</span>(importance_tbl, <span class="at">top_n =</span> <span class="dv">15</span>, <span class="at">measure =</span> <span class="st">&quot;Gain&quot;</span>) <span class="sc">+</span></span>
+<span id="cb547-2"><a href="arboles.html#cb547-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Feature Importance — Modelo LightGBM&quot;</span>,</span>
+<span id="cb547-3"><a href="arboles.html#cb547-3" tabindex="-1"></a>                <span class="at">subtitle =</span> <span class="st">&quot;Medida: Gain&quot;</span>) <span class="sc">+</span></span>
+<span id="cb547-4"><a href="arboles.html#cb547-4" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<p><img src="CDbook_files/figure-html/fm-igph-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
+<pre><code>## NULL</code></pre>
 <hr />
 </div>
-<div id="aplicación-final-para-predicción" class="section level3 hasAnchor" number="10.6.13">
-<h3><span class="header-section-number">10.6.13</span> Aplicación final para predicción<a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="arboles.html#cb545-1" tabindex="-1"></a>test_proc <span class="ot">&lt;-</span> test_clean</span>
-<span id="cb545-2"><a href="arboles.html#cb545-2" tabindex="-1"></a></span>
-<span id="cb545-3"><a href="arboles.html#cb545-3" tabindex="-1"></a>X <span class="ot">&lt;-</span> test_proc <span class="sc">|&gt;</span></span>
-<span id="cb545-4"><a href="arboles.html#cb545-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">all_of</span>(num_vars)) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb545-5"><a href="arboles.html#cb545-5" tabindex="-1"></a></span>
-<span id="cb545-6"><a href="arboles.html#cb545-6" tabindex="-1"></a>prob_default <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_model, X)</span>
-<span id="cb545-7"><a href="arboles.html#cb545-7" tabindex="-1"></a></span>
-<span id="cb545-8"><a href="arboles.html#cb545-8" tabindex="-1"></a>output_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb545-9"><a href="arboles.html#cb545-9" tabindex="-1"></a>  <span class="at">Id           =</span> test_proc<span class="sc">$</span>Id,</span>
-<span id="cb545-10"><a href="arboles.html#cb545-10" tabindex="-1"></a>  <span class="at">prob_default =</span> prob_default</span>
-<span id="cb545-11"><a href="arboles.html#cb545-11" tabindex="-1"></a>)</span>
-<span id="cb545-12"><a href="arboles.html#cb545-12" tabindex="-1"></a></span>
-<span id="cb545-13"><a href="arboles.html#cb545-13" tabindex="-1"></a><span class="fu">head</span>(output_scores)</span></code></pre></div>
+<div id="aplicación-final-para-predicción" class="section level3 hasAnchor" number="10.6.14">
+<h3><span class="header-section-number">10.6.14</span> Aplicación final para predicción<a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="arboles.html#cb549-1" tabindex="-1"></a>test_proc <span class="ot">&lt;-</span> test_clean</span>
+<span id="cb549-2"><a href="arboles.html#cb549-2" tabindex="-1"></a></span>
+<span id="cb549-3"><a href="arboles.html#cb549-3" tabindex="-1"></a>X <span class="ot">&lt;-</span> test_proc <span class="sc">|&gt;</span></span>
+<span id="cb549-4"><a href="arboles.html#cb549-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">all_of</span>(num_vars)) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
+<span id="cb549-5"><a href="arboles.html#cb549-5" tabindex="-1"></a></span>
+<span id="cb549-6"><a href="arboles.html#cb549-6" tabindex="-1"></a>prob_default <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_model, X)</span>
+<span id="cb549-7"><a href="arboles.html#cb549-7" tabindex="-1"></a></span>
+<span id="cb549-8"><a href="arboles.html#cb549-8" tabindex="-1"></a>output_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb549-9"><a href="arboles.html#cb549-9" tabindex="-1"></a>  <span class="at">Id           =</span> test_proc<span class="sc">$</span>Id,</span>
+<span id="cb549-10"><a href="arboles.html#cb549-10" tabindex="-1"></a>  <span class="at">prob_default =</span> prob_default</span>
+<span id="cb549-11"><a href="arboles.html#cb549-11" tabindex="-1"></a>)</span>
+<span id="cb549-12"><a href="arboles.html#cb549-12" tabindex="-1"></a></span>
+<span id="cb549-13"><a href="arboles.html#cb549-13" tabindex="-1"></a><span class="fu">head</span>(output_scores)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##      Id prob_default
 ##   &lt;dbl&gt;        &lt;dbl&gt;
@@ -862,7 +888,7 @@ Figura 10.2: Ada boost
 </div>
 </div>
 </div>
-<h3>Bibliografia<a href="bibliografia-1.html#bibliografia-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-breiman2001" class="csl-entry">
 Breiman, Leo. 2001. <span>«Random Forests»</span>. <em>Machine Learning</em> 45 (1): 5-32.
@@ -898,7 +924,7 @@ Prokhorenkova, Liudmila, Gleb Gusev, Aleksandr Vorobev, Anna Veronika Dorogush, 
         </div>
       </div>
 <a href="logit.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="nnet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cluster.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -940,7 +966,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["CDbook.pdf"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null
