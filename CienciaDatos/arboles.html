@@ -360,13 +360,14 @@ div.csl-indent {
 <li class="chapter" data-level="10.6.7" data-path="arboles.html"><a href="arboles.html#funci%C3%B3n-de-preprocesamiento"><i class="fa fa-check"></i><b>10.6.7</b> Función de preprocesamiento</a></li>
 <li class="chapter" data-level="10.6.8" data-path="arboles.html"><a href="arboles.html#aplicamos-preprocesamiento-a-ambos-datasets"><i class="fa fa-check"></i><b>10.6.8</b> Aplicamos preprocesamiento a ambos datasets</a></li>
 <li class="chapter" data-level="10.6.9" data-path="arboles.html"><a href="arboles.html#divisi%C3%B3n-en-entrenamiento-y-test-etiquetado"><i class="fa fa-check"></i><b>10.6.9</b> División en entrenamiento y test (etiquetado)</a></li>
-<li class="chapter" data-level="10.6.10" data-path="arboles.html"><a href="arboles.html#b%C3%BAsqueda-y-selecci%C3%B3n-de-hiperpar%C3%A1metros"><i class="fa fa-check"></i><b>10.6.10</b> Búsqueda y selección de hiperparámetros</a></li>
+<li class="chapter" data-level="10.6.10" data-path="arboles.html"><a href="arboles.html#selecci%C3%B3n-de-hiperpar%C3%A1metros-grid-search"><i class="fa fa-check"></i><b>10.6.10</b> Selección de hiperparámetros (Grid Search)</a></li>
 <li class="chapter" data-level="10.6.11" data-path="arboles.html"><a href="arboles.html#selecci%C3%B3n-de-hiperpar%C3%A1metros-optimizaci%C3%B3n-bayesiana"><i class="fa fa-check"></i><b>10.6.11</b> Selección de hiperparámetros (Optimización Bayesiana)</a></li>
 <li class="chapter" data-level="10.6.12" data-path="arboles.html"><a href="arboles.html#validaci%C3%B3n-en-test-etiquetado"><i class="fa fa-check"></i><b>10.6.12</b> Validación en test etiquetado</a></li>
-<li class="chapter" data-level="10.6.13" data-path="arboles.html"><a href="arboles.html#entrenamiento-final"><i class="fa fa-check"></i><b>10.6.13</b> Entrenamiento final</a></li>
-<li class="chapter" data-level="10.6.14" data-path="arboles.html"><a href="arboles.html#an%C3%A1lisis-de-resultados"><i class="fa fa-check"></i><b>10.6.14</b> Análisis de resultados</a></li>
-<li class="chapter" data-level="10.6.15" data-path="arboles.html"><a href="arboles.html#an%C3%A1lisis-de-interpretabilidad-shap"><i class="fa fa-check"></i><b>10.6.15</b> Análisis de interpretabilidad (SHAP)</a></li>
-<li class="chapter" data-level="10.6.16" data-path="arboles.html"><a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n"><i class="fa fa-check"></i><b>10.6.16</b> Aplicación final para predicción</a></li>
+<li class="chapter" data-level="10.6.13" data-path="arboles.html"><a href="arboles.html#evaluaci%C3%B3n-de-los-resultados"><i class="fa fa-check"></i><b>10.6.13</b> Evaluación de los resultados</a></li>
+<li class="chapter" data-level="10.6.14" data-path="arboles.html"><a href="arboles.html#entrenamiento-final"><i class="fa fa-check"></i><b>10.6.14</b> Entrenamiento final</a></li>
+<li class="chapter" data-level="10.6.15" data-path="arboles.html"><a href="arboles.html#an%C3%A1lisis-de-resultados"><i class="fa fa-check"></i><b>10.6.15</b> Análisis de resultados</a></li>
+<li class="chapter" data-level="10.6.16" data-path="arboles.html"><a href="arboles.html#an%C3%A1lisis-de-interpretabilidad-shap"><i class="fa fa-check"></i><b>10.6.16</b> Análisis de interpretabilidad (SHAP)</a></li>
+<li class="chapter" data-level="10.6.17" data-path="arboles.html"><a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n"><i class="fa fa-check"></i><b>10.6.17</b> Aplicación final para predicción</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="nnet.html"><a href="nnet.html"><i class="fa fa-check"></i><b>11</b> Neural Networks</a>
@@ -576,40 +577,37 @@ Figura 10.2: Ada boost
 <div id="función-de-preprocesamiento" class="section level3 hasAnchor" number="10.6.7">
 <h3><span class="header-section-number">10.6.7</span> Función de preprocesamiento<a href="arboles.html#funci%C3%B3n-de-preprocesamiento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Usamos esta función solo como ejemplo de <em>feature engineering</em> sencillo dado que las posibilidades son infinitas: <em>ratios</em>, logs, rezagos, <em>one-hot encoding</em> (convierte una variable categórica en varias columnas binarias (0/1) una por cada categoría posible), etc.</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="arboles.html#cb518-1" tabindex="-1"></a>aplicar_preprocesamiento <span class="ot">&lt;-</span> <span class="cf">function</span>(df, medianas, p99, vars){</span>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="arboles.html#cb518-1" tabindex="-1"></a>aplicar_preprocesamiento <span class="ot">&lt;-</span> <span class="cf">function</span>(df, p99, vars){</span>
 <span id="cb518-2"><a href="arboles.html#cb518-2" tabindex="-1"></a>    df2 <span class="ot">&lt;-</span> df</span>
 <span id="cb518-3"><a href="arboles.html#cb518-3" tabindex="-1"></a>    <span class="cf">for</span>(v <span class="cf">in</span> vars){</span>
 <span id="cb518-4"><a href="arboles.html#cb518-4" tabindex="-1"></a>        lim <span class="ot">&lt;-</span> p99[[v]][[<span class="dv">1</span>]]</span>
-<span id="cb518-5"><a href="arboles.html#cb518-5" tabindex="-1"></a>        med <span class="ot">&lt;-</span> medianas[[v]][[<span class="dv">1</span>]]</span>
-<span id="cb518-6"><a href="arboles.html#cb518-6" tabindex="-1"></a>        x <span class="ot">&lt;-</span> df2[[v]]</span>
-<span id="cb518-7"><a href="arboles.html#cb518-7" tabindex="-1"></a>        <span class="co"># Winsorización al percentil 99</span></span>
-<span id="cb518-8"><a href="arboles.html#cb518-8" tabindex="-1"></a>        x[x <span class="sc">&gt;</span> lim] <span class="ot">&lt;-</span> lim</span>
-<span id="cb518-9"><a href="arboles.html#cb518-9" tabindex="-1"></a>        <span class="co"># Imputación por mediana</span></span>
-<span id="cb518-10"><a href="arboles.html#cb518-10" tabindex="-1"></a>        x[<span class="fu">is.na</span>(x)] <span class="ot">&lt;-</span> med</span>
-<span id="cb518-11"><a href="arboles.html#cb518-11" tabindex="-1"></a>        df2[[v]] <span class="ot">&lt;-</span> x</span>
-<span id="cb518-12"><a href="arboles.html#cb518-12" tabindex="-1"></a>    }</span>
-<span id="cb518-13"><a href="arboles.html#cb518-13" tabindex="-1"></a>    df2</span>
-<span id="cb518-14"><a href="arboles.html#cb518-14" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb518-5"><a href="arboles.html#cb518-5" tabindex="-1"></a>        x <span class="ot">&lt;-</span> df2[[v]]</span>
+<span id="cb518-6"><a href="arboles.html#cb518-6" tabindex="-1"></a>        <span class="co"># Winsorización al percentil 99</span></span>
+<span id="cb518-7"><a href="arboles.html#cb518-7" tabindex="-1"></a>        x[x <span class="sc">&gt;</span> lim] <span class="ot">&lt;-</span> lim</span>
+<span id="cb518-8"><a href="arboles.html#cb518-8" tabindex="-1"></a>        df2[[v]] <span class="ot">&lt;-</span> x</span>
+<span id="cb518-9"><a href="arboles.html#cb518-9" tabindex="-1"></a>    }</span>
+<span id="cb518-10"><a href="arboles.html#cb518-10" tabindex="-1"></a>    df2</span>
+<span id="cb518-11"><a href="arboles.html#cb518-11" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="aplicamos-preprocesamiento-a-ambos-datasets" class="section level3 hasAnchor" number="10.6.8">
 <h3><span class="header-section-number">10.6.8</span> Aplicamos preprocesamiento a ambos datasets<a href="arboles.html#aplicamos-preprocesamiento-a-ambos-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="arboles.html#cb519-1" tabindex="-1"></a>train_clean <span class="ot">&lt;-</span> <span class="fu">aplicar_preprocesamiento</span>(train_raw, medianas, p99, num_vars)</span>
-<span id="cb519-2"><a href="arboles.html#cb519-2" tabindex="-1"></a>test_clean  <span class="ot">&lt;-</span> <span class="fu">aplicar_preprocesamiento</span>(test_raw,  medianas, p99, num_vars)</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="arboles.html#cb519-1" tabindex="-1"></a>train_clean <span class="ot">&lt;-</span> <span class="fu">aplicar_preprocesamiento</span>(train_raw, p99, num_vars)</span>
+<span id="cb519-2"><a href="arboles.html#cb519-2" tabindex="-1"></a>test_clean  <span class="ot">&lt;-</span> <span class="fu">aplicar_preprocesamiento</span>(test_raw,  p99, num_vars)</span></code></pre></div>
 <hr />
 </div>
 <div id="división-en-entrenamiento-y-test-etiquetado" class="section level3 hasAnchor" number="10.6.9">
 <h3><span class="header-section-number">10.6.9</span> División en entrenamiento y test (etiquetado)<a href="arboles.html#divisi%C3%B3n-en-entrenamiento-y-test-etiquetado" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="arboles.html#cb520-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
-<span id="cb520-2"><a href="arboles.html#cb520-2" tabindex="-1"></a>idx_train   <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(train_clean<span class="sc">$</span>SeriousDlqin2yrs, <span class="at">p=</span><span class="fl">0.7</span>, <span class="at">list=</span><span class="cn">FALSE</span>)</span>
+<span id="cb520-2"><a href="arboles.html#cb520-2" tabindex="-1"></a>idx_train   <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(train_clean<span class="sc">$</span>SeriousDlqin2yrs, <span class="at">p=</span><span class="fl">0.7</span>, <span class="at">list=</span><span class="cn">FALSE</span>) <span class="co"># divide 70/30</span></span>
 <span id="cb520-3"><a href="arboles.html#cb520-3" tabindex="-1"></a>train_model <span class="ot">&lt;-</span> train_clean[idx_train, ]</span>
 <span id="cb520-4"><a href="arboles.html#cb520-4" tabindex="-1"></a>test_labeled <span class="ot">&lt;-</span> train_clean[<span class="sc">-</span>idx_train, ]</span></code></pre></div>
-<p>Matrices:</p>
+<p>Luego de hacer la partición, se seleccionan las variables para construir las bases de <em>train</em> y <em>test</em>.</p>
 <div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="arboles.html#cb521-1" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> train_model <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Id, <span class="sc">-</span>SeriousDlqin2yrs) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb521-2"><a href="arboles.html#cb521-2" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> train_model<span class="sc">$</span>SeriousDlqin2yrs</span>
+<span id="cb521-2"><a href="arboles.html#cb521-2" tabindex="-1"></a>y_train <span class="ot">&lt;-</span> train_model<span class="sc">$</span>SeriousDlqin2yrs </span>
 <span id="cb521-3"><a href="arboles.html#cb521-3" tabindex="-1"></a></span>
 <span id="cb521-4"><a href="arboles.html#cb521-4" tabindex="-1"></a>X_test_labeled <span class="ot">&lt;-</span> test_labeled <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Id, <span class="sc">-</span>SeriousDlqin2yrs) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
 <span id="cb521-5"><a href="arboles.html#cb521-5" tabindex="-1"></a>y_test_labeled <span class="ot">&lt;-</span> test_labeled<span class="sc">$</span>SeriousDlqin2yrs</span></code></pre></div>
-<p>Se convierten los datos a formato de LightBM.</p>
+<p>Se convierten los datos a formato dataset de LightGBM.</p>
 <div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="arboles.html#cb522-1" tabindex="-1"></a>dtrain <span class="ot">&lt;-</span> <span class="fu">lgb.Dataset</span>(X_train, <span class="at">label =</span> y_train)</span></code></pre></div>
 <p>Balanceo por clase:</p>
 <div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="arboles.html#cb523-1" tabindex="-1"></a>n_pos <span class="ot">&lt;-</span> <span class="fu">sum</span>(y_train<span class="sc">==</span><span class="dv">1</span>)</span>
@@ -638,8 +636,8 @@ Figura 10.2: Ada boost
 <span id="cb528-14"><a href="arboles.html#cb528-14" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="sc">-</span><span class="dv">1</span>                         <span class="co"># Nivel de salida de registro: -1 suprime la mayoría de mensajes de log.</span></span>
 <span id="cb528-15"><a href="arboles.html#cb528-15" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="búsqueda-y-selección-de-hiperparámetros" class="section level3 hasAnchor" number="10.6.10">
-<h3><span class="header-section-number">10.6.10</span> Búsqueda y selección de hiperparámetros<a href="arboles.html#b%C3%BAsqueda-y-selecci%C3%B3n-de-hiperpar%C3%A1metros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="selección-de-hiperparámetros-grid-search" class="section level3 hasAnchor" number="10.6.10">
+<h3><span class="header-section-number">10.6.10</span> Selección de hiperparámetros (Grid Search)<a href="arboles.html#selecci%C3%B3n-de-hiperpar%C3%A1metros-grid-search" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="arboles.html#cb529-1" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
 <span id="cb529-2"><a href="arboles.html#cb529-2" tabindex="-1"></a>  <span class="at">num_leaves       =</span> <span class="fu">c</span>(<span class="dv">31</span>,<span class="dv">63</span>,<span class="dv">127</span>),</span>
 <span id="cb529-3"><a href="arboles.html#cb529-3" tabindex="-1"></a>  <span class="at">min_data_in_leaf =</span> <span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">200</span>),</span>
@@ -722,6 +720,7 @@ Figura 10.2: Ada boost
 <div id="selección-de-hiperparámetros-optimización-bayesiana" class="section level3 hasAnchor" number="10.6.11">
 <h3><span class="header-section-number">10.6.11</span> Selección de hiperparámetros (Optimización Bayesiana)<a href="arboles.html#selecci%C3%B3n-de-hiperpar%C3%A1metros-optimizaci%C3%B3n-bayesiana" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se implementa una búsqueda basada en optimización bayesiana para maximizar el Área Bajo la Curva ROC (AUC) mediante validación cruzada de 5 <em>folds</em>.</p>
+<p>La <strong>optimización bayesiana</strong> es un método diseñado para encontrar combinaciones óptimas de hiperparámetros cuando evaluar el modelo es costoso —por ejemplo, cuando cada intento requiere entrenar un algoritmo mediante cross-validation. En lugar de probar muchas combinaciones al azar o mediante grillas, esta metodoligía construye un <strong>modelo probabilístico (<em>surrogate</em>)</strong> de la función objetivo: típicamente un <em>Gaussian Process</em> que aproxima la relación entre los hiperparámetros y el desempeño del modelo (AUC, RMSE, log-loss, etc.). Con esa “función aproximada”, el método usa una función de adquisición (como <em>Upper Confidence Bound</em> o <em>Expected Improvement</em>) que guía la búsqueda hacia regiones prometedoras, equilibrando explotación (probar valores que el <em>surrogate</em> predice como buenos) y exploración (probar valores donde la incertidumbre es alta). El proceso es iterativo: se evalúan algunos puntos iniciales aleatorios, se entrena el <em>surrogate</em>, se elige el siguiente punto según la adquisición, se actualiza el surrogate y así sucesivamente. De este modo, la optimización bayesiana necesita <strong>muchas menos evaluaciones reales</strong> que una búsqueda tradicional para converger hacia hiperparámetros de alto rendimiento, lo que la vuelve especialmente útil en modelos complejos o costosos de entrenar.</p>
 <p>Hiperparámetros base:</p>
 <div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="arboles.html#cb535-1" tabindex="-1"></a>params_base_fixed <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb535-2"><a href="arboles.html#cb535-2" tabindex="-1"></a>  <span class="at">objective =</span> <span class="st">&quot;binary&quot;</span>,       <span class="co"># Define la función de pérdida para clasificación binaria.</span></span>
@@ -733,7 +732,7 @@ Figura 10.2: Ada boost
 <span id="cb535-8"><a href="arboles.html#cb535-8" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="sc">-</span><span class="dv">1</span>                <span class="co"># Nivel de salida de registro: -1 suprime la mayoría de mensajes de log.</span></span>
 <span id="cb535-9"><a href="arboles.html#cb535-9" tabindex="-1"></a>)</span></code></pre></div>
 <div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="arboles.html#cb536-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb536-2"><a href="arboles.html#cb536-2" tabindex="-1"></a><span class="co"># Función objetivo</span></span>
+<span id="cb536-2"><a href="arboles.html#cb536-2" tabindex="-1"></a><span class="co"># Función objetivo (que se busca max o min dependiendo del caso)</span></span>
 <span id="cb536-3"><a href="arboles.html#cb536-3" tabindex="-1"></a>bayes_scoring_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(num_leaves, min_data_in_leaf, feature_fraction, learning_rate) {</span>
 <span id="cb536-4"><a href="arboles.html#cb536-4" tabindex="-1"></a>  </span>
 <span id="cb536-5"><a href="arboles.html#cb536-5" tabindex="-1"></a>  pars <span class="ot">&lt;-</span> <span class="fu">modifyList</span>(params_base_fixed, <span class="fu">list</span>(</span>
@@ -765,16 +764,16 @@ Figura 10.2: Ada boost
 <span id="cb536-31"><a href="arboles.html#cb536-31" tabindex="-1"></a>  <span class="at">learning_rate    =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.15</span>)</span>
 <span id="cb536-32"><a href="arboles.html#cb536-32" tabindex="-1"></a>)</span>
 <span id="cb536-33"><a href="arboles.html#cb536-33" tabindex="-1"></a></span>
-<span id="cb536-34"><a href="arboles.html#cb536-34" tabindex="-1"></a><span class="co"># Ejecución</span></span>
+<span id="cb536-34"><a href="arboles.html#cb536-34" tabindex="-1"></a><span class="co"># Ejecución de la optimizacion</span></span>
 <span id="cb536-35"><a href="arboles.html#cb536-35" tabindex="-1"></a>opt_res <span class="ot">&lt;-</span> <span class="fu">bayesOpt</span>(</span>
-<span id="cb536-36"><a href="arboles.html#cb536-36" tabindex="-1"></a>  <span class="at">FUN =</span> bayes_scoring_fun,</span>
-<span id="cb536-37"><a href="arboles.html#cb536-37" tabindex="-1"></a>  <span class="at">bounds =</span> bounds,</span>
-<span id="cb536-38"><a href="arboles.html#cb536-38" tabindex="-1"></a>  <span class="at">initPoints =</span> <span class="dv">10</span>,</span>
-<span id="cb536-39"><a href="arboles.html#cb536-39" tabindex="-1"></a>  <span class="at">iters.n =</span> <span class="dv">15</span>,</span>
-<span id="cb536-40"><a href="arboles.html#cb536-40" tabindex="-1"></a>  <span class="at">acq =</span> <span class="st">&quot;ucb&quot;</span></span>
+<span id="cb536-36"><a href="arboles.html#cb536-36" tabindex="-1"></a>  <span class="at">FUN =</span> bayes_scoring_fun, <span class="co"># Funcion objetivo</span></span>
+<span id="cb536-37"><a href="arboles.html#cb536-37" tabindex="-1"></a>  <span class="at">bounds =</span> bounds,         <span class="co"># Espacio de busqueda</span></span>
+<span id="cb536-38"><a href="arboles.html#cb536-38" tabindex="-1"></a>  <span class="at">initPoints =</span> <span class="dv">12</span>,         <span class="co"># Cantidad de puntos iniciales aleatorios</span></span>
+<span id="cb536-39"><a href="arboles.html#cb536-39" tabindex="-1"></a>  <span class="at">iters.n =</span> <span class="dv">35</span>,            <span class="co"># Cantidad de iteraciones adicionales</span></span>
+<span id="cb536-40"><a href="arboles.html#cb536-40" tabindex="-1"></a>  <span class="at">acq =</span> <span class="st">&quot;ucb&quot;</span>              <span class="co"># función de adquisición (Upper Confidence Bound) / &#39;ei&#39; / &#39;poi&#39;</span></span>
 <span id="cb536-41"><a href="arboles.html#cb536-41" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
-## Running initial scoring function 10 times in 1 thread(s)...</code></pre>
+## Running initial scoring function 12 times in 1 thread(s)...</code></pre>
 <p>Hiperparámetros óptimos identificados:</p>
 <div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="arboles.html#cb538-1" tabindex="-1"></a>best_pars <span class="ot">&lt;-</span> <span class="fu">getBestPars</span>(opt_res)</span>
 <span id="cb538-2"><a href="arboles.html#cb538-2" tabindex="-1"></a><span class="fu">print</span>(best_pars)</span></code></pre></div>
@@ -782,18 +781,18 @@ Figura 10.2: Ada boost
 ## [1] 20
 ## 
 ## $min_data_in_leaf
-## [1] 136
+## [1] 300
 ## 
 ## $feature_fraction
-## [1] 1
+## [1] 0.7244074
 ## 
 ## $learning_rate
-## [1] 0.01546069</code></pre>
+## [1] 0.04624538</code></pre>
 <hr />
 </div>
 <div id="validación-en-test-etiquetado" class="section level3 hasAnchor" number="10.6.12">
 <h3><span class="header-section-number">10.6.12</span> Validación en test etiquetado<a href="arboles.html#validaci%C3%B3n-en-test-etiquetado" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Entrenamos modelo candidato con grid:</p>
+<p>Entrenamos modelo candidato con los resultados de Grid Search:</p>
 <div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="arboles.html#cb540-1" tabindex="-1"></a>params_grid <span class="ot">&lt;-</span> params_base</span>
 <span id="cb540-2"><a href="arboles.html#cb540-2" tabindex="-1"></a>params_grid<span class="sc">$</span>num_leaves       <span class="ot">&lt;-</span> best<span class="sc">$</span>num_leaves[[<span class="dv">1</span>]]</span>
 <span id="cb540-3"><a href="arboles.html#cb540-3" tabindex="-1"></a>params_grid<span class="sc">$</span>min_data_in_leaf <span class="ot">&lt;-</span> best<span class="sc">$</span>min_data_in_leaf[[<span class="dv">1</span>]]</span>
@@ -807,9 +806,9 @@ Figura 10.2: Ada boost
 <span id="cb540-11"><a href="arboles.html#cb540-11" tabindex="-1"></a>  <span class="at">data=</span>dtrain,</span>
 <span id="cb540-12"><a href="arboles.html#cb540-12" tabindex="-1"></a>  <span class="at">nrounds=</span>best_iter_grid</span>
 <span id="cb540-13"><a href="arboles.html#cb540-13" tabindex="-1"></a>)</span></code></pre></div>
-<p>Entrenamos modelo candidato con búsqueda bayesiana:</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="arboles.html#cb541-1" tabindex="-1"></a>params_bayes <span class="ot">&lt;-</span> <span class="fu">modifyList</span>(params_base_fixed, <span class="fu">list</span>(</span>
-<span id="cb541-2"><a href="arboles.html#cb541-2" tabindex="-1"></a>    <span class="at">num_leaves =</span> best_pars<span class="sc">$</span>num_leaves,</span>
+<p>Entrenamos modelo candidato con los resultados de la búsqueda bayesiana:</p>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="arboles.html#cb541-1" tabindex="-1"></a>params_bayes <span class="ot">&lt;-</span> <span class="fu">modifyList</span>(params_base_fixed, </span>
+<span id="cb541-2"><a href="arboles.html#cb541-2" tabindex="-1"></a>    <span class="fu">list</span>(<span class="at">num_leaves =</span> best_pars<span class="sc">$</span>num_leaves,</span>
 <span id="cb541-3"><a href="arboles.html#cb541-3" tabindex="-1"></a>    <span class="at">min_data_in_leaf =</span> best_pars<span class="sc">$</span>min_data_in_leaf,</span>
 <span id="cb541-4"><a href="arboles.html#cb541-4" tabindex="-1"></a>    <span class="at">feature_fraction =</span> best_pars<span class="sc">$</span>feature_fraction,</span>
 <span id="cb541-5"><a href="arboles.html#cb541-5" tabindex="-1"></a>    <span class="at">learning_rate =</span> best_pars<span class="sc">$</span>learning_rate))</span>
@@ -819,96 +818,99 @@ Figura 10.2: Ada boost
 <span id="cb541-9"><a href="arboles.html#cb541-9" tabindex="-1"></a>  <span class="at">data =</span> dtrain,</span>
 <span id="cb541-10"><a href="arboles.html#cb541-10" tabindex="-1"></a>  <span class="at">nrounds =</span> <span class="dv">1000</span></span>
 <span id="cb541-11"><a href="arboles.html#cb541-11" tabindex="-1"></a>)</span></code></pre></div>
-<p>Evaluación:</p>
-<p>Matriz de confusión:</p>
-<p>En el modelo de clasificación aplicado a la base GiveMeSomeCredit, la matriz de confusión muestra un patrón típico de problemas de la tasa de <em>default</em> con clases muy desbalanceadas (solo ~6,7% de los casos son morosos). El modelo presenta una AUC de 0.87, lo cual indica que es muy bueno para ordenar a los individuos según su probabilidad de incumplimiento: si tomamos un deudor y un no deudor al azar, el modelo asigna un score mayor al deudor el 87% de las veces. Sin embargo, al convertir esos scores en una predicción binaria usando un umbral fijo de 0.5 —que no es ideal en problemas de baja prevalencia— la matriz de confusión revela limitaciones importantes: la sensibilidad (77,6%) muestra que el modelo identifica correctamente a la mayoría de los deudores reales, pero la precisión (Pos Pred Value = 21,8%) es baja, lo que implica que muchos de los casos marcados como <em>default</em> son falsos positivos. A su vez, la <em>accuracy</em> global (0.80) es inferior al clasificador trivial que siempre predice no <em>default</em> (No Information Rate = 0.934), porque la clase positiva es muy rara. Esto ilustra que en contextos de riesgo de crédito, una AUC alta no garantiza buenas predicciones binarias si no se ajusta el umbral de decisión. En estos problemas, métricas como la sensibilidad, la precisión, el F1-score o la <em>balanced accuracy</em> son más informativas que la <em>accuracy</em> tradicional. En práctica, el umbral debe elegirse optimizando un criterio económico (costos relativos de FP y FN) o estadístico (maximizar F1).</p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="arboles.html#cb542-1" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
-<span id="cb542-2"><a href="arboles.html#cb542-2" tabindex="-1"></a></span>
+</div>
+<div id="evaluación-de-los-resultados" class="section level3 hasAnchor" number="10.6.13">
+<h3><span class="header-section-number">10.6.13</span> Evaluación de los resultados<a href="arboles.html#evaluaci%C3%B3n-de-los-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el modelo de clasificación aplicado a la base Give Me Some Credit, la matriz de confusión muestra un patrón típico de problemas de la tasa de <em>default</em> con clases muy desbalanceadas (solo ~6,7% de los casos son morosos). El modelo presenta una AUC de 0.87, lo cual indica que es muy bueno para ordenar a los individuos según su probabilidad de incumplimiento: si tomamos un deudor y un no deudor al azar, el modelo asigna un score mayor al deudor el 87% de las veces. Sin embargo, al convertir esos scores en una predicción binaria usando un umbral fijo de 0.5 —que no es ideal en problemas de baja prevalencia— la matriz de confusión revela limitaciones importantes: la sensibilidad (77,6%) muestra que el modelo identifica correctamente a la mayoría de los deudores reales, pero la precisión (Pos Pred Value = 21,8%) es baja, lo que implica que muchos de los casos marcados como <em>default</em> son falsos positivos. A su vez, la <em>accuracy</em> global (0.80) es inferior al clasificador trivial que siempre predice no <em>default</em> (No Information Rate = 0.934), porque la clase positiva es muy rara. Esto ilustra que en contextos de riesgo de crédito, una AUC alta no garantiza buenas predicciones binarias si no se ajusta el umbral de decisión. En estos problemas, métricas como la sensibilidad, la precisión, el F1-score o la <em>balanced accuracy</em> son más informativas que la <em>accuracy</em> tradicional. En práctica, el umbral debe elegirse optimizando un criterio económico (costos relativos de FP y FN) o estadístico (maximizar F1).</p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="arboles.html#cb542-1" tabindex="-1"></a><span class="co"># se aplica el modelo entrenado candidate_grid a los datos que separamos para test (X_test_labeled) </span></span>
+<span id="cb542-2"><a href="arboles.html#cb542-2" tabindex="-1"></a><span class="co"># Se obtienen probabilidades (pred_prob_grid) en el rango [0, 1]</span></span>
 <span id="cb542-3"><a href="arboles.html#cb542-3" tabindex="-1"></a>pred_prob_grid <span class="ot">&lt;-</span> <span class="fu">predict</span>(candidate_grid, X_test_labeled)</span>
 <span id="cb542-4"><a href="arboles.html#cb542-4" tabindex="-1"></a></span>
-<span id="cb542-5"><a href="arboles.html#cb542-5" tabindex="-1"></a>pred_class_grid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_prob_grid <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
-<span id="cb542-6"><a href="arboles.html#cb542-6" tabindex="-1"></a>real_class_grid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(y_test_labeled)</span>
-<span id="cb542-7"><a href="arboles.html#cb542-7" tabindex="-1"></a></span>
-<span id="cb542-8"><a href="arboles.html#cb542-8" tabindex="-1"></a><span class="fu">confusionMatrix</span>(</span>
-<span id="cb542-9"><a href="arboles.html#cb542-9" tabindex="-1"></a>  <span class="fu">factor</span>(pred_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
-<span id="cb542-10"><a href="arboles.html#cb542-10" tabindex="-1"></a>  <span class="fu">factor</span>(real_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
-<span id="cb542-11"><a href="arboles.html#cb542-11" tabindex="-1"></a>  <span class="at">positive =</span> <span class="st">&quot;1&quot;</span></span>
-<span id="cb542-12"><a href="arboles.html#cb542-12" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb542-5"><a href="arboles.html#cb542-5" tabindex="-1"></a><span class="co">#Se genera una clase binaria (requerido para la matriz de confusion) con umbral igual a 0,5.</span></span>
+<span id="cb542-6"><a href="arboles.html#cb542-6" tabindex="-1"></a>pred_class_grid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_prob_grid <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb542-7"><a href="arboles.html#cb542-7" tabindex="-1"></a>real_class_grid <span class="ot">&lt;-</span> <span class="fu">as.character</span>(y_test_labeled)</span>
+<span id="cb542-8"><a href="arboles.html#cb542-8" tabindex="-1"></a></span>
+<span id="cb542-9"><a href="arboles.html#cb542-9" tabindex="-1"></a><span class="co"># Notar que las variables &#39;character&#39; se convierten a tipo &#39;factor&#39;</span></span>
+<span id="cb542-10"><a href="arboles.html#cb542-10" tabindex="-1"></a><span class="fu">confusionMatrix</span>(</span>
+<span id="cb542-11"><a href="arboles.html#cb542-11" tabindex="-1"></a>  <span class="fu">factor</span>(pred_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
+<span id="cb542-12"><a href="arboles.html#cb542-12" tabindex="-1"></a>  <span class="fu">factor</span>(real_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
+<span id="cb542-13"><a href="arboles.html#cb542-13" tabindex="-1"></a>  <span class="at">positive =</span> <span class="st">&quot;1&quot;</span></span>
+<span id="cb542-14"><a href="arboles.html#cb542-14" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction     0     1
-##          0 33863   660
-##          1  8184  2292
+##          0 33793   671
+##          1  8254  2281
 ##                                           
-##                Accuracy : 0.8035          
-##                  95% CI : (0.7998, 0.8071)
+##                Accuracy : 0.8017          
+##                  95% CI : (0.7979, 0.8053)
 ##     No Information Rate : 0.9344          
 ##     P-Value [Acc &gt; NIR] : 1               
 ##                                           
-##                   Kappa : 0.2663          
+##                   Kappa : 0.2627          
 ##                                           
 ##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
 ##                                           
-##             Sensitivity : 0.77642         
-##             Specificity : 0.80536         
-##          Pos Pred Value : 0.21879         
-##          Neg Pred Value : 0.98088         
+##             Sensitivity : 0.77270         
+##             Specificity : 0.80370         
+##          Pos Pred Value : 0.21652         
+##          Neg Pred Value : 0.98053         
 ##              Prevalence : 0.06560         
-##          Detection Rate : 0.05093         
-##    Detection Prevalence : 0.23281         
-##       Balanced Accuracy : 0.79089         
+##          Detection Rate : 0.05069         
+##    Detection Prevalence : 0.23412         
+##       Balanced Accuracy : 0.78820         
 ##                                           
 ##        &#39;Positive&#39; Class : 1               
 ## </code></pre>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="arboles.html#cb544-1" tabindex="-1"></a>pred_class_grid2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_prob_grid <span class="sc">&gt;=</span> <span class="fl">0.6</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
-<span id="cb544-2"><a href="arboles.html#cb544-2" tabindex="-1"></a></span>
-<span id="cb544-3"><a href="arboles.html#cb544-3" tabindex="-1"></a><span class="fu">confusionMatrix</span>(</span>
-<span id="cb544-4"><a href="arboles.html#cb544-4" tabindex="-1"></a>  <span class="fu">factor</span>(pred_class_grid2, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
-<span id="cb544-5"><a href="arboles.html#cb544-5" tabindex="-1"></a>  <span class="fu">factor</span>(real_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
-<span id="cb544-6"><a href="arboles.html#cb544-6" tabindex="-1"></a>  <span class="at">positive =</span> <span class="st">&quot;1&quot;</span></span>
-<span id="cb544-7"><a href="arboles.html#cb544-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="arboles.html#cb544-1" tabindex="-1"></a><span class="co"># Se modifica el umbral a 0,6 para comparar resultados.</span></span>
+<span id="cb544-2"><a href="arboles.html#cb544-2" tabindex="-1"></a>pred_class_grid2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_prob_grid <span class="sc">&gt;=</span> <span class="fl">0.6</span>, <span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb544-3"><a href="arboles.html#cb544-3" tabindex="-1"></a></span>
+<span id="cb544-4"><a href="arboles.html#cb544-4" tabindex="-1"></a><span class="fu">confusionMatrix</span>(</span>
+<span id="cb544-5"><a href="arboles.html#cb544-5" tabindex="-1"></a>  <span class="fu">factor</span>(pred_class_grid2, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
+<span id="cb544-6"><a href="arboles.html#cb544-6" tabindex="-1"></a>  <span class="fu">factor</span>(real_class_grid, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&quot;0&quot;</span>,<span class="st">&quot;1&quot;</span>)),</span>
+<span id="cb544-7"><a href="arboles.html#cb544-7" tabindex="-1"></a>  <span class="at">positive =</span> <span class="st">&quot;1&quot;</span></span>
+<span id="cb544-8"><a href="arboles.html#cb544-8" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
 ## Prediction     0     1
-##          0 36520   932
-##          1  5527  2020
+##          0 36490   923
+##          1  5557  2029
 ##                                           
-##                Accuracy : 0.8565          
-##                  95% CI : (0.8532, 0.8597)
+##                Accuracy : 0.856           
+##                  95% CI : (0.8527, 0.8592)
 ##     No Information Rate : 0.9344          
 ##     P-Value [Acc &gt; NIR] : 1               
 ##                                           
-##                   Kappa : 0.3207          
+##                   Kappa : 0.3209          
 ##                                           
 ##  Mcnemar&#39;s Test P-Value : &lt;2e-16          
 ##                                           
-##             Sensitivity : 0.68428         
-##             Specificity : 0.86855         
-##          Pos Pred Value : 0.26766         
-##          Neg Pred Value : 0.97511         
+##             Sensitivity : 0.68733         
+##             Specificity : 0.86784         
+##          Pos Pred Value : 0.26747         
+##          Neg Pred Value : 0.97533         
 ##              Prevalence : 0.06560         
-##          Detection Rate : 0.04489         
-##    Detection Prevalence : 0.16771         
-##       Balanced Accuracy : 0.77642         
+##          Detection Rate : 0.04509         
+##    Detection Prevalence : 0.16858         
+##       Balanced Accuracy : 0.77758         
 ##                                           
 ##        &#39;Positive&#39; Class : 1               
 ## </code></pre>
-<p>AUC Grid:</p>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="arboles.html#cb546-1" tabindex="-1"></a>roc_grid  <span class="ot">&lt;-</span> <span class="fu">roc</span>(y_test_labeled, pred_prob_grid)</span>
-<span id="cb546-2"><a href="arboles.html#cb546-2" tabindex="-1"></a>auc_grid  <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_grid)</span>
-<span id="cb546-3"><a href="arboles.html#cb546-3" tabindex="-1"></a>auc_grid</span></code></pre></div>
-<pre><code>## Area under the curve: 0.8707</code></pre>
-<p>AUC Bayes:</p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="arboles.html#cb548-1" tabindex="-1"></a><span class="co"># Aplicamos mejor modelo bayes</span></span>
-<span id="cb548-2"><a href="arboles.html#cb548-2" tabindex="-1"></a>pred_prob_bayes <span class="ot">&lt;-</span> <span class="fu">predict</span>(candidate_bayes, X_test_labeled)</span>
-<span id="cb548-3"><a href="arboles.html#cb548-3" tabindex="-1"></a></span>
-<span id="cb548-4"><a href="arboles.html#cb548-4" tabindex="-1"></a></span>
-<span id="cb548-5"><a href="arboles.html#cb548-5" tabindex="-1"></a>roc_bayes <span class="ot">&lt;-</span> <span class="fu">roc</span>(y_test_labeled, pred_prob_bayes)</span>
-<span id="cb548-6"><a href="arboles.html#cb548-6" tabindex="-1"></a>auc_bayes <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_bayes)</span>
-<span id="cb548-7"><a href="arboles.html#cb548-7" tabindex="-1"></a>auc_bayes</span></code></pre></div>
-<pre><code>## Area under the curve: 0.8698</code></pre>
+<p>Se aplica el modelo candidato de la búsqueda bayesiana y se calcula la AUC de Grid Search y de la búsquda bayesiana (ahora se utilizan probabilidades):</p>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="arboles.html#cb546-1" tabindex="-1"></a><span class="co"># se aplica el modelo entrenado candidate_bayes a los datos que separamos para test (X_test_labeled) </span></span>
+<span id="cb546-2"><a href="arboles.html#cb546-2" tabindex="-1"></a>pred_prob_bayes <span class="ot">&lt;-</span> <span class="fu">predict</span>(candidate_bayes, X_test_labeled)</span>
+<span id="cb546-3"><a href="arboles.html#cb546-3" tabindex="-1"></a></span>
+<span id="cb546-4"><a href="arboles.html#cb546-4" tabindex="-1"></a>roc_grid  <span class="ot">&lt;-</span> <span class="fu">roc</span>(y_test_labeled, pred_prob_grid)</span>
+<span id="cb546-5"><a href="arboles.html#cb546-5" tabindex="-1"></a>auc_grid  <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_grid)</span>
+<span id="cb546-6"><a href="arboles.html#cb546-6" tabindex="-1"></a>auc_grid</span></code></pre></div>
+<pre><code>## Area under the curve: 0.8703</code></pre>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="arboles.html#cb548-1" tabindex="-1"></a>roc_bayes <span class="ot">&lt;-</span> <span class="fu">roc</span>(y_test_labeled, pred_prob_bayes)</span>
+<span id="cb548-2"><a href="arboles.html#cb548-2" tabindex="-1"></a>auc_bayes <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_bayes)</span>
+<span id="cb548-3"><a href="arboles.html#cb548-3" tabindex="-1"></a>auc_bayes</span></code></pre></div>
+<pre><code>## Area under the curve: 0.8656</code></pre>
+<p>Se utilizan los resultados anteriores para armar una base de datos (en formato ‘long’) para graficar.</p>
 <div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="arboles.html#cb550-1" tabindex="-1"></a><span class="co"># Curva ROC del modelo Grid</span></span>
 <span id="cb550-2"><a href="arboles.html#cb550-2" tabindex="-1"></a>df_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb550-3"><a href="arboles.html#cb550-3" tabindex="-1"></a>  <span class="at">fpr =</span> <span class="dv">1</span> <span class="sc">-</span> roc_grid<span class="sc">$</span>specificities,</span>
@@ -925,12 +927,13 @@ Figura 10.2: Ada boost
 <span id="cb550-14"><a href="arboles.html#cb550-14" tabindex="-1"></a></span>
 <span id="cb550-15"><a href="arboles.html#cb550-15" tabindex="-1"></a><span class="co"># Unimos en formato largo</span></span>
 <span id="cb550-16"><a href="arboles.html#cb550-16" tabindex="-1"></a>roc_long <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_grid, df_bayes)</span></code></pre></div>
+<p>Curva ROC:</p>
 <p><img src="CDbook_files/figure-html/candidate-roc-ds-white-1.svg" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
-<div id="entrenamiento-final" class="section level3 hasAnchor" number="10.6.13">
-<h3><span class="header-section-number">10.6.13</span> Entrenamiento final<a href="arboles.html#entrenamiento-final" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Se utilizan TODOS los datos disponibles para entrenar</strong></p>
+<div id="entrenamiento-final" class="section level3 hasAnchor" number="10.6.14">
+<h3><span class="header-section-number">10.6.14</span> Entrenamiento final<a href="arboles.html#entrenamiento-final" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dado que ahora se busca entrenar un modelo final para luego aplicar a la <strong>predicción final (objetivo del ejercicio)</strong> se utilizan <strong>TODOS</strong> los datos disponibles para entrenar con los mejores hiperparámetros identificados.</p>
 <div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="arboles.html#cb551-1" tabindex="-1"></a>X_full <span class="ot">&lt;-</span> train_clean <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Id, <span class="sc">-</span>SeriousDlqin2yrs) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
 <span id="cb551-2"><a href="arboles.html#cb551-2" tabindex="-1"></a>y_full <span class="ot">&lt;-</span> train_clean<span class="sc">$</span>SeriousDlqin2yrs</span>
 <span id="cb551-3"><a href="arboles.html#cb551-3" tabindex="-1"></a>dtrain_full <span class="ot">&lt;-</span> <span class="fu">lgb.Dataset</span>(X_full, <span class="at">label =</span> y_full)</span></code></pre></div>
@@ -938,74 +941,80 @@ Figura 10.2: Ada boost
 <span id="cb552-2"><a href="arboles.html#cb552-2" tabindex="-1"></a>  <span class="at">params=</span>params_grid,</span>
 <span id="cb552-3"><a href="arboles.html#cb552-3" tabindex="-1"></a>  <span class="at">data=</span>dtrain_full,</span>
 <span id="cb552-4"><a href="arboles.html#cb552-4" tabindex="-1"></a>  <span class="at">nrounds=</span>best_iter_grid</span>
-<span id="cb552-5"><a href="arboles.html#cb552-5" tabindex="-1"></a>)</span></code></pre></div>
-<p>Bayes</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="arboles.html#cb553-1" tabindex="-1"></a>final_model_bayes <span class="ot">&lt;-</span> <span class="fu">lgb.train</span>(</span>
-<span id="cb553-2"><a href="arboles.html#cb553-2" tabindex="-1"></a>  <span class="at">params=</span>params_bayes,</span>
-<span id="cb553-3"><a href="arboles.html#cb553-3" tabindex="-1"></a>  <span class="at">data=</span>dtrain_full,</span>
-<span id="cb553-4"><a href="arboles.html#cb553-4" tabindex="-1"></a>  <span class="at">nrounds=</span><span class="dv">1000</span></span>
-<span id="cb553-5"><a href="arboles.html#cb553-5" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb552-5"><a href="arboles.html#cb552-5" tabindex="-1"></a>)</span>
+<span id="cb552-6"><a href="arboles.html#cb552-6" tabindex="-1"></a></span>
+<span id="cb552-7"><a href="arboles.html#cb552-7" tabindex="-1"></a>final_model_bayes <span class="ot">&lt;-</span> <span class="fu">lgb.train</span>(</span>
+<span id="cb552-8"><a href="arboles.html#cb552-8" tabindex="-1"></a>  <span class="at">params=</span>params_bayes,</span>
+<span id="cb552-9"><a href="arboles.html#cb552-9" tabindex="-1"></a>  <span class="at">data=</span>dtrain_full,</span>
+<span id="cb552-10"><a href="arboles.html#cb552-10" tabindex="-1"></a>  <span class="at">nrounds=</span><span class="dv">1000</span></span>
+<span id="cb552-11"><a href="arboles.html#cb552-11" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="análisis-de-resultados" class="section level3 hasAnchor" number="10.6.14">
-<h3><span class="header-section-number">10.6.14</span> Análisis de resultados<a href="arboles.html#an%C3%A1lisis-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Feature importance:</p>
+<div id="análisis-de-resultados" class="section level3 hasAnchor" number="10.6.15">
+<h3><span class="header-section-number">10.6.15</span> Análisis de resultados<a href="arboles.html#an%C3%A1lisis-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En LightGBM, la importancia de variables se resume mediante tres métricas complementarias: Gain, Cover y Frequency. <strong>Gain</strong> es la más informativa y la que suele usarse como referencia principal: mide cuánto contribuye una variable a reducir la función de pérdida a lo largo de todo el modelo. En otras palabras, captura el “poder explicativo” real de cada predictor y su peso en la construcción del <em>score</em> final. <strong>Cover</strong> indica cuántas observaciones, en promedio, pasan por las divisiones donde interviene una variable; refleja qué tan “amplio” es el segmento del dataset donde esa variable influye. Una variable puede tener bajo Gain pero alto Cover si aparece en <em>splits</em> tempranos que afectan a muchos registros, pero sin mejorar demasiado la pérdida. Finalmente, <strong>Frequency</strong> simplemente cuenta cuántas veces una variable aparece en un split; es útil para detectar variables muy utilizadas, aunque su aporte marginal pueda ser pequeño. En la práctica, Gain es la métrica dominante, porque resume la mejora real del modelo, mientras que Cover y Frequency se interpretan como medidas auxiliares para entender el rol estructural de cada variable dentro de los árboles.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="arboles.html#cb554-1" tabindex="-1"></a>importance_tbl <span class="ot">&lt;-</span> <span class="fu">lgb.importance</span>(final_model_grid)</span>
-<span id="cb554-2"><a href="arboles.html#cb554-2" tabindex="-1"></a>importance_tbl <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="arboles.html#cb553-1" tabindex="-1"></a>importance_tbl <span class="ot">&lt;-</span> <span class="fu">lgb.importance</span>(final_model_grid)</span>
+<span id="cb553-2"><a href="arboles.html#cb553-2" tabindex="-1"></a>importance_tbl <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">15</span>)</span></code></pre></div>
 <pre><code>##                                  Feature        Gain      Cover  Frequency
 ##                                   &lt;char&gt;       &lt;num&gt;      &lt;num&gt;      &lt;num&gt;
-##  1: RevolvingUtilizationOfUnsecuredLines 0.420948827 0.18285849 0.16794872
-##  2:              NumberOfTimes90DaysLate 0.159647396 0.11429209 0.03942308
-##  3: NumberOfTime30-59DaysPastDueNotWorse 0.150636376 0.10458548 0.05448718
-##  4: NumberOfTime60-89DaysPastDueNotWorse 0.072908097 0.09346272 0.03621795
-##  5:                            DebtRatio 0.052068231 0.12781435 0.21282051
-##  6:                                  age 0.050448922 0.11211552 0.13365385
-##  7:                        MonthlyIncome 0.032433820 0.09698231 0.15416667
-##  8:      NumberOfOpenCreditLinesAndLoans 0.030901513 0.08828471 0.10929487
-##  9:         NumberRealEstateLoansOrLines 0.024426798 0.05705801 0.06089744
-## 10:                   NumberOfDependents 0.005580021 0.02254630 0.03108974</code></pre>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="arboles.html#cb556-1" tabindex="-1"></a><span class="fu">lgb.plot.importance</span>(importance_tbl, <span class="at">top_n =</span> <span class="dv">15</span>, <span class="at">measure =</span> <span class="st">&quot;Gain&quot;</span>) <span class="sc">+</span></span>
-<span id="cb556-2"><a href="arboles.html#cb556-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Feature Importance — Modelo LightGBM&quot;</span>,</span>
-<span id="cb556-3"><a href="arboles.html#cb556-3" tabindex="-1"></a>                <span class="at">subtitle =</span> <span class="st">&quot;Medida: Gain&quot;</span>) <span class="sc">+</span></span>
-<span id="cb556-4"><a href="arboles.html#cb556-4" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+##  1: RevolvingUtilizationOfUnsecuredLines 0.418344921 0.18261028 0.15544872
+##  2:              NumberOfTimes90DaysLate 0.159013264 0.11306596 0.03974359
+##  3: NumberOfTime30-59DaysPastDueNotWorse 0.150011588 0.10402867 0.05512821
+##  4: NumberOfTime60-89DaysPastDueNotWorse 0.072762270 0.09127634 0.03621795
+##  5:                                  age 0.049887113 0.11360970 0.13685897
+##  6:                            DebtRatio 0.049664173 0.11068942 0.20865385
+##  7:                        MonthlyIncome 0.039347900 0.11195220 0.16602564
+##  8:      NumberOfOpenCreditLinesAndLoans 0.030908778 0.09007919 0.10929487
+##  9:         NumberRealEstateLoansOrLines 0.023280020 0.05987491 0.05416667
+## 10:                   NumberOfDependents 0.006779972 0.02281334 0.03846154</code></pre>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="arboles.html#cb555-1" tabindex="-1"></a><span class="fu">lgb.plot.importance</span>(importance_tbl, <span class="at">top_n =</span> <span class="dv">15</span>, <span class="at">measure =</span> <span class="st">&quot;Gain&quot;</span>) <span class="sc">+</span></span>
+<span id="cb555-2"><a href="arboles.html#cb555-2" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Feature Importance — Modelo LightGBM&quot;</span>,</span>
+<span id="cb555-3"><a href="arboles.html#cb555-3" tabindex="-1"></a>                <span class="at">subtitle =</span> <span class="st">&quot;Medida: Gain&quot;</span>) <span class="sc">+</span></span>
+<span id="cb555-4"><a href="arboles.html#cb555-4" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/fm-igph-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <pre><code>## NULL</code></pre>
 </div>
-<div id="análisis-de-interpretabilidad-shap" class="section level3 hasAnchor" number="10.6.15">
-<h3><span class="header-section-number">10.6.15</span> Análisis de interpretabilidad (SHAP)<a href="arboles.html#an%C3%A1lisis-de-interpretabilidad-shap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Se emplean valores SHAP (SHapley Additive exPlanations) para determinar la contribución marginal de cada variable a la predicción del modelo.</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="arboles.html#cb558-1" tabindex="-1"></a>shap_obj <span class="ot">&lt;-</span> <span class="fu">shapviz</span>(final_model_bayes, <span class="at">X_pred =</span> X_test_labeled)</span>
-<span id="cb558-2"><a href="arboles.html#cb558-2" tabindex="-1"></a></span>
-<span id="cb558-3"><a href="arboles.html#cb558-3" tabindex="-1"></a><span class="fu">sv_importance</span>(shap_obj, <span class="at">kind =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">show_numbers =</span> <span class="cn">TRUE</span>, <span class="at">max_display =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb558-4"><a href="arboles.html#cb558-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Importancia Global (Mean |SHAP|)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb558-5"><a href="arboles.html#cb558-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div id="análisis-de-interpretabilidad-shap" class="section level3 hasAnchor" number="10.6.16">
+<h3><span class="header-section-number">10.6.16</span> Análisis de interpretabilidad (SHAP)<a href="arboles.html#an%C3%A1lisis-de-interpretabilidad-shap" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Los <strong>valores SHAP (SHapley Additive exPlanations)</strong> son una forma de entender qué aportan las variables dentro de un modelo complejo, como LightGBM. La idea viene de la teoría de juegos cooperativos: imaginar que cada variable es un “jugador” y que la predicción final del modelo es el resultado de un “juego” donde todos colaboran. Los valores SHAP calculan cuál es la contribución marginal promedio de cada variable a través de todas las posibles combinaciones con el resto de las variables. Es decir, miden cuánto cambia la predicción cuando se agrega una variable a un conjunto cualquiera de otras variables. Esto permite explicar predicciones individuales (por ejemplo, por qué para un caso puntual el modelo predijo un valor más alto o más bajo) y al mismo tiempo construir resúmenes globales que muestran las variables más influyentes de manera consistente</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="arboles.html#cb557-1" tabindex="-1"></a>shap_obj <span class="ot">&lt;-</span> <span class="fu">shapviz</span>(final_model_bayes, <span class="at">X_pred =</span> X_test_labeled)</span>
+<span id="cb557-2"><a href="arboles.html#cb557-2" tabindex="-1"></a></span>
+<span id="cb557-3"><a href="arboles.html#cb557-3" tabindex="-1"></a><span class="fu">sv_importance</span>(shap_obj, <span class="at">kind =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">show_numbers =</span> <span class="cn">TRUE</span>, <span class="at">max_display =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb557-4"><a href="arboles.html#cb557-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Importancia Global (Mean |SHAP|)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-5"><a href="arboles.html#cb557-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="CDbook_files/figure-html/shap1-1.png" width="672" height="40%" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
-<div id="aplicación-final-para-predicción" class="section level3 hasAnchor" number="10.6.16">
-<h3><span class="header-section-number">10.6.16</span> Aplicación final para predicción<a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="arboles.html#cb559-1" tabindex="-1"></a>test_proc <span class="ot">&lt;-</span> test_clean</span>
-<span id="cb559-2"><a href="arboles.html#cb559-2" tabindex="-1"></a></span>
-<span id="cb559-3"><a href="arboles.html#cb559-3" tabindex="-1"></a>X <span class="ot">&lt;-</span> test_proc <span class="sc">|&gt;</span></span>
-<span id="cb559-4"><a href="arboles.html#cb559-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">all_of</span>(num_vars)) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb559-5"><a href="arboles.html#cb559-5" tabindex="-1"></a></span>
-<span id="cb559-6"><a href="arboles.html#cb559-6" tabindex="-1"></a>prob_default_grid <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_model_grid, X)</span>
-<span id="cb559-7"><a href="arboles.html#cb559-7" tabindex="-1"></a></span>
-<span id="cb559-8"><a href="arboles.html#cb559-8" tabindex="-1"></a>output_scores_grid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb559-9"><a href="arboles.html#cb559-9" tabindex="-1"></a>  <span class="at">Id           =</span> test_proc<span class="sc">$</span>Id,</span>
-<span id="cb559-10"><a href="arboles.html#cb559-10" tabindex="-1"></a>  <span class="at">prob_default =</span> prob_default_grid</span>
-<span id="cb559-11"><a href="arboles.html#cb559-11" tabindex="-1"></a>)</span>
-<span id="cb559-12"><a href="arboles.html#cb559-12" tabindex="-1"></a></span>
-<span id="cb559-13"><a href="arboles.html#cb559-13" tabindex="-1"></a><span class="fu">head</span>(output_scores_grid)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 2
-##      Id prob_default
-##   &lt;dbl&gt;        &lt;dbl&gt;
-## 1     1        0.515
-## 2     2        0.378
-## 3     3        0.140
-## 4     4        0.504
-## 5     5        0.656
-## 6     6        0.288</code></pre>
+<div id="aplicación-final-para-predicción" class="section level3 hasAnchor" number="10.6.17">
+<h3><span class="header-section-number">10.6.17</span> Aplicación final para predicción<a href="arboles.html#aplicaci%C3%B3n-final-para-predicci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Se aplica el modelo final entrenado en la base de datos de <strong>entrenamiento completa</strong> utilizando los <strong>mejores hiperparámetros</strong> identificados por cada método.</p>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="arboles.html#cb558-1" tabindex="-1"></a>test_proc <span class="ot">&lt;-</span> test_clean</span>
+<span id="cb558-2"><a href="arboles.html#cb558-2" tabindex="-1"></a></span>
+<span id="cb558-3"><a href="arboles.html#cb558-3" tabindex="-1"></a>X <span class="ot">&lt;-</span> test_proc <span class="sc">|&gt;</span></span>
+<span id="cb558-4"><a href="arboles.html#cb558-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">all_of</span>(num_vars)) <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>()</span>
+<span id="cb558-5"><a href="arboles.html#cb558-5" tabindex="-1"></a></span>
+<span id="cb558-6"><a href="arboles.html#cb558-6" tabindex="-1"></a>prob_default_grid  <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_model_grid, X)</span>
+<span id="cb558-7"><a href="arboles.html#cb558-7" tabindex="-1"></a>prob_default_bayes <span class="ot">&lt;-</span> <span class="fu">predict</span>(final_model_bayes, X)</span>
+<span id="cb558-8"><a href="arboles.html#cb558-8" tabindex="-1"></a></span>
+<span id="cb558-9"><a href="arboles.html#cb558-9" tabindex="-1"></a>resultados_default <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb558-10"><a href="arboles.html#cb558-10" tabindex="-1"></a>  <span class="at">Id                 =</span> test_proc<span class="sc">$</span>Id,</span>
+<span id="cb558-11"><a href="arboles.html#cb558-11" tabindex="-1"></a>  <span class="at">prob_default_grid  =</span> prob_default_grid,</span>
+<span id="cb558-12"><a href="arboles.html#cb558-12" tabindex="-1"></a>  <span class="at">prob_default_bayes =</span> prob_default_bayes,</span>
+<span id="cb558-13"><a href="arboles.html#cb558-13" tabindex="-1"></a>)</span>
+<span id="cb558-14"><a href="arboles.html#cb558-14" tabindex="-1"></a></span>
+<span id="cb558-15"><a href="arboles.html#cb558-15" tabindex="-1"></a><span class="fu">head</span>(resultados_default, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 3
+##       Id prob_default_grid prob_default_bayes
+##    &lt;dbl&gt;             &lt;dbl&gt;              &lt;dbl&gt;
+##  1     1            0.473              0.355 
+##  2     2            0.429              0.297 
+##  3     3            0.144              0.132 
+##  4     4            0.494              0.440 
+##  5     5            0.638              0.632 
+##  6     6            0.265              0.357 
+##  7     7            0.279              0.309 
+##  8     8            0.339              0.284 
+##  9     9            0.0317             0.0102
+## 10    10            0.924              0.881</code></pre>
 
 </div>
 </div>
