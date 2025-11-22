@@ -537,7 +537,8 @@ Figura 10.2: Ada boost
 <span id="cb512-7"><a href="arboles.html#cb512-7" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb512-8"><a href="arboles.html#cb512-8" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb512-9"><a href="arboles.html#cb512-9" tabindex="-1"></a><span class="fu">library</span>(ParBayesianOptimization)</span>
-<span id="cb512-10"><a href="arboles.html#cb512-10" tabindex="-1"></a><span class="fu">library</span>(shapviz)</span></code></pre></div>
+<span id="cb512-10"><a href="arboles.html#cb512-10" tabindex="-1"></a><span class="fu">library</span>(shapviz)</span>
+<span id="cb512-11"><a href="arboles.html#cb512-11" tabindex="-1"></a><span class="fu">library</span>(future)</span></code></pre></div>
 </div>
 <div id="carga-de-datos" class="section level3 hasAnchor" number="10.6.2">
 <h3><span class="header-section-number">10.6.2</span> Carga de datos<a href="arboles.html#carga-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -739,41 +740,42 @@ Figura 10.2: Ada boost
 <span id="cb536-6"><a href="arboles.html#cb536-6" tabindex="-1"></a>    <span class="at">num_leaves =</span> <span class="fu">as.integer</span>(num_leaves),</span>
 <span id="cb536-7"><a href="arboles.html#cb536-7" tabindex="-1"></a>    <span class="at">min_data_in_leaf =</span> <span class="fu">as.integer</span>(min_data_in_leaf),</span>
 <span id="cb536-8"><a href="arboles.html#cb536-8" tabindex="-1"></a>    <span class="at">feature_fraction =</span> feature_fraction,</span>
-<span id="cb536-9"><a href="arboles.html#cb536-9" tabindex="-1"></a>    <span class="at">learning_rate =</span> learning_rate))</span>
-<span id="cb536-10"><a href="arboles.html#cb536-10" tabindex="-1"></a></span>
-<span id="cb536-11"><a href="arboles.html#cb536-11" tabindex="-1"></a>  cv_res <span class="ot">&lt;-</span> <span class="fu">lgb.cv</span>(</span>
-<span id="cb536-12"><a href="arboles.html#cb536-12" tabindex="-1"></a>    <span class="at">params =</span> pars,</span>
-<span id="cb536-13"><a href="arboles.html#cb536-13" tabindex="-1"></a>    <span class="at">data =</span> dtrain,</span>
-<span id="cb536-14"><a href="arboles.html#cb536-14" tabindex="-1"></a>    <span class="at">nrounds =</span> <span class="dv">1000</span>,</span>
-<span id="cb536-15"><a href="arboles.html#cb536-15" tabindex="-1"></a>    <span class="at">nfold =</span> <span class="dv">5</span>,</span>
-<span id="cb536-16"><a href="arboles.html#cb536-16" tabindex="-1"></a>    <span class="at">stratified =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb536-17"><a href="arboles.html#cb536-17" tabindex="-1"></a>    <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>,</span>
-<span id="cb536-18"><a href="arboles.html#cb536-18" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb536-19"><a href="arboles.html#cb536-19" tabindex="-1"></a>  )</span>
-<span id="cb536-20"><a href="arboles.html#cb536-20" tabindex="-1"></a>  </span>
-<span id="cb536-21"><a href="arboles.html#cb536-21" tabindex="-1"></a>  best_auc <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">unlist</span>(cv_res<span class="sc">$</span>record_evals<span class="sc">$</span>valid<span class="sc">$</span>auc<span class="sc">$</span>eval))</span>
-<span id="cb536-22"><a href="arboles.html#cb536-22" tabindex="-1"></a>  </span>
-<span id="cb536-23"><a href="arboles.html#cb536-23" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Score =</span> best_auc, <span class="at">best_iter =</span> cv_res<span class="sc">$</span>best_iter))</span>
-<span id="cb536-24"><a href="arboles.html#cb536-24" tabindex="-1"></a>}</span>
-<span id="cb536-25"><a href="arboles.html#cb536-25" tabindex="-1"></a></span>
-<span id="cb536-26"><a href="arboles.html#cb536-26" tabindex="-1"></a><span class="co"># Espacio de búsqueda</span></span>
-<span id="cb536-27"><a href="arboles.html#cb536-27" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb536-28"><a href="arboles.html#cb536-28" tabindex="-1"></a>  <span class="at">num_leaves       =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="dt">L</span>, <span class="dv">127</span><span class="dt">L</span>),</span>
-<span id="cb536-29"><a href="arboles.html#cb536-29" tabindex="-1"></a>  <span class="at">min_data_in_leaf =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="dt">L</span>, <span class="dv">300</span><span class="dt">L</span>),</span>
-<span id="cb536-30"><a href="arboles.html#cb536-30" tabindex="-1"></a>  <span class="at">feature_fraction =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">1.0</span>),</span>
-<span id="cb536-31"><a href="arboles.html#cb536-31" tabindex="-1"></a>  <span class="at">learning_rate    =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.15</span>)</span>
-<span id="cb536-32"><a href="arboles.html#cb536-32" tabindex="-1"></a>)</span>
-<span id="cb536-33"><a href="arboles.html#cb536-33" tabindex="-1"></a></span>
-<span id="cb536-34"><a href="arboles.html#cb536-34" tabindex="-1"></a><span class="co"># Ejecución de la optimizacion</span></span>
-<span id="cb536-35"><a href="arboles.html#cb536-35" tabindex="-1"></a>opt_res <span class="ot">&lt;-</span> <span class="fu">bayesOpt</span>(</span>
-<span id="cb536-36"><a href="arboles.html#cb536-36" tabindex="-1"></a>  <span class="at">FUN =</span> bayes_scoring_fun, <span class="co"># Funcion objetivo</span></span>
-<span id="cb536-37"><a href="arboles.html#cb536-37" tabindex="-1"></a>  <span class="at">bounds =</span> bounds,         <span class="co"># Espacio de busqueda</span></span>
-<span id="cb536-38"><a href="arboles.html#cb536-38" tabindex="-1"></a>  <span class="at">initPoints =</span> <span class="dv">12</span>,         <span class="co"># Cantidad de puntos iniciales aleatorios</span></span>
-<span id="cb536-39"><a href="arboles.html#cb536-39" tabindex="-1"></a>  <span class="at">iters.n =</span> <span class="dv">35</span>,            <span class="co"># Cantidad de iteraciones adicionales</span></span>
-<span id="cb536-40"><a href="arboles.html#cb536-40" tabindex="-1"></a>  <span class="at">acq =</span> <span class="st">&quot;ucb&quot;</span>              <span class="co"># función de adquisición (Upper Confidence Bound) / &#39;ei&#39; / &#39;poi&#39;</span></span>
-<span id="cb536-41"><a href="arboles.html#cb536-41" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb536-9"><a href="arboles.html#cb536-9" tabindex="-1"></a>    <span class="at">learning_rate =</span> learning_rate,</span>
+<span id="cb536-10"><a href="arboles.html#cb536-10" tabindex="-1"></a>    <span class="at">num_threads =</span> <span class="dv">4</span>))</span>
+<span id="cb536-11"><a href="arboles.html#cb536-11" tabindex="-1"></a></span>
+<span id="cb536-12"><a href="arboles.html#cb536-12" tabindex="-1"></a>  cv_res <span class="ot">&lt;-</span> <span class="fu">lgb.cv</span>(</span>
+<span id="cb536-13"><a href="arboles.html#cb536-13" tabindex="-1"></a>    <span class="at">params =</span> pars,</span>
+<span id="cb536-14"><a href="arboles.html#cb536-14" tabindex="-1"></a>    <span class="at">data =</span> dtrain,</span>
+<span id="cb536-15"><a href="arboles.html#cb536-15" tabindex="-1"></a>    <span class="at">nrounds =</span> <span class="dv">1000</span>,</span>
+<span id="cb536-16"><a href="arboles.html#cb536-16" tabindex="-1"></a>    <span class="at">nfold =</span> <span class="dv">5</span>,</span>
+<span id="cb536-17"><a href="arboles.html#cb536-17" tabindex="-1"></a>    <span class="at">stratified =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb536-18"><a href="arboles.html#cb536-18" tabindex="-1"></a>    <span class="at">early_stopping_rounds =</span> <span class="dv">50</span>,</span>
+<span id="cb536-19"><a href="arboles.html#cb536-19" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb536-20"><a href="arboles.html#cb536-20" tabindex="-1"></a>  )</span>
+<span id="cb536-21"><a href="arboles.html#cb536-21" tabindex="-1"></a>  </span>
+<span id="cb536-22"><a href="arboles.html#cb536-22" tabindex="-1"></a>  best_auc <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">unlist</span>(cv_res<span class="sc">$</span>record_evals<span class="sc">$</span>valid<span class="sc">$</span>auc<span class="sc">$</span>eval))</span>
+<span id="cb536-23"><a href="arboles.html#cb536-23" tabindex="-1"></a>  </span>
+<span id="cb536-24"><a href="arboles.html#cb536-24" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">Score =</span> best_auc, <span class="at">best_iter =</span> cv_res<span class="sc">$</span>best_iter))</span>
+<span id="cb536-25"><a href="arboles.html#cb536-25" tabindex="-1"></a>}</span>
+<span id="cb536-26"><a href="arboles.html#cb536-26" tabindex="-1"></a></span>
+<span id="cb536-27"><a href="arboles.html#cb536-27" tabindex="-1"></a><span class="co"># Espacio de búsqueda</span></span>
+<span id="cb536-28"><a href="arboles.html#cb536-28" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb536-29"><a href="arboles.html#cb536-29" tabindex="-1"></a>  <span class="at">num_leaves       =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="dt">L</span>, <span class="dv">127</span><span class="dt">L</span>),</span>
+<span id="cb536-30"><a href="arboles.html#cb536-30" tabindex="-1"></a>  <span class="at">min_data_in_leaf =</span> <span class="fu">c</span>(<span class="dv">20</span><span class="dt">L</span>, <span class="dv">300</span><span class="dt">L</span>),</span>
+<span id="cb536-31"><a href="arboles.html#cb536-31" tabindex="-1"></a>  <span class="at">feature_fraction =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">1.0</span>),</span>
+<span id="cb536-32"><a href="arboles.html#cb536-32" tabindex="-1"></a>  <span class="at">learning_rate    =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.15</span>)</span>
+<span id="cb536-33"><a href="arboles.html#cb536-33" tabindex="-1"></a>)</span>
+<span id="cb536-34"><a href="arboles.html#cb536-34" tabindex="-1"></a></span>
+<span id="cb536-35"><a href="arboles.html#cb536-35" tabindex="-1"></a><span class="co"># Ejecución de la optimizacion</span></span>
+<span id="cb536-36"><a href="arboles.html#cb536-36" tabindex="-1"></a>opt_res <span class="ot">&lt;-</span> <span class="fu">bayesOpt</span>(</span>
+<span id="cb536-37"><a href="arboles.html#cb536-37" tabindex="-1"></a>  <span class="at">FUN =</span> bayes_scoring_fun, <span class="co"># Funcion objetivo</span></span>
+<span id="cb536-38"><a href="arboles.html#cb536-38" tabindex="-1"></a>  <span class="at">bounds =</span> bounds,         <span class="co"># Espacio de busqueda</span></span>
+<span id="cb536-39"><a href="arboles.html#cb536-39" tabindex="-1"></a>  <span class="at">initPoints =</span> <span class="dv">15</span>,         <span class="co"># Cantidad de puntos iniciales aleatorios</span></span>
+<span id="cb536-40"><a href="arboles.html#cb536-40" tabindex="-1"></a>  <span class="at">iters.n =</span> <span class="dv">50</span>,            <span class="co"># Cantidad de iteraciones adicionales</span></span>
+<span id="cb536-41"><a href="arboles.html#cb536-41" tabindex="-1"></a>  <span class="at">acq =</span> <span class="st">&quot;ucb&quot;</span>              <span class="co"># función de adquisición (Upper Confidence Bound) / &#39;ei&#39; / &#39;poi&#39;</span></span>
+<span id="cb536-42"><a href="arboles.html#cb536-42" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
-## Running initial scoring function 12 times in 1 thread(s)...</code></pre>
+## Running initial scoring function 15 times in 1 thread(s)...</code></pre>
 <p>Hiperparámetros óptimos identificados:</p>
 <div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="arboles.html#cb538-1" tabindex="-1"></a>best_pars <span class="ot">&lt;-</span> <span class="fu">getBestPars</span>(opt_res)</span>
 <span id="cb538-2"><a href="arboles.html#cb538-2" tabindex="-1"></a><span class="fu">print</span>(best_pars)</span></code></pre></div>
@@ -781,13 +783,13 @@ Figura 10.2: Ada boost
 ## [1] 20
 ## 
 ## $min_data_in_leaf
-## [1] 300
+## [1] 257
 ## 
 ## $feature_fraction
-## [1] 0.7244074
+## [1] 0.4968178
 ## 
 ## $learning_rate
-## [1] 0.04624538</code></pre>
+## [1] 0.01</code></pre>
 <hr />
 </div>
 <div id="validación-en-test-etiquetado" class="section level3 hasAnchor" number="10.6.12">
@@ -909,7 +911,7 @@ Figura 10.2: Ada boost
 <div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="arboles.html#cb548-1" tabindex="-1"></a>roc_bayes <span class="ot">&lt;-</span> <span class="fu">roc</span>(y_test_labeled, pred_prob_bayes)</span>
 <span id="cb548-2"><a href="arboles.html#cb548-2" tabindex="-1"></a>auc_bayes <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_bayes)</span>
 <span id="cb548-3"><a href="arboles.html#cb548-3" tabindex="-1"></a>auc_bayes</span></code></pre></div>
-<pre><code>## Area under the curve: 0.8656</code></pre>
+<pre><code>## Area under the curve: 0.8709</code></pre>
 <p>Se utilizan los resultados anteriores para armar una base de datos (en formato ‘long’) para graficar.</p>
 <div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="arboles.html#cb550-1" tabindex="-1"></a><span class="co"># Curva ROC del modelo Grid</span></span>
 <span id="cb550-2"><a href="arboles.html#cb550-2" tabindex="-1"></a>df_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -1005,16 +1007,16 @@ Figura 10.2: Ada boost
 <pre><code>## # A tibble: 10 × 3
 ##       Id prob_default_grid prob_default_bayes
 ##    &lt;dbl&gt;             &lt;dbl&gt;              &lt;dbl&gt;
-##  1     1            0.473              0.355 
-##  2     2            0.429              0.297 
-##  3     3            0.144              0.132 
-##  4     4            0.494              0.440 
-##  5     5            0.638              0.632 
-##  6     6            0.265              0.357 
-##  7     7            0.279              0.309 
-##  8     8            0.339              0.284 
-##  9     9            0.0317             0.0102
-## 10    10            0.924              0.881</code></pre>
+##  1     1            0.473              0.484 
+##  2     2            0.429              0.388 
+##  3     3            0.144              0.179 
+##  4     4            0.494              0.515 
+##  5     5            0.638              0.596 
+##  6     6            0.265              0.305 
+##  7     7            0.279              0.321 
+##  8     8            0.339              0.319 
+##  9     9            0.0317             0.0300
+## 10    10            0.924              0.921</code></pre>
 
 </div>
 </div>
